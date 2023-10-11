@@ -1,0 +1,1 @@
+cmd in ('DbccFilesCompact','DbccLOBCompact','DbccSpaceReclaim','WAITFOR')
