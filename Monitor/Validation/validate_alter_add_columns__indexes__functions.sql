@@ -1,0 +1,2934 @@
+declare @syntax varchar(max) = 'CREATE FUNCTION dbo.F_BAB_H_EFT_BRANCH_DTLS_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_EFT_BRANCH_DTLS_c10 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c10/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TOWN_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_264_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_264_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_C220_c23 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c23/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_C220_c28 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c28/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_283_c3 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_POST_RESTRICT_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_A003_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_A003_c3 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_H_FTP_RATES_c4 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_BANK_BRANCH_c3 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_BANK_BRANCH_c4 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_BANK_BRANCH_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.scFBNK_BAB_009_c98 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c98/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.scFBNK_BAB_009_c92 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c92/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_IPS_PROXY_VAL_c1 (@xmlrecord XML)
+RETURNS nvarchar(65)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(65) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_CUS_SAL_c7 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_AML_SUSPICIOS_c4 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_AML_SUSPICIOS_c7 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_AML_SUSPICIOS_c14 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c14/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_EDUC_SERVICES_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_IPO_SUBSCRIBE_c77 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c77/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_IPO_SUBSCRIBE_c41 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c41/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_IPO_SUBSCRIBE_c7 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_IPO_SUBSCRIBE_c4 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_IPO_SUBSCRIBE_c6 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_E213_c3 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_E213_c18 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c18/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_T024_c7 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_T024_c8 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c8/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_D202_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_D202_c14 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c14/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_FUNDS_TRANSFER_c225 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c225/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_RE_CRF_BABGL_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FMFI_ACCOUNT_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_397_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_397_c22 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c22/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.acFBNK_AC_L001_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_H_CARD_AC014_STATUS_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_FUNDS_TRANSFER#NAU_c225 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c225/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_FUNDS_TRANSFER#NAU_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_INVOICE_c19 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c19/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_INVOICE_c21 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c21/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_PROCESS_RESULT_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_PROCESS_RESULT_c2 (@xmlrecord XML)
+RETURNS nvarchar(100)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(100) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_PROCESS_RESULT_c11 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SMB_H_FCY_DRAFT_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_310_c12 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c12/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_310_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_SC_PORTFOLIO_PL_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_IM_DOCUMENT_IMAGE_c4 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c5 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c8 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c8/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c13 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c13/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c16 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c16/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c18 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c18/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c46 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c46/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_TXNS_c19 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c19/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_LD_CASHFLOW_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_IFSC_CODE_c2 (@xmlrecord XML)
+RETURNS nvarchar(65)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(65) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_IFSC_CODE_c4 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_REFUND_PYMNTS_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FMFI_GM_ORDERS_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FMFI_GM_ORDERS_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_BRANCH_LIMIT_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_ETRADE_CUS_REG_c5 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.stFOMS_LS_O007_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.stFOMS_LS_O007_c13 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c13/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_LOANREQ_REJ_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_ACC_MASTER_c4 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_ACC_MASTER_c36 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c36/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_ACC_MASTER_c54 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c54/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_ACC_MASTER_c77 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c77/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_ACC_MASTER_c76 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c76/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_ACC_MASTER_c155 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c155/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_ACC_MASTER_c27 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c27/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_A212_c6 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_SIMAH_RESPONSE_c9 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c9/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_SADAD_FT_HIST_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_EB_QUERIES_ANSWERS_c22 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c22/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_TELLER_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_E054_c24 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c24/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_E054_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_TELLER#HIS_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_TELLER#HIS_c66 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c66/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.ldFBNK_LD_L001_c107 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c107/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.ldFBNK_LD_L001_c90 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c90/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.ldFBNK_LD_L001_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_V200_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_V200_c6 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_V200_c8 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c8/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FVCO_ACCOUNT_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_DE_BIC_c16 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c16/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_DE_BIC_c4 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_DE_BIC_c5 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_T000_c49 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c49/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_SADAD_BILL_PAY_c14 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c14/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SC_ASSET_BAL_c26 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c26/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_R200_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_231_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c7 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c110 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c110/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c113 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c113/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c118 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c118/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c120 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c120/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c6 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_RECORD_LOCK_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.ebFBNK_BAB_242_c61 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c61/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SMB_H_FT_DETAILS_c0 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c0/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SMB_H_FT_DETAILS_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_FOREX#HIS_c24 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c24/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_N200_c2 (@xmlrecord XML)
+RETURNS nvarchar(50)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(50) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_ACCOUNT_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_ACCOUNT_c78 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c78/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_ACCOUNT_c11 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_CCY_POS_SE_DET_c11 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_DEL_FT_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_S037_c4 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_IFSC_CITY_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_PR_RELEASED_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_RM_RETAIL_c4 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_T001_c49 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c49/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_TELLER_ID_c18 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c18/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_DEL_TT_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_RE_UNITS_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_RE_UNITS_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_USER_c6 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_FUNDS_TRANSFER#HIS_c18 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c18/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_FUNDS_TRANSFER#HIS_c153 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c153/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.lcFBNK_LETT001_c9 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c9/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.acFBNK_BAB_024_c10 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c10/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.acFBNK_BAB_024_c5 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_PROTOCOL_HIST_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_T017_c3 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CUS_EXP_IDS_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CUS_EXP_IDS_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CUS_EXP_IDS_c5 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FVCO_FUNDS_TRANSFER#HIS_c18 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c18/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.acFBNK_BAB_032_c7 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.acFBNK_BAB_032_c20 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c20/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_EB_PHANTOM_c2 (@xmlrecord XML)
+RETURNS nvarchar(55)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(55) '') 
+END
+GO
+CREATE FUNCTION dbo.F_PROTOCOL_c8 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c8/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_PROTOCOL_c11 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_TSA_STATUS_c5 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_SIMAH_DEALS_c26 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c26/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_SIMAH_DEALS_c27 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c27/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_SIMAH_DEALS_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_FUNDS_TRANSFER#HIS_c18 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c18/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_E000_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_E000_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_E000_c7 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_T002_c49 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c49/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_CITY_AREA_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_CITY_AREA_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_TRADE_c5 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_SEC_TRADE_c6 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_MD_WTHAQ_STTS_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_MD_DEAL#HIS_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_I000_c37 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c37/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_CITY_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_MOF_AGENCY_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_H_TT_EXCESS_c3 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_H_TT_EXCESS_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_H_TT_EXCESS_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_ACCOUNT_CLOSED_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FOMS_ACCOUNT_c2 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_INACTIVE_AC_c1 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_INACTIVE_AC_c31 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c31/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_M000_c14 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c14/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_M000_c15 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c15/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CHEQUE_ISSUE_c1 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CUSTOMER_c179m121 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c179m121/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CUSTOMER_c34 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c34/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CUSTOMER_c179m71 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c179m71/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CUSTOMER_c179m13 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c179m13/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CUSTOMER_c24 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c24/text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION [dbo].[‏F_BAB_L_M001_c19] (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c19/text())[1]'', ''nvarchar(45) '')
+END
+GO
+CREATE FUNCTION [dbo].[‏F_BAB_L_M001_c20] (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c20/text())[1]'', ''nvarchar(45) '')
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_050_c179m265  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c179m265 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.stF_TSD_CUS000_c9  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c9 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_CIF_LAST_UPD_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_M002_c37  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c37 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_M002_c38  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c38 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.ebFBNK_BAB_211_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_C010_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_G000_c9  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c9 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_M003_c13  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c13 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_M003_c14  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c14 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_EXCEPTION_LOG_HIST_c13  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c13 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_ADAHI_TXNS_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_C203_c6  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CUSTOMER_SECURITY_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_EAD_CONCAT_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_ENJ_FT_PROMO_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_ENJ_FT_PROMO_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_REVERSED_TXNS_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SECURITY_POSITION_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SECURITY_POSITION_c81  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c81 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SECURITY_POSITION_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SECURITY_POSITION_c2  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_SECURITY_POSITION_c1_c2 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1_c2/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_SA_CONTRACT_c3  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_SA_CONTRACT_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_ESCR_UNITS_c2  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_EB_FREE_MESSAGE_c13  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c13 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_387_c3  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_387_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_058_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_058_c15  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c15 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_058_c10  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c10 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_EB_POS_SRV_REQ_c23  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c23 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_E001_c7  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_E001_c5  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_E001_c14  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c14 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_E001_c10  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c10 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CARD_ISSUE_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CARD_ISSUE_c4  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CARD_ISSUE_c36  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c36 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CARD_ISSUE_c47  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c47 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_CARD_ISSUE_c54  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c54 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_H_REDF_CITY_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_M004_c2  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_CR_RISK_LIST_c4  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_CR_RISK_LIST_c3  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_W_EB_PYRL_PRO_c5  (@xmlrecord XML)
+RETURNS nvarchar(55)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5 /text())[1]'', ''nvarchar(55) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_CORP_BALANCE_CONF_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_KYC_STATUS_c5  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_L_KYC_STATUS_c6  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_EB_TXN_HIS_c6  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_EB_TXN_HIS_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_EB_TXN_HIS_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_W_EB_PYRL_PRO_c20  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c20 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_IS_H_LOAN_REQUEST_c141  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c141 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_IS_H_LOAN_REQUEST_c173  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c173 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_IS_H_LOAN_REQUEST_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_HOLD_CONTROL_c8  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c8 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_HOLD_CONTROL_c2  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_20022_INSTRID_c17  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c17 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.ebFBNK_IS_H012_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.ebFBNK_IS_H012_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.ebFBNK_IS_H012_c341  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c341 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.ebFBNK_IS_H012_c344  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c344 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_TANFEETH_RES_c9  (@xmlrecord XML)
+RETURNS nvarchar(60)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c9 /text())[1]'', ''nvarchar(60) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_TANFEETH_RES_c10  (@xmlrecord XML)
+RETURNS nvarchar(60)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c10 /text())[1]'', ''nvarchar(60) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_TANFEETH_RES_c4  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_TANFEETH_RES_c6  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_TANFEETH_RES_c11  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_TANFEETH_RES_c7  (@xmlrecord XML)
+RETURNS nvarchar(60)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7 /text())[1]'', ''nvarchar(60) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_AC_LOCKED_EVENTS_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_AC_LOCKED_EVENTS_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_CUS_RISK_UPD_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_CUS_RISK_UPD_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_WU_RECON_TXNS_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_WU_RECON_TXNS_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_WU_RECON_TXNS_c4  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_WU_RECON_TXNS_c11  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_WU_RECON_TXNS_c15  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c15 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_ENJ_CUS_PROMO_c4  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FMFI_GM_CUSTOMER_c7  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FMFI_GM_CUSTOMER_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_W_TANFEETH_REQ_c7  (@xmlrecord XML)
+RETURNS nvarchar(60)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7 /text())[1]'', ''nvarchar(60) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_W_TANFEETH_REQ_c10  (@xmlrecord XML)
+RETURNS nvarchar(60)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c10 /text())[1]'', ''nvarchar(60) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_W_TANFEETH_REQ_c23  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c23 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_W_TANFEETH_REQ_c43  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c43 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_W_TANFEETH_REQ_c33  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c33 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_W_TANFEETH_REQ_c11  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_E226_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_E226_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_CUSTOMER#NAU_c187 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c187/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_EB_TXN_REMRKS_c4  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_EB_TXN_REMRKS_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_D200_c8  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c8 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_260_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_260_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_LD_CF_DETS_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_LD_CF_DETS_c2  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_RESCHED_DETS_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_RESCHED_DETS_c2  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_ENJ_CUS_LIMIT_c5  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_EFT_BANK_DTLS_c3  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_WALKIN_TXNS_c11  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c11 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_WALKIN_TXNS_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_LD_CF_POSN_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_208_c7  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c7 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_SAFE_DEP_BOX_c5  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_SAFE_DEP_BOX_c21  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c21 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_TF_CITY_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_OC_PURCH_DET_c1  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_OC_PURCH_DET_c3  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_VISA_CRD_ISSUE_c4  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c4 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_VISA_CRD_ISSUE_c5  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_VISA_CRD_ISSUE_c94  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c94 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_VISA_CRD_ISSUE_c110  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c110 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_IFRS217_c1  (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1 /text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_IFRS217_c35  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c35 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_IFRS217_c29  (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c29 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_POST_RESTRICT_c49 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c49 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_WATHQ_AUTH_DEP_c5 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c95 (@xmlrecord XML)
+RETURNS bigint
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c95 /text())[1]'', ''bigint'') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_D212_c2 (@xmlrecord XML)
+RETURNS nvarchar(13)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c2/text())[1]'', ''nvarchar(13) '') 
+END
+GO
+
+
+CREATE FUNCTION dbo.F_BAB_H_EB_REG_REQUEST_c1 (@xmlrecord XML)
+RETURNS nvarchar(1)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c1/text())[1]'', ''nvarchar(1) '') 
+END
+GO
+
+CREATE FUNCTION dbo.F_BAB_H_RE_PROJECT_XML_c37 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c37/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_RE_UNITS_c14 (@xmlrecord XML)
+RETURNS nvarchar(20)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c14/text())[1]'', ''nvarchar(20) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_H_WATHIQ_CR_INFO_c5 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c5/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_SIMAH_DEALS_c21 (@xmlrecord XML)
+RETURNS nvarchar(35)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c21/text())[1]'', ''nvarchar(35) '') 
+END
+GO
+CREATE FUNCTION dbo.F_BAB_L_T001_c30 (@xmlrecord XML)
+RETURNS nvarchar(35)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c30/text())[1]'', ''nvarchar(35) '') 
+END
+GO
+CREATE FUNCTION dbo.F_PROTOCOL_c6 (@xmlrecord XML)
+RETURNS nvarchar(3)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c6/text())[1]'', ''nvarchar(3) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_BAB_476_c3 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c3/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+CREATE FUNCTION dbo.FBNK_LIMIT_c95 (@xmlrecord XML)
+RETURNS nvarchar(45)
+WITH SCHEMABINDING
+BEGIN
+RETURN @xmlrecord.value(''(/row/c95/text())[1]'', ''nvarchar(45) '') 
+END
+GO
+'
+go
+declare @syntax varchar(max) = 'ALTER TABLE dbo.F_BAB_H_EFT_BRANCH_DTLS ADD BANK_CODE AS dbo.F_BAB_H_EFT_BRANCH_DTLS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BANK_CODE_BAB_H_EFT_BRANCH_DTLS_c1 ON dbo.F_BAB_H_EFT_BRANCH_DTLS(BANK_CODE ASC);
+ALTER TABLE dbo.F_BAB_H_EFT_BRANCH_DTLS ADD IFSC_CODE AS dbo.F_BAB_H_EFT_BRANCH_DTLS_c10(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX IFSC_CODE_BAB_H_EFT_BRANCH_DTLS_c10 ON dbo.F_BAB_H_EFT_BRANCH_DTLS(IFSC_CODE ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TOWN ADD COUNTRY AS dbo.F_BAB_H_TF_TOWN_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX COUNTRY_BAB_H_TF_TOWN_c1 ON dbo.F_BAB_H_TF_TOWN(COUNTRY ASC);
+ALTER TABLE dbo.FBNK_BAB_264 ADD CUSTOMER_ID AS dbo.FBNK_BAB_264_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_BAB_264_c3 ON dbo.FBNK_BAB_264(CUSTOMER_ID ASC);
+ALTER TABLE dbo.FBNK_BAB_264 ADD PRODUCT AS dbo.FBNK_BAB_264_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PRODUCT_BAB_264_c1 ON dbo.FBNK_BAB_264(PRODUCT ASC);
+ALTER TABLE dbo.F_BAB_H_C220 ADD REMIT_TXN_ID AS dbo.F_BAB_H_C220_c23(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REMIT_TXN_ID_BAB_H_C220_c23 ON dbo.F_BAB_H_C220(REMIT_TXN_ID ASC);
+ALTER TABLE dbo.F_BAB_H_C220 ADD RFND_PRCESS AS dbo.F_BAB_H_C220_c28(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RFND_PRCESS_BAB_H_C220_c28 ON dbo.F_BAB_H_C220(RFND_PRCESS ASC);
+ALTER TABLE dbo.FBNK_BAB_283 ADD REPORT_ID_LINE AS dbo.FBNK_BAB_283_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REPORT_ID_LINE_BAB_283_c3 ON dbo.FBNK_BAB_283(REPORT_ID_LINE ASC);
+ALTER TABLE dbo.F_BAB_H_POST_RESTRICT ADD CURRENT_PR AS dbo.F_BAB_H_POST_RESTRICT_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CURRENT_PR_BAB_H_POST_RESTRICT_c1 ON dbo.F_BAB_H_POST_RESTRICT(CURRENT_PR ASC);
+ALTER TABLE dbo.F_BAB_L_A003 ADD LEGAL_ID AS dbo.F_BAB_L_A003_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LEGAL_ID_BAB_L_A003_c1 ON dbo.F_BAB_L_A003(LEGAL_ID ASC);
+ALTER TABLE dbo.F_BAB_L_A003 ADD STATUS AS dbo.F_BAB_L_A003_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATUS_BAB_L_A003_c3 ON dbo.F_BAB_L_A003(STATUS ASC);
+ALTER TABLE dbo.FBNK_BAB_H_FTP_RATES ADD DATE AS dbo.FBNK_BAB_H_FTP_RATES_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DATE_BAB_H_FTP_RATES_c4 ON dbo.FBNK_BAB_H_FTP_RATES(DATE ASC);
+ALTER TABLE dbo.F_BAB_H_TF_BANK_BRANCH ADD CITY AS dbo.F_BAB_H_TF_BANK_BRANCH_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CITY_BAB_H_TF_BANK_BRANCH_c3 ON dbo.F_BAB_H_TF_BANK_BRANCH(CITY ASC);
+ALTER TABLE dbo.F_BAB_H_TF_BANK_BRANCH ADD TOWN AS dbo.F_BAB_H_TF_BANK_BRANCH_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TOWN_BAB_H_TF_BANK_BRANCH_c4 ON dbo.F_BAB_H_TF_BANK_BRANCH(TOWN ASC);
+ALTER TABLE dbo.F_BAB_H_TF_BANK_BRANCH ADD STATE AS dbo.F_BAB_H_TF_BANK_BRANCH_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATE_BAB_H_TF_BANK_BRANCH_c2 ON dbo.F_BAB_H_TF_BANK_BRANCH(STATE ASC);
+ALTER TABLE dbo.scFBNK_BAB_009 ADD DATE_TIME AS dbo.scFBNK_BAB_009_c98(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DATE_TIME_BAB_009_c98 ON dbo.scFBNK_BAB_009(DATE_TIME ASC);
+ALTER TABLE dbo.scFBNK_BAB_009 ADD ORDER_EXEC AS dbo.scFBNK_BAB_009_c92(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ORDER_EXEC_BAB_009_c92 ON dbo.scFBNK_BAB_009(ORDER_EXEC ASC);
+ALTER TABLE dbo.F_BAB_L_IPS_PROXY_VAL ADD UUID AS dbo.F_BAB_L_IPS_PROXY_VAL_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UUID_BAB_L_IPS_PROXY_VAL_c1 ON dbo.F_BAB_L_IPS_PROXY_VAL(UUID ASC);
+ALTER TABLE dbo.F_BAB_L_CUS_SAL ADD LAST_CREDIT_DT AS dbo.F_BAB_L_CUS_SAL_c7(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_CREDIT_DT_BAB_L_CUS_SAL_c7 ON dbo.F_BAB_L_CUS_SAL(LAST_CREDIT_DT ASC);
+ALTER TABLE dbo.F_BAB_H_AML_SUSPICIOS ADD ES_DATE_TIME AS dbo.F_BAB_H_AML_SUSPICIOS_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ES_DATE_TIME_BAB_H_AML_SUSPICIOS_c4 ON dbo.F_BAB_H_AML_SUSPICIOS(ES_DATE_TIME ASC);
+ALTER TABLE dbo.F_BAB_H_AML_SUSPICIOS ADD ES_STATUS AS dbo.F_BAB_H_AML_SUSPICIOS_c7(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ES_STATUS_BAB_H_AML_SUSPICIOS_c7 ON dbo.F_BAB_H_AML_SUSPICIOS(ES_STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_AML_SUSPICIOS ADD ES_TXN_REF AS dbo.F_BAB_H_AML_SUSPICIOS_c14(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ES_TXN_REF_BAB_H_AML_SUSPICIOS_c14 ON dbo.F_BAB_H_AML_SUSPICIOS(ES_TXN_REF ASC);
+ALTER TABLE dbo.F_BAB_H_EDUC_SERVICES ADD PROVIDER AS dbo.F_BAB_H_EDUC_SERVICES_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROVIDER_BAB_H_EDUC_SERVICES_c2 ON dbo.F_BAB_H_EDUC_SERVICES(PROVIDER ASC);
+ALTER TABLE dbo.FBNK_BAB_IPO_SUBSCRIBE ADD REQ_STATUS AS dbo.FBNK_BAB_IPO_SUBSCRIBE_c77(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REQ_STATUS_BAB_IPO_SUBSCRIBE_c77 ON dbo.FBNK_BAB_IPO_SUBSCRIBE(REQ_STATUS ASC);
+ALTER TABLE dbo.FBNK_BAB_IPO_SUBSCRIBE ADD BRANCH_CODE AS dbo.FBNK_BAB_IPO_SUBSCRIBE_c41(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BRANCH_CODE_BAB_IPO_SUBSCRIBE_c41 ON dbo.FBNK_BAB_IPO_SUBSCRIBE(BRANCH_CODE ASC);
+ALTER TABLE dbo.FBNK_BAB_IPO_SUBSCRIBE ADD CUSTOMER_NO AS dbo.FBNK_BAB_IPO_SUBSCRIBE_c7(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_NO_BAB_IPO_SUBSCRIBE_c7 ON dbo.FBNK_BAB_IPO_SUBSCRIBE(CUSTOMER_NO ASC);
+ALTER TABLE dbo.FBNK_BAB_IPO_SUBSCRIBE ADD SECURITY_NO AS dbo.FBNK_BAB_IPO_SUBSCRIBE_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SECURITY_NO_BAB_IPO_SUBSCRIBE_c4 ON dbo.FBNK_BAB_IPO_SUBSCRIBE(SECURITY_NO ASC);
+ALTER TABLE dbo.FBNK_BAB_IPO_SUBSCRIBE ADD VALUE_DATE AS dbo.FBNK_BAB_IPO_SUBSCRIBE_c6(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX VALUE_DATE_BAB_IPO_SUBSCRIBE_c6 ON dbo.FBNK_BAB_IPO_SUBSCRIBE(VALUE_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_E213 ADD PROVIDER AS dbo.F_BAB_H_E213_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROVIDER_BAB_H_E213_c3 ON dbo.F_BAB_H_E213(PROVIDER ASC);
+ALTER TABLE dbo.F_BAB_H_E213 ADD REQ_STATUS AS dbo.F_BAB_H_E213_c18(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REQ_STATUS_BAB_H_E213_c18 ON dbo.F_BAB_H_E213(REQ_STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_T024 ADD CITY AS dbo.F_BAB_H_T024_c7(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CITY_BAB_H_T024_c7 ON dbo.F_BAB_H_T024(CITY ASC);
+ALTER TABLE dbo.F_BAB_H_T024 ADD TOWN AS dbo.F_BAB_H_T024_c8(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TOWN_BAB_H_T024_c8 ON dbo.F_BAB_H_T024(TOWN ASC);
+ALTER TABLE dbo.F_BAB_H_D202 ADD CUS_ID AS dbo.F_BAB_H_D202_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUS_ID_BAB_H_D202_c3 ON dbo.F_BAB_H_D202(CUS_ID ASC);
+ALTER TABLE dbo.F_BAB_H_D202 ADD LET_DATE_G AS dbo.F_BAB_H_D202_c14(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LET_DATE_G_BAB_H_D202_c14 ON dbo.F_BAB_H_D202(LET_DATE_G ASC);
+ALTER TABLE dbo.FBNK_FUNDS_TRANSFER ADD DEPT_CODE AS dbo.FBNK_FUNDS_TRANSFER_c225(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEPT_CODE_FUNDS_TRANSFER_c225 ON dbo.FBNK_FUNDS_TRANSFER(DEPT_CODE ASC);
+ALTER TABLE dbo.FBNK_RE_CRF_BABGL ADD DESC_1 AS dbo.FBNK_RE_CRF_BABGL_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DESC_1_RE_CRF_BABGL_c2 ON dbo.FBNK_RE_CRF_BABGL(DESC_1 ASC);
+ALTER TABLE dbo.FMFI_ACCOUNT ADD CATEGORY AS dbo.FMFI_ACCOUNT_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_ACCOUNT_c2 ON dbo.FMFI_ACCOUNT(CATEGORY ASC);
+ALTER TABLE dbo.FBNK_BAB_397 ADD CUST_NO AS dbo.FBNK_BAB_397_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUST_NO_BAB_397_c1 ON dbo.FBNK_BAB_397(CUST_NO ASC);
+ALTER TABLE dbo.FBNK_BAB_397 ADD REQ_DATE AS dbo.FBNK_BAB_397_c22(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REQ_DATE_BAB_397_c22 ON dbo.FBNK_BAB_397(REQ_DATE ASC);
+ALTER TABLE dbo.acFBNK_AC_L001 ADD ACCOUNT_NUMBER AS dbo.acFBNK_AC_L001_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_NUMBER_AC_L001_c1 ON dbo.acFBNK_AC_L001(ACCOUNT_NUMBER ASC);
+ALTER TABLE dbo.FBNK_BAB_H_CARD_AC014_STATUS ADD STATUS_DATE AS dbo.FBNK_BAB_H_CARD_AC014_STATUS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATUS_DATE_BAB_H_CARD_AC014_STATUS_c1 ON dbo.FBNK_BAB_H_CARD_AC014_STATUS(STATUS_DATE ASC);
+ALTER TABLE dbo.FBNK_FUNDS_TRANSFER#NAU ADD DEPT_CODE AS dbo.FBNK_FUNDS_TRANSFER#NAU_c225(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEPT_CODE_FUNDS_TRANSFER#NAU_c225 ON dbo.FBNK_FUNDS_TRANSFER#NAU(DEPT_CODE ASC);
+ALTER TABLE dbo.FBNK_FUNDS_TRANSFER#NAU ADD TRANSACTION_TYPE AS dbo.FBNK_FUNDS_TRANSFER#NAU_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANSACTION_TYPE_FUNDS_TRANSFER#NAU_c1 ON dbo.FBNK_FUNDS_TRANSFER#NAU(TRANSACTION_TYPE ASC);
+ALTER TABLE dbo.F_BAB_H_TF_INVOICE ADD TXN_PAY_DATE AS dbo.F_BAB_H_TF_INVOICE_c19(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TXN_PAY_DATE_BAB_H_TF_INVOICE_c19 ON dbo.F_BAB_H_TF_INVOICE(TXN_PAY_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_TF_INVOICE ADD SETTLE_DATE AS dbo.F_BAB_H_TF_INVOICE_c21(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SETTLE_DATE_BAB_H_TF_INVOICE_c21 ON dbo.F_BAB_H_TF_INVOICE(SETTLE_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_PROCESS_RESULT ADD PROCESS_DT AS dbo.F_BAB_L_PROCESS_RESULT_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESS_DT_BAB_L_PROCESS_RESULT_c1 ON dbo.F_BAB_L_PROCESS_RESULT(PROCESS_DT ASC);
+ALTER TABLE dbo.F_BAB_L_PROCESS_RESULT ADD ERROR AS dbo.F_BAB_L_PROCESS_RESULT_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ERROR_BAB_L_PROCESS_RESULT_c2 ON dbo.F_BAB_L_PROCESS_RESULT(ERROR ASC);
+ALTER TABLE dbo.F_BAB_L_PROCESS_RESULT ADD ARCHIVE_DT AS dbo.F_BAB_L_PROCESS_RESULT_c11(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ARCHIVE_DT_BAB_L_PROCESS_RESULT_c11 ON dbo.F_BAB_L_PROCESS_RESULT(ARCHIVE_DT ASC);
+ALTER TABLE dbo.FBNK_SMB_H_FCY_DRAFT ADD ISSUANCE_DATE AS dbo.FBNK_SMB_H_FCY_DRAFT_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ISSUANCE_DATE_SMB_H_FCY_DRAFT_c3 ON dbo.FBNK_SMB_H_FCY_DRAFT(ISSUANCE_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_310 ADD AMORT_STATUS AS dbo.FBNK_BAB_310_c12(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX AMORT_STATUS_BAB_310_c12 ON dbo.FBNK_BAB_310(AMORT_STATUS ASC);
+ALTER TABLE dbo.FBNK_BAB_310 ADD LAST_END_DATE AS dbo.FBNK_BAB_310_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_END_DATE_BAB_310_c2 ON dbo.FBNK_BAB_310(LAST_END_DATE ASC);
+ALTER TABLE dbo.F_BAB_SC_PORTFOLIO_PL ADD PORT_NUMBER AS dbo.F_BAB_SC_PORTFOLIO_PL_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PORT_NUMBER_BAB_SC_PORTFOLIO_PL_c1 ON dbo.F_BAB_SC_PORTFOLIO_PL(PORT_NUMBER ASC);
+ALTER TABLE dbo.F_IM_DOCUMENT_IMAGE ADD IMAGE_REFERENCE AS dbo.F_IM_DOCUMENT_IMAGE_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX IMAGE_REFERENCE_IM_DOCUMENT_IMAGE_c4 ON dbo.F_IM_DOCUMENT_IMAGE(IMAGE_REFERENCE ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD TFPIN AS dbo.F_BAB_H_TF_TXNS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TFPIN_BAB_H_TF_TXNS_c1 ON dbo.F_BAB_H_TF_TXNS(TFPIN ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD TXN_DATE AS dbo.F_BAB_H_TF_TXNS_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TXN_DATE_BAB_H_TF_TXNS_c5 ON dbo.F_BAB_H_TF_TXNS(TXN_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD INVOICE_NO AS dbo.F_BAB_H_TF_TXNS_c8(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX INVOICE_NO_BAB_H_TF_TXNS_c8 ON dbo.F_BAB_H_TF_TXNS(INVOICE_NO ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD RECON_STATUS AS dbo.F_BAB_H_TF_TXNS_c13(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RECON_STATUS_BAB_H_TF_TXNS_c13 ON dbo.F_BAB_H_TF_TXNS(RECON_STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD BAB_STATUS AS dbo.F_BAB_H_TF_TXNS_c16(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BAB_STATUS_BAB_H_TF_TXNS_c16 ON dbo.F_BAB_H_TF_TXNS(BAB_STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD TF_STATUS AS dbo.F_BAB_H_TF_TXNS_c18(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TF_STATUS_BAB_H_TF_TXNS_c18 ON dbo.F_BAB_H_TF_TXNS(TF_STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD CUSTOMER AS dbo.F_BAB_H_TF_TXNS_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_H_TF_TXNS_c2 ON dbo.F_BAB_H_TF_TXNS(CUSTOMER ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD MAIN_AC_PENDING_BAL AS dbo.F_BAB_H_TF_TXNS_c46(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX MAIN_AC_PENDING_BAL_BAB_H_TF_TXNS_c46 ON dbo.F_BAB_H_TF_TXNS(MAIN_AC_PENDING_BAL ASC);
+ALTER TABLE dbo.F_BAB_H_TF_TXNS ADD TF_STATUS_DATE AS dbo.F_BAB_H_TF_TXNS_c19(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TF_STATUS_DATE_BAB_H_TF_TXNS_c19 ON dbo.F_BAB_H_TF_TXNS(TF_STATUS_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_LD_CASHFLOW ADD CATEGORY AS dbo.F_BAB_L_LD_CASHFLOW_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_BAB_L_LD_CASHFLOW_c2 ON dbo.F_BAB_L_LD_CASHFLOW(CATEGORY ASC);
+ALTER TABLE dbo.FBNK_BAB_L_IFSC_CODE ADD BANK AS dbo.FBNK_BAB_L_IFSC_CODE_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BANK_BAB_L_IFSC_CODE_c2 ON dbo.FBNK_BAB_L_IFSC_CODE(BANK ASC);
+ALTER TABLE dbo.FBNK_BAB_L_IFSC_CODE ADD CITY AS dbo.FBNK_BAB_L_IFSC_CODE_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CITY_BAB_L_IFSC_CODE_c4 ON dbo.FBNK_BAB_L_IFSC_CODE(CITY ASC);
+ALTER TABLE dbo.F_BAB_L_REFUND_PYMNTS ADD STATUS AS dbo.F_BAB_L_REFUND_PYMNTS_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATUS_BAB_L_REFUND_PYMNTS_c2 ON dbo.F_BAB_L_REFUND_PYMNTS(STATUS ASC);
+ALTER TABLE dbo.FMFI_GM_ORDERS ADD CUSTOMER_ID AS dbo.FMFI_GM_ORDERS_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_GM_ORDERS_c2 ON dbo.FMFI_GM_ORDERS(CUSTOMER_ID ASC);
+ALTER TABLE dbo.FMFI_GM_ORDERS ADD ORDER_DATE AS dbo.FMFI_GM_ORDERS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ORDER_DATE_GM_ORDERS_c1 ON dbo.FMFI_GM_ORDERS(ORDER_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_BRANCH_LIMIT ADD LAST_UPDATED_DATE AS dbo.F_BAB_L_BRANCH_LIMIT_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_UPDATED_DATE_BAB_L_BRANCH_LIMIT_c3 ON dbo.F_BAB_L_BRANCH_LIMIT(LAST_UPDATED_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_ETRADE_CUS_REG ADD EXPIRY_DATE AS dbo.F_BAB_H_ETRADE_CUS_REG_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EXPIRY_DATE_BAB_H_ETRADE_CUS_REG_c5 ON dbo.F_BAB_H_ETRADE_CUS_REG(EXPIRY_DATE ASC);
+ALTER TABLE dbo.stFOMS_LS_O007 ADD CUSTOMER_NAME AS dbo.stFOMS_LS_O007_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_NAME_LS_O007_c2 ON dbo.stFOMS_LS_O007(CUSTOMER_NAME ASC);
+ALTER TABLE dbo.stFOMS_LS_O007 ADD MSG_DATE AS dbo.stFOMS_LS_O007_c13(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX MSG_DATE_LS_O007_c13 ON dbo.stFOMS_LS_O007(MSG_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_L_LOANREQ_REJ ADD REJECTION_DATE AS dbo.FBNK_BAB_L_LOANREQ_REJ_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REJECTION_DATE_BAB_L_LOANREQ_REJ_c1 ON dbo.FBNK_BAB_L_LOANREQ_REJ(REJECTION_DATE ASC);
+ALTER TABLE dbo.FOMS_SEC_ACC_MASTER ADD ACCOUNT_OFFICER AS dbo.FOMS_SEC_ACC_MASTER_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_OFFICER_SEC_ACC_MASTER_c4 ON dbo.FOMS_SEC_ACC_MASTER(ACCOUNT_OFFICER ASC);
+ALTER TABLE dbo.FOMS_SEC_ACC_MASTER ADD DEALER_BOOK AS dbo.FOMS_SEC_ACC_MASTER_c36(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEALER_BOOK_SEC_ACC_MASTER_c36 ON dbo.FOMS_SEC_ACC_MASTER(DEALER_BOOK ASC);
+ALTER TABLE dbo.FOMS_SEC_ACC_MASTER ADD REVAL_FREQ AS dbo.FOMS_SEC_ACC_MASTER_c54(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REVAL_FREQ_SEC_ACC_MASTER_c54 ON dbo.FOMS_SEC_ACC_MASTER(REVAL_FREQ ASC);
+ALTER TABLE dbo.FOMS_SEC_ACC_MASTER ADD NEW_REFERENCE_CCY AS dbo.FOMS_SEC_ACC_MASTER_c77(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NEW_REFERENCE_CCY_SEC_ACC_MASTER_c77 ON dbo.FOMS_SEC_ACC_MASTER(NEW_REFERENCE_CCY ASC);
+ALTER TABLE dbo.FOMS_SEC_ACC_MASTER ADD NEW_RFCCY_EFF_DATE AS dbo.FOMS_SEC_ACC_MASTER_c76(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NEW_RFCCY_EFF_DATE_SEC_ACC_MASTER_c76 ON dbo.FOMS_SEC_ACC_MASTER(NEW_RFCCY_EFF_DATE ASC);
+ALTER TABLE dbo.FOMS_SEC_ACC_MASTER ADD OPENING_DATE AS dbo.FOMS_SEC_ACC_MASTER_c155(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX OPENING_DATE_SEC_ACC_MASTER_c155 ON dbo.FOMS_SEC_ACC_MASTER(OPENING_DATE ASC);
+ALTER TABLE dbo.FOMS_SEC_ACC_MASTER ADD START_DATE AS dbo.FOMS_SEC_ACC_MASTER_c27(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX START_DATE_SEC_ACC_MASTER_c27 ON dbo.FOMS_SEC_ACC_MASTER(START_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_A212 ADD CUSTOMER_NIN AS dbo.F_BAB_H_A212_c6(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_NIN_BAB_H_A212_c6 ON dbo.F_BAB_H_A212(CUSTOMER_NIN ASC);
+ALTER TABLE dbo.F_BAB_SIMAH_RESPONSE ADD REPORT_DATE AS dbo.F_BAB_SIMAH_RESPONSE_c9(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REPORT_DATE_BAB_SIMAH_RESPONSE_c9 ON dbo.F_BAB_SIMAH_RESPONSE(REPORT_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_SADAD_FT_HIST ADD BOOKING_DATE AS dbo.F_BAB_L_SADAD_FT_HIST_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BOOKING_DATE_BAB_L_SADAD_FT_HIST_c1 ON dbo.F_BAB_L_SADAD_FT_HIST(BOOKING_DATE ASC);
+ALTER TABLE dbo.FBNK_EB_QUERIES_ANSWERS ADD ACTIVITY_DATE AS dbo.FBNK_EB_QUERIES_ANSWERS_c22(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACTIVITY_DATE_EB_QUERIES_ANSWERS_c22 ON dbo.FBNK_EB_QUERIES_ANSWERS(ACTIVITY_DATE ASC);
+ALTER TABLE dbo.FBNK_TELLER ADD TRANSACTION_CODE AS dbo.FBNK_TELLER_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANSACTION_CODE_TELLER_c1 ON dbo.FBNK_TELLER(TRANSACTION_CODE ASC);
+ALTER TABLE dbo.F_BAB_H_E054 ADD REQ_STATUS AS dbo.F_BAB_H_E054_c24(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REQ_STATUS_BAB_H_E054_c24 ON dbo.F_BAB_H_E054(REQ_STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_E054 ADD SRV_ID AS dbo.F_BAB_H_E054_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SRV_ID_BAB_H_E054_c3 ON dbo.F_BAB_H_E054(SRV_ID ASC);
+ALTER TABLE dbo.FBNK_TELLER#HIS ADD TRANSACTION_CODE AS dbo.FBNK_TELLER#HIS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANSACTION_CODE_TELLER#HIS_c1 ON dbo.FBNK_TELLER#HIS(TRANSACTION_CODE ASC);
+ALTER TABLE dbo.FBNK_TELLER#HIS ADD AUTH_DATE AS dbo.FBNK_TELLER#HIS_c66(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX AUTH_DATE_TELLER#HIS_c66 ON dbo.FBNK_TELLER#HIS(AUTH_DATE ASC);
+ALTER TABLE dbo.ldFBNK_LD_L001 ADD VD_PRIOR_ADJUST AS dbo.ldFBNK_LD_L001_c107(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX VD_PRIOR_ADJUST_LD_L001_c107 ON dbo.ldFBNK_LD_L001(VD_PRIOR_ADJUST ASC);
+ALTER TABLE dbo.ldFBNK_LD_L001 ADD STATUS AS dbo.ldFBNK_LD_L001_c90(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATUS_LD_L001_c90 ON dbo.ldFBNK_LD_L001(STATUS ASC);
+ALTER TABLE dbo.ldFBNK_LD_L001 ADD CUSTOMER_ID AS dbo.ldFBNK_LD_L001_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_LD_L001_c1 ON dbo.ldFBNK_LD_L001(CUSTOMER_ID ASC);
+ALTER TABLE dbo.F_BAB_L_V200 ADD CUSTOMER_ID AS dbo.F_BAB_L_V200_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_BAB_L_V200_c3 ON dbo.F_BAB_L_V200(CUSTOMER_ID ASC);
+ALTER TABLE dbo.F_BAB_L_V200 ADD ENQ_RUN_DATE AS dbo.F_BAB_L_V200_c6(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ENQ_RUN_DATE_BAB_L_V200_c6 ON dbo.F_BAB_L_V200(ENQ_RUN_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_V200 ADD ENQ_RUN_USER AS dbo.F_BAB_L_V200_c8(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ENQ_RUN_USER_BAB_L_V200_c8 ON dbo.F_BAB_L_V200(ENQ_RUN_USER ASC);
+ALTER TABLE dbo.FVCO_ACCOUNT ADD CATEGORY AS dbo.FVCO_ACCOUNT_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_ACCOUNT_c2 ON dbo.FVCO_ACCOUNT(CATEGORY ASC);
+ALTER TABLE dbo.F_DE_BIC ADD COUNTRY_CODE AS dbo.F_DE_BIC_c16(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX COUNTRY_CODE_DE_BIC_c16 ON dbo.F_DE_BIC(COUNTRY_CODE ASC);
+ALTER TABLE dbo.F_DE_BIC ADD INSTITUTION AS dbo.F_DE_BIC_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX INSTITUTION_DE_BIC_c4 ON dbo.F_DE_BIC(INSTITUTION ASC);
+ALTER TABLE dbo.F_DE_BIC ADD CITY AS dbo.F_DE_BIC_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CITY_DE_BIC_c5 ON dbo.F_DE_BIC(CITY ASC);
+ALTER TABLE dbo.F_BAB_H_T000 ADD TRANSACTION_DATE AS dbo.F_BAB_H_T000_c49(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANSACTION_DATE_BAB_H_T000_c49 ON dbo.F_BAB_H_T000(TRANSACTION_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_SADAD_BILL_PAY ADD PAY_DATE AS dbo.F_BAB_H_SADAD_BILL_PAY_c14(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PAY_DATE_BAB_H_SADAD_BILL_PAY_c14 ON dbo.F_BAB_H_SADAD_BILL_PAY(PAY_DATE ASC);
+ALTER TABLE dbo.FOMS_SC_ASSET_BAL ADD PORTFOLIO AS dbo.FOMS_SC_ASSET_BAL_c26(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PORTFOLIO_SC_ASSET_BAL_c26 ON dbo.FOMS_SC_ASSET_BAL(PORTFOLIO ASC);
+ALTER TABLE dbo.F_BAB_L_R200 ADD CHANGE_DT AS dbo.F_BAB_L_R200_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CHANGE_DT_BAB_L_R200_c2 ON dbo.F_BAB_L_R200(CHANGE_DT ASC);
+ALTER TABLE dbo.FBNK_BAB_231 ADD SMS_DATE AS dbo.FBNK_BAB_231_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SMS_DATE_BAB_231_c1 ON dbo.FBNK_BAB_231(SMS_DATE ASC);
+ALTER TABLE dbo.FBNK_LIMIT ADD EXPIRY_DATE AS dbo.FBNK_LIMIT_c7(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EXPIRY_DATE_LIMIT_c7 ON dbo.FBNK_LIMIT(EXPIRY_DATE ASC);
+ALTER TABLE dbo.FBNK_LIMIT ADD UNUTIL_ACCT AS dbo.FBNK_LIMIT_c110(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UNUTIL_ACCT_LIMIT_c110 ON dbo.FBNK_LIMIT(UNUTIL_ACCT ASC);
+ALTER TABLE dbo.FBNK_LIMIT ADD PREV_UNUTIL_ACCT AS dbo.FBNK_LIMIT_c113(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PREV_UNUTIL_ACCT_LIMIT_c113 ON dbo.FBNK_LIMIT(PREV_UNUTIL_ACCT ASC);
+ALTER TABLE dbo.FBNK_LIMIT ADD UTIL_ACCOUNT AS dbo.FBNK_LIMIT_c118(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UTIL_ACCOUNT_LIMIT_c118 ON dbo.FBNK_LIMIT(UTIL_ACCOUNT ASC);
+ALTER TABLE dbo.FBNK_LIMIT ADD PREV_UTIL_ACCT AS dbo.FBNK_LIMIT_c120(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PREV_UTIL_ACCT_LIMIT_c120 ON dbo.FBNK_LIMIT(PREV_UTIL_ACCT ASC);
+ALTER TABLE dbo.FBNK_LIMIT ADD REVIEW_FREQUENCY AS dbo.FBNK_LIMIT_c6(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REVIEW_FREQUENCY_LIMIT_c6 ON dbo.FBNK_LIMIT(REVIEW_FREQUENCY ASC);
+ALTER TABLE dbo.F_RECORD_LOCK ADD K_USER AS dbo.F_RECORD_LOCK_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX K_USER_RECORD_LOCK_c2 ON dbo.F_RECORD_LOCK(K_USER ASC);
+ALTER TABLE dbo.ebFBNK_BAB_242 ADD PRODUCT_CODE AS dbo.ebFBNK_BAB_242_c61(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PRODUCT_CODE_BAB_242_c61 ON dbo.ebFBNK_BAB_242(PRODUCT_CODE ASC);
+ALTER TABLE dbo.FBNK_SMB_H_FT_DETAILS ADD REF_ID AS dbo.FBNK_SMB_H_FT_DETAILS_c0(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REF_ID_SMB_H_FT_DETAILS_c0 ON dbo.FBNK_SMB_H_FT_DETAILS(REF_ID ASC);
+ALTER TABLE dbo.FBNK_SMB_H_FT_DETAILS ADD BEN_TYPE AS dbo.FBNK_SMB_H_FT_DETAILS_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BEN_TYPE_SMB_H_FT_DETAILS_c2 ON dbo.FBNK_SMB_H_FT_DETAILS(BEN_TYPE ASC);
+ALTER TABLE dbo.FBNK_FOREX#HIS ADD DEAL_DATE AS dbo.FBNK_FOREX#HIS_c24(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEAL_DATE_FOREX#HIS_c24 ON dbo.FBNK_FOREX#HIS(DEAL_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_N200 ADD NAME_AR AS dbo.F_BAB_H_N200_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NAME_AR_BAB_H_N200_c2 ON dbo.F_BAB_H_N200(NAME_AR ASC);
+ALTER TABLE dbo.FBNK_ACCOUNT ADD CATEGORY AS dbo.FBNK_ACCOUNT_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_ACCOUNT_c2 ON dbo.FBNK_ACCOUNT(CATEGORY ASC);
+ALTER TABLE dbo.FBNK_ACCOUNT ADD OPENING_DATE AS dbo.FBNK_ACCOUNT_c78(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX OPENING_DATE_ACCOUNT_c78 ON dbo.FBNK_ACCOUNT(OPENING_DATE ASC);
+ALTER TABLE dbo.FBNK_ACCOUNT ADD ACCOUNT_OFFICER AS dbo.FBNK_ACCOUNT_c11(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_OFFICER_ACCOUNT_c11 ON dbo.FBNK_ACCOUNT(ACCOUNT_OFFICER ASC);
+ALTER TABLE dbo.F_BAB_L_CCY_POS_SE_DET ADD DAO AS dbo.F_BAB_L_CCY_POS_SE_DET_c11(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DAO_BAB_L_CCY_POS_SE_DET_c11 ON dbo.F_BAB_L_CCY_POS_SE_DET(DAO ASC);
+ALTER TABLE dbo.F_BAB_L_DEL_FT ADD DEL_DATE AS dbo.F_BAB_L_DEL_FT_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEL_DATE_BAB_L_DEL_FT_c1 ON dbo.F_BAB_L_DEL_FT(DEL_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_S037 ADD LAST_UPD_DATE AS dbo.F_BAB_H_S037_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_UPD_DATE_BAB_H_S037_c4 ON dbo.F_BAB_H_S037(LAST_UPD_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_L_IFSC_CITY ADD CITY AS dbo.FBNK_BAB_L_IFSC_CITY_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CITY_BAB_L_IFSC_CITY_c1 ON dbo.FBNK_BAB_L_IFSC_CITY(CITY ASC);
+ALTER TABLE dbo.FBNK_BAB_L_PR_RELEASED ADD RELEASE_DATE AS dbo.FBNK_BAB_L_PR_RELEASED_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RELEASE_DATE_BAB_L_PR_RELEASED_c1 ON dbo.FBNK_BAB_L_PR_RELEASED(RELEASE_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_RM_RETAIL ADD RM_ID AS dbo.F_BAB_H_RM_RETAIL_c4(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RM_ID_BAB_H_RM_RETAIL_c4 ON dbo.F_BAB_H_RM_RETAIL(RM_ID ASC);
+ALTER TABLE dbo.F_BAB_H_T001 ADD TRANSACTION_DATE AS dbo.F_BAB_H_T001_c49(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANSACTION_DATE_BAB_H_T001_c49 ON dbo.F_BAB_H_T001(TRANSACTION_DATE ASC);
+ALTER TABLE dbo.FBNK_TELLER_ID ADD TELLER_OFFICE AS dbo.FBNK_TELLER_ID_c18(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TELLER_OFFICE_TELLER_ID_c18 ON dbo.FBNK_TELLER_ID(TELLER_OFFICE ASC);
+ALTER TABLE dbo.F_BAB_L_DEL_TT ADD DEL_DATE AS dbo.F_BAB_L_DEL_TT_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEL_DATE_BAB_L_DEL_TT_c1 ON dbo.F_BAB_L_DEL_TT(DEL_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_RE_UNITS ADD PROJECT_ID AS dbo.F_BAB_H_RE_UNITS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROJECT_ID_BAB_H_RE_UNITS_c1 ON dbo.F_BAB_H_RE_UNITS(PROJECT_ID ASC);
+ALTER TABLE dbo.F_BAB_H_RE_UNITS ADD UNIT_REF AS dbo.F_BAB_H_RE_UNITS_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UNIT_REF_BAB_H_RE_UNITS_c2 ON dbo.F_BAB_H_RE_UNITS(UNIT_REF ASC);
+ALTER TABLE dbo.F_USER ADD DEPARTMENT_CODE AS dbo.F_USER_c6(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEPARTMENT_CODE_USER_c6 ON dbo.F_USER(DEPARTMENT_CODE ASC);
+ALTER TABLE dbo.FBNK_FUNDS_TRANSFER#HIS ADD PROCESSING_DATE AS dbo.FBNK_FUNDS_TRANSFER#HIS_c18(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESSING_DATE_FUNDS_TRANSFER#HIS_c18 ON dbo.FBNK_FUNDS_TRANSFER#HIS(PROCESSING_DATE ASC);
+ALTER TABLE dbo.FBNK_FUNDS_TRANSFER#HIS ADD AUTH_DATE AS dbo.FBNK_FUNDS_TRANSFER#HIS_c153(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX AUTH_DATE_FUNDS_TRANSFER#HIS_c153 ON dbo.FBNK_FUNDS_TRANSFER#HIS(AUTH_DATE ASC);
+ALTER TABLE dbo.lcFBNK_LETT001 ADD APPLICANT_CUSTNO AS dbo.lcFBNK_LETT001_c9(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX APPLICANT_CUSTNO_LETT001_c9 ON dbo.lcFBNK_LETT001(APPLICANT_CUSTNO ASC);
+ALTER TABLE dbo.acFBNK_BAB_024 ADD FILE_EXEC_DATE AS dbo.acFBNK_BAB_024_c10(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_EXEC_DATE_BAB_024_c10 ON dbo.acFBNK_BAB_024(FILE_EXEC_DATE ASC);
+ALTER TABLE dbo.acFBNK_BAB_024 ADD PROCESSED_FLAG AS dbo.acFBNK_BAB_024_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESSED_FLAG_BAB_024_c5 ON dbo.acFBNK_BAB_024(PROCESSED_FLAG ASC);
+ALTER TABLE dbo.F_BAB_L_PROTOCOL_HIST ADD PROCESS_DATE AS dbo.F_BAB_L_PROTOCOL_HIST_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESS_DATE_BAB_L_PROTOCOL_HIST_c1 ON dbo.F_BAB_L_PROTOCOL_HIST(PROCESS_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_T017 ADD RECON_STATUS AS dbo.F_BAB_H_T017_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RECON_STATUS_BAB_H_T017_c3 ON dbo.F_BAB_H_T017(RECON_STATUS ASC);
+ALTER TABLE dbo.FBNK_BAB_CUS_EXP_IDS ADD EXPIRY_DATE AS dbo.FBNK_BAB_CUS_EXP_IDS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EXPIRY_DATE_BAB_CUS_EXP_IDS_c1 ON dbo.FBNK_BAB_CUS_EXP_IDS(EXPIRY_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_CUS_EXP_IDS ADD AUTO_UPD_DT AS dbo.FBNK_BAB_CUS_EXP_IDS_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX AUTO_UPD_DT_BAB_CUS_EXP_IDS_c3 ON dbo.FBNK_BAB_CUS_EXP_IDS(AUTO_UPD_DT ASC);
+ALTER TABLE dbo.FBNK_BAB_CUS_EXP_IDS ADD CHANNEL_UPD_DT AS dbo.FBNK_BAB_CUS_EXP_IDS_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CHANNEL_UPD_DT_BAB_CUS_EXP_IDS_c5 ON dbo.FBNK_BAB_CUS_EXP_IDS(CHANNEL_UPD_DT ASC);
+ALTER TABLE dbo.FVCO_FUNDS_TRANSFER#HIS ADD PROCESSING_DATE AS dbo.FVCO_FUNDS_TRANSFER#HIS_c18(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESSING_DATE_FUNDS_TRANSFER#HIS_c18 ON dbo.FVCO_FUNDS_TRANSFER#HIS(PROCESSING_DATE ASC);
+ALTER TABLE dbo.acFBNK_BAB_032 ADD FILE_NAME AS dbo.acFBNK_BAB_032_c7(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_NAME_BAB_032_c7 ON dbo.acFBNK_BAB_032(FILE_NAME ASC);
+ALTER TABLE dbo.acFBNK_BAB_032 ADD TXN_PROC_DATE AS dbo.acFBNK_BAB_032_c20(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TXN_PROC_DATE_BAB_032_c20 ON dbo.acFBNK_BAB_032(TXN_PROC_DATE ASC);
+ALTER TABLE dbo.F_EB_PHANTOM ADD STATUS AS dbo.F_EB_PHANTOM_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATUS_EB_PHANTOM_c2 ON dbo.F_EB_PHANTOM(STATUS ASC);
+ALTER TABLE dbo.F_PROTOCOL ADD ID AS dbo.F_PROTOCOL_c11(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ID_PROTOCOL_c11 ON dbo.F_PROTOCOL(ID ASC);
+ALTER TABLE dbo.F_TSA_STATUS ADD CURRENT_SERVICE AS dbo.F_TSA_STATUS_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CURRENT_SERVICE_TSA_STATUS_c5 ON dbo.F_TSA_STATUS(CURRENT_SERVICE ASC);
+ALTER TABLE dbo.F_BAB_L_SIMAH_DEALS ADD SIMAH_UPLOAD_DATE AS dbo.F_BAB_L_SIMAH_DEALS_c26(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SIMAH_UPLOAD_DATE_BAB_L_SIMAH_DEALS_c26 ON dbo.F_BAB_L_SIMAH_DEALS(SIMAH_UPLOAD_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_SIMAH_DEALS ADD CATEGORY AS dbo.F_BAB_L_SIMAH_DEALS_c27(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_BAB_L_SIMAH_DEALS_c27 ON dbo.F_BAB_L_SIMAH_DEALS(CATEGORY ASC);
+ALTER TABLE dbo.F_BAB_L_SIMAH_DEALS ADD APRD_PRODUCT AS dbo.F_BAB_L_SIMAH_DEALS_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX APRD_PRODUCT_BAB_L_SIMAH_DEALS_c2 ON dbo.F_BAB_L_SIMAH_DEALS(APRD_PRODUCT ASC);
+ALTER TABLE dbo.FOMS_FUNDS_TRANSFER#HIS ADD PROCESSING_DATE AS dbo.FOMS_FUNDS_TRANSFER#HIS_c18(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESSING_DATE_FUNDS_TRANSFER#HIS_c18 ON dbo.FOMS_FUNDS_TRANSFER#HIS(PROCESSING_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_E000 ADD BANK_CODE AS dbo.F_BAB_L_E000_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BANK_CODE_BAB_L_E000_c1 ON dbo.F_BAB_L_E000(BANK_CODE ASC);
+ALTER TABLE dbo.F_BAB_L_E000 ADD TRANSACTION_DATE AS dbo.F_BAB_L_E000_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANSACTION_DATE_BAB_L_E000_c3 ON dbo.F_BAB_L_E000(TRANSACTION_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_E000 ADD FILE_NAME AS dbo.F_BAB_L_E000_c7(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_NAME_BAB_L_E000_c7 ON dbo.F_BAB_L_E000(FILE_NAME ASC);
+ALTER TABLE dbo.F_BAB_H_T002 ADD TRANSACTION_DATE AS dbo.F_BAB_H_T002_c49(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANSACTION_DATE_BAB_H_T002_c49 ON dbo.F_BAB_H_T002(TRANSACTION_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_CITY_AREA ADD EN_DESC AS dbo.F_BAB_H_CITY_AREA_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EN_DESC_BAB_H_CITY_AREA_c1 ON dbo.F_BAB_H_CITY_AREA(EN_DESC ASC);
+ALTER TABLE dbo.F_BAB_H_CITY_AREA ADD CITY AS dbo.F_BAB_H_CITY_AREA_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CITY_BAB_H_CITY_AREA_c3 ON dbo.F_BAB_H_CITY_AREA(CITY ASC);
+ALTER TABLE dbo.FOMS_SEC_TRADE ADD TRADE_DATE AS dbo.FOMS_SEC_TRADE_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRADE_DATE_SEC_TRADE_c5 ON dbo.FOMS_SEC_TRADE(TRADE_DATE ASC);
+ALTER TABLE dbo.FOMS_SEC_TRADE ADD VALUE_DATE AS dbo.FOMS_SEC_TRADE_c6(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX VALUE_DATE_SEC_TRADE_c6 ON dbo.FOMS_SEC_TRADE(VALUE_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_MD_WTHAQ_STTS ADD LAST_STATUS AS dbo.F_BAB_L_MD_WTHAQ_STTS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_STATUS_BAB_L_MD_WTHAQ_STTS_c1 ON dbo.F_BAB_L_MD_WTHAQ_STTS(LAST_STATUS ASC);
+ALTER TABLE dbo.FBNK_MD_DEAL#HIS ADD CUSTOMER AS dbo.FBNK_MD_DEAL#HIS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_MD_DEAL#HIS_c1 ON dbo.FBNK_MD_DEAL#HIS(CUSTOMER ASC);
+ALTER TABLE dbo.F_BAB_L_I000 ADD NEW_DEED_NO AS dbo.F_BAB_L_I000_c37(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NEW_DEED_NO_BAB_L_I000_c37 ON dbo.F_BAB_L_I000(NEW_DEED_NO ASC);
+ALTER TABLE dbo.F_BAB_H_CITY ADD EN_DESC AS dbo.F_BAB_H_CITY_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EN_DESC_BAB_H_CITY_c1 ON dbo.F_BAB_H_CITY(EN_DESC ASC);
+ALTER TABLE dbo.F_BAB_H_MOF_AGENCY ADD CUSTOMER_ID AS dbo.F_BAB_H_MOF_AGENCY_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_BAB_H_MOF_AGENCY_c1 ON dbo.F_BAB_H_MOF_AGENCY(CUSTOMER_ID ASC);
+ALTER TABLE dbo.FBNK_BAB_H_TT_EXCESS ADD STATUS AS dbo.FBNK_BAB_H_TT_EXCESS_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATUS_BAB_H_TT_EXCESS_c3 ON dbo.FBNK_BAB_H_TT_EXCESS(STATUS ASC);
+ALTER TABLE dbo.FBNK_BAB_H_TT_EXCESS ADD OPEN_DT AS dbo.FBNK_BAB_H_TT_EXCESS_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX OPEN_DT_BAB_H_TT_EXCESS_c2 ON dbo.FBNK_BAB_H_TT_EXCESS(OPEN_DT ASC);
+ALTER TABLE dbo.FBNK_BAB_H_TT_EXCESS ADD EXCESS_DT AS dbo.FBNK_BAB_H_TT_EXCESS_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EXCESS_DT_BAB_H_TT_EXCESS_c1 ON dbo.FBNK_BAB_H_TT_EXCESS(EXCESS_DT ASC);
+ALTER TABLE dbo.FBNK_ACCOUNT_CLOSED ADD ACCT_CLOSE_DATE AS dbo.FBNK_ACCOUNT_CLOSED_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCT_CLOSE_DATE_ACCOUNT_CLOSED_c1 ON dbo.FBNK_ACCOUNT_CLOSED(ACCT_CLOSE_DATE ASC);
+ALTER TABLE dbo.FOMS_ACCOUNT ADD CATEGORY AS dbo.FOMS_ACCOUNT_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_ACCOUNT_c2 ON dbo.FOMS_ACCOUNT(CATEGORY ASC);
+ALTER TABLE dbo.F_BAB_H_INACTIVE_AC ADD CURRENT_STATUS AS dbo.F_BAB_H_INACTIVE_AC_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CURRENT_STATUS_BAB_H_INACTIVE_AC_c1 ON dbo.F_BAB_H_INACTIVE_AC(CURRENT_STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_INACTIVE_AC ADD CUS_SEGMENT AS dbo.F_BAB_H_INACTIVE_AC_c31(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUS_SEGMENT_BAB_H_INACTIVE_AC_c31 ON dbo.F_BAB_H_INACTIVE_AC(CUS_SEGMENT ASC);
+ALTER TABLE dbo.F_BAB_L_M000 ADD UPLOAD_DATE AS dbo.F_BAB_L_M000_c14(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UPLOAD_DATE_BAB_L_M000_c14 ON dbo.F_BAB_L_M000(UPLOAD_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_M000 ADD FILE_DATE AS dbo.F_BAB_L_M000_c15(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_DATE_BAB_L_M000_c15 ON dbo.F_BAB_L_M000(FILE_DATE ASC);
+ALTER TABLE dbo.FBNK_CHEQUE_ISSUE ADD CHEQUE_STATUS AS dbo.FBNK_CHEQUE_ISSUE_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CHEQUE_STATUS_CHEQUE_ISSUE_c1 ON dbo.FBNK_CHEQUE_ISSUE(CHEQUE_STATUS ASC);
+ALTER TABLE dbo.FBNK_CUSTOMER ADD OWNER_ID AS dbo.FBNK_CUSTOMER_c179m121(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX OWNER_ID_CUSTOMER_c179m121 ON dbo.FBNK_CUSTOMER(OWNER_ID ASC);
+ALTER TABLE dbo.FBNK_CUSTOMER ADD LEGAL_ID AS dbo.FBNK_CUSTOMER_c34(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LEGAL_ID_CUSTOMER_c34 ON dbo.FBNK_CUSTOMER(LEGAL_ID ASC);
+ALTER TABLE dbo.FBNK_CUSTOMER ADD OPEN_DATE AS dbo.FBNK_CUSTOMER_c179m71(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX OPEN_DATE_CUSTOMER_c179m71 ON dbo.FBNK_CUSTOMER(OPEN_DATE ASC);
+ALTER TABLE dbo.FBNK_CUSTOMER ADD MOBILE_NO AS dbo.FBNK_CUSTOMER_c179m13(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX MOBILE_NO_CUSTOMER_c179m13 ON dbo.FBNK_CUSTOMER(MOBILE_NO ASC);
+ALTER TABLE dbo.FBNK_CUSTOMER ADD ACCOUNT_OFFICER AS dbo.FBNK_CUSTOMER_c24(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_OFFICER_CUSTOMER_c24 ON dbo.FBNK_CUSTOMER(ACCOUNT_OFFICER ASC);
+ALTER TABLE dbo.F_BAB_L_M001 ADD UPLOAD_DATE AS dbo.F_BAB_L_M001_19(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UPLOAD_DATE_BAB_L_M001_ ON dbo.F_BAB_L_M001(UPLOAD_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_M001 ADD FILE_DATE AS dbo.F_BAB_L_M001_20(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_DATE_BAB_L_M001_ ON dbo.F_BAB_L_M001(FILE_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_050 ADD SPONSOR_CIF AS dbo.FBNK_BAB_050_c179m265 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SPONSOR_CIF_BAB_050_c179m265  ON dbo.FBNK_BAB_050(SPONSOR_CIF ASC);
+ALTER TABLE dbo.stF_TSD_CUS000 ADD CHANGE_DATE AS dbo.stF_TSD_CUS000_c9 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CHANGE_DATE_TSD_CUS000_c9  ON dbo.stF_TSD_CUS000(CHANGE_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_CIF_LAST_UPD ADD RESTRICT_DATE AS dbo.F_BAB_L_CIF_LAST_UPD_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RESTRICT_DATE_BAB_L_CIF_LAST_UPD_c1  ON dbo.F_BAB_L_CIF_LAST_UPD(RESTRICT_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_M002 ADD UPLOAD_DATE AS dbo.F_BAB_L_M002_c37 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UPLOAD_DATE_BAB_L_M002_c37  ON dbo.F_BAB_L_M002(UPLOAD_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_M002 ADD FILE_DATE AS dbo.F_BAB_L_M002_c38 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_DATE_BAB_L_M002_c38  ON dbo.F_BAB_L_M002(FILE_DATE ASC);
+ALTER TABLE dbo.ebFBNK_BAB_211 ADD PROCESS_DT AS dbo.ebFBNK_BAB_211_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESS_DT_BAB_211_c2  ON dbo.ebFBNK_BAB_211(PROCESS_DT ASC);
+ALTER TABLE dbo.F_BAB_L_C010 ADD CUSTOMER AS dbo.F_BAB_L_C010_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_L_C010_c1  ON dbo.F_BAB_L_C010(CUSTOMER ASC);
+ALTER TABLE dbo.F_BAB_L_G000 ADD POSN_DATE AS dbo.F_BAB_L_G000_c9 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX POSN_DATE_BAB_L_G000_c9  ON dbo.F_BAB_L_G000(POSN_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_M003 ADD UPLOAD_DATE AS dbo.F_BAB_L_M003_c13 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UPLOAD_DATE_BAB_L_M003_c13  ON dbo.F_BAB_L_M003(UPLOAD_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_M003 ADD FILE_DATE AS dbo.F_BAB_L_M003_c14 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_DATE_BAB_L_M003_c14  ON dbo.F_BAB_L_M003(FILE_DATE ASC);
+ALTER TABLE dbo.F_EXCEPTION_LOG_HIST ADD RUN_DATE AS dbo.F_EXCEPTION_LOG_HIST_c13 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RUN_DATE_EXCEPTION_LOG_HIST_c13  ON dbo.F_EXCEPTION_LOG_HIST(RUN_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_ADAHI_TXNS ADD CUSTOMER AS dbo.F_BAB_H_ADAHI_TXNS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_H_ADAHI_TXNS_c1  ON dbo.F_BAB_H_ADAHI_TXNS(CUSTOMER ASC);
+ALTER TABLE dbo.F_BAB_L_C203 ADD REF_ID AS dbo.F_BAB_L_C203_c6 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REF_ID_BAB_L_C203_c6  ON dbo.F_BAB_L_C203(REF_ID ASC);
+ALTER TABLE dbo.FBNK_CUSTOMER_SECURITY ADD CUSTOMER_TYPE AS dbo.FBNK_CUSTOMER_SECURITY_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_TYPE_CUSTOMER_SECURITY_c1  ON dbo.FBNK_CUSTOMER_SECURITY(CUSTOMER_TYPE ASC);
+ALTER TABLE dbo.FBNK_BAB_L_EAD_CONCAT ADD REPORT_NAME AS dbo.FBNK_BAB_L_EAD_CONCAT_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REPORT_NAME_BAB_L_EAD_CONCAT_c1  ON dbo.FBNK_BAB_L_EAD_CONCAT(REPORT_NAME ASC);
+ALTER TABLE dbo.F_BAB_L_ENJ_FT_PROMO ADD CUSTOMER AS dbo.F_BAB_L_ENJ_FT_PROMO_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_L_ENJ_FT_PROMO_c2  ON dbo.F_BAB_L_ENJ_FT_PROMO(CUSTOMER ASC);
+ALTER TABLE dbo.F_BAB_L_ENJ_FT_PROMO ADD PROMO_ID AS dbo.F_BAB_L_ENJ_FT_PROMO_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROMO_ID_BAB_L_ENJ_FT_PROMO_c1  ON dbo.F_BAB_L_ENJ_FT_PROMO(PROMO_ID ASC);
+ALTER TABLE dbo.F_BAB_L_REVERSED_TXNS ADD DATE AS dbo.F_BAB_L_REVERSED_TXNS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DATE_BAB_L_REVERSED_TXNS_c1  ON dbo.F_BAB_L_REVERSED_TXNS(DATE ASC);
+ALTER TABLE dbo.FBNK_SECURITY_POSITION ADD DEPOSITORY AS dbo.FBNK_SECURITY_POSITION_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEPOSITORY_SECURITY_POSITION_c3  ON dbo.FBNK_SECURITY_POSITION(DEPOSITORY ASC);
+ALTER TABLE dbo.FBNK_SECURITY_POSITION ADD FIN_COMPANY AS dbo.FBNK_SECURITY_POSITION_c81 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FIN_COMPANY_SECURITY_POSITION_c81  ON dbo.FBNK_SECURITY_POSITION(FIN_COMPANY ASC);
+ALTER TABLE dbo.FBNK_SECURITY_POSITION ADD SECURITY_ACCOUNT AS dbo.FBNK_SECURITY_POSITION_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SECURITY_ACCOUNT_SECURITY_POSITION_c1  ON dbo.FBNK_SECURITY_POSITION(SECURITY_ACCOUNT ASC);
+ALTER TABLE dbo.FBNK_SECURITY_POSITION ADD SECURITY_NUMBER AS dbo.FBNK_SECURITY_POSITION_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SECURITY_NUMBER_SECURITY_POSITION_c2  ON dbo.FBNK_SECURITY_POSITION(SECURITY_NUMBER ASC);
+ALTER TABLE dbo.FBNK_BAB_L_SA_CONTRACT ADD END_DATE AS dbo.FBNK_BAB_L_SA_CONTRACT_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX END_DATE_BAB_L_SA_CONTRACT_c3  ON dbo.FBNK_BAB_L_SA_CONTRACT(END_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_L_SA_CONTRACT ADD CUSTOMER_ID AS dbo.FBNK_BAB_L_SA_CONTRACT_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_BAB_L_SA_CONTRACT_c1  ON dbo.FBNK_BAB_L_SA_CONTRACT(CUSTOMER_ID ASC);
+ALTER TABLE dbo.F_BAB_H_ESCR_UNITS ADD PROJ_ID AS dbo.F_BAB_H_ESCR_UNITS_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROJ_ID_BAB_H_ESCR_UNITS_c2  ON dbo.F_BAB_H_ESCR_UNITS(PROJ_ID ASC);
+ALTER TABLE dbo.FBNK_EB_FREE_MESSAGE ADD GENERATED_DATE AS dbo.FBNK_EB_FREE_MESSAGE_c13 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX GENERATED_DATE_EB_FREE_MESSAGE_c13  ON dbo.FBNK_EB_FREE_MESSAGE(GENERATED_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_387 ADD END_DATE AS dbo.FBNK_BAB_387_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX END_DATE_BAB_387_c3  ON dbo.FBNK_BAB_387(END_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_387 ADD CUSTOMER_ID AS dbo.FBNK_BAB_387_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_BAB_387_c1  ON dbo.FBNK_BAB_387(CUSTOMER_ID ASC);
+ALTER TABLE dbo.FBNK_BAB_058 ADD NIN_ID AS dbo.FBNK_BAB_058_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NIN_ID_BAB_058_c1  ON dbo.FBNK_BAB_058(NIN_ID ASC);
+ALTER TABLE dbo.FBNK_BAB_058 ADD FT_REJECTION AS dbo.FBNK_BAB_058_c15 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FT_REJECTION_BAB_058_c15  ON dbo.FBNK_BAB_058(FT_REJECTION ASC);
+ALTER TABLE dbo.FBNK_BAB_058 ADD STATUS AS dbo.FBNK_BAB_058_c10 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STATUS_BAB_058_c10  ON dbo.FBNK_BAB_058(STATUS ASC);
+ALTER TABLE dbo.F_BAB_H_EB_POS_SRV_REQ ADD REQ_DATE AS dbo.F_BAB_H_EB_POS_SRV_REQ_c23 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REQ_DATE_BAB_H_EB_POS_SRV_REQ_c23  ON dbo.F_BAB_H_EB_POS_SRV_REQ(REQ_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_E001 ADD BOOKING_DATE AS dbo.F_BAB_L_E001_c7 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BOOKING_DATE_BAB_L_E001_c7  ON dbo.F_BAB_L_E001(BOOKING_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_E001 ADD CURRENCY AS dbo.F_BAB_L_E001_c5 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CURRENCY_BAB_L_E001_c5  ON dbo.F_BAB_L_E001(CURRENCY ASC);
+ALTER TABLE dbo.F_BAB_L_E001 ADD PROCESS_STATUS AS dbo.F_BAB_L_E001_c14 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROCESS_STATUS_BAB_L_E001_c14  ON dbo.F_BAB_L_E001(PROCESS_STATUS ASC);
+ALTER TABLE dbo.F_BAB_L_E001 ADD TRANS_REFERENCE AS dbo.F_BAB_L_E001_c10 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TRANS_REFERENCE_BAB_L_E001_c10  ON dbo.F_BAB_L_E001(TRANS_REFERENCE ASC);
+ALTER TABLE dbo.FBNK_BAB_CARD_ISSUE ADD ACCOUNT_NUMBER AS dbo.FBNK_BAB_CARD_ISSUE_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_NUMBER_BAB_CARD_ISSUE_c3  ON dbo.FBNK_BAB_CARD_ISSUE(ACCOUNT_NUMBER ASC);
+ALTER TABLE dbo.FBNK_BAB_CARD_ISSUE ADD CUSTOMER AS dbo.FBNK_BAB_CARD_ISSUE_c4 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_CARD_ISSUE_c4  ON dbo.FBNK_BAB_CARD_ISSUE(CUSTOMER ASC);
+ALTER TABLE dbo.FBNK_BAB_CARD_ISSUE ADD REPLACEMENT_DATE AS dbo.FBNK_BAB_CARD_ISSUE_c36 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REPLACEMENT_DATE_BAB_CARD_ISSUE_c36  ON dbo.FBNK_BAB_CARD_ISSUE(REPLACEMENT_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_CARD_ISSUE ADD CORP_CIF AS dbo.FBNK_BAB_CARD_ISSUE_c47 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CORP_CIF_BAB_CARD_ISSUE_c47  ON dbo.FBNK_BAB_CARD_ISSUE(CORP_CIF ASC);
+ALTER TABLE dbo.FBNK_BAB_CARD_ISSUE ADD NEXT_REVIEW_DATE AS dbo.FBNK_BAB_CARD_ISSUE_c54 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NEXT_REVIEW_DATE_BAB_CARD_ISSUE_c54  ON dbo.FBNK_BAB_CARD_ISSUE(NEXT_REVIEW_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_H_REDF_CITY ADD REGION_CODE AS dbo.FBNK_BAB_H_REDF_CITY_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REGION_CODE_BAB_H_REDF_CITY_c3  ON dbo.FBNK_BAB_H_REDF_CITY(REGION_CODE ASC);
+ALTER TABLE dbo.F_BAB_L_M004 ADD CUS_INT_PL_AC AS dbo.F_BAB_L_M004_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUS_INT_PL_AC_BAB_L_M004_c2  ON dbo.F_BAB_L_M004(CUS_INT_PL_AC ASC);
+ALTER TABLE dbo.F_BAB_H_CR_RISK_LIST ADD FULL_ID_NO AS dbo.F_BAB_H_CR_RISK_LIST_c4 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FULL_ID_NO_BAB_H_CR_RISK_LIST_c4  ON dbo.F_BAB_H_CR_RISK_LIST(FULL_ID_NO ASC);
+ALTER TABLE dbo.F_BAB_H_CR_RISK_LIST ADD ID_NUMBER AS dbo.F_BAB_H_CR_RISK_LIST_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ID_NUMBER_BAB_H_CR_RISK_LIST_c3  ON dbo.F_BAB_H_CR_RISK_LIST(ID_NUMBER ASC);
+ALTER TABLE dbo.FBNK_BAB_W_EB_PYRL_PRO ADD FILE_NAME AS dbo.FBNK_BAB_W_EB_PYRL_PRO_c5 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FILE_NAME_BAB_W_EB_PYRL_PRO_c5  ON dbo.FBNK_BAB_W_EB_PYRL_PRO(FILE_NAME ASC);
+ALTER TABLE dbo.F_BAB_L_CORP_BALANCE_CONF ADD RUN_DATE AS dbo.F_BAB_L_CORP_BALANCE_CONF_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX RUN_DATE_BAB_L_CORP_BALANCE_CONF_c1  ON dbo.F_BAB_L_CORP_BALANCE_CONF(RUN_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_L_KYC_STATUS ADD NEXT_DATE_CHANGE AS dbo.FBNK_BAB_L_KYC_STATUS_c5 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NEXT_DATE_CHANGE_BAB_L_KYC_STATUS_c5  ON dbo.FBNK_BAB_L_KYC_STATUS(NEXT_DATE_CHANGE ASC);
+ALTER TABLE dbo.FBNK_BAB_L_KYC_STATUS ADD NEXT_SMS_DATE AS dbo.FBNK_BAB_L_KYC_STATUS_c6 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NEXT_SMS_DATE_BAB_L_KYC_STATUS_c6  ON dbo.FBNK_BAB_L_KYC_STATUS(NEXT_SMS_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_EB_TXN_HIS ADD INIT_TS AS dbo.F_BAB_L_EB_TXN_HIS_c6 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX INIT_TS_BAB_L_EB_TXN_HIS_c6  ON dbo.F_BAB_L_EB_TXN_HIS(INIT_TS ASC);
+ALTER TABLE dbo.F_BAB_L_EB_TXN_HIS ADD CIF AS dbo.F_BAB_L_EB_TXN_HIS_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CIF_BAB_L_EB_TXN_HIS_c2  ON dbo.F_BAB_L_EB_TXN_HIS(CIF ASC);
+ALTER TABLE dbo.F_BAB_L_EB_TXN_HIS ADD SRV_ID AS dbo.F_BAB_L_EB_TXN_HIS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SRV_ID_BAB_L_EB_TXN_HIS_c1  ON dbo.F_BAB_L_EB_TXN_HIS(SRV_ID ASC);
+ALTER TABLE dbo.FBNK_BAB_W_EB_PYRL_PRO ADD SRV_ID AS dbo.FBNK_BAB_W_EB_PYRL_PRO_c20 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SRV_ID_BAB_W_EB_PYRL_PRO_c20  ON dbo.FBNK_BAB_W_EB_PYRL_PRO(SRV_ID ASC);
+ALTER TABLE dbo.FBNK_IS_H_LOAN_REQUEST ADD REQ_STATUS AS dbo.FBNK_IS_H_LOAN_REQUEST_c141 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REQ_STATUS_IS_H_LOAN_REQUEST_c141  ON dbo.FBNK_IS_H_LOAN_REQUEST(REQ_STATUS ASC);
+ALTER TABLE dbo.FBNK_IS_H_LOAN_REQUEST ADD LAST_REJ_STAT AS dbo.FBNK_IS_H_LOAN_REQUEST_c173 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_REJ_STAT_IS_H_LOAN_REQUEST_c173  ON dbo.FBNK_IS_H_LOAN_REQUEST(LAST_REJ_STAT ASC);
+ALTER TABLE dbo.FBNK_IS_H_LOAN_REQUEST ADD CUSTOMER AS dbo.FBNK_IS_H_LOAN_REQUEST_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_IS_H_LOAN_REQUEST_c3  ON dbo.FBNK_IS_H_LOAN_REQUEST(CUSTOMER ASC);
+ALTER TABLE dbo.F_HOLD_CONTROL ADD BANK_DATE AS dbo.F_HOLD_CONTROL_c8 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BANK_DATE_HOLD_CONTROL_c8  ON dbo.F_HOLD_CONTROL(BANK_DATE ASC);
+ALTER TABLE dbo.F_HOLD_CONTROL ADD REPORT_NAME AS dbo.F_HOLD_CONTROL_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REPORT_NAME_HOLD_CONTROL_c2  ON dbo.F_HOLD_CONTROL(REPORT_NAME ASC);
+ALTER TABLE dbo.F_BAB_H_20022_INSTRID ADD LAST_UPD_DATE AS dbo.F_BAB_H_20022_INSTRID_c17 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_UPD_DATE_BAB_H_20022_INSTRID_c17  ON dbo.F_BAB_H_20022_INSTRID(LAST_UPD_DATE ASC);
+ALTER TABLE dbo.ebFBNK_IS_H012 ADD PRODUCT_CODE AS dbo.ebFBNK_IS_H012_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PRODUCT_CODE_IS_H012_c1  ON dbo.ebFBNK_IS_H012(PRODUCT_CODE ASC);
+ALTER TABLE dbo.ebFBNK_IS_H012 ADD CUSTOMER AS dbo.ebFBNK_IS_H012_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_IS_H012_c3  ON dbo.ebFBNK_IS_H012(CUSTOMER ASC);
+ALTER TABLE dbo.ebFBNK_IS_H012 ADD DATE_TIME AS dbo.ebFBNK_IS_H012_c341 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DATE_TIME_IS_H012_c341  ON dbo.ebFBNK_IS_H012(DATE_TIME ASC);
+ALTER TABLE dbo.ebFBNK_IS_H012 ADD DEPT_CODE AS dbo.ebFBNK_IS_H012_c344 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEPT_CODE_IS_H012_c344  ON dbo.ebFBNK_IS_H012(DEPT_CODE ASC);
+ALTER TABLE dbo.F_BAB_L_TANFEETH_RES ADD MSG_UID AS dbo.F_BAB_L_TANFEETH_RES_c9 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX MSG_UID_BAB_L_TANFEETH_RES_c9  ON dbo.F_BAB_L_TANFEETH_RES(MSG_UID ASC);
+ALTER TABLE dbo.F_BAB_L_TANFEETH_RES ADD OVRD_MSG_UID AS dbo.F_BAB_L_TANFEETH_RES_c10 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX OVRD_MSG_UID_BAB_L_TANFEETH_RES_c10  ON dbo.F_BAB_L_TANFEETH_RES(OVRD_MSG_UID ASC);
+ALTER TABLE dbo.F_BAB_L_TANFEETH_RES ADD ID_NUMBER AS dbo.F_BAB_L_TANFEETH_RES_c4 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ID_NUMBER_BAB_L_TANFEETH_RES_c4  ON dbo.F_BAB_L_TANFEETH_RES(ID_NUMBER ASC);
+ALTER TABLE dbo.F_BAB_L_TANFEETH_RES ADD ACC_NUM AS dbo.F_BAB_L_TANFEETH_RES_c6 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACC_NUM_BAB_L_TANFEETH_RES_c6  ON dbo.F_BAB_L_TANFEETH_RES(ACC_NUM ASC);
+ALTER TABLE dbo.F_BAB_L_TANFEETH_RES ADD EXEC_CASE_NUM AS dbo.F_BAB_L_TANFEETH_RES_c11 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EXEC_CASE_NUM_BAB_L_TANFEETH_RES_c11  ON dbo.F_BAB_L_TANFEETH_RES(EXEC_CASE_NUM ASC);
+ALTER TABLE dbo.F_BAB_L_TANFEETH_RES ADD SRN AS dbo.F_BAB_L_TANFEETH_RES_c7 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SRN_BAB_L_TANFEETH_RES_c7  ON dbo.F_BAB_L_TANFEETH_RES(SRN ASC);
+ALTER TABLE dbo.FBNK_AC_LOCKED_EVENTS ADD FROM_DATE AS dbo.FBNK_AC_LOCKED_EVENTS_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FROM_DATE_AC_LOCKED_EVENTS_c3  ON dbo.FBNK_AC_LOCKED_EVENTS(FROM_DATE ASC);
+ALTER TABLE dbo.FBNK_AC_LOCKED_EVENTS ADD ACCOUNT_NUMBER AS dbo.FBNK_AC_LOCKED_EVENTS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_NUMBER_AC_LOCKED_EVENTS_c1  ON dbo.FBNK_AC_LOCKED_EVENTS(ACCOUNT_NUMBER ASC);
+ALTER TABLE dbo.F_BAB_L_CUS_RISK_UPD ADD SUBMIT_DATE AS dbo.F_BAB_L_CUS_RISK_UPD_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SUBMIT_DATE_BAB_L_CUS_RISK_UPD_c1  ON dbo.F_BAB_L_CUS_RISK_UPD(SUBMIT_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_CUS_RISK_UPD ADD APPROVED_DATE AS dbo.F_BAB_L_CUS_RISK_UPD_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX APPROVED_DATE_BAB_L_CUS_RISK_UPD_c2  ON dbo.F_BAB_L_CUS_RISK_UPD(APPROVED_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_WU_RECON_TXNS ADD FT_ID AS dbo.F_BAB_H_WU_RECON_TXNS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FT_ID_BAB_H_WU_RECON_TXNS_c1  ON dbo.F_BAB_H_WU_RECON_TXNS(FT_ID ASC);
+ALTER TABLE dbo.F_BAB_H_WU_RECON_TXNS ADD MTCN_NO AS dbo.F_BAB_H_WU_RECON_TXNS_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX MTCN_NO_BAB_H_WU_RECON_TXNS_c2  ON dbo.F_BAB_H_WU_RECON_TXNS(MTCN_NO ASC);
+ALTER TABLE dbo.F_BAB_H_WU_RECON_TXNS ADD TXN_DATE AS dbo.F_BAB_H_WU_RECON_TXNS_c4 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TXN_DATE_BAB_H_WU_RECON_TXNS_c4  ON dbo.F_BAB_H_WU_RECON_TXNS(TXN_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_WU_RECON_TXNS ADD WU_SETTLE_DATE AS dbo.F_BAB_H_WU_RECON_TXNS_c11 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX WU_SETTLE_DATE_BAB_H_WU_RECON_TXNS_c11  ON dbo.F_BAB_H_WU_RECON_TXNS(WU_SETTLE_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_WU_RECON_TXNS ADD CUSTOMER_ID AS dbo.F_BAB_H_WU_RECON_TXNS_c15 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_BAB_H_WU_RECON_TXNS_c15  ON dbo.F_BAB_H_WU_RECON_TXNS(CUSTOMER_ID ASC);
+ALTER TABLE dbo.F_BAB_L_ENJ_CUS_PROMO ADD TXN_EXPIRY_DATE AS dbo.F_BAB_L_ENJ_CUS_PROMO_c4 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TXN_EXPIRY_DATE_BAB_L_ENJ_CUS_PROMO_c4  ON dbo.F_BAB_L_ENJ_CUS_PROMO(TXN_EXPIRY_DATE ASC);
+ALTER TABLE dbo.FMFI_GM_CUSTOMER ADD CUST_ACCOUNT AS dbo.FMFI_GM_CUSTOMER_c7 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUST_ACCOUNT_GM_CUSTOMER_c7  ON dbo.FMFI_GM_CUSTOMER(CUST_ACCOUNT ASC);
+ALTER TABLE dbo.FMFI_GM_CUSTOMER ADD CUSTOMER_ID AS dbo.FMFI_GM_CUSTOMER_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_GM_CUSTOMER_c1  ON dbo.FMFI_GM_CUSTOMER(CUSTOMER_ID ASC);
+ALTER TABLE dbo.F_BAB_W_TANFEETH_REQ ADD MSG_UID AS dbo.F_BAB_W_TANFEETH_REQ_c7 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX MSG_UID_BAB_W_TANFEETH_REQ_c7  ON dbo.F_BAB_W_TANFEETH_REQ(MSG_UID ASC);
+ALTER TABLE dbo.F_BAB_W_TANFEETH_REQ ADD OVRD_MSG_UID AS dbo.F_BAB_W_TANFEETH_REQ_c10 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX OVRD_MSG_UID_BAB_W_TANFEETH_REQ_c10  ON dbo.F_BAB_W_TANFEETH_REQ(OVRD_MSG_UID ASC);
+ALTER TABLE dbo.F_BAB_W_TANFEETH_REQ ADD ID_NUMBER AS dbo.F_BAB_W_TANFEETH_REQ_c23 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ID_NUMBER_BAB_W_TANFEETH_REQ_c23  ON dbo.F_BAB_W_TANFEETH_REQ(ID_NUMBER ASC);
+ALTER TABLE dbo.F_BAB_W_TANFEETH_REQ ADD ACC_NUM AS dbo.F_BAB_W_TANFEETH_REQ_c43 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACC_NUM_BAB_W_TANFEETH_REQ_c43  ON dbo.F_BAB_W_TANFEETH_REQ(ACC_NUM ASC);
+ALTER TABLE dbo.F_BAB_W_TANFEETH_REQ ADD EXEC_CASE_NUM AS dbo.F_BAB_W_TANFEETH_REQ_c33 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX EXEC_CASE_NUM_BAB_W_TANFEETH_REQ_c33  ON dbo.F_BAB_W_TANFEETH_REQ(EXEC_CASE_NUM ASC);
+ALTER TABLE dbo.F_BAB_W_TANFEETH_REQ ADD SRN AS dbo.F_BAB_W_TANFEETH_REQ_c11 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX SRN_BAB_W_TANFEETH_REQ_c11  ON dbo.F_BAB_W_TANFEETH_REQ(SRN ASC);
+ALTER TABLE dbo.F_BAB_H_E226 ADD CIF AS dbo.F_BAB_H_E226_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CIF_BAB_H_E226_c2  ON dbo.F_BAB_H_E226(CIF ASC);
+ALTER TABLE dbo.F_BAB_H_E226 ADD ACCOUNT AS dbo.F_BAB_H_E226_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_BAB_H_E226_c3  ON dbo.F_BAB_H_E226(ACCOUNT ASC);
+ALTER TABLE dbo.FBNK_CUSTOMER#NAU ADD DEPT_CODE AS dbo.FBNK_CUSTOMER#NAU_c187(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX DEPT_CODE_CUSTOMER#NAU_c187 ON dbo.FBNK_CUSTOMER#NAU(DEPT_CODE ASC);
+ALTER TABLE dbo.F_BAB_H_EB_TXN_REMRKS ADD CIF AS dbo.F_BAB_H_EB_TXN_REMRKS_c4 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CIF_BAB_H_EB_TXN_REMRKS_c4  ON dbo.F_BAB_H_EB_TXN_REMRKS(CIF ASC);
+ALTER TABLE dbo.F_BAB_H_EB_TXN_REMRKS ADD BOOKING_DATE AS dbo.F_BAB_H_EB_TXN_REMRKS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BOOKING_DATE_BAB_H_EB_TXN_REMRKS_c1  ON dbo.F_BAB_H_EB_TXN_REMRKS(BOOKING_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_D200 ADD ARCHIVE_DT AS dbo.F_BAB_L_D200_c8 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ARCHIVE_DT_BAB_L_D200_c8  ON dbo.F_BAB_L_D200(ARCHIVE_DT ASC);
+ALTER TABLE dbo.FBNK_BAB_260 ADD BRANCH AS dbo.FBNK_BAB_260_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BRANCH_BAB_260_c1  ON dbo.FBNK_BAB_260(BRANCH ASC);
+ALTER TABLE dbo.FBNK_BAB_260 ADD UPDATE_DATE AS dbo.FBNK_BAB_260_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX UPDATE_DATE_BAB_260_c2 ON dbo.FBNK_BAB_260(UPDATE_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_LD_CF_DETS ADD CATEGORY AS dbo.F_BAB_L_LD_CF_DETS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_BAB_L_LD_CF_DETS_c1  ON dbo.F_BAB_L_LD_CF_DETS(CATEGORY ASC);
+ALTER TABLE dbo.F_BAB_L_LD_CF_DETS ADD PERIOD AS dbo.F_BAB_L_LD_CF_DETS_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PERIOD_BAB_L_LD_CF_DETS_c2  ON dbo.F_BAB_L_LD_CF_DETS(PERIOD ASC);
+ALTER TABLE dbo.F_BAB_L_RESCHED_DETS ADD CUSTOMER_ID AS dbo.F_BAB_L_RESCHED_DETS_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_ID_BAB_L_RESCHED_DETS_c1  ON dbo.F_BAB_L_RESCHED_DETS(CUSTOMER_ID ASC);
+ALTER TABLE dbo.F_BAB_L_RESCHED_DETS ADD VALUE_DATE AS dbo.F_BAB_L_RESCHED_DETS_c2 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX VALUE_DATE_BAB_L_RESCHED_DETS_c2  ON dbo.F_BAB_L_RESCHED_DETS(VALUE_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_ENJ_CUS_LIMIT ADD LAST_UPD_MONTH AS dbo.F_BAB_L_ENJ_CUS_LIMIT_c5 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LAST_UPD_MONTH_BAB_L_ENJ_CUS_LIMIT_c5  ON dbo.F_BAB_L_ENJ_CUS_LIMIT(LAST_UPD_MONTH ASC);
+ALTER TABLE dbo.F_BAB_H_EFT_BANK_DTLS ADD COUNTRY_CODE AS dbo.F_BAB_H_EFT_BANK_DTLS_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX COUNTRY_CODE_BAB_H_EFT_BANK_DTLS_c3  ON dbo.F_BAB_H_EFT_BANK_DTLS(COUNTRY_CODE ASC);
+ALTER TABLE dbo.F_BAB_L_WALKIN_TXNS ADD BRANCH_NUM AS dbo.F_BAB_L_WALKIN_TXNS_c11 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX BRANCH_NUM_BAB_L_WALKIN_TXNS_c11  ON dbo.F_BAB_L_WALKIN_TXNS(BRANCH_NUM ASC);
+ALTER TABLE dbo.F_BAB_L_WALKIN_TXNS ADD TT_TXN_DATE AS dbo.F_BAB_L_WALKIN_TXNS_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX TT_TXN_DATE_BAB_L_WALKIN_TXNS_c3  ON dbo.F_BAB_L_WALKIN_TXNS(TT_TXN_DATE ASC);
+ALTER TABLE dbo.F_BAB_L_LD_CF_POSN ADD CATEGORY AS dbo.F_BAB_L_LD_CF_POSN_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CATEGORY_BAB_L_LD_CF_POSN_c1  ON dbo.F_BAB_L_LD_CF_POSN(CATEGORY ASC);
+ALTER TABLE dbo.FBNK_BAB_208 ADD NATHEER AS dbo.FBNK_BAB_208_c7 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NATHEER_BAB_208_c7  ON dbo.FBNK_BAB_208(NATHEER ASC);
+ALTER TABLE dbo.FBNK_BAB_SAFE_DEP_BOX ADD CUSTOMER AS dbo.FBNK_BAB_SAFE_DEP_BOX_c5 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_SAFE_DEP_BOX_c5  ON dbo.FBNK_BAB_SAFE_DEP_BOX(CUSTOMER ASC);
+ALTER TABLE dbo.FBNK_BAB_SAFE_DEP_BOX ADD NEXT_SAMA_DT AS dbo.FBNK_BAB_SAFE_DEP_BOX_c21 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX NEXT_SAMA_DT_BAB_SAFE_DEP_BOX_c21  ON dbo.FBNK_BAB_SAFE_DEP_BOX(NEXT_SAMA_DT ASC);
+ALTER TABLE dbo.F_BAB_H_TF_CITY ADD COUNTRY AS dbo.F_BAB_H_TF_CITY_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX COUNTRY_BAB_H_TF_CITY_c1  ON dbo.F_BAB_H_TF_CITY(COUNTRY ASC);
+ALTER TABLE dbo.F_BAB_H_OC_PURCH_DET ADD CUSTOMER AS dbo.F_BAB_H_OC_PURCH_DET_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_H_OC_PURCH_DET_c1  ON dbo.F_BAB_H_OC_PURCH_DET(CUSTOMER ASC);
+ALTER TABLE dbo.F_BAB_H_OC_PURCH_DET ADD PURCH_DATE AS dbo.F_BAB_H_OC_PURCH_DET_c3 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PURCH_DATE_BAB_H_OC_PURCH_DET_c3  ON dbo.F_BAB_H_OC_PURCH_DET(PURCH_DATE ASC);
+ALTER TABLE dbo.FBNK_BAB_VISA_CRD_ISSUE ADD ACCOUNT_NUMBER AS dbo.FBNK_BAB_VISA_CRD_ISSUE_c4 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACCOUNT_NUMBER_BAB_VISA_CRD_ISSUE_c4  ON dbo.FBNK_BAB_VISA_CRD_ISSUE(ACCOUNT_NUMBER ASC);
+ALTER TABLE dbo.FBNK_BAB_VISA_CRD_ISSUE ADD CUSTOMER AS dbo.FBNK_BAB_VISA_CRD_ISSUE_c5 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_VISA_CRD_ISSUE_c5  ON dbo.FBNK_BAB_VISA_CRD_ISSUE(CUSTOMER ASC);
+ALTER TABLE dbo.FBNK_BAB_VISA_CRD_ISSUE ADD REQ_STATUS AS dbo.FBNK_BAB_VISA_CRD_ISSUE_c94 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REQ_STATUS_BAB_VISA_CRD_ISSUE_c94  ON dbo.FBNK_BAB_VISA_CRD_ISSUE(REQ_STATUS ASC);
+ALTER TABLE dbo.FBNK_BAB_VISA_CRD_ISSUE ADD CORP_CUST AS dbo.FBNK_BAB_VISA_CRD_ISSUE_c110 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CORP_CUST_BAB_VISA_CRD_ISSUE_c110  ON dbo.FBNK_BAB_VISA_CRD_ISSUE(CORP_CUST ASC);
+ALTER TABLE dbo.FBNK_IFRS217 ADD REPORT_NAME AS dbo.FBNK_IFRS217_c1 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REPORT_NAME_IFRS217_c1  ON dbo.FBNK_IFRS217(REPORT_NAME ASC);
+ALTER TABLE dbo.FBNK_IFRS217 ADD REPORT_DATE AS dbo.FBNK_IFRS217_c35 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX REPORT_DATE_IFRS217_c35  ON dbo.FBNK_IFRS217(REPORT_DATE ASC);
+ALTER TABLE dbo.FBNK_IFRS217 ADD STAGE AS dbo.FBNK_IFRS217_c29 (XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX STAGE_IFRS217_c29  ON dbo.FBNK_IFRS217(STAGE ASC);
+ALTER TABLE dbo.F_BAB_H_D212 ADD INST_CODE AS dbo.F_BAB_H_D212_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX INST_CODE_BAB_H_D212_c2 ON dbo.F_BAB_H_D212(INST_CODE ASC);
+ALTER TABLE dbo.F_BAB_H_E226 ADD CIF AS dbo.F_BAB_H_E226_c2(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CIF_BAB_H_E226_c2 ON dbo.F_BAB_H_E226(CIF ASC);
+ALTER TABLE dbo.F_BAB_H_E226 ADD CUSTOMER AS dbo.F_BAB_H_E226_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CUSTOMER_BAB_H_E226_c3 ON dbo.F_BAB_H_E226(CUSTOMER ASC);
+ALTER TABLE dbo.F_BAB_H_EB_REG_REQUEST ADD ACTION AS dbo.F_BAB_H_EB_REG_REQUEST_c1(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ACTION_BAB_H_EB_REG_REQUEST_c1 ON dbo.F_BAB_H_EB_REG_REQUEST(ACTION ASC);
+ALTER TABLE dbo.F_BAB_H_POST_RESTRICT ADD FUT.PROCESS.DATE AS dbo.F_BAB_H_POST_RESTRICT_c49(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX FUT_PROCESS_DATE_BAB_H_POST_RESTRICT_c49 ON dbo.F_BAB_H_POST_RESTRICT(FUT_PROCESS_DATE ASC);
+ALTER TABLE dbo.F_BAB_H_RE_PROJECT_XML ADD PROJ_CODE AS dbo.F_BAB_H_RE_PROJECT_XML_c37(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROJ_CODE_BAB_H_RE_PROJECT_XML_c37 ON dbo.F_BAB_H_RE_PROJECT_XML(PROJ_CODE ASC);
+ALTER TABLE dbo.F_BAB_H_RE_UNITS ADD PROJ_CODE AS dbo.F_BAB_H_RE_UNITS_c14(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PROJ_CODE_BAB_H_RE_UNITS_c14 ON dbo.F_BAB_H_RE_UNITS(PROJ_CODE ASC);
+ALTER TABLE dbo.F_BAB_H_WATHIQ_CR_INFO ADD ID_NUMBER AS dbo.F_BAB_H_WATHIQ_CR_INFO_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ID_NUMBER_BAB_H_WATHIQ_CR_INFO_c5 ON dbo.F_BAB_H_WATHIQ_CR_INFO(ID_NUMBER ASC);
+ALTER TABLE dbo.F_BAB_H_WATHQ_AUTH_DEP ADD CIF AS dbo.F_BAB_H_WATHQ_AUTH_DEP_c5(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CIF_BAB_H_WATHQ_AUTH_DEP_c5 ON dbo.F_BAB_H_WATHQ_AUTH_DEP(CIF ASC);
+ALTER TABLE dbo.F_BAB_L_SIMAH_DEALS ADD CID2_LEGAL_ID AS dbo.F_BAB_L_SIMAH_DEALS_c21(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX CID2_LEGAL_ID_BAB_L_SIMAH_DEALS_c21 ON dbo.F_BAB_L_SIMAH_DEALS(CID2_LEGAL_ID ASC);
+ALTER TABLE dbo.F_BAB_L_T001 ADD COUNTRY AS dbo.F_BAB_L_T001_c30(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX COUNTRY_BAB_L_T001_c30 ON dbo.F_BAB_L_T001(COUNTRY ASC);
+ALTER TABLE dbo.FBNK_BAB_476 ADD LEGAL_ID AS dbo.FBNK_BAB_476_c3(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LEGAL_ID_BAB_476_c3 ON dbo.FBNK_BAB_476(LEGAL_ID ASC);
+ALTER TABLE dbo.scFBNK_BAB_009 ADD ORDER_SEQ AS dbo.scFBNK_BAB_009_c98(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX ORDER_SEQ_scFBNK_BAB_009_c98 ON dbo.scFBNK_BAB_009(ORDER_SEQ ASC);
+ALTER TABLE dbo.F_PROTOCOL ADD PHANTOM_ID AS dbo.F_PROTOCOL_c6(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX PHANTOM_ID_PROTOCOL_c6 ON dbo.F_PROTOCOL(PHANTOM_ID ASC);
+ALTER TABLE dbo.FBNK_LIMIT ADD LIABILITY_NUMBER AS dbo.FBNK_LIMIT_c95(XMLRECORD) PERSISTED;
+CREATE NONCLUSTERED INDEX LIABILITY_NUMBER_LIMIT_c95 ON dbo.FBNK_LIMIT(LIABILITY_NUMBER ASC);'
+
+--alter procedure [dbo].[sp_ddl_validation]
+--(
+declare @ddl_script varchar(max) = @syntax , @sep varchar(100) = ';', 
+@command varchar(100) = 'create index',
+@sub_command varchar(100) = null,
+@is_table_exist int = 1,
+@is_column_exist int = 1,
+@is_index_exist int = 0,
+@is_function_exist int = 0,
+@is_main_function_exist int = 0
+--)
+--as
+--begin
+
+declare @result table (syntax varchar(max), command varchar(500), sub_command varchar(500), table_name varchar(500), is_table_exist varchar(500), rows varchar(500), column_name varchar(500), is_column_exist varchar(500), function_name varchar(500), is_function_exist varchar(500), index_name varchar(500), is_index_exist varchar(500))
+  
+set transaction isolation level read uncommitted 
+--insert into @result
+--select syntax, command, sub_command, 
+--table_name, 
+--is_table_exist, 
+--(select max(rows) from sys.partitions  with (nolock) where object_id = object_id(table_name)) rows,
+----0 rows,
+--column_name, 
+--is_column_exist, 
+--fn_name, 
+--is_function_exist, 
+--index_name, 
+--is_index_exist 
+--from (
+select * from (
+select id, syntax, command, sub_command, table_name, column_name,fn_name,index_name,function_name, substring(function_returns,1,charindex(CHAR(10),function_returns)-len(CHAR(10))) function_returns,
+case when sub_command = 'Add Column' or command = 'Create Index' then case when (select count(*) from sys.columns  with (nolock) where name = column_name collate Arabic_100_CI_AS and object_id = object_id(table_name collate Arabic_100_CI_AS)) > 0 then 1 else 0 end 
+else '' end is_column_exist,
+case when sub_command in ('Add Column') or command in ('Create Index','Drop Index') then case when (select count(*) from sys.tables  with (nolock) where object_id = object_id(table_name collate Arabic_100_CI_AS)) > 0 then 1 else 0 end 
+else '' end is_table_exist,
+case when sub_command = 'Add Column' then case when (select count(*) from sys.objects with (nolock) where object_id = object_id(fn_name collate Arabic_100_CI_AS) and type = 'fn') > 0 then 1 else 0 end 
+else '' end is_function_exist,
+case when command in ('Create Index','Drop Index') then case when (select count(*) from sys.indexes with (nolock) where name = replace(replace(index_name,']',''),'[','') collate Arabic_100_CI_AS and object_id = object_id(table_name collate Arabic_100_CI_AS)) > 0 then 1 else 0 end 
+else '' end is_index_exist,
+case when command in ('Create Function','Drop Function') then case when (select count(*) from sys.objects with (nolock) where object_id = object_id(function_name collate Arabic_100_CI_AS) and type = 'fn') > 0 then 1 else 0 end 
+else '' end is_main_function_exist
+from (
+select id, syntax, command, sub_command, 
+case 
+when substring(table_name, 1, charindex(' ',table_name)-1) like '%(%' then substring(table_name, 1, charindex('(',table_name)-1)
+else substring(table_name, 1, charindex(' ',table_name)-1) end
+table_name, 
+case 
+when substring(fn_name, 1, charindex(' ',fn_name)-1) like '%(%' then substring(fn_name, 1, charindex('(',fn_name)-1)
+else substring(fn_name, 1, charindex(' ',fn_name)-1) end
+fn_name, 
+case command 
+when 'Alter Table' then substring(column_name, 1, charindex(' ',column_name)-1) 
+when 'Create Index' then substring(replace(replace(column_name,' ASC',''),' DESC',''), 1, charindex(')',replace(replace(column_name,' ASC',''),' DESC',''))-1) 
+end
+column_name, 
+substring(index_name, 1, charindex(' ',index_name)-1) index_name,
+substring(function_name, 1, charindex(' ',function_name)-1) function_name,
+substring(returns_datatype,charindex('returns',returns_datatype)+8,len(returns_datatype)) function_returns
+from (
+select id, syntax, command,
+case when command = 'Alter Table' then case 
+when syntax like '% add %' then 'Add Column'
+when syntax like '% drop %' then 'Drop Column'
+end end sub_command,
+case 
+when command = 'Alter Table' then substring(syntax, charindex(' table ',syntax)+7, len(syntax)) 
+when command = 'Create Table' then substring(syntax, charindex(' table ',syntax)+7, len(syntax)) 
+when command = 'Drop Table' then substring(syntax, charindex(' table ',syntax)+7, len(syntax)) 
+when command = 'Create Index' then substring(syntax, charindex(' on ',syntax)+4, len(syntax)) 
+when command = 'Drop Index' then substring(syntax, charindex(' on ',syntax)+4, len(syntax)) 
+end table_name,
+case 
+when command = 'Alter Table' then substring(syntax, charindex(' as ',syntax)+4, len(syntax)) 
+end fn_name,
+case 
+when command = 'Alter Table' then substring(syntax, charindex(' add ',syntax)+5, len(syntax)) 
+when command = 'Alter Table' then substring(syntax, charindex(' drop ',syntax)+5, len(syntax)) 
+when command = 'create index' then substring(syntax, charindex('(',syntax)+1, len(syntax)) 
+end column_name,
+case 
+when command = 'Create Index' then substring(syntax, charindex(' index ',syntax)+7, len(syntax)) 
+when command = 'Drop Index' then substring(syntax, charindex(' index ',syntax)+7, len(syntax)) 
+end index_name,
+case 
+when command = 'Create Function' then substring(syntax, charindex(' Function ',syntax)+10, len(syntax)) 
+end function_name,
+case 
+when command = 'Create Function' then substring(syntax, charindex(' returns ',syntax)+10, len(syntax)) 
+end returns_datatype
+from (
+select id, [value] syntax, case 
+when ltrim([value]) like '%create function%' then 'CREATE Function'
+when ltrim([value]) like '%alter table%' then 'Alter Table'
+when ltrim([value]) like '%create table%' then 'Create Table'
+when ltrim([value]) like '%drop table%' then 'Drop Table'
+when ltrim([value]) like '%create%index%' then 'Create Index'
+when ltrim([value]) like '%drop%index%' then 'Drop Index'
+end command
+from master.[dbo].[Separator](@ddl_script,@sep))a
+where command is not null)b)c)d
+where command = @command
+--and sub_command = @sub_command
+and is_table_exist = @is_table_exist
+and is_column_exist = @is_column_exist
+and is_index_exist = @is_index_exist
+and is_function_exist = @is_function_exist
+and is_main_function_exist = @is_main_function_exist
+--end
+--where is_main_function_exist = 1
