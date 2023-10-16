@@ -1,0 +1,16 @@
+exec dbo.sp_restore_backups_sorting
+@db_name					= 'T24PROD', 
+@before_date				= '2017-03-31 23:00:23.000',
+@db_new_name				= 'T24SDC100',
+@P_option_01				= 0,
+@P_option_02				= 0,
+@P_restore_loc				= 'default',
+@P_option_03				= 0,
+@P_restore_loc_data			= 'default',
+@P_restore_loc_log			= 'default',
+@P_option_04				= 1,
+@P_number_of_files_per_type	= '2-4',
+@P_restore_loction_groups	= '0-T:\SQLSERVER\Data\;1-J:\SQLSERVER\data\;2-J:\SQLSERVER\data\;2-K:\SQLSERVER\Data\;2-L:\SQLSERVER\Data\;2-M:\SQLSERVER\Data\;3-N:\SQLSERVER\Data\',
+@P_percent					= 50,
+@P_password					= 'default',
+@P_action					= 3
