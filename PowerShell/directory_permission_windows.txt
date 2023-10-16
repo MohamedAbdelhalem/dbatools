@@ -1,0 +1,14 @@
+ping -a 10.1.102.16
+
+Enter-PSSession D1T24DBSQPWV4
+
+# get all users of this folder
+Get-Acl I:\SQLSERVER\DATA\MSSQL12.MSSQLSERVER\MSSQL\DatabaseAuditing\ | select -Expand AccessToString
+
+ALBILAD\svc_sqlT24 Allow  FullControl
+BUILTIN\Administrators Allow  FullControl
+CREATOR OWNER Allow  FullControl
+NT AUTHORITY\SYSTEM Allow  FullControl
+BUILTIN\Administrators Allow  FullControl
+NT SERVICE\MSSQLSERVER Allow  FullControl
+S-1-5-21-973147237-356256743-1864736973-47446 Allow  FullControl
