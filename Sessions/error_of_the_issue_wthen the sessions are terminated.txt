@@ -1,0 +1,2 @@
+Remote harden of transaction 'ALTER TABLE' (ID 0x000001537c8dc907 002e:b54bd5fa) started at Jan  5 2023  1:24PM in database 'T24Prod' at LSN (2008218:759251:14) failed.
+Query was canceled by user.

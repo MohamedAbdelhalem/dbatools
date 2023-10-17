@@ -1,0 +1,8 @@
+SELECT TOP 10 count(1) AS lock_count, request_session_id 
+--INTO #holding_locks
+FROM sys.dm_tran_locks 
+GROUP BY request_session_id ORDER BY 1 DESC 
+
+SELECT master.dbo.numbersize(SUM(pages_kb),'kb')lock_memory, type 
+FROM sys.dm_os_memory_clerks 
+GROUP BY type ORDER BY SUM(pages_kb) DESC
