@@ -1,0 +1,1 @@
+truncate table [F_BAB_L_GEN_ACCT_STMT]
