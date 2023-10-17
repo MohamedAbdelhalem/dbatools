@@ -1,0 +1,40 @@
+#how to allow user in the sudoer
+
+<span style="color: green"> Some green text </span>
+- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
+- ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `#c5f015`
+- ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `#1589F0`
+
+#[postgres@localhost ~]$ sudo yum install crontabs
+sudo yum install crontabs
+#[sudo] password for postgres: 
+#Sorry, user postgres is not allowed to execute '/bin/yum install crontabs' as root on localhost.localdomain.
+
+#[root@localhost ~]# vi /etc/sudoers
+vi /etc/sudoers
+
+#add what the user can access or execute 
+
+User_Alias OPUSERS = postgres
+Cmnd_Alias MEINSH = /bin/sh, /bin/yum
+OPUSERS ALL=MEINSH
+
+#[root@localhost ~]# su - postgres
+su - postgres
+#[postgres@localhost ~]$ sudo yum install crontabs
+sudo yum install crontabs
+#[sudo] password for postgres: 
+#Last metadata expiration check: 11:41:37 ago on Sun 26 Dec 2021 10:12:43 PM +03.
+#Package crontabs-1.11-16.20150630git.el8.noarch is already installed.
+#Dependencies resolved.
+
+#Upgraded:
+#  crontabs-1.11-17.20190603git.el8.noarch                                                                                                                     
+
+#Complete!
+
+#[postgres@localhost ~]$ sudo yum list installed | grep cron
+sudo yum list installed | grep cron
+#cronie.x86_64                                      1.5.2-4.el8                                   @anaconda                                
+#cronie-anacron.x86_64                              1.5.2-4.el8                                   @anaconda                                
+#crontabs.noarch                                    1.11-17.20190603git.el8                       @BaseOS                                  
