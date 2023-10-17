@@ -1,0 +1,12 @@
+--powershell
+to recursive folders
+
+Get-ChildItem -Path E:\ -Recurse -Directory -Force -ErrorAction SilentlyContinue | Select-Object FullName
+
+
+--cmd
+to clean the recycle bin
+
+rd /s /q E:\$Recycle.bin
+
+
