@@ -1,1 +1,1 @@
-for some sepecific tasks
+for some specific tasks
