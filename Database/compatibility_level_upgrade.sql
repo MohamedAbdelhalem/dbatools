@@ -1,7 +1,6 @@
-select * from sys.databases
-
-
-CREATE Procedure compatibility_level_upgrade 2014
+--e.g. exec compatibility_level_upgrade 2014
+GO
+CREATE Procedure compatibility_level_upgrade
 (@version int)
 as
 begin
