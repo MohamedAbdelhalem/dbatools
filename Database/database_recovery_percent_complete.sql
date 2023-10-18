@@ -19,8 +19,6 @@ and id in (select max(id) from @table where text like 'Recovery%approximately%')
 inner join sys.databases db
 on c.database_name = db.name
 
---alter database [ePO_D1EPOAPMTPWV2] set hadr resume
---select * from sys.dm_server_registry
 select session_id, percent_complete, command, status, start_time, master.dbo.duration('s',datediff(s,start_time,getdate())) 
 from sys.dm_exec_requests
 where command = 'db startup'
@@ -28,12 +26,6 @@ where command = 'db startup'
 select count(*), object_name from sys.dm_os_performance_counters
 group by object_name
 order by object_name
-
---select *
---from sys.dm_os_performance_counters
---object_name	counter_name	instance_name	cntr_value	cntr_type
---SQLServer:Batch Resp Statistics                                                                                                 	Batches >=000002ms & <000005ms                                                                                                  	CPU Time:Total(ms)                                                                                                              	1373	65792
---SQLServer:Batch Resp Statistics                                                                                                 	Batches >=000005ms & <000010ms                                                                                                  	CPU Time:Total(ms)                                                                                                              	197	65792
 
 
 
