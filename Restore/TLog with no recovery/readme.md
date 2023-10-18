@@ -1,1 +1,1 @@
-restore all transaction log files (let's say the original source database is taking Tlog backup every 10 minutes) continuously with no recovery if you plan to migrate to another or a new database server(s).
+Restore all transaction log files (let's say the original source database is taking Tlog backup every 10 minutes) continuously with no recovery if you plan to migrate to another or a new database server(s).
