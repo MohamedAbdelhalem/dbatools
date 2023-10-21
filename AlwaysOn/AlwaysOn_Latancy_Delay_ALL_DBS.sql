@@ -22,10 +22,3 @@ group by ar.replica_server_name, db.state_desc, cm.member_state_desc,ars.role_de
 synchronization_state_desc, rs.synchronization_health_desc, database_state_desc
 order by 
 total_waiting_logs desc
---142.63 GB
-
---check for upgrade
---select count(*), log_reuse_wait_desc from sys.databases where database_id > 4 group by log_reuse_wait_desc
---select @@VERSION
---Microsoft SQL Server 2014 (SP3) (KB4022619) - 12.0.6024.0 (X64)   Sep  7 2018 01:37:51   Copyright (c) Microsoft Corporation  Enterprise Edition: Core-based Licensing (64-bit) on Windows NT 6.3 <X64> (Build 9600: ) (Hypervisor) 
---Microsoft SQL Server 2014 (SP3-CU4-GDR) (KB5014164) - 12.0.6439.10 (X64)   Apr 20 2022 03:13:42   Copyright (c) Microsoft Corporation  Enterprise Edition: Core-based Licensing (64-bit) on Windows NT 6.3 <X64> (Build 9600: ) (Hypervisor) 
