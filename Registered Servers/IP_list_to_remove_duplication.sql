@@ -8,7 +8,7 @@ set @ips = '10.10.10.10
 172.0.1.120,1521
 172.0.1.120,1521_2'
 
---all the above @ips just 2 IPs 10.10.10.10,1444 and 10.10.10.20,1444
+--all the above @ips just 2 IPs 10.10.10.10,1444 and 172.0.1.120,1521
   
 select '('+''''+Ip_address_with_port+''''+')'+case when COUNT(*) over() = rowid then '' else ',' end
 from (
