@@ -11,7 +11,8 @@ insert into @ips values
 ('DR','172.0.0.4,1433')
 
 
-
+--or use a table to fetch the server's IPs
+ 
 --insert into @ips --values  
 --select --top 50 
 --replace(replace(replace(replace(replace(replace(replace(APPNameChild,',',''),'-',''),'/',''),'+',''),'-',''),'&',''),'–',''),FULLSQLNAME,
@@ -19,7 +20,6 @@ insert into @ips values
 --from ServerInfoDetails
 --where len(APPNameChild) > 1
 --and FULLSQLNAME is not null
---and APPNameChild != 'D2PBIDBSQRWV4'
 --order by APPNameChild, FULLSQLNAME
 
 declare @groups varchar(1000) 
