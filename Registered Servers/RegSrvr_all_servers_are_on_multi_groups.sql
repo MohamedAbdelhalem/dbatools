@@ -14,7 +14,7 @@ insert into @ips values
 
 --insert into @ips --values  
 --select --top 50 
---replace(replace(replace(replace(replace(replace(replace(APPNameChild,',',''),'-',''),'/',''),'+',''),'-',''),'&',''),'–',''),FULLSQLNAME,
+--replace(replace(replace(replace(replace(replace(replace(APPNameChild,',',''),'-',''),'/',''),'+',''),'-',''),'&',''),'â€“',''),FULLSQLNAME,
 --'('+''''+replace(replace(replace(replace(replace(APPNameChild,',',''),'-',''),'/',''),'+',''),'-','')+''''+','+''''+FULLSQLNAME+''''+'),'
 --from ServerInfoDetails
 --where len(APPNameChild) > 1
