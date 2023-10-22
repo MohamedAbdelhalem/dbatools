@@ -5,7 +5,7 @@ declare
 declare @RegSrvr table (g_seq int, row_id int, value varchar(max)) 
 declare @ips table (
 groups varchar(1000), 
-clean_groups as (replace(replace(replace(replace(replace(replace(replace(groups,'/','_/'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39'),'–','')), 
+clean_groups as (replace(replace(replace(replace(replace(replace(replace(groups,'/','_/'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39'),'â€“','')), 
 ip_address varchar(1000)) 
 
 if @manual_insert = 1
