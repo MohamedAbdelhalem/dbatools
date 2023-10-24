@@ -1,4 +1,4 @@
-declare @windowa_loginame varchar(200) = '[ALBILAD\e010204]'
+declare @windowa_loginame varchar(200) = '[domain\username]'
 select value from (
 select top 100 percent b.value
 from (select 'USE [master]
