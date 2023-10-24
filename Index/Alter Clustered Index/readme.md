@@ -12,12 +12,12 @@ you will create the clustered index again then you will convert back the table f
 
 to avoid rebuilding the nonclustered indexes 2 times and do the rebuild 1 time to minimize the downtime, we will do the below steps by achieving the scripts on this folder
 
-1- drop the non-clustered indexes (almost no time 1 or 2 seconds maximum).
-2- drop the computed columns if: (almost no time 1 or 2 seconds maximum)
+1. drop the non-clustered indexes (almost no time 1 or 2 seconds maximum).
+2. drop the computed columns if: (almost no time 1 or 2 seconds maximum)
     a. it is touching the CI column like the ID column containing values like idenity_no-financial year-branch id e.g. 123-2324-147854
     b. if the computed columns persist you need to change it to non-persisted.
-3- drop the clustered index
-4- alter the clustered index key column
-5- create again the clustered index 
-6- create the computed columns (almost no time 1 or 2 seconds maximum if they are non-persisted)
-7- create the non-clustered indexes but if you have an enterprise edition then you can have the ability to use with (online=on) feature to avoid the blocking during the non-clustered index creation.
+3. drop the clustered index
+4. alter the clustered index key column
+5. create again the clustered index 
+6. create the computed columns (almost no time 1 or 2 seconds maximum if they are non-persisted)
+7. create the non-clustered indexes but if you have an enterprise edition then you can have the ability to use with (online=on) feature to avoid the blocking during the non-clustered index creation.
