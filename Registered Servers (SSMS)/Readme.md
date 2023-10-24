@@ -1,7 +1,7 @@
 If you want to register your database servers and you don't have much time to organize or you have a lot of decommissioned servers you can use this script.
 
 ## Location ##
-C:\Users\ *USERNAME*\AppData\Roaming\Microsoft\Microsoft SQL Server\ *version e.g. 120*\Tools\Shell\RegSrvr.XML
+C:\Users\ *USERNAME*\AppData\Roaming\Microsoft\Microsoft SQL Server\ *version e.g. **120***\Tools\Shell\RegSrvr.XML
 
 ## Tips: ##
 - This folder "C:\Users\ *USERNAME*\AppData" is by default hidden.
