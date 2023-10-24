@@ -1,7 +1,7 @@
-I am explaining here the script of generate_HASH_view_years.sql and what it can do for you to solve a problem.
+I am explaining here the script of **generate_HASH_view_years.sql** and what it can do for you to solve a problem.
 
 an example:
-you have a database called Data_Warehouse_Billing but this database is very big and you decided to split it into years database let's say:
+you have a database called **Data_Warehouse_Billing** but this database is very big and you decided to split it into years database let's say:
 
 Databases                    |
 ---------------------------- |
@@ -14,7 +14,7 @@ Data_Warehouse_Billing_2015  |
 
 and so on...
 
-and an ETL will use the main database Data_Warehouse_Billing to insert on it instead of inserting individually on each year e.g. Data_Warehouse_Billing_2023 so you create a multi-views with the same name of the tables but with the below script design
+and an ETL will use the main database **Data_Warehouse_Billing** to insert on it instead of inserting individually on each year e.g. **Data_Warehouse_Billing_2023** so you create a multi-views with the same name of the tables but with the below script design
 
 ```
  CREATE VIEW [dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] 
@@ -36,9 +36,9 @@ and an ETL will use the main database Data_Warehouse_Billing to insert on it ins
  SELECT * FROM [Data_Warehouse_Billing_Max].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12]  
 
 ```
-let's say you have more than 3,000 views and you need to do some maintenance on some years e.g. 2012, 2013, 2019, 2021, 2022 and you need to convert the tables into partitions and that will take a big amount of time, so you need to remove these years from the views to not stop the ETL from working.
+let's say you have more than **3,000 views** and you need to do some maintenance on some years e.g. **2012, 2013, 2019, 2021, and 2022** and you need to convert the tables into partitions and that will take a big amount of time, so you need to remove these years from the views to not stop the ETL from working.
 
-so the script will generate for you an ALTER statement with commenting out these years and the generated script will be like the below.
+so the script will generate for you an **ALTER statement** with **commenting out** these years and the generated script will be like the below.
 
 ```
  ALTER VIEW [dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] 
