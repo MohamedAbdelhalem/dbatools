@@ -4,12 +4,15 @@ declare
 
 declare @RegSrvr table (g_seq int, row_id int, value varchar(max)) 
 declare @ips table (
-groups varchar(1000), 
-clean_groups as (replace(replace(replace(replace(replace(replace(replace(groups,'/','_/'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39'),'–','')), 
-ip_address varchar(1000)) 
+groups varchar(255), 
+clean_groups AS (replace(replace(replace(replace(replace(replace(groups,'/','_/'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39')), 
+ip_address varchar(255)) 
 
 if @manual_insert = 1
 begin
+--column 1 = group_name e.g., group of apps like Billing, or group of DBA names like Mohamed, Fawzy, and Peter for each one will be responsible on some database servers in an activity.
+--column 2 = IP address and you can put "," the port number like 10.10.10.122,1521
+ 
 insert into @ips values  
 ('Prod','10.0.0.1,1433'),
 ('Prod','10.0.0.2,1433'),
@@ -19,21 +22,24 @@ insert into @ips values
 ('DR','172.0.0.2,1433'),
 ('DR','172.0.0.3,1433'),
 ('DR','172.0.0.4,1433')
+ 
 end
 else
 begin
---using query column 1 = group_name, column 2 = ip address and you can put "," the port number like 10.10.10.122,1521
+ 
+--using query 
+--column 1 = group_name e.g., group of apps like Billing, or group of DBA names like Mohamed, Fawzy, and Peter for each one will be responsible on some database servers in an activity.
+--column 2 = IP address and you can put "," the port number like 10.10.10.122,1521
+ 
 insert into @ips 
 select
-APPNameChild, FULLSQLNAME
-from ServerInfoDetails
-where len(APPNameChild) > 1
-and FULLSQLNAME is not null
-and APPNameChild != 'D2PBIDBSQRWV4'
-order by APPNameChild, FULLSQLNAME
+application_name, ip_addresses
+from master.dbo.servers -- any table name
+order by application_name, ip_addresses
+ 
 end
 
-declare @groups varchar(1000) 
+declare @groups varchar(255) 
 declare group_cursor cursor fast_forward 
 for 
 select distinct clean_groups 
@@ -47,7 +53,7 @@ declare
 @xml_reg_servers_detail			varchar(max), 
 @xml_reg_servers_header_open	varchar(max), 
 @xml_reg_servers_header_close	varchar(max), 
-@ip								varchar(100), 
+@ip								varchar(255), 
 @group_scope					int, 
 @x								int,
 @xml							varchar(max) 
@@ -420,6 +426,7 @@ from @RegSrvr
 ORDER BY g_seq, row_id 
  
 select cast(@xml as xml) 
+ 
 end
 else
 begin
