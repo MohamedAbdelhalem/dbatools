@@ -1,6 +1,5 @@
 <details>
 <summary>generate_HASH_view_years.sql</summary>
-#<p>ddddd</p>
 I am explaining here the script of **generate_HASH_view_years.sql** and what it can do for you to solve a problem.
 
 an example:
