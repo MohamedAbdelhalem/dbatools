@@ -64,7 +64,7 @@ so the script will generate for you an **ALTER statement** with **commenting out
  ```
 </details>
 <details>
-<summary>Grant_view_with_dependencies.sql</summary>
+<summary>grant_view_with_dependencies.sql</summary>
 
 when you have 1 view selecting from multi-databases, and you need to grant selection to these objects in each database automatically, this script can automate these steps.
 
