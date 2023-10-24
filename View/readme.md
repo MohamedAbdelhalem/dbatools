@@ -1,3 +1,6 @@
+<details>
+<summary>Title 1</summary>
+<p>
 I am explaining here the script of **generate_HASH_view_years.sql** and what it can do for you to solve a problem.
 
 an example:
@@ -59,3 +62,5 @@ so the script will generate for you an **ALTER statement** with **commenting out
  SELECT * FROM [Data_Warehouse_Billing_2025].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_Max].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12]   
  ```
+</p>
+</details>
