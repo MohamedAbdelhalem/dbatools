@@ -1,6 +1,7 @@
 <details>
 <summary>generate_HASH_view_years.sql</summary>
-I am explaining here the script of **generate_HASH_view_years.sql** and what it can do for you to solve a problem.
+
+ I am explaining here the script of **generate_HASH_view_years.sql** and what it can do for you to solve a problem.
 
 an example:
 you have a database called **Data_Warehouse_Billing** but this database is very big and you decided to split it into years database let's say:
