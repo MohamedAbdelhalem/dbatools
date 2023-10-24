@@ -2,12 +2,16 @@ I am explaining here the script of generate_HASH_view_years.sql and what it can 
 
 an example:
 you have a database called Data_Warehouse_Billing but this database is very big and you decided to split it into years database let's say:
-....
-Data_Warehouse_Billing_2010
-Data_Warehouse_Billing_2011
-Data_Warehouse_Billing_2012
-Data_Warehouse_Billing_2013
-Data_Warehouse_Billing_2014
+
+Databases                    |
+---------------------------- |
+Data_Warehouse_Billing_2010  |
+Data_Warehouse_Billing_2011  |
+Data_Warehouse_Billing_2012  |
+Data_Warehouse_Billing_2013  |
+Data_Warehouse_Billing_2014  |
+Data_Warehouse_Billing_2015  |
+
 and so on...
 
 and an ETL will use the main database Data_Warehouse_Billing to insert on it instead of inserting individually on each year e.g. Data_Warehouse_Billing_2023 so you create a multi-views with the same name of the tables but with the below script design
