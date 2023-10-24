@@ -4,7 +4,7 @@ If you want to register your database servers and you don't have much time to or
 C:\Users\_username_\AppData\Roaming\Microsoft\Microsoft SQL Server\120\Tools\Shell\RegSrvr.XML
 
 ## Tips: ##
-- This folder "C:\Users\**username**\AppData" is by default hidden.
+- This folder "C:\Users\ **username** \AppData" is by default hidden.
 - If you have an old version of SSMS like 2014 and then you install a new one 18, it will use the same location.
 - after you execute the RegSrvr.sql file with your required database servers then do the below steps in case you already have registered servers:
   1. Go to any servers, delete the content of this file ...\Microsoft SQL Server\120\Tools\Shell\RegSrvr.XML, and add the result.
