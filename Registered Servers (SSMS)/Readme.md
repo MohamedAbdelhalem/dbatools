@@ -4,5 +4,5 @@ Location
 C:\Users\"username"\AppData\Roaming\Microsoft\Microsoft SQL Server\120\Tools\Shell\RegSrvr.xml
 
 Tips:
-- This folder "C:\Users\"username"\AppData" is by default hidden.
+- This folder "C:\Users\/"username"\AppData" is by default hidden.
 - If you have an old version of SSMS like 2014 and then you install a new one 18, it will use the same location.
