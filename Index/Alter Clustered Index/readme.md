@@ -14,8 +14,8 @@ to avoid rebuilding the nonclustered indexes 2 times and do the rebuild 1 time t
 
 1. drop the non-clustered indexes (almost no time 1 or 2 seconds maximum).
 2. drop the computed columns if: (almost no time 1 or 2 seconds maximum)
-    a. it is touching the CI column like the ID column containing values like idenity_no-financial year-branch id e.g. 123-2324-147854
-    b. if the computed columns persist you need to change it to non-persisted.
+    1. it is touching the CI column like the ID column containing values like idenity_no-financial year-branch id e.g. 123-2324-147854
+    2. if the computed columns persist you need to change it to non-persisted.
 3. drop the clustered index
 4. alter the clustered index key column
 5. create again the clustered index 
