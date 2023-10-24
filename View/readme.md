@@ -40,7 +40,7 @@ let's say you have more than **3,000 views** and you need to do some maintenance
 
 so the script will generate for you an **ALTER statement** with **commenting out** these years and the generated script will be like the below.
 
-```
+``` sql
  ALTER VIEW [dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] 
  AS
 -- SELECT * FROM [Data_Warehouse_Billing_2012].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
