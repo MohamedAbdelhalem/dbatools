@@ -41,19 +41,19 @@ let's say you have more than 3,000 views and you need to do some maintenance on 
 so the script will generate for you an ALTER statement with commenting out these years and the generated script will be like the below.
 
 ```
- CREATE VIEW [dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] 
+ ALTER VIEW [dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] 
  AS
 -- SELECT * FROM [Data_Warehouse_Billing_2012].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
 -- SELECT * FROM [Data_Warehouse_Billing_2013].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
--- SELECT * FROM [Data_Warehouse_Billing_2014].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
--- SELECT * FROM [Data_Warehouse_Billing_2015].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
+ SELECT * FROM [Data_Warehouse_Billing_2014].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
+ SELECT * FROM [Data_Warehouse_Billing_2015].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2016].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2017].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2018].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
- SELECT * FROM [Data_Warehouse_Billing_2019].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
+-- SELECT * FROM [Data_Warehouse_Billing_2019].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2020].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
- SELECT * FROM [Data_Warehouse_Billing_2021].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
- SELECT * FROM [Data_Warehouse_Billing_2022].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
+-- SELECT * FROM [Data_Warehouse_Billing_2021].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
+-- SELECT * FROM [Data_Warehouse_Billing_2022].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2023].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2024].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2025].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
