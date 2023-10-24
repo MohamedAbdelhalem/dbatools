@@ -1,4 +1,4 @@
-CREATE PROCEDURE Grant_view_with_dependencies(
+CREATE PROCEDURE grant_view_with_dependencies(
 @database_name			varchar(500),
 @view_name_with_schema	varchar(500),
 @login_name				varchar(500))
