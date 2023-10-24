@@ -1,7 +1,7 @@
-use Data_Hub_T24
+use Data_Warehouse_Billing
 go
-declare @database_name varchar(500) = 'Data_Hub_T24_2023'
-declare @years varchar(1000) = '2012,2013,2014,2015'
+declare @database_name varchar(500) = 'Data_Warehouse_Billing_2023'
+declare @years varchar(1000) = '2012,2013,2019,2021,2022'
 declare @group_year_table table (id int, group_year varchar(10))
 declare 
 @group_years int,
@@ -53,7 +53,6 @@ when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then repl
 when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
 when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' then '--'+ss.value
 --when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
---when ss.value like '%2023%' then case when ss.value like '%'+@keep_only_year+'%' then replace(ss.value,' UNION ALL',' --UNION ALL') else case when ss.value like '' then ''+ss.value end end
 else 
 ss.value end before_change
 ,ss.value original
@@ -90,7 +89,6 @@ when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then repl
 when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
 when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' or ss.value like '%'+@group_year_2+'['+@group_year_2_like+']%' then '--'+ss.value
 --when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
---when ss.value like '%2023%' then case when ss.value like '%'+@keep_only_year+'%' then replace(ss.value,' UNION ALL',' --UNION ALL') else case when ss.value like '' then ''+ss.value end end
 else 
 ss.value end before_change
 ,ss.value original
@@ -135,7 +133,6 @@ when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then repl
 when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
 when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' or ss.value like '%'+@group_year_2+'['+@group_year_2_like+']%' or ss.value like '%'+@group_year_3+'['+@group_year_3_like+']%' then '--'+ss.value
 --when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
---when ss.value like '%2023%' then case when ss.value like '%'+@keep_only_year+'%' then replace(ss.value,' UNION ALL',' --UNION ALL') else case when ss.value like '' then ''+ss.value end end
 else 
 ss.value end before_change
 ,ss.value original
@@ -188,7 +185,6 @@ when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then repl
 when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
 when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' or ss.value like '%'+@group_year_2+'['+@group_year_2_like+']%' or ss.value like '%'+@group_year_3+'['+@group_year_3_like+']%' or ss.value like '%'+@group_year_4+'['+@group_year_4_like+']%' then '--'+ss.value
 --when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
---when ss.value like '%2023%' then case when ss.value like '%'+@keep_only_year+'%' then replace(ss.value,' UNION ALL',' --UNION ALL') else case when ss.value like '' then ''+ss.value end end
 else 
 ss.value end before_change
 ,ss.value original
