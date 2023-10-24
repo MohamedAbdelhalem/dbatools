@@ -12,7 +12,7 @@ and so on...
 
 and an ETL will use the main database Data_Warehouse_Billing to insert on it instead of inserting individually on each year e.g. Data_Warehouse_Billing_2023 so you create a multi-views with the same name of the tables but with the below script design
 
-`CREATE VIEW [dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] 
+```CREATE VIEW [dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] 
  AS
  SELECT * FROM [Data_Warehouse_Billing_2012].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2013].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
@@ -28,7 +28,7 @@ and an ETL will use the main database Data_Warehouse_Billing to insert on it ins
  SELECT * FROM [Data_Warehouse_Billing_2023].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2024].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
  SELECT * FROM [Data_Warehouse_Billing_2025].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12] UNION ALL  
- SELECT * FROM [Data_Warehouse_Billing_Max].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12]   `
+ SELECT * FROM [Data_Warehouse_Billing_Max].[dbo].[FENJ_FUNDS_TRANSFER#HIS_M12]   ```
 
 let's say you have more than 3,000 views and you need to do some maintenance on some years e.g. 2012, 2013, 2019, 2021, 2022 and you need to convert the tables into partitions and that will take a big amount of time, so you need to remove these years from the views to not stop the ETL from working.
 
