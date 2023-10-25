@@ -23,7 +23,7 @@ from (
 select distinct left(value,3) group_year
 from master.dbo.Separator(@years,','))a
 
-declare @views table (id int identity(1,1), name varchar(255), line_id int, syntax varchar(max), undo_before_alter varchar(max))
+declare @views table (id int identity(1,1), name varchar(255), line_id int, alter_statement_with_comment varchar(max), undo_before_alter varchar(max))
 declare @object_id bigint
 declare i cursor fast_forward
 for
@@ -49,7 +49,7 @@ select @group_year_1_like = isnull(@group_year_1_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_1
 
-insert into @views (name, line_id, syntax, undo_before_alter)
+insert into @views (name, line_id, alter_statement_with_comment, undo_before_alter)
 select v.name, ss.id, case 
 when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
 when (ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %SELECT %' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
@@ -88,7 +88,7 @@ select @group_year_2_like = isnull(@group_year_2_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_2
 
-insert into @views (name, line_id, syntax, undo_before_alter)
+insert into @views (name, line_id, alter_statement_with_comment, undo_before_alter)
 select v.name, ss.id, case 
 when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' and ss.value not like '%'+@group_year_2+'['+@group_year_2_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
 when (
@@ -144,7 +144,7 @@ select @group_year_3_like = isnull(@group_year_3_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_3
 
-insert into @views (name, line_id, syntax, undo_before_alter)
+insert into @views (name, line_id, alter_statement_with_comment, undo_before_alter)
 select v.name, ss.id, case 
 when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' and ss.value not like '%'+@group_year_2+'['+@group_year_2_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
 when (
@@ -210,7 +210,7 @@ select @group_year_4_like = isnull(@group_year_4_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_4
 
-insert into @views (name, line_id, syntax, undo_before_alter)
+insert into @views (name, line_id, alter_statement_with_comment, undo_before_alter)
 select v.name, ss.id, case 
 when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' and ss.value not like '%'+@group_year_2+'['+@group_year_2_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
 when (
