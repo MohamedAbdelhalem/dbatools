@@ -1,5 +1,5 @@
 <details>
-<summary>generate_HASH_view_years.sql</summary>
+<summary>generate_alter_stmt_with_comments_to_unwanted_years.sql</summary>
 
  I am explaining here the script of **generate_HASH_view_years.sql** and what it can do for you to solve a problem.
 
