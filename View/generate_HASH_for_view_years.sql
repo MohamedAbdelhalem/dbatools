@@ -1,7 +1,7 @@
-use Data_Warehouse_Billing
+use Data_Hub_T24_history
 go
-declare @database_name varchar(500) = 'Data_Warehouse_Billing_2023'
-declare @years varchar(1000) = '2012,2013,2019,2021,2022'
+declare @database_name varchar(500) = 'Data_Hub_T24_history_2023'
+declare @years varchar(1000) = '2014,2017,2019,2021,2022'
 declare @group_year_table table (id int, group_year varchar(10))
 declare 
 @group_years int,
@@ -23,7 +23,7 @@ from (
 select distinct left(value,3) group_year
 from master.dbo.Separator(@years,','))a
 
-declare @views table (id int identity(1,1), name varchar(255), line_id int, syntax varchar(max), syntax_org varchar(max))
+declare @views table (id int identity(1,1), name varchar(255), line_id int, syntax varchar(max), undo_before_alter varchar(max))
 declare @object_id bigint
 declare i cursor fast_forward
 for
@@ -39,6 +39,8 @@ begin
 if @group_years = 1
 begin
 
+set @group_year_1_like = null
+
 select @group_year_1 = group_year 
 from @group_year_table 
 where id = 1
@@ -47,15 +49,15 @@ select @group_year_1_like = isnull(@group_year_1_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_1
 
-insert into @views (name, line_id, syntax, syntax_org)
+insert into @views (name, line_id, syntax, undo_before_alter)
 select v.name, ss.id, case 
-when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
-when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
-when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' then '--'+ss.value
---when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
+when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
+when (ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %SELECT %' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
+when (ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%') and (ss.value not like '%CREATE %VIEW %' ) and ss.value not like '% AS %SELECT %' then '--'+ss.value
+--when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name)),LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
 else 
-ss.value end before_change
-,ss.value original
+ss.value end before_change,
+case when ss.value like '%CREATE %VIEW %' then replace(ss.value,'CREATE','ALTER') else ss.value end original
 from sys.all_sql_modules s inner join sys.views v
 on s.object_id = v.object_id
 cross apply master.dbo.Separator(s.definition, CHAR(10)) ss
@@ -66,6 +68,9 @@ end
 else
 if @group_years = 2
 begin
+
+set @group_year_1_like = null
+set @group_year_2_like = null
 
 select @group_year_1 = group_year 
 from @group_year_table 
@@ -83,15 +88,23 @@ select @group_year_2_like = isnull(@group_year_2_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_2
 
-insert into @views (name, line_id, syntax, syntax_org)
+insert into @views (name, line_id, syntax, undo_before_alter)
 select v.name, ss.id, case 
-when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
-when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
-when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' or ss.value like '%'+@group_year_2+'['+@group_year_2_like+']%' then '--'+ss.value
---when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
+when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' and ss.value not like '%'+@group_year_2+'['+@group_year_2_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
+when (
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' or 
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_2+'['+@group_year_2_like+']%'
+) 
+and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %SELECT %' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
+when (
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' or 
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_2+'['+@group_year_2_like+']%'
+) 
+and (ss.value not like '%CREATE %VIEW %') and ss.value not like '% AS %SELECT %' then '--'+ss.value
+--when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name)),LEN(reverse(@database_name))))+'_Max%' then '--'+ss.value
 else 
-ss.value end before_change
-,ss.value original
+ss.value end before_change,
+case when ss.value like '%CREATE %VIEW %' then replace(ss.value,'CREATE','ALTER') else ss.value end original
 from sys.all_sql_modules s inner join sys.views v
 on s.object_id = v.object_id
 cross apply master.dbo.Separator(s.definition, CHAR(10)) ss
@@ -102,6 +115,10 @@ end
 else
 if @group_years = 3
 begin
+
+set @group_year_1_like = null
+set @group_year_2_like = null
+set @group_year_3_like = null
 
 select @group_year_1 = group_year 
 from @group_year_table 
@@ -127,15 +144,24 @@ select @group_year_3_like = isnull(@group_year_3_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_3
 
-insert into @views (name, line_id, syntax, syntax_org)
+insert into @views (name, line_id, syntax, undo_before_alter)
 select v.name, ss.id, case 
-when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
-when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
-when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' or ss.value like '%'+@group_year_2+'['+@group_year_2_like+']%' or ss.value like '%'+@group_year_3+'['+@group_year_3_like+']%' then '--'+ss.value
---when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
+when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' and ss.value not like '%'+@group_year_2+'['+@group_year_2_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
+when (
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' or 
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_2+'['+@group_year_2_like+']%' or
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_3+'['+@group_year_3_like+']%'
+) 
+and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %SELECT %' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
+when (
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' or 
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_2+'['+@group_year_2_like+']%' or
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_3+'['+@group_year_3_like+']%' 
+) and (ss.value not like '%CREATE %VIEW %') and ss.value not like '% AS %SELECT %' then '--'+ss.value
+--when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name)),LEN(reverse(@database_name))))+'_Max%' then '--'+ss.value
 else 
-ss.value end before_change
-,ss.value original
+ss.value end before_change,
+case when ss.value like '%CREATE %VIEW %' then replace(ss.value,'CREATE','ALTER') else ss.value end original
 from sys.all_sql_modules s inner join sys.views v
 on s.object_id = v.object_id
 cross apply master.dbo.Separator(s.definition, CHAR(10)) ss
@@ -146,6 +172,11 @@ end
 else
 if @group_years = 4
 begin
+
+set @group_year_1_like = null
+set @group_year_2_like = null
+set @group_year_3_like = null
+set @group_year_4_like = null
 
 select @group_year_1 = group_year 
 from @group_year_table 
@@ -179,15 +210,26 @@ select @group_year_4_like = isnull(@group_year_4_like,'')+right(value,1)
 from master.dbo.Separator(@years,',')
 where LEFT(value,3) = @group_year_4
 
-insert into @views (name, line_id, syntax, syntax_org)
+insert into @views (name, line_id, syntax, undo_before_alter)
 select v.name, ss.id, case 
-when ss.value like '%CREATE%VIEW%' and ss.value     like '%as%select%' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
-when ss.value like '%CREATE%VIEW%' and ss.value not like '%as%select%' then replace(ss.value,'CREATE','ALTER')
-when ss.value like '%'+@group_year_1+'['+@group_year_1_like+']%' or ss.value like '%'+@group_year_2+'['+@group_year_2_like+']%' or ss.value like '%'+@group_year_3+'['+@group_year_3_like+']%' or ss.value like '%'+@group_year_4+'['+@group_year_4_like+']%' then '--'+ss.value
---when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name))+1,LEN(reverse(@database_name))))+'_Max%' then ''+ss.value
+when (ss.value not like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' and ss.value not like '%'+@group_year_2+'['+@group_year_2_like+']%') and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %' then replace(ss.value,'CREATE','ALTER')
+when (
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' or 
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_2+'['+@group_year_2_like+']%' or
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_3+'['+@group_year_3_like+']%' or
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_4+'['+@group_year_4_like+']%'
+) 
+and ss.value like '%CREATE %VIEW %' and ss.value like '% AS %SELECT %' then replace(replace(ss.value,'CREATE','ALTER'),' AS ',' AS-- ') 
+when (
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_1+'['+@group_year_1_like+']%' or 
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_2+'['+@group_year_2_like+']%' or
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_3+'['+@group_year_3_like+']%' or
+ss.value like '%'+reverse(substring(reverse(@database_name),charindex('_',reverse(@database_name)),len(@database_name)))+@group_year_4+'['+@group_year_4_like+']%' 
+) and (ss.value not like '%CREATE %VIEW %') and ss.value not like '% AS %SELECT %' then '--'+ss.value
+--when ss.value like '%'+reverse(SUBSTRING(reverse(@database_name),charindex('_',reverse(@database_name)),LEN(reverse(@database_name))))+'_Max%' then '--'+ss.value
 else 
-ss.value end before_change
-,ss.value original
+ss.value end before_change,
+case when ss.value like '%CREATE %VIEW %' then replace(ss.value,'CREATE','ALTER') else ss.value end original
 from sys.all_sql_modules s inner join sys.views v
 on s.object_id = v.object_id
 cross apply master.dbo.Separator(s.definition, CHAR(10)) ss
@@ -207,8 +249,4 @@ select *
 from @views 
 --where name = 'F_BAB_H_REL_CON_PARTY' 
 order by id
-
-
-go
-
 
