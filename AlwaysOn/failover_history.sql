@@ -9,4 +9,5 @@ SELECT data.value('(/event/@timestamp)[1]','datetime') AS [timestamp],
        data.value('(/event/data[@name=''error_number''])[1]','int') AS [error_number],
        data.value('(/event/data[@name=''message''])[1]','varchar(max)') AS [message]
 FROM cte_HADR
-WHERE data.value('(/event/data[@name=''error_number''])[1]','int') = 1480
+WHERE data.value('(/event/data[@name=''error_number''])[1]','int') = 1480 --error 1480 can occur when an AlwaysOn Availability Group fails over.
+
