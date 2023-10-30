@@ -2,7 +2,7 @@ If you have a situation with ***a database***  that has a mirror configuration,
 
 The point of weakness here that the transaction log was configured with a max size of 50GB and by the coincidence that the backup team takes daily backups for all databases inside this instance except this database and the second thing that the disk was reached 63% used space and that makes us didn’t receive any alert from ManageEngine because that will not trigger the threshold of 85%.
 
-So the issue was that the transaction log reached the max size of ${{font{console}\color{red}Big}}$ plus there were some data waits to sync with the secondary node around 980 KB but because the free space inside the log file was + -1.20 MB all the below solutions failed:
+So the issue was that the transaction log reached the <span style="font-family: 'Lucida Console';">foo</span> max size of ${{font{console}\color{red}Big}}$ plus there were some data waits to sync with the secondary node around 980 KB but because the free space inside the log file was + -1.20 MB all the below solutions failed:
 1.	Take a log or full backup, because when you are going to take any backup you will write the checkpoint LSN regarding any type, as a transaction, because there is not enough space @@ -1.20 MB@@.
 2.	Increase the max size of the transaction log file.
 3.	Alter the secondary log file and set the file growth to more than 0 KB (the database has two log files 1 active and the other set to 0 KB file growth).
