@@ -12,7 +12,7 @@ So the only solution is to remove the database from the mirror by the below step
 From the Primary node
 
 ```SQL
-ALTER DATABASE ***database name*** SET PARTNER OFF;
+ALTER DATABASE [DATABASE_NAME] SET PARTNER OFF;
 ```
 
 From Secondary node and make sure that Log Send Queue KB counter doesn’t have any queues
@@ -46,25 +46,25 @@ Then take transaction log backup from the Primary database
 
 ```SQL
 
-BACKUP log ***database name*** TO  DISK = N'\\...\ ***database name***_log_2023_07_25__03_23_pm.bak' WITH NOFORMAT, NOINIT,  
-NAME = N'***database name***-Log Database Backup', SKIP, NOREWIND, NOUNLOAD, COMPRESSION, STATS = 1
+BACKUP log [DATABASE_NAME] TO  DISK = N'\\...\DATABASE_NAME_log_2023_07_25__03_23_pm.bak' WITH NOFORMAT, NOINIT,  
+NAME = N'DATABASE_NAME-Log Database Backup', SKIP, NOREWIND, NOUNLOAD, COMPRESSION, STATS = 1
 ```
 
 Then restore it on the Secondary node
 
 ```SQL
 
-RESTORE LOG ***database name***
-FROM DISK = N'\\...\ ***database name***_log_2023_07_25__03_23_pm.bak'
+RESTORE LOG [DATABASE_NAME]
+FROM DISK = N'\\...\DATABASE_NAME_log_2023_07_25__03_23_pm.bak'
 WITH FILE = 1,
-NAME = N'***database name***-log Database Backup', NORECOVERY, NOUNLOAD, STATS = 1
+NAME = N'DATABASE_NAME-log Database Backup', NORECOVERY, NOUNLOAD, STATS = 1
 ```
 
 Then go to the Secondary node and join the database to mirror
 
 ```SQL
 
-declare @partner varchar(500), @set_partner varchar(1000), @database_name varchar(500) = '***database name***'
+declare @partner varchar(500), @set_partner varchar(1000), @database_name varchar(500) = 'DATABASE_NAME'
 select top 1 @partner = mirroring_partner_name 
 from sys.database_mirroring
 where mirroring_partner_name is not null
@@ -77,7 +77,7 @@ And finally go to the Primary node and join the database to mirror
 
 ```SQL
 
-declare @partner varchar(500), @set_partner varchar(1000), @database_name varchar(500) = '***database name***'
+declare @partner varchar(500), @set_partner varchar(1000), @database_name varchar(500) = 'DATABASE_NAME'
 select top 1 @partner = mirroring_partner_name 
 from sys.database_mirroring
 where mirroring_partner_name is not null
