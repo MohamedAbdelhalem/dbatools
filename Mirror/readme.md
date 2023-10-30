@@ -9,13 +9,15 @@ So the issue was that the transaction log reached the max size of 50 GB plus the
 
 So the only solution is to remove the database from the mirror by the below steps.
 
-From the **Primary node**
+> **Note**
+> From the **Primary node**
 
 ```SQL
 ALTER DATABASE [DATABASE_NAME] SET PARTNER OFF;
 ```
 
-From `#f03c15`**Secondary node**`#f03c15` and make sure that Log Send Queue KB counter doesn’t have any queues
+> **Note**
+> From the **Primary node**From **Secondary node** and make sure that Log Send Queue KB counter doesn’t have any queues
 
 ```SQL
 
@@ -42,7 +44,8 @@ from @table
 order by counter_name
 ```
 
-Then take transaction log backup from the **Primary Node** database
+> **Note**
+> From the **Primary node**Then take transaction log backup from the **Primary Node** database
 
 ```SQL
 
@@ -50,7 +53,8 @@ BACKUP log [DATABASE_NAME] TO  DISK = N'\\...\DATABASE_NAME_log_2023_07_25__03_2
 NAME = N'DATABASE_NAME-Log Database Backup', SKIP, NOREWIND, NOUNLOAD, COMPRESSION, STATS = 1
 ```
 
-Then restore it on the **Secondary node**
+> **Note**
+> From the **Primary node**Then restore it on the **Secondary node**
 
 ```SQL
 
@@ -60,7 +64,8 @@ WITH FILE = 1,
 NAME = N'DATABASE_NAME-log Database Backup', NORECOVERY, NOUNLOAD, STATS = 1
 ```
 
-Then go to the **Secondary node** and join the database to mirror
+> **Note**
+> From the **Primary node**Then go to the **Secondary node** and join the database to mirror
 
 ```SQL
 
@@ -73,7 +78,8 @@ set @set_partner = 'ALTER DATABASE ['+@database_name+'] SET PARTNER ='+''''+@par
 exec(@set_partner)
 ```
 
-And finally go to the **Primary node** and join the database to mirror
+> **Note**
+> From the **Primary node**And finally go to the **Primary node** and join the database to mirror
 
 ```SQL
 
