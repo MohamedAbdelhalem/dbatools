@@ -11,7 +11,9 @@ So the only solution is to remove the database from the mirror by the below step
 
 From the Primary node
 
+```SQL
 ALTER DATABASE [***database name***] SET PARTNER OFF;
+```
 
 From Secondary node and make sure that Log Send Queue KB counter doesn’t have any queues
 
