@@ -45,7 +45,7 @@ order by counter_name
 ```
 
 > **Note**
-> From the **Primary node**Then take transaction log backup from the **Primary Node** database
+> From the **Primary node** Then take transaction log backup from the **Primary Node** database
 
 ```SQL
 
@@ -54,7 +54,7 @@ NAME = N'DATABASE_NAME-Log Database Backup', SKIP, NOREWIND, NOUNLOAD, COMPRESSI
 ```
 
 > **Note**
-> From the **Primary node**Then restore it on the **Secondary node**
+> From the **Primary node** Then restore it on the **Secondary node**
 
 ```SQL
 
@@ -65,7 +65,7 @@ NAME = N'DATABASE_NAME-log Database Backup', NORECOVERY, NOUNLOAD, STATS = 1
 ```
 
 > **Note**
-> From the **Primary node**Then go to the **Secondary node** and join the database to mirror
+> From the **Primary node** Then go to the **Secondary node** and join the database to mirror
 
 ```SQL
 
@@ -79,7 +79,7 @@ exec(@set_partner)
 ```
 
 > **Note**
-> From the **Primary node**And finally go to the **Primary node** and join the database to mirror
+> From the **Primary node** And finally go to the **Primary node** and join the database to mirror
 
 ```SQL
 
