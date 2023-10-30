@@ -17,6 +17,8 @@ ALTER DATABASE [***database name***] SET PARTNER OFF;
 
 From Secondary node and make sure that Log Send Queue KB counter doesn’t have any queues
 
+```SQL
+
 declare @table table ([object_name] varchar(1000), counter_name varchar(1000), instance_name varchar(1000), current_value varchar(200))
 
 insert into @table
@@ -38,20 +40,29 @@ current_value
 end current_value
 from @table
 order by counter_name
+```
 
 Then take transaction log backup from the Primary database
 
+```SQL
+
 BACKUP log [***database name***] TO  DISK = N'\\...\ ***database name***_log_2023_07_25__03_23_pm.bak' WITH NOFORMAT, NOINIT,  
 NAME = N'***database name***-Log Database Backup', SKIP, NOREWIND, NOUNLOAD, COMPRESSION, STATS = 1
+```
 
 Then restore it on the Secondary node
+
+```SQL
 
 RESTORE LOG [AptraConn_prd]
 FROM DISK = N'\\...\ ***database name***_log_2023_07_25__03_23_pm.bak'
 WITH FILE = 1,
 NAME = N'***database name***-log Database Backup', NORECOVERY, NOUNLOAD, STATS = 1
+```
 
 Then go to the Secondary node and join the database to mirror
+
+```SQL
 
 declare @partner varchar(500), @set_partner varchar(1000), @database_name varchar(500) = '***database name***'
 select top 1 @partner = mirroring_partner_name 
@@ -60,14 +71,17 @@ where mirroring_partner_name is not null
 
 set @set_partner = 'ALTER DATABASE ['+@database_name+'] SET PARTNER ='+''''+@partner+''''
 exec(@set_partner)
+```
 
 And finally go to the Primary node and join the database to mirror
 
-declare @partner varchar(500), @set_partner varchar(1000), @database_name varchar(500) = 'AptraConn_prd'
+```SQL
+
+declare @partner varchar(500), @set_partner varchar(1000), @database_name varchar(500) = '***database name***'
 select top 1 @partner = mirroring_partner_name 
 from sys.database_mirroring
 where mirroring_partner_name is not null
 
 set @set_partner = 'ALTER DATABASE ['+@database_name+'] SET PARTNER ='+''''+@partner+''''
 exec(@set_partner)
-
+```
