@@ -17,7 +17,7 @@ ALTER DATABASE [DATABASE_NAME] SET PARTNER OFF;
 ```
 
 > **Note**
-> From the **Primary node**From **Secondary node** and make sure that Log Send Queue KB counter doesn’t have any queues
+> From the **Primary node** From **Secondary node** and make sure that Log Send Queue KB counter doesn’t have any queues
 
 ```SQL
 
