@@ -32,3 +32,5 @@ ALTER DATABASE AccountStatementPRD SET PARTNER = 'TCP://D2ENTDBSQPWV4.albilad.co
 alter database CC_StatementArchive_PRD modify file (name ='CC_StatementArchive_PRD', filegrowth=0KB)
 alter database AccountStatementPRD modify file (name ='AccountStatementPRD', filegrowth=0KB)
 alter database AccountStatementPRD modify file (name ='part201501_stg', filegrowth=0KB)
+
+
