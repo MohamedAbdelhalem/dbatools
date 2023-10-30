@@ -12,7 +12,7 @@ So the only solution is to remove the database from the mirror by the below step
 From the Primary node
 
 ```SQL
-ALTER DATABASE [***database name***] SET PARTNER OFF;
+ALTER DATABASE ***database name*** SET PARTNER OFF;
 ```
 
 From Secondary node and make sure that Log Send Queue KB counter doesn’t have any queues
@@ -46,7 +46,7 @@ Then take transaction log backup from the Primary database
 
 ```SQL
 
-BACKUP log [***database name***] TO  DISK = N'\\...\ ***database name***_log_2023_07_25__03_23_pm.bak' WITH NOFORMAT, NOINIT,  
+BACKUP log ***database name*** TO  DISK = N'\\...\ ***database name***_log_2023_07_25__03_23_pm.bak' WITH NOFORMAT, NOINIT,  
 NAME = N'***database name***-Log Database Backup', SKIP, NOREWIND, NOUNLOAD, COMPRESSION, STATS = 1
 ```
 
@@ -54,7 +54,7 @@ Then restore it on the Secondary node
 
 ```SQL
 
-RESTORE LOG [AptraConn_prd]
+RESTORE LOG ***database name***
 FROM DISK = N'\\...\ ***database name***_log_2023_07_25__03_23_pm.bak'
 WITH FILE = 1,
 NAME = N'***database name***-log Database Backup', NORECOVERY, NOUNLOAD, STATS = 1
