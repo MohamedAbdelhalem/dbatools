@@ -9,7 +9,8 @@ nodes|Replica_server|Server_IP
 
 Then you have to do the below 4 steps using the above scripts:
 
-1. Make node 2 Async and node (3, 4) Sync.
+1. Make node 2 **asynchronous** and nodes 3 and 4 **synchronous**.
 2. Failover to node 3.
-3. change the Vote nodes (1,2) = 0, nodes (3,4) = 1.
-4. Make node 1 Async.
+3. Change the Vote on nodes (1,2) = 0, nodes (3,4) = 1.
+4. Make node 1 **asynchronous**.
+
