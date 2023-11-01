@@ -1,6 +1,6 @@
 You have a planned activity to switch to the DR site and you need to failover to node 1 in DR.
 
-no Replica_server|Server_IP|
+no|Replica_server|Server_IP|
 ------------------------------
 1 | D1SQLDBPrWV1|172.10.20.1|
 2 | D1SQLDBPrWV2|172.10.20.2|
