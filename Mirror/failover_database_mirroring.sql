@@ -49,6 +49,7 @@ begin
 	if @action in (2,3)
 	begin
 		waitfor delay '00:00:20'
+		print('go')
 	end
 end
 
