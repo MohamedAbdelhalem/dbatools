@@ -1,4 +1,5 @@
-## How to fix the mirror database issue when there is not enough space - wait type (Database mirroring).sql
+## Explaining: 
+### How to fix the mirror database issue when there is not enough space - wait type (Database mirroring).sql
 
 If you have a situation with ***a database***  that has a mirror configuration, 
 
