@@ -1,7 +1,7 @@
 You have a planned activity to switch to the DR site and you need to failover to node 1 in DR.
 
 nodes|node_type|type_id|replica_server|replica_server_ip
-----|--------------|---------
+-----|---------|-------|--------------|----------------
 1|Prod|1|D1SQLDBPrWV1|172.10.20.1
 2|Prod|2|D1SQLDBPrWV2|172.10.20.2
 3|DR|1|D2SQLDBDrWV1|10.55.20.1
