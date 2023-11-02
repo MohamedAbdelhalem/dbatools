@@ -25,18 +25,18 @@ set @sql = 'ALTER DATABASE ['+@mirror_database+'] SET SAFETY FULL'
 
 if @action = 1
 begin
-print(@sql)
+	print(@sql)
 end
 else
 if @action = 2
 begin
-exec(@sql)
+	exec(@sql)
 end
 else
 if @action = 3
 begin
-exec(@sql)
-print(@sql)
+	exec(@sql)
+	print(@sql)
 end
 
 fetch next from change_to_sync into @mirror_database
@@ -70,20 +70,20 @@ set @sql = 'ALTER DATABASE ['+@mirror_database+'] SET PARTNER FAILOVER'
 
 if @action = 1
 begin
-print(@sql)
+	print(@sql)
 end
 else
 if @action = 2
 begin
-exec(@sql)
-waitfor delay '00:00:05'
+	exec(@sql)
+	waitfor delay '00:00:05'
 end
 else
 if @action = 3
 begin
-exec(@sql)
-print(@sql)
-waitfor delay '00:00:05'
+	exec(@sql)
+	print(@sql)
+	waitfor delay '00:00:05'
 end
 
 
