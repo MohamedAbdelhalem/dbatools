@@ -1,3 +1,5 @@
+##How to fix the mirror database issue when there is not enough space - wait type (Database mirroring).sql
+
 If you have a situation with ***a database***  that has a mirror configuration, 
 
 The point of weakness here that the transaction log was configured with a max size of **```50GB```** and by the coincidence that the backup team takes daily backups for all databases inside this instance except this database and the second thing that the disk was reached **```63%```** used space and that makes us didn’t receive any alert from ManageEngine because that will not trigger the threshold of **```85%```**.
