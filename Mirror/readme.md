@@ -27,7 +27,7 @@ insert into @table
 select object_name, counter_name, instance_name, cntr_value
 from sys.dm_os_performance_counters
 where object_name like '%mirr%'
-and instance_name = AptraConn_prd'
+and instance_name = 'DATABASE_NAME' --put your database name here
 and counter_name not like '%/%'
 and counter_name in ('Log Send Queue KB')
 and cntr_value > 0 
