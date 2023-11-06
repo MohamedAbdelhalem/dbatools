@@ -8,7 +8,9 @@ Function File-Transfer-with-state {
         $byteData = Get-Content -Path $full_from_file -Encoding Byte -ReadCount 0 -Raw | foreach { $_ }
         $total_bytes = $byteData.Count
 
-        "Copy from ""$full_from_file"" to ""$full_to_file"" shows with below progress state."
+        "Copy from ""$full_from_file"" 
+        to ""$full_to_file"" 
+        shows with below progress state."
         ""
         try {
                 [byte[]]$buff = new-object byte[] 262144 #256 kb speed
