@@ -21,7 +21,7 @@ try {
         $count = $ffile.Read($buff, 0, $buff.Length)
         $tofile.Write($buff, 0, $count)
         $total += $count
-        Write-Progress -PercentComplete (($total/$total_bytes)*100.0) -Status "In-progress..." -Activity "Coping file progress"
+        Write-Progress -PercentComplete (($total/$total_bytes)*100.0) -Status "In-progress..." -Activity "Coping file $filename"
         } 
     while ($count -gt 0)
        } finally {
