@@ -13,7 +13,7 @@ Function File-Transfer-with-state {
         shows with below progress state."
         ""
         try {
-                [byte[]]$buff = new-object byte[] 262144 #256 kb speed
+                [byte[]]$buff = new-object byte[] 1048576 #1 mb speed
                 [long]$total = [int]$count = 0
                 do {
                     #[string][math]::round(($total/$total_bytes) * 100.0,1) +"%"
