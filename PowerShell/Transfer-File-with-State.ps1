@@ -28,5 +28,5 @@ Function File-Transfer-with-state {
                        }
     }
 
-File-Transfer-with-state -filename 'SSMS-Setup-ENU.exe' -PathFrom 'C:\temp\new\' -PathTo '\\npci2.d2fs.albilad.com\DBTEMP\T24DBXTREMIOT4'
+File-Transfer-with-state -filename 'SSMS-Setup-ENU.exe' -PathFrom 'C:\temp\new\' -PathTo '\\domain.com\DB\Backup'
 
