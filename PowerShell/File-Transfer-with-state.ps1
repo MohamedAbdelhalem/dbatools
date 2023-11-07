@@ -11,16 +11,20 @@ $startDate = (Get-Date)
 #[datetime]$time_to_complet
 [datetime]$date = "2023-01-01 00:00:00"
 
-"Copying file... 
-from ""$full_from_file"" 
-to ""$full_to_file""" 
-""
+#if you need to print the full paths with files
+
+#"Copying file... 
+#from ""$full_from_file"" 
+#to ""$full_to_file""" 
+#""
 
 try {
     [byte[]]$buff = new-object byte[] ($speed_MB * 1MB) # speed by MB
     [long]$total = [int]$count = 0
     do {
+        #if you need to print the percentage as numbers. 
         #[string][math]::round(($total/$total_bytes) * 100.0,1) +"%"
+        
         $count = $ffile.Read($buff, 0, $buff.Length)
         $tofile.Write($buff, 0, $count)
         $total += $count
@@ -38,7 +42,8 @@ try {
          $ffile.Dispose()
          $tofile.Dispose()
      }
+     $endDate = (Get-Date)
+     "The copy total time duration is "+$date.AddMilliseconds(($endDate - $startDate).TotalMilliseconds).ToString('HH:mm:ss.fff')
 }
 
-
-File-Transfer-with-state -filename 'T24SDC3_HIS_conv_2023_09_14__01_13_pm.bak' -speed_MB 10 -PathFrom 'N:\must_delete' -PathTo 'N:\must_delete_temp'
+File-Transfer-with-state -filename 'SSMS-Setup-ENU.exe' -speed_MB 10 -PathFrom 'N:\must_delete' -PathTo 'N:\must_delete_temp'
