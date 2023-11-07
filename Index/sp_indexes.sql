@@ -164,7 +164,7 @@ and i.index_id = @p_index_id
 if @is_primary_key = 1
 begin
 set @sql = 'ALTER TABLE '+@p_table_name+' ADD CONSTRAINT ['+@p_index_name+'] PRIMARY KEY '+ case when @index_id = 1 then 'CLUSTERED ' else 'NONCLUSTERED ' end + @sql + 
-' WITH (FILLFACTOR = '+cast(case when @fill_factor = 0 then 100 else @fill_factor end as varchar)+') ON [' + @filegroup +']'
+') WITH (FILLFACTOR = '+cast(case when @fill_factor = 0 then 100 else @fill_factor end as varchar)+') ON [' + @filegroup +']'
 end
 else
 begin
