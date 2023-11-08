@@ -3,7 +3,7 @@
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Get-DiskMaps.gif)
 
 
-* The outcome of the script **`File-Transfer-with-state`**
+* Either to use **`File-Transfer-with-state`** or **`Copy.ps1`** this is the outcome to copy file from PowerShell with progress bar and time estimation.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/File-Transfer-with-state.gif)
 
