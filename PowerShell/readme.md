@@ -9,7 +9,7 @@
 
 
 * use **`Copy_mssql.ps1`** to copy file with progress (percent, and time), create the table first and you can use this script from
-[GitHubPages](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Database/Move_Data_files/auto_change_data_files_to_other_drives_PRI_RW__with_powershell.sql)/)
+[Move_Data_files](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Database/Move_Data_files/auto_change_data_files_to_other_drives_PRI_RW__with_powershell.sql)
 
 ```SQL
 
