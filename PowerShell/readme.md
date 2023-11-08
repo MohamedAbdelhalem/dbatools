@@ -8,7 +8,7 @@
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/File-Transfer-with-state.gif)
 
 
--use Copy_mssql to copy file with progress (percent, and time), create the table first and you can use this script from dbatools/database/datafile_move/
+#use Copy_mssql.ps1 to copy file with progress (percent, and time), create the table first and you can use this script from dbatools/database/datafile_move/
 
 ```SQL
 
