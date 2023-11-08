@@ -1,0 +1,8 @@
+#PowerShell
+#first extract to a folder
+
+E:\sqlserver_cu\KB5005679\setup.exe /X:E:\KB5005679
+
+cd E:\KB5005679
+
+E:\KB5005679\setup.exe /action=patch /instancename=MSSQLSERVER /quiet /IAcceptSQLServerLicenseTerms
