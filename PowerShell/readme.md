@@ -1,14 +1,14 @@
-The outcome of the script **Get-DiskMaps**
+*The outcome of the script **Get-DiskMaps**
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Get-DiskMaps.gif)
 
 
-The outcome of the script **File-Transfer-with-state**
+*The outcome of the script **File-Transfer-with-state**
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/File-Transfer-with-state.gif)
 
 
-Copy_inside_mssql, create the table first and you can use this script from dbatools/database/datafile_move/
+*use Copy_mssql to copy file with progress (percent, and time), create the table first and you can use this script from dbatools/database/datafile_move/
 
 ```SQL
 
@@ -24,4 +24,12 @@ Begin
 	Create Table [dbo].[Copy_Progress] ([File_Name] varchar(1000), [Percent_complete] Varchar(25), [Time_to_Complete] Varchar(25))
 end
 ```
+then use the below select to know the Percent_Complete and Time_to_Complete
 
+```SQL
+
+use master
+go
+Select * from [dbo].[Copy_Progress]
+
+```
