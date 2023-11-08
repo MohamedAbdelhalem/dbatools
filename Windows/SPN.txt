@@ -1,0 +1,12 @@
+#details information
+##company: NAQI
+###domain: naqi
+#hostname: D1ERPDBSQPWV15
+#####port: 18857
+#serviceAccount: naqi\svc_mssql
+----------------------------------------------
+#so how to set the SPN
+
+SetSPN -s "MSSQLSvc/ D1ERPDBSQPWV15:18857" "naqi\svc_mssql"
+SetSPN -s "MSSQLSvc/ D1ERPDBSQPWV15.naqi.com:18857" "naqi\svc_mssql"
+
