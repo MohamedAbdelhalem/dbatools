@@ -2,7 +2,7 @@
 
 param
 ( 
-[string]$username = 'Albilad\C904529', #your AD username
+[string]$username = 'domain\mabdelhalem', #your AD username
 [string]$password = '***************'  #your AD password
 )
 
