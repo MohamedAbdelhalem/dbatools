@@ -1,0 +1,42 @@
+#open PowerShell ISE as administrator and past the below code
+
+param
+( 
+[string]$username = 'Albilad\C904529', #your AD username
+[string]$password = '***************'  #your AD password
+)
+
+$check = Get-ScheduledTask | where-object {$_.TaskName -eq 'Disks_style'}
+if ($check)
+{
+    $check = 'Y'
+}
+else
+{
+    $check = 'N'
+}
+if ($check -eq 'N')
+{
+    $taskName='Disks_Style'
+    $description='Fetch the disks style for database capacity monitor emails to helps DBA team to maintain the database availability'
+    $action= New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument '-File C:\ps_disk_style\get_volume_style.ps1'
+    $trigger = New-ScheduledTaskTrigger -Once -At 12am
+    $task = Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -description $description -RunLevel 1
+    $task.Triggers.Repetition.Duration = 'P1D'
+    $task.Triggers.Repetition.Interval = 'PT1H'
+    $task | Set-ScheduledTask
+    Set-ScheduledTask -TaskName $taskName -User $username -Password $password
+} 
+if ($check -eq 'Y')
+{
+    $taskName='Disks_Style'
+    $description='Fetch the disks style for database capacity monitor emails to helps DBA team to maintain the database availability'
+    Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+    $action= New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument '-File C:\ps_disk_style\get_volume_style.ps1'
+    $trigger = New-ScheduledTaskTrigger -Once -At 12am
+    $task = Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -description $description -RunLevel 1
+    $task.Triggers.Repetition.Duration = 'P1D'
+    $task.Triggers.Repetition.Interval = 'PT1H'
+    $task | Set-ScheduledTask
+    Set-ScheduledTask -TaskName $taskName -User $username -Password $password
+}
