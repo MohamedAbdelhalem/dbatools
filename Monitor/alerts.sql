@@ -1,5 +1,6 @@
 select 
-name, message_text, enabled, occurrence_count, last_occurrence, last_response
+name, --message_text, 
+ltrim(rtrim(s.value)) message_text_multi_lines, enabled, occurrence_count, last_occurrence, last_response
 from (
 select 
 name, message_text, enabled, occurrence_count,
@@ -30,7 +31,6 @@ end last_response_time
 FROM msdb.dbo.sysalerts a inner join sys.messages mess
 on a.message_id = mess.message_id
 where mess.language_id = 1033)b)c
+cross apply master.dbo.Separator(message_text, '. ')s
 where occurrence_count > 0
-
-
-select * FROM msdb.dbo.syscachedcredentials
+order by c.last_response_date desc, c.name, s.id
