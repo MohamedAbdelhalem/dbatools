@@ -1,7 +1,15 @@
 declare 
 @set_vote_on_pdc	int = 1,
+--1 primary site
+--2 Secondary site
+--3 all primary and Secondary sites
 @action				int = 1,
+--1 = print
+--2 = execute
+--3 = print + execute
 @is_auto			int = 0
+--1 = using your pattern
+--0 = manual as it's added below on the @replicas table
 
 set nocount on
 --Manual entry AG replicas----------------------------------------
