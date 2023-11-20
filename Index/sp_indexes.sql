@@ -142,7 +142,10 @@ set @column_name = null
 select 
 --@column_name = isnull(@column_name+', ','') + c.name 
 @column_name = isnull(@column_name+', ','') + '['+c.name+'] ['+tt.name+']' + 
-case when tt.name in ('char','nchar','varchar','nvarchar','binary','varbinary') then '('+cast(CEILING(cast(c.max_length as float)/2) as varchar(30))+')' else '' end 
+case 
+when tt.name in ('char','varchar','binary','varbinary') then '('+cast(CEILING(cast(c.max_length as float)) as varchar(30))+')' 
+when tt.name in ('nchar','nvarchar') then '('+cast(CEILING(cast(c.max_length/2 as float)) as varchar(30))+')' 
+else '' end 
 from sys.tables t inner join sys.columns c
 on t.object_id = c.object_id
 inner join sys.types tt
