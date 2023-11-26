@@ -104,8 +104,6 @@ master.dbo.numbersize((cast(size as float) / cast(1024 as float)) * 8.0,''mb'') 
 master.dbo.numbersize((cast(growth as float)) * 8.0,''kb'') growth
 from sys.database_files')
 
-select * from  sys.database_files
-
 insert into @dm_os_volume_stats
 select 
 master.dbo.virtical_array(output_text,'|',1), 
@@ -115,6 +113,7 @@ from @output
 where output_text is not null 
 and output_text not like '%\\?\Volume%'
 
+select * from @dm_os_volume_stats
 end
 
 if @volumes = '*'
@@ -303,10 +302,10 @@ begin
 			then total_bytes * (cast(100 - cast(available_bytes as float)/cast(total_bytes as float) * 100.0 as decimal(5,2)) - @threshold_pct) / 100 else 0 end ,'byte') 
 			recommended_extend_size,
 			count(*) over(partition by volume_mount_point) data_files,
-			master.dbo.numbersize(sum(s.size_n)	over(partition by left(s.physical_name,1) order by left(s.physical_name,1)),'mb') data_files_size,
-			master.dbo.numbersize(sum(s.free_n) over(partition by left(s.physical_name,1) order by left(s.physical_name,1)),'mb') data_files_free,
+			master.dbo.numbersize(sum(s.size_n)	over(partition by v.volume_mount_point order by v.volume_mount_point),'mb') data_files_size,
+			master.dbo.numbersize(sum(s.free_n) over(partition by v.volume_mount_point order by v.volume_mount_point),'mb') data_files_free,
 			master.dbo.numbersize((cast(v.total_bytes as float)/1024.0/1024.0) - (cast(v.available_bytes as float)/1024.0/1024.0) - sum(s.size_n) 
-			over(partition by left(s.physical_name,1) order by left(s.physical_name,1)),'mb') used_non_database
+			over(partition by v.volume_mount_point order by v.volume_mount_point),'mb') used_non_database
 			from @db_size s cross apply sys.dm_os_volume_stats(db_id(database_name), [file_id]) v
 			where volume_mount_point in (select case 
 										when ltrim(rtrim(value)) like '%:\' then ltrim(rtrim(value))  
@@ -318,6 +317,7 @@ begin
 		end
 		else
 		begin
+
 			select distinct 
 			volume_mount_point volume,v.logical_volume_name,
 			master.dbo.numbersize(v.total_bytes ,'byte') volume_total_size, 
@@ -328,10 +328,10 @@ begin
 			then v.total_bytes * (cast(100 - cast(v.available_bytes as float)/cast(v.total_bytes as float) * 100.0 as decimal(5,2)) - @threshold_pct) / 100 else 0 end ,'byte') 
 			recommended_extend_size,
 			count(*) over(partition by volume_mount_point) data_files,
-			master.dbo.numbersize(sum(s.size_n)	over(partition by left(s.physical_name,1) order by left(s.physical_name,1)),'mb') data_files_size,
-			master.dbo.numbersize(sum(s.free_n) over(partition by left(s.physical_name,1) order by left(s.physical_name,1)),'mb') data_files_free,
+			master.dbo.numbersize(sum(s.size_n)	over(partition by v.volume_mount_point order by v.volume_mount_point),'mb') data_files_size,
+			master.dbo.numbersize(sum(s.free_n) over(partition by v.volume_mount_point order by v.volume_mount_point),'mb') data_files_free,
 			master.dbo.numbersize((cast(v.total_bytes as float)/1024.0/1024.0) - (cast(v.available_bytes as float)/1024.0/1024.0) - sum(s.size_n) 
-			over(partition by left(s.physical_name,1) order by left(s.physical_name,1)),'mb') used_non_database
+			over(partition by v.volume_mount_point order by v.volume_mount_point),'mb') used_non_database
 			from @db_size s 
 			cross apply sys.dm_os_volume_stats(db_id(database_name), [file_id]) v
 			where volume_mount_point in (select case 
@@ -348,6 +348,7 @@ begin
 	begin
 		if @over_threshold = 0
 		begin
+
 			select 
 			volume_mount_point volume,
 			master.dbo.numbersize(total_bytes ,'byte') volume_total_size, 
