@@ -1,8 +1,8 @@
 DECLARE 
 @profileId	int,
 @profile	varchar(255) = 'DBAlert',
-@emailid	varchar(255) = 'sqlalerts@bankalbilad.com',
-@smtpsrv	varchar(255) = 'babsmtp.albilad.com'
+@emailid	varchar(255) = 'sqlalerts@companydomain.com',
+@smtpsrv	varchar(255) = 'prodsmtp.companydomain.com'
   
 EXECUTE msdb.dbo.sysmail_add_profile_sp
 @profile_name		= @profile,
