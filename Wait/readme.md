@@ -48,4 +48,14 @@ and this is the result
 1. full scan
 2. acquire a lock and release it immediately.
 
- ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/Heap_full_scan.png)
+ ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/Heap_read_committed.png)
+
+Then now we will try to use **Serializable Isolation Level** with `dbo.Orders_Header` table as it is still a heap.
+
+```SQL
+set transaction isolation level Serializable
+```
+
+the first thing you will see here is that the RangeS-S lock will not work (Shared Range - Shared) that is the main reason you are using Serializable Read to lock any read or modify, insert, or delete between this range because there is no Index key to get the serial range on it.
+
+ ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/Heap_serializable_read.png)
