@@ -100,5 +100,5 @@ Where Customer_id in (103,1000)
 -- just 2 records
 ```
 
- ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/noncluster_index_on_clusterIndexTable_serializable_read_covered_query.png)
+ ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/noncluster_index_on_clusterIndexTable_serializable_covered_query.png)
 
