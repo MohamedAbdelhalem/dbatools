@@ -59,3 +59,46 @@ set transaction isolation level Serializable
 the first thing you will see here is that the RangeS-S lock will not work (Shared Range - Shared) that is the main reason you are using Serializable Read to lock any read or modify, insert, or delete between this range because there is no Index key to get the serial range on it.
 
  ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/Heap_serializable_read.png)
+
+
+but when we add a nonclustered index we can see different figures.
+
+```SQL
+create nonclustered index ix_customer_id_orders_header on dbo.Orders_Header (customer_id);
+```
+
+```
+Set Transaction Isolation Level Read Committed
+go
+Select Order_id, Customer_id, Order_Date, Total_Amount
+From dbo.Orders_Header 
+Where Customer_id in (103,1000)
+-- just 2 records
+```
+
+ ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/noncluster_index_on_clusterIndexTable_read_committed_covered_query.png)
+
+
+```
+Set Transaction Isolation Level Repeatable Read
+go
+Select Order_id, Customer_id, Order_Date, Total_Amount
+From dbo.Orders_Header 
+Where Customer_id in (103,1000)
+-- just 2 records
+```
+
+ ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/noncluster_index_on_clusterIndexTable_repeatable_read_covered_query.png)
+
+
+```
+Set Transaction Isolation Level Serializable
+go
+Select Order_id, Customer_id, Order_Date, Total_Amount
+From dbo.Orders_Header 
+Where Customer_id in (103,1000)
+-- just 2 records
+```
+
+ ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/noncluster_index_on_clusterIndexTable_serializable_read_covered_query.png)
+
