@@ -22,6 +22,7 @@ SQL Query against Isolation Levels
 ```SQL
 create table dbo.Orders_Header
 (Order_id int, Order_Date datetime, Customer_id int, Total_items int, Total_Amount int)
+go
 
 insert into dbo.Orders_Header values 
 (1, '10/11/2023', 1424, 3, 234),
@@ -36,7 +37,7 @@ insert into dbo.Orders_Header values
 (10,'10/16/2023', 222, 7, 299)
 ```
 
-Now `dbo.Orders_Header` table is a heap and will use the **Read Committed Isolation** Level to execute the below query.
+Now `dbo.Orders_Header` table is a heap and will use the **Read Committed Isolation Level** to execute the below query.
 
 ```SQL
 Select Order_id, Order_Date, Total_Amount
