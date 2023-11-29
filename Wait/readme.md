@@ -18,4 +18,11 @@ Order_id|Order_Date|Customer_id|Total_items|Total_Amount
 10|10/16/2023|222|7|299
 …|…|…|…|…			
 
+SQL Query against Isolation Levels
+
+```SQL
+Select Order_id, Order_Date, Total_Amount
+From Order_Header
+Where Customer_id = 344
+```
 
