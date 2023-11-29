@@ -16,6 +16,6 @@ Order_id|Order_Date|Customer_id|Total_items|Total_Amount
 8|10/15/2023|344|10|20
 9|10/15/2023|10|1|3000
 10|10/16/2023|222|7|299
-….				
+…|…|…|…|…			
 
 
