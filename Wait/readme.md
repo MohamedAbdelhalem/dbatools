@@ -36,11 +36,15 @@ insert into dbo.Orders_Header values
 (10,'10/16/2023', 222, 7, 299)
 ```
 
-Now `dbo.Orders_Header` table is a heap and will use the Read Committed Isolation Level to execute the below query.
+Now `dbo.Orders_Header` table is a heap and will use the `*Read Committed Isolation*` Level to execute the below query.
 
 ```SQL
 Select Order_id, Order_Date, Total_Amount
 From dbo.Order_Header
 Where Customer_id = 344;
 ```
+and this is the result 
+1. full scan
+2. acquire a lock and release it immediately.
 
+ ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Wait/Heap_full_scan.png)
