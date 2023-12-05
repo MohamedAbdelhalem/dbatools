@@ -9,7 +9,7 @@ select
 row_number() over(order by @recid) row_num,  
 T.C.value('.', 'varchar(255)') c1
 FROM @XMLRECORD.nodes('(/row/*[local-name(.)=sql:variable("@col")])') as T(C))a
-where row_num > 1
+--where row_num > 1
 
 return @count
 end
