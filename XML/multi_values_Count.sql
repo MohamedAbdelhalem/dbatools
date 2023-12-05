@@ -1,4 +1,4 @@
-CREATE FUNCTION [dbo].[BAB_multi_values_Count](@col varchar(10), @recid varchar(255), @xmlrecord XML)
+CREATE FUNCTION [dbo].[multi_values_Count](@col varchar(10), @recid varchar(255), @xmlrecord XML)
 RETURNS int 
 BEGIN
 declare @count int 
