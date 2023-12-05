@@ -123,7 +123,7 @@ select
 from sys.tables t inner join sys.columns c
 on t.object_id = c.object_id
 left outer join (
-select i.object_id, i.index_id, i.name index_name, ic.column_id
+select i.object_id, i.index_id, i.name index_name, ic.column_id, key_ordinal
 from sys.indexes i inner join sys.index_columns ic
 on i.object_id = ic.object_id
 and i.index_id = ic.index_id) i
@@ -135,7 +135,7 @@ and cc.column_id = c.column_id
 where t.object_id = @P_object_id 
 and i.index_id = @p_index_id
 and cc.column_id is not null
---order by cc.column_id
+order by cc.column_id
 
 set @column_name = null
 
@@ -151,7 +151,7 @@ on t.object_id = c.object_id
 inner join sys.types tt
 on c.user_type_id = tt.user_type_id
 left outer join (
-select i.object_id, i.index_id, i.name index_name, ic.column_id
+select i.object_id, i.index_id, i.name index_name, ic.column_id, key_ordinal
 from sys.indexes i inner join sys.index_columns ic
 on i.object_id = ic.object_id
 and i.index_id = ic.index_id) i
@@ -162,7 +162,7 @@ on cc.object_id = c.object_id
 and cc.column_id = c.column_id
 where t.object_id = @P_object_id 
 and i.index_id = @p_index_id
-
+order by i.key_ordinal
 
 if @is_primary_key = 1
 begin
