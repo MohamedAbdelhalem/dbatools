@@ -15,7 +15,7 @@ begin
 insert into @table
 SELECT DISTINCT
 [bind_variables]	= x.value('(@Column)[1]',   'varchar(1000)'),
-[parameters]		= x.value('(@ParameterCompiledValue)[1]', 'varchar(1000)')
+[parameters]		= x.value('(@ParameterCompiledValue)[1]', 'nvarchar(1000)')
 FROM   @plan.nodes('//ColumnReference') x1(x)
 where x.value('(@Column)[1]','varchar(1000)') like '%@%'
 and x.value(N'(@ParameterCompiledValue)[1]',N'varchar(1000)') is not null
