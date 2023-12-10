@@ -57,7 +57,7 @@ master.dbo.format([total_worker_time],-1) [total_worker_time],
 master.dbo.format([Last CPU Time (ms)],-1) [Last_CPU_Time_ms], 
 [Last_Execution], replace(explan.bind_variables,'@','') bind_variables, 
 --replace(explan.parameter_values,'''','"') parameter_values
-replace(replace(replace(replace(replace(explan.parameter_values,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39') parameter_values
+replace(replace(replace(replace(replace(explan.parameter_values,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') parameter_values
 from (
 select  row_number() over(ORDER BY total_worker_time DESC)id,
 ((total_worker_time/1000.0) / sum(total_worker_time/1000.0) over()) * 100.0 pct_worker_time, *
