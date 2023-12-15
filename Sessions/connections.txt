@@ -1,0 +1,27 @@
+--local
+SELECT top 10 *
+FROM OPENROWSET(
+'SQLNCLI', 
+'Server=10.4.0.41;Trusted_Connection=yes;',
+master.dbo.disks) AS d;
+
+--remote
+SELECT top 10 *
+FROM OPENROWSET(
+'SQLNCLI11', 
+'Server=10.36.0.41;UID=DBA;PWD=P@$$w0rd@123',
+master.dbo.disks) AS d;
+
+--remote
+select a.* 
+from openrowset(
+'MSDASQL', 
+'Driver={SQL SERVER}; Server=10.36.0.41;UID=DBA; PWD=P@$$w0rd@123;', 
+'select * from sys.databases') as a
+
+
+--remote
+select a.* 
+from openrowset(
+'Data Source=10.33.102.2;Trusted_Connection=Yes;Initial Catalog=T24Prod;Integrated Security=SSPI;',
+T24Prod.dbo.DBmonitor_long_transactions_log) AS a
