@@ -1,11 +1,4 @@
-USE [T24Prod]
-GO
-/****** Object:  StoredProcedure [dbo].[usp_open_transacton_confirmation]    Script Date: 12/14/2023 3:27:37 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER Procedure [dbo].[usp_open_transacton_confirmation]
+CREATE Procedure [dbo].[usp_open_transacton_confirmation]
 as
 begin
 declare 
