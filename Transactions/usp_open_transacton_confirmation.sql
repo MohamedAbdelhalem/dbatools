@@ -1,4 +1,4 @@
-﻿USE [T24Prod]
+USE [T24Prod]
 GO
 /****** Object:  StoredProcedure [dbo].[usp_open_transacton_confirmation]    Script Date: 12/14/2023 3:27:37 PM ******/
 SET ANSI_NULLS ON
@@ -39,12 +39,16 @@ begin
 	from (
 	select 
 	case 
-	when DATEDIFF (minute,r.[start_time] , GETDATE()) is null then 1 
-	when DATEDIFF (minute,r.[start_time] , GETDATE()) < 5    then 1 
-	when mlog.[Begin Time] = r.[start_time] then 0 end  done,
+	when DATEDIFF (minute,isnull(tat.transaction_begin_time, r.[start_time]) , GETDATE()) is null then 1 
+	when DATEDIFF (minute,isnull(tat.transaction_begin_time, r.[start_time]) , GETDATE()) < 5    then 1 
+	when mlog.[Begin Time] = isnull(tat.transaction_begin_time, r.[start_time]) then 0 end  done,
 	mlog.session_id
 	from dbo.DBmonitor_long_transactions_log mlog left outer join sys.dm_exec_requests r
 	on mlog.session_id = r.session_id
+	left outer join sys.dm_tran_session_transactions tst
+	on tst.session_id = r.session_id
+	left outer join sys.dm_tran_active_transactions tat
+	on tat.transaction_id = tst.transaction_id
 	where mlog.session_id in (
 						select session_id 
 						from dbo.DBmonitor_long_transactions_log
