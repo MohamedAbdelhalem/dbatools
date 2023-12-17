@@ -1,5 +1,5 @@
-$path = "G:\IE"
-$packagePath = "importexcel.5.1.1.nupkg"
+$path = "C:\downloadedPackages"
+$packagePath = "ImportExcel.5.1.1.nupkg"
 $packageName = $packagePath.Split(".")[0]
 $packageVersion = $packagePath.Replace($packagePath.Split(".")[0]+".", "").Replace("."+$packagePath.Split(".")[-1], "")
 $zip = $packagePath.Replace("."+$packagePath.Split(".")[-1],".zip")
