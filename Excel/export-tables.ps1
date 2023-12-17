@@ -1,7 +1,7 @@
 $server = '172.20.182.1'
-$database = 'DataProdMongoDB'
-$path = 'G:\IE\'+$database+'_Tables.xlsx'
-$query = "SELECT top 100 
+$database = 'CustomersOrders'
+$path = 'C:\downloadedPackages\'+$database+'_Tables.xlsx'
+$query = "select
 schema_name(t.schema_id)+'.'+t.name table_name, 
 substring(schema_name(t.schema_id)+'.'+replace(replace(replace(replace(t.name,':',''),' ',''),'[',''),']',''),1,25)+'_'+
 cast(row_number() over(partition by substring(schema_name(t.schema_id)+'.'+replace(replace(replace(replace(t.name,':',''),' ',''),'[',''),']',''),1,25) 
