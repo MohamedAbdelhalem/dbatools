@@ -5,7 +5,7 @@ $packageVersion = $packagePath.Replace($packagePath.Split(".")[0]+".", "").Repla
 $zip = $packagePath.Replace("."+$packagePath.Split(".")[-1],".zip")
 $unzip = $path+"\"+$packageName+"."+$packageVersion
 
-if ($packagePath -like "*."+$packagePath.Split(".")[-1])
+if ($packagePath -like "*.nupkg")
     {
         Copy-Item -Path $path\$packagePath -Destination $path\$zip
         Expand-Archive -Path $path\$zip -DestinationPath $unzip
