@@ -21,7 +21,7 @@ declare @confirmation table (id int identity(1,1), row_id int, tr varchar(1000))
 Declare @RecepientsPart1 VARCHAR(2000) = 'mailgroup_dba@bankalbilad.com;Data_center@bankalbilad.com;t24_production@bankalbilad.com'
 Declare @RecepientsPart2 VARCHAR(2000) = 'MFawzyAlHaleem@bankalbilad.com;sabdullahalballaa@bankalbilad.com;nayedalhajri@bankalbilad.com'
 Declare @EmailPart1_subject AS NVARCHAR(500)
-SET @EmailPart1_subject = 'Confirmation - T24 Open Transaction by T24 APP Account on DB Server  ' + +( CAST(( SELECT  SERVERPROPERTY('ServerName')) AS NVARCHAR) )
+SET @EmailPart1_subject = 'Cleared T24 Open Transaction by T24 APP Account on DB Server  ' + +( CAST(( SELECT  SERVERPROPERTY('ServerName')) AS NVARCHAR) )
 Declare @MailProfile VARCHAR(100) = 'DBAlert'
 
 if exists (select * from dbo.DBmonitor_long_transactions_log where [status] = 0 and [replica_name] = @@SERVERNAME)
@@ -32,22 +32,23 @@ begin
 	from (
 	select 
 	case 
-	when DATEDIFF (minute,isnull(tat.transaction_begin_time, r.[start_time]) , GETDATE()) is null then 1 
-	when DATEDIFF (minute,isnull(tat.transaction_begin_time, r.[start_time]) , GETDATE()) < 5    then 1 
-	when mlog.[Begin Time] = isnull(tat.transaction_begin_time, r.[start_time]) then 0 end  done,
+	when DATEDIFF (minute,tdt.database_transaction_begin_time , GETDATE()) is null then 1 
+	when DATEDIFF (minute,tdt.database_transaction_begin_time , GETDATE()) < 5     then 1 
+	when mlog.[Begin Time] = tdt.database_transaction_begin_time then 0 end done,
 	mlog.session_id
-	from dbo.DBmonitor_long_transactions_log mlog left outer join sys.dm_exec_requests r
-	on mlog.session_id = r.session_id
-	left outer join sys.dm_tran_session_transactions tst
-	on tst.session_id = r.session_id
+	from dbo.DBmonitor_long_transactions_log mlog left outer join
+	sys.dm_tran_session_transactions tst
+	on tst.session_id = mlog.session_id
 	left outer join sys.dm_tran_active_transactions tat
 	on tat.transaction_id = tst.transaction_id
+	left outer join sys.dm_tran_database_transactions tdt
+	on tat.transaction_id = tdt.transaction_id
+	and tdt.database_id = DB_ID()
 	where mlog.session_id in (
 						select session_id 
 						from dbo.DBmonitor_long_transactions_log
 						where [status] = 0
-						and [replica_name] = @@SERVERNAME
-						)
+						and [replica_name] = @@SERVERNAME)
 	)a
     where done = 1
 	order by session_id, done desc
@@ -118,7 +119,7 @@ select @loop, '<td style="border:1px solid gray; text-align: center; vertical-al
 union all 
 select @loop, '<td style="border:1px solid gray; text-align: center; vertical-align: middle; font face="Verdana" size="1" color="gray">'+cast(@spid as varchar(100))+'</font></td>'
 union all 
-select @loop, '<td style="border:1px solid gray; text-align: center; vertical-align: middle; font face="Verdana" size="1" color="gray">'+case @by_who when 1 then 'It was killed.' else 'It was finished by itself.' end+'</font></td>'
+select @loop, '<td style="border:1px solid gray; text-align: center; vertical-align: middle; font face="Verdana" size="1" color="gray">'+case @by_who when 1 then 'Cleared, it was killed and has been terminated.' else 'Cleared, T24 open transaction has been terminated' end+'</font></td>'
 union all 
 select @loop, '<td style="border:1px solid gray; text-align: center; vertical-align: middle; font face="Verdana" size="1" color="gray">'+@release_date+'</font></td>'
 union all 
