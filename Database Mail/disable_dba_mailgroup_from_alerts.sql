@@ -193,7 +193,7 @@ select al.name, op.name,email_address,
 case 
 when replace(op.email_address,';','') = 'dba@domain.com' then 'dba_mailgroup' 
 when replace(email_address,';','') != 'dba@domain.com' and email_address like '%dba@domain.com%' then 'dba_mailgroup_and_others'
-when email_address = 'ai.binabdulwahed@bankalbilad.com;analhumud@bankalbilad.com;szubairfareed@bankalbilad.com' then 'dba_member' 
+when email_address = 'ahmed@domain.com;Mickey@domain.com;John@domain.com' then 'dba_member' 
 when op.name like 'DBAs_g%' then 'DBAs' 
 end alert_type
 from msdb.dbo.sysoperators op inner join msdb.dbo.sysnotifications n
