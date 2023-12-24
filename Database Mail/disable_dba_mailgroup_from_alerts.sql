@@ -10,13 +10,12 @@ declare @sysoperators table (operator_id int, email_addresses varchar(100))
 declare @dba_team table 
 (id int identity(1,1), account_number varchar(100), username varchar(255), member_role varchar(100), email_address varchar(1000), is_allowed bit)
 insert into @dba_team values
-('ALBILAD\e008374','Fahad Alqarawi'	, 'DBA Manager','FSAlqarawi@bankAlbilad.com',	1),
-('ALBILAD\e004199','Abdulmohsen'	, 'DBA', 'AI.BinAbdulwahed@Bankalbilad.com',	1),
-('ALBILAD\c904153','Shaik Zubair'	, 'DBA', 'SZubairFareed@Bankalbilad.com',		1),
-('ALBILAD\c904529','Mohammed Fawzy'	, 'DBA', 'MFawzyAlHaleem@Bankalbilad.com',		1),
-('ALBILAD\e010053','Saud Al Ballaa'	, 'DBA', 'SAbdullahAlBallaa@Bankalbilad.com',	1),
-('ALBILAD\e010059','Rahaf'			, 'DBA', 'ROmarALTirbaq@Bankalbilad.com',		1),
-('ALBILAD\e010312','Nawaf Alhajri'	, 'DBA', 'NAyedAlhajri@Bankalbilad.com',		1)
+('domain\102154','Mohamed'	, 'DBA', 'Mohaemd@domain.com',		1),
+('domain\102155','Fawzy'	, 'DBA', 'Fawzy@domain.com',		1),
+('domain\102156','Ismail'	, 'DBA', 'Ismail@domain.com',		1),
+('domain\102157','Abdelhalem'	, 'DBA', 'Abdelhalem@domain.com',	1),
+('domain\102158','Sayed'	, 'DBA', 'Sayed@domain.com',		1),
+('domain\102159','Mohaemd'	, 'DBA', 'Mohaemd@domain.com',		1)
 
 select @max_dba = MIN(id) - 1, @email_group = '' 
 from @dba_team
@@ -106,9 +105,9 @@ go
 /*
 select al.name, op.name,
 case 
-when replace(op.email_address,';','') = 'mailgroup_dba@bankalbilad.com' then 'dba_mailgroup' 
-when replace(email_address,';','') != 'mailgroup_dba@bankalbilad.com' and email_address like '%mailgroup_dba@bankalbilad.com%' then 'dba_mailgroup_and_others'
-when email_address = 'ai.binabdulwahed@bankalbilad.com;analhumud@bankalbilad.com;szubairfareed@bankalbilad.com' then 'dba_member' 
+when replace(op.email_address,';','') = 'dba@domain.com' then 'dba_mailgroup' 
+when replace(email_address,';','') != 'dba@domain.com' and email_address like '%dba@domain.com%' then 'dba_mailgroup_and_others'
+when email_address = 'ahmed@domain.com;Mickey@domain.com;John@domain.com' then 'dba_member' 
 when op.name like 'DBAs_g%' then 'DBAs' 
 end alert_type
 from msdb.dbo.sysoperators op inner join msdb.dbo.sysnotifications n
@@ -116,9 +115,9 @@ on op.id = n.operator_id
 inner join msdb.dbo.sysalerts al
 on al.id = n.alert_id
 where case 
-when replace(op.email_address,';','') = 'mailgroup_dba@bankalbilad.com' then 'dba_mailgroup' 
-when replace(email_address,';','') != 'mailgroup_dba@bankalbilad.com' and email_address like '%mailgroup_dba@bankalbilad.com%' then 'dba_mailgroup_and_others'
-when email_address = 'ai.binabdulwahed@bankalbilad.com;analhumud@bankalbilad.com;szubairfareed@bankalbilad.com' then 'dba_member' 
+when replace(op.email_address,';','') = 'dba@domain.com' then 'dba_mailgroup' 
+when replace(email_address,';','') != 'dba@domain.com' and email_address like '%dba@domain.com%' then 'dba_mailgroup_and_others'
+when email_address = 'ahmed@domain.com;Mickey@domain.com;John@domain.com' then 'dba_member' 
 when op.name like 'DBAs_g%' then 'DBAs' 
 end  in ('dba_mailgroup','dba_mailgroup_and_others','dba_member')
 order by al.name, op.name
@@ -141,9 +140,9 @@ declare update_notification cursor fast_forward
 for
 select al.name, op.name,
 case 
-when replace(op.email_address,';','') = 'mailgroup_dba@bankalbilad.com' then 'dba_mailgroup' 
-when replace(email_address,';','') != 'mailgroup_dba@bankalbilad.com' and email_address like '%mailgroup_dba@bankalbilad.com%' then 'dba_mailgroup_and_others'
-when email_address = 'ai.binabdulwahed@bankalbilad.com;analhumud@bankalbilad.com;szubairfareed@bankalbilad.com' then 'dba_member' 
+when replace(op.email_address,';','') = 'dba@domain.com' then 'dba_mailgroup' 
+when replace(email_address,';','') != 'dba@domain.com' and email_address like '%dba@domain.com%' then 'dba_mailgroup_and_others'
+when email_address = 'ahmed@domain.com;Mickey@domain.com;John@domain.com' then 'dba_member' 
 when op.name like 'DBAs_g%' then 'DBAs' 
 end alert_type
 from msdb.dbo.sysoperators op inner join msdb.dbo.sysnotifications n
@@ -151,9 +150,9 @@ on op.id = n.operator_id
 inner join msdb.dbo.sysalerts al
 on al.id = n.alert_id
 where case 
-when replace(op.email_address,';','') = 'mailgroup_dba@bankalbilad.com' then 'dba_mailgroup' 
-when replace(email_address,';','') != 'mailgroup_dba@bankalbilad.com' and email_address like '%mailgroup_dba@bankalbilad.com%' then 'dba_mailgroup_and_others'
-when email_address = 'ai.binabdulwahed@bankalbilad.com;analhumud@bankalbilad.com;szubairfareed@bankalbilad.com' then 'dba_member' 
+when replace(op.email_address,';','') = 'dba@domain.com' then 'dba_mailgroup' 
+when replace(email_address,';','') != 'dba@domain.com' and email_address like '%dba@domain.com%' then 'dba_mailgroup_and_others'
+when email_address = 'ahmed@domain.com;Mickey@domain.com;John@domain.com' then 'dba_member' 
 when op.name like 'DBAs_g%' then 'DBAs' 
 end  in ('dba_mailgroup','dba_mailgroup_and_others','dba_member')
 order by al.name, op.name
@@ -192,8 +191,8 @@ from msdb.dbo.sysoperators
 
 select al.name, op.name,email_address,
 case 
-when replace(op.email_address,';','') = 'mailgroup_dba@bankalbilad.com' then 'dba_mailgroup' 
-when replace(email_address,';','') != 'mailgroup_dba@bankalbilad.com' and email_address like '%mailgroup_dba@bankalbilad.com%' then 'dba_mailgroup_and_others'
+when replace(op.email_address,';','') = 'dba@domain.com' then 'dba_mailgroup' 
+when replace(email_address,';','') != 'dba@domain.com' and email_address like '%dba@domain.com%' then 'dba_mailgroup_and_others'
 when email_address = 'ai.binabdulwahed@bankalbilad.com;analhumud@bankalbilad.com;szubairfareed@bankalbilad.com' then 'dba_member' 
 when op.name like 'DBAs_g%' then 'DBAs' 
 end alert_type
@@ -205,7 +204,7 @@ order by al.name, op.name
 */
 go
 
---operators that have mailgroup_dba@bankalbilad.com and others
+--operators that have dba@domain.com and others
 declare @operator_name varchar(255), @email_address varchar(200)
 declare dba_operator cursor fast_forward
 for
@@ -214,9 +213,9 @@ from (
 select row_number() over(partition by name order by name) id, name, s.value email_address
 from msdb.dbo.sysoperators
 cross apply master.dbo.Separator(email_address,';') s
-where replace(email_address,';','') != 'mailgroup_dba@bankalbilad.com' 
-and email_address like '%mailgroup_dba@bankalbilad.com%'
-and s.value != 'mailgroup_dba@bankalbilad.com')a
+where replace(email_address,';','') != 'dba@domain.com' 
+and email_address like '%dba@domain.com%'
+and s.value != 'dba@domain.com')a
 pivot (
 max(email_address) for id in ([1],[2],[3],[4],[5]))p
 
@@ -238,13 +237,13 @@ close dba_operator
 deallocate dba_operator
 
 GO
---only operators with mailgroup_dba@bankalbilad.com
+--only operators with dba@domain.com
 declare @operator_name varchar(255), @email_address varchar(200)
 declare dba_operator cursor fast_forward
 for
 select name
 from msdb.dbo.sysoperators
-where replace(email_address,';','') = 'mailgroup_dba@bankalbilad.com' 
+where replace(email_address,';','') = 'dba@domain.com' 
 or (name like 'DBAs_g%' and enabled = 0)
 
 open dba_operator
