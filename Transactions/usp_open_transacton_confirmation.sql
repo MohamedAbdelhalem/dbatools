@@ -18,10 +18,11 @@ set nocount on
 declare @errorlog table (LogDate datetime, ProcessInfo varchar(50), [Text] varchar(2000))
 declare @done_sessions table (session_id int)
 declare @confirmation table (id int identity(1,1), row_id int, tr varchar(1000))
-Declare @RecepientsPart1 VARCHAR(2000) = 'mailgroup_dba@bankalbilad.com;Data_center@bankalbilad.com;t24_production@bankalbilad.com'
-Declare @RecepientsPart2 VARCHAR(2000) = 'MFawzyAlHaleem@bankalbilad.com;sabdullahalballaa@bankalbilad.com;nayedalhajri@bankalbilad.com'
+Declare @RecepientsPart1 VARCHAR(2000) = 'dba@domain.com;dcenter@domain.com;appsupport@domain.com'
+Declare @RecepientsPart2 VARCHAR(2000) = 'mohamed.abdelhalem@domain.com'
 Declare @EmailPart1_subject AS NVARCHAR(500)
-SET @EmailPart1_subject = 'Cleared T24 Open Transaction by T24 APP Account on DB Server  ' + +( CAST(( SELECT  SERVERPROPERTY('ServerName')) AS NVARCHAR) )
+--put your subject down there
+SET @EmailPart1_subject = 'Cleared Open Transaction by APP Account on DB Server  ' + +( CAST(( SELECT  SERVERPROPERTY('ServerName')) AS NVARCHAR) )
 Declare @MailProfile VARCHAR(100) = 'DBAlert'
 
 if exists (select * from dbo.DBmonitor_long_transactions_log where [status] = 0 and [replica_name] = @@SERVERNAME)
