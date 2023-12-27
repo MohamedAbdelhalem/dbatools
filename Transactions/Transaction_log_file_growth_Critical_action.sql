@@ -1,9 +1,36 @@
-use T24Prod
+use [database name]
 go
+--new error message
+exec sp_addmessage 
+199999,
+16,
+'You have reached the threshold of the transaction log file''s disk used space and that means that the automation process just has created a new log file, please act as a critical matter to solve the long-running transaction that caused this issue and free up the log then remove this temp log file as soon as you can.',
+'us_english',
+'True',
+NULL
+go
+
+/*
+select * 
+from sys.messages
+where message_id = 199999
+*/
+go
+
+EXEC msdb.dbo.sp_add_alert @name=N'log_file_threshold', 
+		@message_id=199999, 
+		@severity=0, 
+		@enabled=1, 
+		@delay_between_responses=0, 
+		@include_event_description_in=1, 
+		@category_name=N'[Uncategorized]', 
+		@job_id=N'00000000-0000-0000-0000-000000000000'
+GO
+
 --Create a job and make it run every 1 minute to execute the below procedure with your threshold and new disk to create the new log file
 CREATE Procedure [dbo].[usp_add_log_file_critical_behavior](
-@threshold_pct	float = 58,
-@new_volume		varchar(10) = 'D:\')
+@threshold_pct	float = 95,
+@new_volume	varchar(10) = 'P:\')
 as
 begin
 declare 
@@ -70,25 +97,12 @@ begin
 
 		set @sql = 'ALTER DATABASE ['+db_name(DB_ID())+'] ADD LOG FILE (NAME='+''''+@logical_name+'_2'', FILENAME= '+''''+@new_path+@new_file_name+''''+', SIZE= 50GB, FILEGROWTH= '+replace(@log_file_growth,' ','')+', MAXSIZE=UNLIMITED)'
 		print(@sql)
+		--exec(@sql)
 		RAISERROR (199999, -1, -1, @sql);
 	end
 end
 end
 
-go
---new error message
-exec sp_addmessage 
-199999,
-16,
-'You have reached the threshold of the transaction log file''s disk used space and that means that the automation process just has created a new log file, please act as a critical matter to solve the long-running transaction that caused this issue and free up the log then remove this temp log file as soon as you can.',
-'us_english',
-'True',
-NULL
-go
-
-select * 
-from sys.messages
-where message_id = 199999
 go
 
 --Solution 1 but it doesn't work because the trigger will not work because it will not update the view using UPDATE statement ever happens.
