@@ -16,7 +16,8 @@ insert into @dba_team values
 ('ALBILAD\c904529','Mohammed Fawzy'	, 'DBA', 'MFawzyAlHaleem@Bankalbilad.com',		1),
 ('ALBILAD\e010053','Saud Al Ballaa'	, 'DBA', 'SAbdullahAlBallaa@Bankalbilad.com',	1),
 ('ALBILAD\e010059','Rahaf'			, 'DBA', 'ROmarALTirbaq@Bankalbilad.com',		1),
-('ALBILAD\e010312','Nawaf Alhajri'	, 'DBA', 'NAyedAlhajri@Bankalbilad.com',		1)
+('ALBILAD\e010312','Nawaf Alhajri'	, 'DBA', 'NAyedAlhajri@Bankalbilad.com',		1),
+('ALBILAD\e010052','Hamad Al Rubayq', 'DBA', 'HFahadAlRubayq@Bankalbilad.com',		1)
 
 select @max_dba = MIN(id) - 1, @email_group = '' 
 from @dba_team
@@ -40,6 +41,7 @@ and id > @max_dba
 )a)b
 where flag = 1
 
+insert into @sysoperators
 select operator_id, email_addresses
 from (
 select @loop + 1 operator_id, @email_group email_addresses)a
@@ -125,6 +127,7 @@ when op.name like 'DBAs_g%' then 'DBAs'
 end  in ('dba_mailgroup','dba_mailgroup_and_others','dba_member')
 order by al.name, op.name
 */
+--here add/remove notification = relation between alerts and operators = lookup = many to many relation
 
 declare 
 @alert			varchar(255), 
@@ -164,18 +167,21 @@ open update_notification
 fetch next from update_notification into @alert, @old_operator, @alert_type
 while @@FETCH_STATUS = 0
 begin
-
-open dba_operators
-fetch next from dba_operators into @dba_operator
-while @@FETCH_STATUS = 0
-begin
-	exec msdb.dbo.sp_add_notification 
-	@alert_name = @alert, 
-	@operator_name = @dba_operator, 
-	@notification_method = 1
-fetch next from dba_operators into @dba_operator
-end
-close dba_operators 
+		open dba_operators
+		fetch next from dba_operators into @dba_operator
+		while @@FETCH_STATUS = 0
+		begin
+			if not exists (select * from msdb.dbo.sysoperators op inner join msdb.dbo.sysnotifications n on n.operator_id = op.id inner join msdb.dbo.sysalerts al on n.alert_id = al.id
+			where al.name = @alert and op.name = @dba_operator)
+			begin
+				exec msdb.dbo.sp_add_notification 
+				@alert_name = @alert, 
+				@operator_name = @dba_operator, 
+				@notification_method = 1
+			end
+		fetch next from dba_operators into @dba_operator
+		end
+		close dba_operators 
 
 if @alert_type in ('dba_member','dba_mailgroup')
 begin
@@ -192,7 +198,7 @@ deallocate dba_operators
 select * 
 from msdb.dbo.sysoperators
 
-select al.name, op.name,email_address,
+select al.name alert_name, op.name operator_name,email_address,
 case 
 when replace(op.email_address,';','') = 'mailgroup_dba@bankalbilad.com' then 'dba_mailgroup' 
 when replace(email_address,';','') != 'mailgroup_dba@bankalbilad.com' and email_address like '%mailgroup_dba@bankalbilad.com%' then 'dba_mailgroup_and_others'
@@ -207,7 +213,7 @@ order by al.name, op.name
 */
 go
 
---operators that have mailgroup_dba@bankalbilad.com and others
+--update operator's email_addresses that have mailgroup_dba@bankalbilad.com and others
 declare @operator_name varchar(255), @email_address varchar(200)
 declare dba_operator cursor fast_forward
 for
