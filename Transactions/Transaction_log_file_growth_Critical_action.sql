@@ -1,4 +1,4 @@
-use [database name]
+use test
 go
 --new error message
 exec sp_addmessage 
@@ -13,7 +13,8 @@ go
 /*
 select * 
 from sys.messages
-where message_id = 199999
+where language_id = 1033
+and message_id = 199999
 */
 go
 
@@ -27,10 +28,20 @@ EXEC msdb.dbo.sp_add_alert @name=N'log_file_threshold',
 		@job_id=N'00000000-0000-0000-0000-000000000000'
 GO
 
+--master.dbo.database_size @report=3
+
+--master.dbo.database_size @databases='Test'
+
+--exec [dbo].[usp_add_log_file_critical_behavior] @threshold_pct = 7, @log_size = 2
+--exec [dbo].[usp_add_log_file_critical_behavior] @threshold_pct = 7, @log_size = 2
+
 --Create a job and make it run every 1 minute to execute the below procedure with your threshold and new disk to create the new log file
+go
 CREATE Procedure [dbo].[usp_add_log_file_critical_behavior](
-@threshold_pct	float = 95,
-@new_volume	varchar(10) = 'P:\')
+@threshold_pct	float = 5,
+@new_volume		varchar(10) = 'K:\',
+@log_size		int = 2
+)
 as
 begin
 declare 
@@ -48,7 +59,8 @@ declare
 @log_file_count		int,
 @new_file_name		varchar(max),
 @new_path			varchar(max),
-@xp_cmdshell		varchar(1000)
+@xp_cmdshell		varchar(1000),
+@replicas			varchar(max)
 
 declare @Test_Path table (does_exist varchar(10))
 select 
@@ -76,14 +88,25 @@ set @new_path = @new_volume+SUBSTRING(@new_path,4,len(@new_path))
 set @new_file_name = reverse(SUBSTRING(reverse(@physical_name),1, charindex('\',reverse(@physical_name))-1))
 set @new_file_name = master.dbo.vertical_array(@new_file_name,'.',1)+'_'+CAST(@log_file_count + 1 as varchar(10))+'.'+master.dbo.vertical_array(@new_file_name,'.',2)
 
---select @new_path, @new_file_name, @used_pct
+if exists (select * from sys.availability_replicas)
+begin
+select @replicas = ISNULL(@replicas+', ','') + case when charindex('\',replica_server_name) > 0 then substring(replica_server_name,1,charindex('\',replica_server_name)-1) else replica_server_name end
+from sys.availability_replicas
+end
+else
+begin
+set @replicas = case when charindex('\',@@SERVERNAME) > 0 then substring(@@SERVERNAME,1,charindex('\',@@SERVERNAME)-1) else @@SERVERNAME end
+end
+
+select @new_path, @new_file_name, @used_pct, @replicas
+
 
 --Creating new log file on the new drive only if: 
 --1. the used space % is = or > than 95%.
 --2. if there is no log file exists on the new drive.
 if @used_pct >= @threshold_pct 
 begin
-	if (select COUNT(*) from sys.master_files where type = 1 and left(physical_name,3) = @new_volume) = 0
+	if (select COUNT(*) from sys.database_files where type = 1 and left(physical_name,3) = @new_volume) = 0
 	begin
 		set @xp_cmdshell = 'xp_cmdshell ''PowerShell.exe -Command "& {Test-Path -Path '+@new_path+'}"'''
 		insert into @Test_Path
@@ -91,51 +114,52 @@ begin
 
 		if (select top 1 does_exist from @Test_Path where does_exist is not null) = 'False'
 		begin
-			set @xp_cmdshell = 'xp_cmdshell ''PowerShell.exe -Command "& {mkdir -Path '+@new_path+'}"'''
+			set @xp_cmdshell = 'xp_cmdshell ''PowerShell.exe -Command "& {Invoke-Command -ComputerName '+@replicas+' -ScriptBlock {mkdir -Path '''''+@new_path+'''''}}"'''
 			exec(@xp_cmdshell)
+			print(@xp_cmdshell)
 		end	
 
-		set @sql = 'ALTER DATABASE ['+db_name(DB_ID())+'] ADD LOG FILE (NAME='+''''+@logical_name+'_2'', FILENAME= '+''''+@new_path+@new_file_name+''''+', SIZE= 50GB, FILEGROWTH= '+replace(@log_file_growth,' ','')+', MAXSIZE=UNLIMITED)'
+		set @sql = 'ALTER DATABASE ['+db_name(DB_ID())+'] ADD LOG FILE (NAME='+''''+@logical_name+'_Emergency'', FILENAME= '+''''+@new_path+@new_file_name+''''+', SIZE= '+cast(@log_size as varchar(10))+'GB, FILEGROWTH= '+replace(@log_file_growth,' ','')+', MAXSIZE=UNLIMITED)'
 		print(@sql)
-		--exec(@sql)
+		exec(@sql)
 		RAISERROR (199999, -1, -1, @sql);
 	end
 end
 end
 
-go
+--go
 
---Solution 1 but it doesn't work because the trigger will not work because it will not update the view using UPDATE statement ever happens.
-CREATE View [dbo].[log_files_used_pct]
-as
-select 
-row_number() over(order by dbf.FILE_ID) id,
-v.volume_mount_point,
-used_pct = cast(cast((v.total_bytes - v.available_bytes) as float) / cast(v.total_bytes as float) * 100.0 as numeric(10,3))
-from sys.database_files dbf cross apply sys.dm_os_volume_stats(DB_ID(), file_id) v
-where type = 1
-and dbf.file_id in (select MIN(file_id) from sys.database_files sdbf where type = 1)
+----Solution 1 but it doesn't work because the trigger will not work because it will not update the view using UPDATE statement ever happens.
+--CREATE View [dbo].[log_files_used_pct]
+--as
+--select 
+--row_number() over(order by dbf.FILE_ID) id,
+--v.volume_mount_point,
+--used_pct = cast(cast((v.total_bytes - v.available_bytes) as float) / cast(v.total_bytes as float) * 100.0 as numeric(10,3))
+--from sys.database_files dbf cross apply sys.dm_os_volume_stats(DB_ID(), file_id) v
+--where type = 1
+--and dbf.file_id in (select MIN(file_id) from sys.database_files sdbf where type = 1)
 
-go
-select used_pct
-from dbo.log_files_used_pct
-where id = 1
-go
+--go
+--select used_pct
+--from dbo.log_files_used_pct
+--where id = 1
+--go
 
---the trigger will not run ever because there is no update statement happens on the dbo.log_files_used_pct view
-CREATE Trigger [dbo].[log_file_threshold_monitor_trigger]
-on dbo.log_files_used_pct
-INSTEAD OF update
-as
-begin
-declare @used_pct float
-select @used_pct = used_pct
-from dbo.log_files_used_pct
-where id = 1
+----the trigger will not run ever because there is no update statement happens on the dbo.log_files_used_pct view
+--CREATE Trigger [dbo].[log_file_threshold_monitor_trigger]
+--on dbo.log_files_used_pct
+--INSTEAD OF update
+--as
+--begin
+--declare @used_pct float
+--select @used_pct = used_pct
+--from dbo.log_files_used_pct
+--where id = 1
 
-if @used_pct >= 57
-begin
-	RAISERROR (199999, -1, -1, 'Transaction log file threshold exceeds');
-end
-end
+--if @used_pct >= 57
+--begin
+--	RAISERROR (199999, -1, -1, 'Transaction log file threshold exceeds');
+--end
+--end
 
