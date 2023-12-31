@@ -1,5 +1,8 @@
 use test
 go
+--prerequisites 
+--1. new custom error message
+
 --new error message
 exec sp_addmessage 
 199999,
@@ -18,6 +21,8 @@ and message_id = 199999
 */
 go
 
+--2. alert to fire when the error message logged
+	
 EXEC msdb.dbo.sp_add_alert @name=N'log_file_threshold', 
 		@message_id=199999, 
 		@severity=0, 
@@ -28,13 +33,9 @@ EXEC msdb.dbo.sp_add_alert @name=N'log_file_threshold',
 		@job_id=N'00000000-0000-0000-0000-000000000000'
 GO
 
---master.dbo.database_size @report=3
+--3. open port 5985 between all replica servers for Security Considerations for PowerShell Remoting using WinRM
 
---master.dbo.database_size @databases='Test'
-
---exec [dbo].[usp_add_log_file_critical_behavior] @threshold_pct = 7, @log_size = 2
---exec [dbo].[usp_add_log_file_critical_behavior] @threshold_pct = 7, @log_size = 2
-
+--4.
 --Create a job and make it run every 1 minute to execute the below procedure with your threshold and new disk to create the new log file
 go
 CREATE Procedure [dbo].[usp_add_log_file_critical_behavior](
@@ -101,9 +102,9 @@ end
 select @new_path, @new_file_name, @used_pct, @replicas
 
 
---Creating new log file on the new drive only if: 
+--Creating a new log file on the new drive only if: 
 --1. the used space % is = or > than 95%.
---2. if there is no log file exists on the new drive.
+--2. if there is no log file that exists on the new drive.
 if @used_pct >= @threshold_pct 
 begin
 	if (select COUNT(*) from sys.database_files where type = 1 and left(physical_name,3) = @new_volume) = 0
