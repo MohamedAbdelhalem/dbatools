@@ -5,14 +5,14 @@ as
 begin
 
 declare @users table (
-	[database_name]				varchar(300), 
-	[principal_id]				int, 
-	[sid]						varbinary(255), 
-	[login_name]				varchar(300), 
-	[login_type]				varchar(100), 
+	[database_name]			varchar(300), 
+	[principal_id]			int, 
+	[sid]				varbinary(255), 
+	[login_name]			varchar(300), 
+	[login_type]			varchar(100), 
 	[default_schema_name]		varchar(100), 
 	[authentication_type_desc]	varchar(100), 
-	[db_role_name]				varchar(200)
+	[db_role_name]			varchar(200)
 )
 
 declare @login table (
