@@ -16,34 +16,34 @@ declare @users table (
 )
 
 declare @login table (
-	[id]			int identity(1,1), 
-	[sid]			varbinary(255), 
+	[id]		int identity(1,1), 
+	[sid]		varbinary(255), 
 	[Login_name]	varchar(300), 
-	[Roles]			varchar(max)
+	[Roles]		varchar(max)
 )
 
 declare @table_permissions table (
-	[principal_id]					int, 
-	[sid]							varbinary(255), 
-	[database_name]					varchar(500), 
-	[loginame]						varchar(300), 
-	[state_desc]					varchar(100), 
+	[principal_id]			int, 
+	[sid]				varbinary(255), 
+	[database_name]			varchar(500), 
+	[loginame]			varchar(300), 
+	[state_desc]			varchar(100), 
 	[Object_Name_Type_Permissions]	varchar(max)
 )
 
 declare @server_db_roles table (
-	[sid]				varbinary(255), 
-	[loginame]			varchar(500), 
+	[sid]			varbinary(255), 
+	[loginame]		varchar(500), 
 	[is_disabled]		int, 
-	[hasAccess]			int, 
+	[hasAccess]		int, 
 	[server_roles]		varchar(500), 
 	[database_roles]	varchar(max)
 )
 
 create table #permissions (
-	[database_name]					varchar(500), 
-	[sid]							varbinary(255), 
-	[state_desc]					varchar(100), 
+	[database_name]			varchar(500), 
+	[sid]				varbinary(255), 
+	[state_desc]			varchar(100), 
 	[Object_Name_Type_Permissions]	varchar(max)
 )
 
