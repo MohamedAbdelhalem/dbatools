@@ -1,49 +1,56 @@
-use [master]
-go
-CREATE Procedure [dbo].[sp_logins_Roles_collector]
+USE [master]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_logins_Roles_collector]    Script Date: 2/21/2024 1:36:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER Procedure [dbo].[sp_logins_Roles_collector]
 as
 begin
 
 declare @users table (
-	[database_name]			varchar(300), 
-	[principal_id]			int, 
-	[sid]				varbinary(255), 
-	[login_name]			varchar(300), 
-	[login_type]			varchar(100), 
+	[database_name]				varchar(300), 
+	[principal_id]				int, 
+	[sid]						varbinary(255), 
+	[login_name]				varchar(300), 
+	[login_type]				varchar(100), 
 	[default_schema_name]		varchar(100), 
 	[authentication_type_desc]	varchar(100), 
-	[db_role_name]			varchar(200)
+	[db_role_name]				varchar(200)
 )
 
 declare @login table (
-	[id]		int identity(1,1), 
-	[sid]		varbinary(255), 
+	[id]			int identity(1,1), 
+	[sid]			varbinary(255), 
 	[Login_name]	varchar(300), 
-	[Roles]		varchar(max)
+	[Roles]			varchar(max)
 )
 
 declare @table_permissions table (
-	[principal_id]			int, 
-	[sid]				varbinary(255), 
-	[database_name]			varchar(500), 
-	[loginame]			varchar(300), 
-	[state_desc]			varchar(100), 
+	[principal_id]					int, 
+	[sid]							varbinary(255), 
+	[database_name]					varchar(500), 
+	[loginame]						varchar(300), 
+	[state_desc]					varchar(100), 
 	[Object_Name_Type_Permissions]	varchar(max)
 )
 
 declare @server_db_roles table (
-	[sid]			varbinary(255), 
-	[loginame]		varchar(500), 
+	[sid]				varbinary(255), 
+	[loginame]			varchar(500), 
 	[is_disabled]		int, 
-	[hasAccess]		int, 
+	[language]			varchar(100), 
+	[denyAccess]		int, 
+	[hasAccess]			int, 
 	[server_roles]		varchar(500), 
 	[database_roles]	varchar(max)
 )
 
 create table #permissions (
-	[database_name]			varchar(500), 
-	[sid]				varbinary(255), 
-	[state_desc]			varchar(100), 
+	[database_name]					varchar(500), 
+	[sid]							varbinary(255), 
+	[state_desc]					varchar(100), 
 	[Object_Name_Type_Permissions]	varchar(max)
 )
 
@@ -64,9 +71,9 @@ select p.name, p.principal_id, p.type_desc,sid, p.default_schema_name, p.authent
 from sys.database_principals p left outer join sys.database_role_members dbm
 on p.principal_id = dbm.role_principal_id) r
 on p.principal_id = r.member_principal_id
-where p.type_desc in (''sql_user'',''windows_user'')
+where p.type_desc in (''sql_user'',''windows_user'',''WINDOWS_GROUP'')
 and p.authentication_type_desc != ''none''
-order by p.type_desc, p.name'
+order by p.type_desc, p.name, db_role_name'
 
 insert into @login (sid, Login_name, Roles)
 select sid, [login_name],
@@ -82,10 +89,11 @@ select row_number() over(partition by database_name order by login_name) id,
 +isnull(' -"'+[7]+'"','')+isnull(' -"'+[8]+'"','')+isnull(' -"'+[9]+'"','')+isnull(' -"'+[10]+'"','')+isnull(' -"'+[11]+'"','')+isnull(' -"'+[12]+'"','')
 db_roles 
 from (
-select 
+select top 100 percent
 row_number() over(partition by sid, database_name order by database_name) id,
 database_name,  sid, login_name, db_role_name 
-from @users)a
+from @users
+order by login_name, db_role_name )a
 pivot (
 max(db_role_name) for id in ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12]))p)b
 where login_name not like '%#%')c
@@ -94,19 +102,19 @@ max(logins_db_roles) for id in ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[1
 order by login_name
 
 insert into @server_db_roles
-select  s.sid, isnull(loginname,lo.Login_name) Login_Name , is_disabled, hasaccess, server_roles, --lo.Roles database_roles --
+select  s.sid, isnull(loginname,lo.Login_name) Login_Name , is_disabled, language, denylogin,hasaccess, server_roles, --lo.Roles database_roles --
 isnull(lo.Roles, 'No Database Mapping') database_roles
 from @login lo full outer join (
-select sid, loginname, is_disabled, hasaccess,
+select sid, loginname, is_disabled, language, denylogin,hasaccess,
 case when len(server_roles) = 0 then 'Public' else substring(server_roles, 1, len(server_roles) - 1) end server_roles
 from (
-select principal_id, sid, loginname, is_disabled, hasaccess, 
+select principal_id, sid, loginname, is_disabled, language, denylogin,hasaccess, 
 isnull(sysadmin+', ','')    +isnull(securityadmin+', ','') +isnull(serveradmin+', ','')+
 isnull(setupadmin+', ','')  +isnull(processadmin+', ','')  +isnull(diskadmin+', ','')+
 isnull(dbcreator+', ','')   +isnull(bulkadmin+', ','')
 server_roles
 from (
-select sp.principal_id, l.sid, loginname, is_disabled, hasaccess, 
+select sp.principal_id, l.sid, loginname, is_disabled, language, denylogin, hasaccess, 
 case sysadmin        when 1 then 'sysadmin'			else null end sysadmin, 
 case securityadmin   when 1 then 'securityadmin'	else null end securityadmin, 
 case serveradmin     when 1 then 'serveradmin'		else null end serveradmin, 
@@ -302,7 +310,7 @@ set @sql = 'select *
 exec(@sql)
 
 select sdbr.Loginame Login_Name, case sdbr.is_disabled when 0 then 'Enabled' else 'Disabled' end [Status], 
-sdbr.HasAccess, sdbr.Server_Roles, sdbr.Database_Roles, db_per.*
+sdbr.language, sdbr.[denyAccess], sdbr.HasAccess, sdbr.Server_Roles, sdbr.Database_Roles, db_per.*
 from @server_db_roles sdbr left outer join tempdb..permissions_pivot db_per
 on sdbr.sid = db_per.sid
 inner join sys.syslogins l
@@ -312,8 +320,6 @@ order by l.createdate
 --drop table #permissions 
 drop table tempdb..permissions_pivot
 end
-
 go
-
 
 EXEC [dbo].[sp_logins_Roles_collector]
