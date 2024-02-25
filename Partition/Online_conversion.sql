@@ -2,7 +2,7 @@ DROP Index CI_PARTITION_TABLE__5E02827250CDB1A2 On [dbo].[PARTITION_TABLE]
 --00:00:13
  
 --add computed column as a PARTITION_KEY column
-ALTER Table [dbo].[PARTITION_TABLE] Add PARTITION_KEY As (DATEPART(DY, TransactionTime)) Persisted NOT NULL
+ALTER Table [dbo].[PARTITION_TABLE] Add PARTITION_KEY As (DATEPART(DY, TransactionTime)) PERSISTED NOT NULL
 --00:16:44
  
 --then alter the table and choose either to convert to 
