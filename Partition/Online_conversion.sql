@@ -1,7 +1,9 @@
 DROP Index CI_PARTITION_TABLE__5E02827250CDB1A2 On [dbo].[PARTITION_TABLE] 
 --00:00:13
  
---add computed column as a PARTITION_KEY column
+--add computed column as a PARTITION_KEY column 
+--e.g. in this column will be a day year number so 1 partition will has multi-years
+--e.g., partition 1 will have 2021-01-01, 2022-01-01, 2023-01-01, and 2024-01-01
 ALTER Table [dbo].[PARTITION_TABLE] Add PARTITION_KEY As (DATEPART(DY, TransactionTime)) PERSISTED NOT NULL
 --00:16:44
  
