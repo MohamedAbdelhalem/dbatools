@@ -4,7 +4,7 @@
 
 --let say multi examples
 
---1. datetime partition key
+--1. int partition key
 --RIGHT
 CREATE PARTITION FUNCTION [PARTITION_F_YEARS_RIGHT](INT)
 AS
@@ -14,7 +14,7 @@ RANGE RIGHT FOR VALUES (
 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 
 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031);
 
---for thivs partition function 
+--for this partition function 
 --partition 1 will have values < 2000
 --partition 2 will have values = 2000
 --partition 3 will have values = 2001
@@ -22,12 +22,12 @@ RANGE RIGHT FOR VALUES (
 --and so on
 
 --so in this case if you desire to truncate Year 2020 
---you will use partiton number 22
+--you will use partition number 22
 
 TRUNCATE TABLE [dbo].[PARTITION_TABLE] WITH (PARTITIONS (22));
 
 --LEFT 
-CREATE PARTITION FUNCTION [PARTITION_F_YEARS_RIGHT](INT)
+CREATE PARTITION FUNCTION [PARTITION_F_YEARS_LEFT](INT)
 AS
 RANGE LEFT FOR VALUES (
 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 
@@ -44,6 +44,6 @@ RANGE LEFT FOR VALUES (
 --and so on
 
 --so in this case if you desire to truncate Year 2020 
---you will use partiton number 21
+--you will use partition number 21
 
 TRUNCATE TABLE [dbo].[PARTITION_TABLE] WITH (PARTITIONS (21));
