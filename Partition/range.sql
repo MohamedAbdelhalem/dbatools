@@ -14,7 +14,7 @@ RANGE RIGHT FOR VALUES (
 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 
 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031);
 
---for this partition function 
+--for thivs partition function 
 --partition 1 will have values < 2000
 --partition 2 will have values = 2000
 --partition 3 will have values = 2001
