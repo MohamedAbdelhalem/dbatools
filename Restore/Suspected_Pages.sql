@@ -7,7 +7,7 @@ declare
 
 declare @suspected_pages varchar(max)
 select @suspected_pages = ISNULL(@suspected_pages+',','') + CAST(file_id as varchar(10))+':'+CAST(page_id as varchar(50)) 
-from master.dbo.suspect_pages
+from msdb.dbo.suspect_pages
 where database_id = DB_ID(@database)
 
 --select @suspected_pages
