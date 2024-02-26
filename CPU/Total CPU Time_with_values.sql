@@ -9,7 +9,7 @@ master.dbo.format([Total CPU Time (ms)],-1) [Total_CPU_Time_ms],
 master.dbo.format([total_worker_time],-1) [total_worker_time], 
 master.dbo.format([Last CPU Time (ms)],-1) [Last_CPU_Time_ms], 
 master.dbo.duration('ms',cast([Last CPU Time (ms)] as int)) [Last_CPU_Time], 
-[Last Execution], 
+[Last Execution], cast(query_plan as XML) query_plan,
 ex.[1],ex.[2],ex.[3],ex.[4],ex.[5],ex.[6],ex.[7],ex.[8],ex.[9],ex.[10]
 from (
 select  row_number() over(ORDER BY total_worker_time DESC)id,
@@ -30,7 +30,7 @@ left outer join (
 select *
 from (
 select ex.id,
-qs.plan_handle,
+qs.plan_handle,cast(qp.query_plan as nvarchar(max)) query_plan,
 ex.bind_variables+' = '+ex.parameter_values parameter_values
 --, ex.bind_variables+' = '+isnull(ParameterRuntimeValue,'NULL') ParameterRuntimeValue 
 FROM sys.dm_exec_query_stats qs
