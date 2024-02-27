@@ -1,8 +1,8 @@
-use [database name]
+use [AdventureWorks2019]
 go
 select al.table_name, partition_rows, partition_size,
 master.dbo.numbersize(sum(total_pages) over(partition by al.table_name) *8.0,'k') table_size,
-prv.boundary_id partition_number
+(prv.boundary_id + boundary_value_on_right) partition_number, prv.value PARTITION_KEY_Value
 from (
 select i.data_space_id, p.object_id, p.index_id,
 '['+schema_name(schema_id)+'].['+t.name+']' table_name,partition_number,
@@ -26,5 +26,5 @@ inner join sys.partition_range_values prv
 on prv.function_id = pf.function_id
 and (prv.boundary_id + boundary_value_on_right) = al.partition_number
 --where table_name = '[dbo].[PARTITION_TABLE]'
+--and prv.value = datepart(DY,'2024-01-01')
 order by table_name, partition_number
-
