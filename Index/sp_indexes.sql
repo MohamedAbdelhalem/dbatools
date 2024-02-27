@@ -55,10 +55,10 @@ on i.object_id = t.object_id
 where i.object_id = @P_object_id 
 and index_id = @p_index_id
 
+declare @index_columns_keys varchar(max), @filegroup_type varchar(255), @partition_column_name varchar(255)
 declare @index_id int, @index_name varchar(100), @column_name varchar(1500), @sql varchar(max), @is_include int, @fill_factor int, @filegroup varchar(500)
-declare i cursor fast_forward
-for
-SELECT index_id, index_name, 
+
+SELECT @index_columns_keys = ISNULL(@index_columns_keys+'','') +  
 case is_included_column 
 when 0 then (
 case when (select max(key_ordinal) 
@@ -68,11 +68,10 @@ when 1 then (
 case when (select count(*) 
 FROM sys.indexes AS i INNER JOIN sys.index_columns AS ic ON i.object_id = ic.object_id AND i.index_id = ic.index_id 
 WHERE i.name = @P_Index_Name and ic.is_included_column = 1) = 1 then substring(COLUMN_NAME,1,charindex(',',COLUMN_NAME)-1)+')' else column_name end) 
-end column_name,
-index_column_id
+end 
 from(
 SELECT i.index_id, '['+i.name+']' AS index_name ,
-case index_column_id
+case key_ordinal
 when (select min(key_ordinal) FROM sys.indexes AS i INNER JOIN sys.index_columns AS ic ON i.object_id = ic.object_id AND i.index_id = ic.index_id WHERE i.name = @P_Index_Name and ic.is_included_column = 0) then '('+'['+COL_NAME(ic.object_id,ic.column_id)+']'+','
 when (select max(key_ordinal) FROM sys.indexes AS i INNER JOIN sys.index_columns AS ic ON i.object_id = ic.object_id AND i.index_id = ic.index_id WHERE i.name = @P_Index_Name and ic.is_included_column = 0) then '['+COL_NAME(ic.object_id,ic.column_id)+']'+')'
 else '['+COL_NAME(ic.object_id,ic.column_id)+']'+',' end COLUMN_NAME,
@@ -83,7 +82,7 @@ WHERE i.name = @P_Index_Name
 and i.object_id = object_id(@P_table_name)
 and is_included_column = 0
 union all
-SELECT i.index_id, '['+i.name+']' AS index_name ,case index_column_id
+SELECT i.index_id, '['+i.name+']' AS index_name ,case key_ordinal
 when (select min(index_column_id) FROM sys.indexes AS i INNER JOIN sys.index_columns AS ic ON i.object_id = ic.object_id AND i.index_id = ic.index_id WHERE i.name = @P_Index_Name and ic.is_included_column = 1) then ' INCLUDE ('+'['+COL_NAME(ic.object_id,ic.column_id)+']'+','
 when (select max(index_column_id) FROM sys.indexes AS i INNER JOIN sys.index_columns AS ic ON i.object_id = ic.object_id AND i.index_id = ic.index_id WHERE i.name = @P_Index_Name and ic.is_included_column = 1) then '['+COL_NAME(ic.object_id,ic.column_id)+']'+')'
 else '['+COL_NAME(ic.object_id,ic.column_id)+']'+',' end COLUMN_NAME,
@@ -94,27 +93,31 @@ ON i.object_id = ic.object_id AND i.index_id = ic.index_id
 WHERE i.name = @P_Index_Name
 and i.object_id = object_id(@P_table_name)
 and is_included_column = 1)A
-order by index_column_id
+order by key_ordinal
 
-set @sql = ''
-open i
-fetch next from i into @index_id, @index_name, @column_name, @is_include
-while @@fetch_status = 0
-begin
-set @sql = @sql+' '+@column_name
+set @sql = substring(ltrim(rtrim(@index_columns_keys )),1,len(ltrim(rtrim(@index_columns_keys )))-1)
 
-fetch next from i into @index_id, @index_name, @column_name, @is_include
-end
-close i
-deallocate i
-
-set @sql = substring(ltrim(rtrim(@sql)),1,len(ltrim(rtrim(@sql)))-1)
-
-select @fill_factor = fill_factor, @filegroup = fg.name, @is_disabled = is_disabled
-from sys.indexes i inner join sys.filegroups fg
+select 
+@fill_factor = fill_factor, 
+@filegroup_type = case when fg.name is null then 'Partition Scheme' else 'Filegroup' end, 
+@filegroup = isnull(fg.name,ps.name), 
+@partition_column_name = pc.partition_column_name, 
+@is_disabled = is_disabled
+from sys.indexes i left outer join sys.filegroups fg
 on i.data_space_id = fg.data_space_id
-where object_id = @P_object_id 
-and index_id = @p_index_id
+left outer join sys.partition_schemes ps
+on i.data_space_id = ps.data_space_id
+left outer join (select ic.object_id, c.name partition_column_name
+from sys.index_columns ic inner join sys.columns c
+on ic.object_id = c.object_id
+and ic.column_id = c.column_id
+where ic.index_id = 1
+and ic.partition_ordinal > 0)pc
+on i.object_id = pc.object_id
+where i.object_id = @P_object_id 
+and i.index_id = @p_index_id
+
+--select @sql, @fill_factor, @filegroup, @filegroup_type, @partition_column_name, @is_disabled
 
 select 
 @compute_function = isnull(@compute_function +',','')+substring(cc.definition,2,charindex('(',cc.definition,2)-2),
@@ -167,7 +170,7 @@ order by i.key_ordinal
 if @is_primary_key = 1
 begin
 set @sql = 'ALTER TABLE '+@p_table_name+' ADD CONSTRAINT ['+@p_index_name+'] PRIMARY KEY '+ case when @index_id = 1 then 'CLUSTERED ' else 'NONCLUSTERED ' end + @sql + 
-') WITH (FILLFACTOR = '+cast(case when @fill_factor = 0 then 100 else @fill_factor end as varchar)+') ON [' + @filegroup +']'
+') WITH (FILLFACTOR = '+cast(case when @fill_factor = 0 then 100 else @fill_factor end as varchar)+') ON [' + @filegroup +']'+ISNULL('('+@partition_column_name+')','')
 end
 else
 begin
@@ -175,7 +178,7 @@ if @is_unique_constraint = 1
 begin
 
 set @sql = 'ALTER TABLE '+@p_table_name+' ADD CONSTRAINT ['+@p_index_name+'] UNIQUE '+ case when @index_id = 1 then 'CLUSTERED ' else 'NONCLUSTERED ' end + @sql + 
-' ON [' + @filegroup +']'
+' ON [' + @filegroup +']'+ISNULL('('+@partition_column_name+')','')
 end
 else
 begin
@@ -184,7 +187,7 @@ Case @index_type
 when 1 then 'CLUSTERED' 
 when 2 then 'NONCLUSTERED' 
 end + ' INDEX ['+@P_index_Name+'] ON '+@P_table_Name+' '+@sql + 
-') WITH (FILLFACTOR = '+cast(case when @fill_factor = 0 then 100 else @fill_factor end as varchar)+') ON [' + @filegroup +']'
+') WITH (FILLFACTOR = '+cast(case when @fill_factor = 0 then 100 else @fill_factor end as varchar)+') ON [' + @filegroup +']'+ISNULL('('+@partition_column_name+')','')
 end
 end
 select @P_table_Name, @p_index_id, @P_index_Name,Case @index_type 
