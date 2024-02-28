@@ -1,7 +1,8 @@
 use master
 go
 select 
-ar.replica_server_name, db.name [database_name], db.state_desc, cm.member_state_desc,ars.role_desc, cm.number_of_quorum_votes quorum_votes, 
+ar.replica_server_name, ag.name availability_group_name, 
+db.name [database_name], db.state_desc, cm.member_state_desc,ars.role_desc, cm.number_of_quorum_votes quorum_votes, 
 synchronization_state_desc sync_state_desc, rs.synchronization_health_desc sync_health_desc, database_state_desc, is_failover_ready, is_pending_secondary_suspend,
 master.dbo.numbersize(isnull(log_send_queue_size,0),'kb') log_send_queue_size,
 master.dbo.numbersize(isnull(redo_queue_size,0),'kb') redo_queue_size_not_yet,
@@ -21,13 +22,11 @@ on case when charindex('\',ar.replica_server_name) > 0 then substring(ar.replica
 inner join sys.dm_hadr_availability_replica_states ars
 on ar.replica_id = ars.replica_id
 inner join sys.dm_hadr_database_replica_cluster_states ardbs
-on ar.replica_id = ardbs.replica_id
+on ars.replica_id = ardbs.replica_id
+and db.name = ardbs.database_name
+inner join sys.availability_groups ag
+on ar.group_id = ag.group_id
 where rs.is_local = 1
+--and synchronization_state_desc != 'SYNCHRONIZED'
 order by --[Data_loss_Time RPO] desc, 
-total_waiting_logs desc
-
-
-
-
-
-
+availability_group_name, database_name, total_waiting_logs desc
