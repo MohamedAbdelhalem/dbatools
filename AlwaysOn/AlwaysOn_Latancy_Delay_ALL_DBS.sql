@@ -1,5 +1,7 @@
+use master
+go
 select 
-ar.replica_server_name replica_server, count(*) [sync_databases], db.state_desc, cm.member_state_desc member_state,ars.role_desc, cm.number_of_quorum_votes quorum_votes, 
+ar.replica_server_name replica_server,ag.name availability_group_name, count(*) [sync_databases], db.state_desc, cm.member_state_desc member_state,ars.role_desc, cm.number_of_quorum_votes quorum_votes, 
 synchronization_state_desc sync_state_desc, rs.synchronization_health_desc sync_health_desc, database_state_desc, 
 master.dbo.numbersize(isnull(sum(log_send_queue_size),0),'kb') log_send_queue_size, --master.dbo.format(cast(cast(sum(log_send_queue_size) as float) /1024.0 as numeric(10,5)),5)log_send_queue_size_mb,
 master.dbo.numbersize(isnull(sum(redo_queue_size),0),'kb') redo_queue_size_not_yet,
@@ -17,8 +19,10 @@ inner join sys.dm_hadr_cluster_members cm
 on case when charindex('\',ar.replica_server_name) > 0 then substring(ar.replica_server_name, 1, charindex('\',ar.replica_server_name)-1) else ar.replica_server_name end = cm.member_name
 inner join sys.dm_hadr_availability_replica_states ars
 on ar.replica_id = ars.replica_id
+inner join sys.availability_groups ag
+on ar.group_id = ag.group_id
 where rs.is_local = 1
 group by ar.replica_server_name, db.state_desc, cm.member_state_desc,ars.role_desc, cm.number_of_quorum_votes, 
-synchronization_state_desc, rs.synchronization_health_desc, database_state_desc
+synchronization_state_desc, rs.synchronization_health_desc, database_state_desc, ag.name
 order by 
 total_waiting_logs desc
