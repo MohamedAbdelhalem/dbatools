@@ -1,40 +1,41 @@
-use [database name]
+use [AdventureWorks2019]
 go
 declare 
 @file_type varchar(50) = 'data', --values (data or log).
---@file_id varchar(max) = '1,3,5,7,8,9,13,16,17', -- values (0 = all or file id (1,2,3,4,5,6,...)).
-@file_id varchar(max) = '1,3,4,5,6,9,16', -- values (0 = all or file id (1,2,3,4,5,6,...)).
+@file_id varchar(max) = '0', 
+--values whether (0 = all or file id (1,2,3,4,5,6,...))
 @start_from int = 0,
-@except_files varchar(100) = '9',
-@shrink_size_type int = 3, 
+@except_files varchar(100) = '0',
+@shrink_size_type int = 2, 
 --1 percentage %
 --2 fixed size mb
 --3 mix between the 2 types
-	--first it uses fixed size until it reched the mix_threshold then it use the percentage number %
-@mix_threshold_mb float = 2048,
+	--first, it uses fixed-size until it reaches the mix_threshold then it uses the percentage number % by the percent of the used space
+@mix_threshold_mb float = 512,
 @file_percent float = 1, -- value = this is the percent number that you want to shrink with batches like every 5 seconds it will get this value to shrink the file.
 @shrink_fixed_size_mb float = 1024,
-@file_used_buffer_mb int = 512 -- value = @file_used_buffer_mb MB additional space added on the total used space of the file.
+@file_used_buffer_mb int = 5 -- value = @file_used_buffer_mb MB additional space added on the total used space of the file.
 
-declare @file_size bigint, @file_dbcc bigint, @file_used bigint, @file_name nvarchar(300), @message nvarchar(1000)
+declare @file_size bigint, @file_dbcc bigint, @file_used bigint, @file_name nvarchar(300), @message nvarchar(1000), @fileid int
 declare cursor_files cursor fast_forward
 for
-select --FILE_ID, --((cast(size as bigint) * 8) / 1024) , (@shrink_fixed_size_mb) ,
-[file_size] = ((cast(size as bigint) * 8) / 1024), 
+select FILE_ID, --((cast(size as bigint) * 8) / 1024) , (@shrink_fixed_size_mb) ,
+[file_size] = ((cast(size as float) * 8.0) / 1024.0), 
 [file_dbcc] = case 
-			  when @shrink_size_type = 1 then cast(((cast(size as bigint) * 8) / 1024) - ((cast(size as bigint) * 8 / 1024.0) / 100 * @file_percent) as bigint)
-			  when @shrink_size_type in (2,3) then cast((((cast(size as bigint) * 8) / 1024) - (@shrink_fixed_size_mb)) as bigint)
+			  when @shrink_size_type = 1 then cast(((cast(size as bigint) * 8.0) / 1024.0) - ((cast(size as bigint) * 8.0 / 1024.0) / 100.0 * @file_percent) as bigint)
+			  when @shrink_size_type in (2,3) then cast((((cast(size as bigint) * 8.0) / 1024.0) - (@shrink_fixed_size_mb)) as bigint)
 			  end, 
-[file_used] = cast((cast(FILEPROPERTY(name, 'spaceused') as bigint) * 8.0) / 1024 as bigint) + @file_used_buffer_mb, 
+[file_used] = cast(((cast(FILEPROPERTY(name, 'spaceused') as bigint) * 8.0) / 1024.0) as bigint) + @file_used_buffer_mb, 
 [file_name] = name
-from sys.master_files
+from sys.master_files mf left outer join master.dbo.Separator(@file_id,',') sp
+on mf.file_id = cast(ltrim(rtrim(sp.value)) as int)
 where database_id = db_id()
 and file_id >= @start_from
 and file_id not in (select cast(ltrim(rtrim(value)) as int) from master.dbo.Separator(@except_files,','))
 and type = case @file_type when 'data' then 0 else 1 end
 and (file_id in (
 select cast(value as int)
-from master.dbo.separator(( -- now it will get only 40 files, if you need to use more just add another lines till what you want.
+from master.dbo.separator(( -- now it will get only 110 files, if you need to use more just add other lines to what you want.
 select	isnull(    [01],'')+isnull(','+[02],'')+isnull(','+[03],'')+isnull(','+[04],'')+isnull(','+[05],'')+
 		isnull(','+[06],'')+isnull(','+[07],'')+isnull(','+[08],'')+isnull(','+[09],'')+isnull(','+[10],'')+
 		isnull(','+[11],'')+isnull(','+[12],'')+isnull(','+[13],'')+isnull(','+[14],'')+isnull(','+[15],'')+
@@ -43,6 +44,7 @@ select	isnull(    [01],'')+isnull(','+[02],'')+isnull(','+[03],'')+isnull(','+[0
 		isnull(','+[26],'')+isnull(','+[27],'')+isnull(','+[28],'')+isnull(','+[29],'')+isnull(','+[30],'')+
 		isnull(','+[31],'')+isnull(','+[32],'')+isnull(','+[33],'')+isnull(','+[34],'')+isnull(','+[35],'')+
 		isnull(','+[36],'')+isnull(','+[37],'')+isnull(','+[38],'')+isnull(','+[39],'')+isnull(','+[40],'')+
+		isnull(','+[41],'')+isnull(','+[42],'')+isnull(','+[43],'')+isnull(','+[44],'')+isnull(','+[45],'')+
 		isnull(','+[46],'')+isnull(','+[47],'')+isnull(','+[48],'')+isnull(','+[49],'')+isnull(','+[50],'')+
 		isnull(','+[51],'')+isnull(','+[52],'')+isnull(','+[53],'')+isnull(','+[54],'')+isnull(','+[55],'')+
 		isnull(','+[56],'')+isnull(','+[57],'')+isnull(','+[58],'')+isnull(','+[59],'')+isnull(','+[60],'')+
@@ -83,13 +85,14 @@ pivot					-- and lines here too if you need more files.
 						when charindex(',',@file_id) = 0 then cast(@file_id as int) 
 						else 999999 
 					 end)
-order by file_id
+--order by file_id
+order by case when @file_id = '0' then sp.id else mf.file_id end
 
 open cursor_files
-fetch next from cursor_files into @file_size, @file_dbcc, @file_used, @file_name
+fetch next from cursor_files into @fileid, @file_size, @file_dbcc, @file_used, @file_name
 while @@FETCH_STATUS = 0
 begin
-	select master.dbo.numbersize(@file_used,'mb') file_used, master.dbo.numbersize(@file_dbcc,'mb') file_dbcc
+	select master.dbo.numbersize(@file_used,'mb') file_used, master.dbo.numbersize(@file_dbcc,'mb') file_dbcc, @file_used,  @file_dbcc, @fileid, @file_name
 	while @file_used < @file_dbcc
 	begin
 		Print('DBCC SHRINKFILE ('+@file_name+' , '+master.dbo.NumberSize(@file_dbcc,'MB')+') = DbccSpaceReclaim '+master.dbo.numbersize(@file_size - @file_dbcc,'mb'))
@@ -100,23 +103,22 @@ begin
 
 		select 
 		@file_size = ((cast(size as bigint) * 8) / 1024), 
-		@file_dbcc = case when @shrink_size_type = 1 then cast(((cast(size as bigint) * 8) / 1024) - ((cast(size as bigint) * 8 / 1024.0) / 100 * @file_percent) as bigint)
-						  when @shrink_size_type = 2 then cast((((cast(size as bigint) * 8) / 1024) - (@shrink_fixed_size_mb)) as bigint)
-						  when @shrink_size_type = 3 then case when @file_dbcc < (@file_used + @mix_threshold_mb) 
-																then cast(((cast(size as bigint) * 8) / 1024) - ((cast(size as bigint) * 8 / 1024.0) / 100 * @file_percent) as bigint)
-																else cast((((cast(size as bigint) * 8) / 1024) - (@shrink_fixed_size_mb)) as bigint)
-					end
-					end, 
+		@file_dbcc = case when @shrink_size_type = 1 then cast(((cast(size as bigint) * 8.0) / 1024.0) - ((cast(size as bigint) * 8 / 1024.0) / 100 * @file_percent) as bigint)
+						  				when @shrink_size_type = 2 then cast((((cast(size as bigint) * 8.0) / 1024.0) - (@shrink_fixed_size_mb)) as bigint)
+						  				when @shrink_size_type = 3 then case when @file_dbcc < (@file_used + @mix_threshold_mb) 
+																												then cast(((@file_used * 8.0) / 1024.0) - (((@file_used * 8.0) / 1024.0) / 100.0 * @file_percent) as bigint)
+																												else cast((((cast(size as bigint) * 8.0) / 1024.0) - (@shrink_fixed_size_mb)) as bigint)
+																											end
+								end, 
 		@file_used = cast((cast(FILEPROPERTY(name, 'spaceused') as bigint) * 8.0) / 1024 as bigint) + @file_used_buffer_mb, 
 		@file_name = name
 		from sys.master_files
 		where database_id = db_id()
 		and name = @file_name
 
-		waitfor delay '00:00:05'
+		waitfor delay '00:00:01'
 	end
-fetch next from cursor_files into @file_size, @file_dbcc, @file_used, @file_name
+fetch next from cursor_files into @fileid, @file_size, @file_dbcc, @file_used, @file_name
 end
 close cursor_files
 deallocate cursor_files
-
