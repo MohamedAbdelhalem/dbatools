@@ -1,11 +1,6 @@
 USE [master]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_logins_Roles_collector]    Script Date: 2/21/2024 1:36:34 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER Procedure [dbo].[sp_logins_Roles_collector]
+CREATE Procedure [dbo].[sp_logins_Roles_collector]
 as
 begin
 
