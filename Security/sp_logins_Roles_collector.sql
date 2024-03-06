@@ -21,36 +21,36 @@ declare @users table (
 )
 
 declare @login table (
-	[id]			int identity(1,1), 
-	[sid]			varbinary(255), 
-	[Login_name]	varchar(300), 
-	[Roles]			varchar(max)
+	[id]				int identity(1,1), 
+	[sid]				varbinary(255), 
+	[Login_name]			varchar(300), 
+	[Roles]				varchar(max)
 )
 
 declare @table_permissions table (
-	[principal_id]					int, 
-	[sid]							varbinary(255), 
-	[database_name]					varchar(500), 
-	[loginame]						varchar(300), 
-	[state_desc]					varchar(100), 
+	[principal_id]			int, 
+	[sid]				varbinary(255), 
+	[database_name]			varchar(500), 
+	[loginame]			varchar(300), 
+	[state_desc]			varchar(100), 
 	[Object_Name_Type_Permissions]	varchar(max)
 )
 
 declare @server_db_roles table (
 	[sid]				varbinary(255), 
 	[loginame]			varchar(500), 
-	[is_disabled]		int, 
+	[is_disabled]			int, 
 	[language]			varchar(100), 
-	[denyAccess]		int, 
+	[denyAccess]			int, 
 	[hasAccess]			int, 
-	[server_roles]		varchar(500), 
-	[database_roles]	varchar(max)
+	[server_roles]			varchar(500), 
+	[database_roles]		varchar(max)
 )
 
 create table #permissions (
-	[database_name]					varchar(500), 
-	[sid]							varbinary(255), 
-	[state_desc]					varchar(100), 
+	[database_name]			varchar(500), 
+	[sid]				varbinary(255), 
+	[state_desc]			varchar(100), 
 	[Object_Name_Type_Permissions]	varchar(max)
 )
 
@@ -303,10 +303,10 @@ from sys.databases
 where database_id > 4 --remove this line if you want all database mapping
 
 set @sql = 'select * 
-			  into tempdb..permissions_pivot 
-			  from #permissions 
-			  pivot (
-			  max([Object_Name_Type_Permissions]) for [database_name] in ('+@db_name+'))p'
+		into tempdb..permissions_pivot 
+		from #permissions 
+		pivot (
+		max([Object_Name_Type_Permissions]) for [database_name] in ('+@db_name+'))p'
 exec(@sql)
 
 select sdbr.Loginame Login_Name, case sdbr.is_disabled when 0 then 'Enabled' else 'Disabled' end [Status], 
@@ -320,6 +320,4 @@ order by l.createdate
 --drop table #permissions 
 drop table tempdb..permissions_pivot
 end
-go
 
-EXEC [dbo].[sp_logins_Roles_collector]
