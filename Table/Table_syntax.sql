@@ -3,7 +3,7 @@ CREATE Procedure [dbo].[sp_table_syntax]
 as
 begin
 declare 
-@id					int,
+@id				int,
 @count_over			int,
 @type				int, 
 @index_id			int, 
@@ -28,7 +28,8 @@ index_id					varchar(30),
 index_name					varchar(1000), 
 index_type					varchar(100), 
 is_disabled					varchar(30), 
-index_columns				varchar(1500), 
+index_columns				varchar(max), 
+included_columns			varchar(max), 
 column_is_computed			varchar(30), 
 column_is_persisted			varchar(30), 
 columns_computed_function	varchar(500), 
