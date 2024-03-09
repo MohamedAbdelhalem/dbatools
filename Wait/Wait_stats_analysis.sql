@@ -56,3 +56,4 @@ where wait_type not in (
 ,N'XE_DISPATCHER_WAIT',N'XE_LIVE_TARGET_TVF',N'XE_TIMER_EVENT')
 )a
 where Running_PCT <= 99
+order by Running_PCT
