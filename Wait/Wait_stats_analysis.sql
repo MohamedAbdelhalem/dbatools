@@ -3,14 +3,16 @@ master.dbo.duration('ms', wait_time_ms) wait_time,
 master.dbo.duration('ms', cast(wait_time_ms / waiting_tasks_count as numeric(13,3)) avg_wait_time,
 master.dbo.duration('ms', signal_wait_time_ms) signal_time,
 master.dbo.duration('ms', cast(signal_wait_time_ms / waiting_tasks_count as numeric(13,3)) avg_signal_time,
-
+master.dbo.duration('ms', resource_wait_time_ms) resource_time,
+master.dbo.duration('ms', cast(resource_wait_time_ms / waiting_tasks_count as numeric(13,3)) avg_resource_time,
+PCT, Running_PCT
 from (
 select 
 row_number() over(order by wait_time_ms desc) id,
 wait_type, wait_time_ms, signal_wait_time_ms, waiting_tasks_count,
 wait_time_ms - signal_wait_time_ms resource_wait_time,
-cast((wait_time_ms / sum(wait_time_ms) over()) * 100.0 as numeric(10,3)) pct,
-cast((sum(wait_time_ms) over(order by wait_time_ms desc) / sum(wait_time_ms) over()) * 100.0 as numeric(10,3)) runPct
+cast((wait_time_ms / sum(wait_time_ms) over()) * 100.0 as numeric(10,3)) PCT,
+cast((sum(wait_time_ms) over(order by wait_time_ms desc) / sum(wait_time_ms) over()) * 100.0 as numeric(10,3)) running_PCT
 where wait_type not in (
  N'BROKER_EVENTHANDLER',N'BROKER_RECEIVE_WAITFOR',N'BROKER_TASK_STOP'
 ,N'BROKER_TO_FLUSH',N'BROKER_TRANSMITTER',N'CHECKPOINT_QUEUE',N'CHKPT'
@@ -53,4 +55,4 @@ where wait_type not in (
 ,N'XE_BUFFERMGR_ALLPROCESSED_EVENT',N'XE_DISPATCHER_JOIN'
 ,N'XE_DISPATCHER_WAIT',N'XE_LIVE_TARGET_TVF',N'XE_TIMER_EVENT')
 )a
-where runpct <= 99
+where Running_PCT <= 99
