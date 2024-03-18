@@ -1,35 +1,44 @@
 USE [master]
 GO
-/****** Object:  StoredProcedure [dbo].[Backup_Database]    Script Date: 2/29/2024 3:00:35 PM ******/
+/****** Object:  StoredProcedure [dbo].[Backup_Database]    Script Date: 08/09/45 02:08:30 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER Procedure [dbo].[Backup_Database](
+CREATE Procedure [dbo].[Backup_Database](
 @database_name	varchar(max) = '*',
 @except_db		varchar(max) = '0',
-@backup_type	varchar(1),
-@full_path		varchar(2000),
-@execution_type	int)
+@backup_type	varchar(1) = 'F',
+@full_path		varchar(2000) = '\\10.10.10.10\Backup\backup_user_databases\',
+@execution_type	int = 2)
 as
 begin
 
+declare @path_exists table (id int identity(1,1), isexist varchar(20))
 declare @dbs_list table (database_name varchar(400), allowed_backups char(1)) 
 declare @dbs table (database_name varchar(400)) 
 declare 
-@db_name           varchar(300), 
-@sql               varchar(2000), 
-@file_name         varchar(1000), 
-@week_number       varchar(10), 
-@backup_start      varchar(30), 
-@date              varchar(10), 
-@time              varchar(10), 
-@ampm              varchar(2),
-@diff_seq          varchar(5),
-@log_seq           varchar(5)
+@db_name			varchar(300), 
+@sql				varchar(2000), 
+@file_name			varchar(1000), 
+@week_number		varchar(10), 
+@backup_start		varchar(30), 
+@date				varchar(10), 
+@time				varchar(10), 
+@ampm				varchar(2),
+@diff_seq			varchar(5),
+@log_seq			varchar(5),
+@path_end			bit,
+@year				varchar(10),
+@month				varchar(20),
+@Pexists			varchar(4000),
+@mkdir				varchar(4000)
+
+set nocount on
 
 insert into @dbs_list
-select db.name, case 'L' when 'L' then case when db.recovery_model_desc in ('Simple','bulk-logged') then 'N' else 'Y' end else 'Y' end allow_log_backup
+select db.name, case @backup_type when 'L' then 
+case when db.recovery_model_desc in ('Simple','bulk-logged') then 'N' else 'Y' end else 'Y' end allow_log_backup
 from sys.databases db
 where database_id > 4
 and state_desc = 'ONLINE'
@@ -68,11 +77,33 @@ when 'L' then @date+'__'+@time+'_'+@ampm+'__'+'TLog'
 end
 
 --select @date, @time, @ampm, @file_name
+select 
+@path_end = case when right(ltrim(rtrim(@full_path)),1) = '\' then 1 else 0 end, 
+@year = cast(year(getdate()) as varchar(10)),
+@month = DATENAME(month, getdate())
+
+set @full_path = @full_path+case @path_end when 1 then '' else '\' end+@year+'\'+@month+'\'+case @backup_type 
+when 'F' then 'FULL'
+when 'D' then 'DIFF'
+when 'L' then 'LOG'
+end
 
 open backup_cursor
 fetch next from backup_cursor into @db_name
 while @@fetch_status = 0
 begin
+
+set @Pexists = 'xp_cmdshell ''PowerShell.exe -Command "& {Test-Path -Path '+''''+''''+@full_path+'\'+replace(@db_name,'''','')+''''+''''+'}"'''
+insert into @path_exists
+exec(@pexists)
+--print(@pexists)
+
+if (select top 1 isexist from @path_exists where isexist is not null order by id desc) = 'False'
+begin 
+set @mkdir = 'xp_cmdshell ''PowerShell.exe -Command "& {mkdir '+''''+''''+@full_path+'\'+replace(@db_name,'''','')+''''+''''+'}"'''
+exec(@mkdir)
+--print(@mkdir)
+end
 
 set @sql = 'BACKUP '+case @backup_type 
 when 'F' then 'DATABASE' 
@@ -109,5 +140,7 @@ fetch next from backup_cursor into @db_name
 end
 close backup_cursor
 deallocate backup_cursor
+
+set nocount off
  
 end
