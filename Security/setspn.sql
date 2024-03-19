@@ -1,10 +1,4 @@
 
---setspn -s MSSQLSvc/PGD-SQL-DB1.pgd.gov.sa PGD\deesrv
---setspn -s MSSQLSvc/PGD-SQL-DB1 PGD\deesrv
-
---setspn -s MSSQLSvc/PGD-SQL-DB2.pgd.gov.sa PGD\deesrv
---setspn -s MSSQLSvc/PGD-SQL-DB2 PGD\deesrv
-
 declare 
 @service_account	varchar(200),
 @FQDN				varchar(100),
