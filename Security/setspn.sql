@@ -1,6 +1,18 @@
+
+--setspn -s MSSQLSvc/PGD-SQL-DB1.pgd.gov.sa PGD\deesrv
+--setspn -s MSSQLSvc/PGD-SQL-DB1 PGD\deesrv
+
+--setspn -s MSSQLSvc/PGD-SQL-DB2.pgd.gov.sa PGD\deesrv
+--setspn -s MSSQLSvc/PGD-SQL-DB2 PGD\deesrv
+
 declare 
 @service_account	varchar(200),
-@FQDN				varchar(100)
+@FQDN				varchar(100),
+@port				varchar(10)
+
+select @port = port 
+from sys.dm_tcp_listener_states
+where ip_address = '0.0.0.0'
 
 select @service_account = case 
 when 
@@ -25,6 +37,10 @@ exec xp_regread
 @value = @FQDN output
 
 select 'setspn -s MSSQLSvc/'+name+'.'+@FQDN+' '+@service_account
+from sys.servers
+where server_id = 0
+union
+select 'setspn -s MSSQLSvc/'+name+'.'+@FQDN+':'+@port+' '+@service_account
 from sys.servers
 where server_id = 0
 union
