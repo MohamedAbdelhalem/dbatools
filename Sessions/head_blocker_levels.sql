@@ -27,6 +27,7 @@ SUBSTRING(s.text, (stmt_start/2)+1, ((stmt_end/2)+1) - ((stmt_start/2)+1) + 1)
 from sys.sysprocesses p cross apply sys.dm_exec_sql_text(p.sql_handle)s
 inner join sys.dm_exec_connections c
 on p.spid = c.session_id
+and c.net_transport = 'TCP'
 left outer join sys.dm_exec_requests r
 on p.spid = r.session_id
 --left outer join sys.dm_tran_locks tl
