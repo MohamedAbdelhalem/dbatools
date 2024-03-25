@@ -11,16 +11,20 @@ declare
 declare
 table_cursor cursor fast_forword
 as
-select t.name, c.name
+select '['+schema_name(t.schema_id)+'].['+t.name+']', c.name
 from sys.tables t inner join sys.columns c
 on t.object_id = c.object_id
 inner join sys.types tp
 on c.user_type_id = tp.user_type_id
 where tp.name in ('varchar','nvarchar')
+order by t.name, c.name
 
 open table_cursor
 fetch next from table_cursor into @table_name, @column_name
 while @@fetch_status = 0
 begin 
 
+set @sql = 'select '+@column_name+'
+from '+@table_name+'
+where '+@column_name+' like '+''''+'%'+@text+'%'+''''
 
