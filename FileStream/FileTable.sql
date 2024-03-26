@@ -41,3 +41,10 @@ SELECT
 [is_temporary]
 FROM [AdventureWorks2019].[dbo].[Documents]
 WITH (READCOMMITTEDLOCK)
+GO
+
+INSERT INTO [AdventureWorks2019].[dbo].[Documents] ([name],[file_stream])
+SELECT
+'46447150.png', * FROM OPENROWSET(BULK N'C:\documents\46447150.png', SINGLE_BLOB) AS FileData
+GO
+
