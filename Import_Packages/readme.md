@@ -7,4 +7,4 @@ https://www.powershellgallery.com/packages/SqlServer/22.1.1
 ``` Powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
-3. After that type ``` Powershell Y ``` and press Enter.
+3. After that type ``` Y ``` and press Enter.
