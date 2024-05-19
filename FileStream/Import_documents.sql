@@ -1,8 +1,4 @@
-declare
-@source_folders varchar(max) = 'C:\source_doc_01, C:\source_doc_02, C:\source_doc_03',
-@database       varchar(300) = 'AdventureWorks2019',
-@table_w_schema varchar(800) = '[dbo].[Documents]'
-
+declare @source_folders varchar(max) = 'C:\source_doc_01, C:\source_doc_02, C:\source_doc_03'
 declare @table table (output_text varchar(max), source_path varchar(500))
 declare 
 @xp_cmdshell	varchar(2000), 
@@ -51,11 +47,12 @@ fetch next from cursor_import_as_filetable into @name, @file_name
 while @@fetch_status = 0
 begin
 
-set @sql_insert = 'insert into '+@database+'.'+@table_w_schema+' ([name],[file_stream])
-select '+''''+@name+''''+', * from OPENROWSET(BULK N'+''''+@file_name+''''+', SINGLE_BLOB) AS FileData'
+set @sql_insert = 'insert into [AdventureWorks2019].[dbo].[Documents] ([name],[file_stream])
+select '+''''+@name+''''+', * FROM OPENROWSET(BULK N'+''''+@file_name+''''+', SINGLE_BLOB) AS FileData'
 exec(@sql_insert)
 
 fetch next from cursor_import_as_filetable into @name, @file_name
 end
 close cursor_import_as_filetable
 deallocate cursor_import_as_filetable
+
