@@ -1,11 +1,12 @@
 $Server = ".";              
 $Database = "AdventureWorks2019";
+$db_schema_table_name = '[AdventureWorks2019].[dbo].[Documents]';
 $Dest = "C:\Export\";     
 $bufferSize = 8192;
-$buf = $bufferSize
+
 
 $Sql = "SELECT [name] [Document_Name], [file_stream] [DocumentBin]
-  FROM [AdventureWorks2019].[dbo].[Documents]
+  FROM $db_schema_table_name
 ";
 
 $con = New-Object Data.SqlClient.SqlConnection; 
