@@ -3,7 +3,7 @@ $packagePath = "ImportExcel.5.1.1.nupkg"
 #please add package as it is above 3 parts with (.) separator;
 #1. package name e.g. ImportExcel
 #2. version e.g. 5.1.1
-#3. extension e.g. nupkg
+#3. extension e.g. .nupkg
 $packageName = $packagePath.Split(".")[0]
 $packageVersion = $packagePath.Replace($packagePath.Split(".")[0]+".", "").Replace("."+$packagePath.Split(".")[-1], "")
 $zip = $packagePath.Replace("."+$packagePath.Split(".")[-1],".zip")
