@@ -1,8 +1,0 @@
-CREATE TABLE seq_test (id INT IDENTITY(1,1), rid UNIQUEIDENTIFIER DEFAULT NEWID(), name VARCHAR(100))
-GO
-INSERT INTO seq_test (name) VALUES ('mohamed')
-GO 1000
-
-SELECT * 
-FROM seq_test 
-ORDER BY rid
