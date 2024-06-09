@@ -1,3 +1,6 @@
+--THIS FEATURE IS ONLY ALLOWED ON ENTERPRISE EDITION for updatable distributed partitioned view
+--#############################################################################################
+
 create table employee_2018 (id int, name varchar(100), date_time datetime check (date_time between '2018-01-01' and '2018-12-31 23:59:59.997'))
 create table employee_2019 (id int, name varchar(100), date_time datetime check (date_time between '2019-01-01' and '2019-12-31 23:59:59.997'))
 create table employee_2020 (id int, name varchar(100), date_time datetime check (date_time between '2020-01-01' and '2020-12-31 23:59:59.997'))
