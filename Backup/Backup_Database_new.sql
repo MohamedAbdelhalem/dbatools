@@ -1,15 +1,13 @@
 USE [master]
 GO
-/****** Object:  StoredProcedure [dbo].[Backup_Database]    Script Date: 08/09/45 02:08:30 م ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE Procedure [dbo].[Backup_Database](
 @database_name	varchar(max) = '*',
 @except_db		varchar(max) = '0',
 @backup_type	varchar(1) = 'F',
 @full_path		varchar(2000) = '\\10.10.10.10\Backup\backup_user_databases\',
+@mirror_pathes	varchar(max) = 'default',
+@override		bit = 0,
 @execution_type	int = 2)
 as
 begin
@@ -32,9 +30,21 @@ declare
 @year				varchar(10),
 @month				varchar(20),
 @Pexists			varchar(4000),
-@mkdir				varchar(4000)
+@mkdir				varchar(4000),
+@mirror				varchar(max),
+@mirror_exists		bit = 0
 
 set nocount on
+if @mirror_pathes != 'default'
+begin
+select @mirror = isnull(@mirror+',
+','')+ 'Disk = '+''''+value+''''
+from master.dbo.Separator(@mirror_pathes,',')
+order by id
+set @mirror = 'MIRROR TO
+'+@mirror
+select @mirror_exists = case when @mirror is null then 0 else 1 end
+end
 
 insert into @dbs_list
 select db.name, case @backup_type when 'L' then 
@@ -110,10 +120,13 @@ when 'F' then 'DATABASE'
 when 'D' then 'DATABASE' 
 when 'L' then 'LOG' end + ' ['+@db_name+'] 
 TO  DISK = N'+''''+@full_path+'\'+replace(@db_name,'''','')+'\'+replace(@db_name,'''','')+'_'+@file_name+'.bak'' 
-WITH '+case @backup_type 
+'+case @mirror_exists when 0 then '' else @mirror end+ case @mirror_exists when 0 then '' else '
+' end+'WITH '+case @backup_type 
 when 'F' then '' 
 when 'L' then '' 
-when 'D' then 'DIFFERENTIAL, ' end+ 'NOFORMAT, NOINIT,  
+when 'D' then 'DIFFERENTIAL, ' end+ 
+case @mirror_exists when 0 then 'NOFORMAT, '+case @override when 1 then 'INIT' else 'NOINIT' end+', ' 
+else 'FORMAT, '+case @override when 1 then 'INIT,' else '' end end+' 
 NAME = N'+''''+replace(@db_name,'''','')+'-'+case @backup_type 
 when 'F' then 'Full'
 when 'D' then 'Diff'
