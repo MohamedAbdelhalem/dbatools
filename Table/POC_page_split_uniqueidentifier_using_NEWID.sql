@@ -13,7 +13,7 @@ ORDER BY rid
 --meanwhile, when you use NEWSEQUENTIALID() instead of NEWID() function the behavior will change on the other hand.
 --let's see the changes here.
 
-CREATE TABLE seq_test_newsequentialid` (id INT IDENTITY(1,1), rid UNIQUEIDENTIFIER DEFAULT NEWSEQUENTIALID(), name VARCHAR(100))
+CREATE TABLE seq_test_newsequentialid (id INT IDENTITY(1,1), rid UNIQUEIDENTIFIER DEFAULT NEWSEQUENTIALID(), name VARCHAR(100))
 GO
 INSERT INTO seq_test_newsequentialid (name) VALUES ('Mohamed')
 GO 1000
