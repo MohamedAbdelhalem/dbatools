@@ -1,8 +1,22 @@
 ALTER DATABASE AdventureWorks2019 ADD FILEGROUP [fg_filestream01] CONTAINS FILESTREAM;
 GO
-ALTER DATABASE [AdventureWorks2019] ADD FILE ( 
-NAME = N'Filestream_F01', 
-FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\FFS01' ) 
+
+--in 1 folder
+ALTER DATABASE [AdventureWorks2019] ADD FILE 
+(NAME = N'Filestream_F01', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\FFS01' ) 
+TO FILEGROUP [fg_filestream01];
+
+--in multi-folders
+exec xp_cmdshell 'Mkdir "C:\MSSQL\DATA\FFS01"'
+exec xp_cmdshell 'Mkdir "C:\MSSQL\DATA\FFS02"'
+exec xp_cmdshell 'Mkdir "C:\MSSQL\DATA\FFS03"'
+exec xp_cmdshell 'Mkdir "C:\MSSQL\DATA\FFS04"'
+
+ALTER DATABASE [AdventureWorks2019] ADD FILE 
+(NAME = N'Filestream_F01', FILENAME = N'C:\MSSQL\DATA\FFS02\FSTable'), 
+(NAME = N'Filestream_F02', FILENAME = N'C:\MSSQL\DATA\FFS02\FSTable'), 
+(NAME = N'Filestream_F03', FILENAME = N'C:\MSSQL\DATA\FFS02\FSTable'), 
+(NAME = N'Filestream_F04', FILENAME = N'C:\MSSQL\DATA\FFS02\FSTable') 
 TO FILEGROUP [fg_filestream01];
 
 --if NON_TRANSACTED_ACCESS = FULL then disable allow the snapshot_isolation_state and is_read_committed_snapshot_on to prevent blocking on filetable
@@ -47,4 +61,6 @@ INSERT INTO [AdventureWorks2019].[dbo].[Documents] ([name],[file_stream])
 SELECT
 '46447150.png', * FROM OPENROWSET(BULK N'C:\documents\46447150.png', SINGLE_BLOB) AS FileData
 GO
+
+--create a normal table with filestream column
 
