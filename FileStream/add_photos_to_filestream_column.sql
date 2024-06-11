@@ -17,6 +17,9 @@
 --backup Transaction log
 --exec sp_filestream_force_garbage_collection @dbname = 'AdventureWorks2019'
 
+--add photos or documents in the folder and change the files with this example "C:\MSSQL\Pictures_filestream\191644724_Mohamed_Fawzy.jpg" and the date will be added like that Mohamed_Fawzy.jpg.
+--such as the indicator here is the NationalIDNumber
+
 declare 
 @location	varchar(1000) = 'C:\MSSQL\Pictures_filestream\',
 @cmd		varchar(1500),
