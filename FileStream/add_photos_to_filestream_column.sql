@@ -24,9 +24,9 @@
 CREATE TABLE [HumanResources].[Employees](
 	[BusinessEntityID]	[int] NOT NULL,
 	[NationalIDNumber]	[nvarchar](15) NOT NULL,
-	[PhotoName]					[VARCHAR](300) NULL,
-	[Photo]							[VARBINARY](max) FILESTREAM NULL,
-	[LoginID]						[nvarchar](256) NOT NULL,
+	[PhotoName]		[VARCHAR](300) NULL,
+	[Photo]			[VARBINARY](max) FILESTREAM NULL,
+	[LoginID]		[nvarchar](256) NOT NULL,
 	[OrganizationNode] 	[hierarchyid] NULL,
 	[OrganizationLevel]  AS ([OrganizationNode].[GetLevel]()),
 	[JobTitle] [nvarchar](50) NOT NULL,
