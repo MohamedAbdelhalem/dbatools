@@ -20,6 +20,33 @@
 --add photos or documents in the folder and change the files with this example "C:\MSSQL\Pictures_filestream\191644724_Mohamed_Fawzy.jpg" and the date will be added like that Mohamed_Fawzy.jpg.
 --such as the indicator here is the NationalIDNumber
 
+--Table structure 
+CREATE TABLE [HumanResources].[Employees](
+	[BusinessEntityID]	[int] NOT NULL,
+	[NationalIDNumber]	[nvarchar](15) NOT NULL,
+	[PhotoName]					[VARCHAR](300) NULL,
+	[Photo]							[VARBINARY](max) FILESTREAM NULL,
+	[LoginID]						[nvarchar](256) NOT NULL,
+	[OrganizationNode] 	[hierarchyid] NULL,
+	[OrganizationLevel]  AS ([OrganizationNode].[GetLevel]()),
+	[JobTitle] [nvarchar](50) NOT NULL,
+	[BirthDate] [date] NOT NULL,
+	[MaritalStatus] [nchar](1) NOT NULL,
+	[Gender] [nchar](1) NOT NULL,
+	[HireDate] [date] NOT NULL,
+	[SalariedFlag] [dbo].[Flag] NOT NULL,
+	[VacationHours] [smallint] NOT NULL,
+	[SickLeaveHours] [smallint] NOT NULL,
+	[CurrentFlag] [dbo].[Flag] NOT NULL,
+	[rowguid] [uniqueidentifier] not null ROWGUIDCOL UNIQUE DEFAULT NEWID(),
+	[ModifiedDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Employee_BusinessEntityID2] PRIMARY KEY CLUSTERED 
+(
+	[BusinessEntityID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] FILESTREAM_ON [fg_filestream02]
+GO
+  
 declare 
 @location	varchar(1000) = 'C:\MSSQL\Pictures_filestream\',
 @cmd		varchar(1500),
