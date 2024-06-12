@@ -28,18 +28,18 @@ CREATE TABLE [HumanResources].[Employees](
 	[Photo]			[VARBINARY](max) FILESTREAM NULL,
 	[LoginID]		[nvarchar](256) NOT NULL,
 	[OrganizationNode] 	[hierarchyid] NULL,
-	[OrganizationLevel]  AS ([OrganizationNode].[GetLevel]()),
-	[JobTitle] [nvarchar](50) NOT NULL,
-	[BirthDate] [date] NOT NULL,
-	[MaritalStatus] [nchar](1) NOT NULL,
-	[Gender] [nchar](1) NOT NULL,
-	[HireDate] [date] NOT NULL,
-	[SalariedFlag] [dbo].[Flag] NOT NULL,
-	[VacationHours] [smallint] NOT NULL,
-	[SickLeaveHours] [smallint] NOT NULL,
-	[CurrentFlag] [dbo].[Flag] NOT NULL,
-	[rowguid] [uniqueidentifier] not null ROWGUIDCOL UNIQUE DEFAULT NEWID(),
-	[ModifiedDate] [datetime] NOT NULL,
+	[OrganizationLevel]  	AS ([OrganizationNode].[GetLevel]()),
+	[JobTitle] 		[nvarchar](50) NOT NULL,
+	[BirthDate] 		[date] NOT NULL,
+	[MaritalStatus] 	[nchar](1) NOT NULL,
+	[Gender] 		[nchar](1) NOT NULL,
+	[HireDate] 		[date] NOT NULL,
+	[SalariedFlag] 		[dbo].[Flag] NOT NULL,
+	[VacationHours] 	[smallint] NOT NULL,
+	[SickLeaveHours] 	[smallint] NOT NULL,
+	[CurrentFlag] 		[dbo].[Flag] NOT NULL,
+	[rowguid] 		[uniqueidentifier] not null ROWGUIDCOL UNIQUE DEFAULT NEWID(),
+	[ModifiedDate] 		[datetime] NOT NULL,
  CONSTRAINT [PK_Employee_BusinessEntityID2] PRIMARY KEY CLUSTERED 
 (
 	[BusinessEntityID] ASC
@@ -53,7 +53,7 @@ declare
 @sql		varchar(max), 
 @loop		int = 0
 declare @table		table (output_text varchar(1000))
-declare @openrowset table (NationalIDNumber nvarchar(15), photoName varchar(1000), photo varbinary(max))
+declare @openrowset 	table (NationalIDNumber nvarchar(15), photoName varchar(1000), photo varbinary(max))
 declare @script		table (id int, output_text varchar(1000))
 
 set @cmd = 'xp_cmdshell ''dir cd "'+@location+'"'+''''
@@ -81,6 +81,7 @@ and output_text not like '%Directory %')a)b)c
 while @loop < (select count(id) from @script)
 begin
 set @loop += 1
+
 select @sql = output_text 
 from @script
 where id = @loop
@@ -92,7 +93,9 @@ end
 insert into [AdventureWorks2019].[HumanResources].[Employees] 
 ([BusinessEntityID], [NationalIDNumber], [PhotoName], [Photo], [LoginID], [OrganizationNode], [JobTitle], [BirthDate], [MaritalStatus], [Gender], [HireDate], [SalariedFlag], [VacationHours], [SickLeaveHours], [CurrentFlag], [rowguid], [ModifiedDate])
 select 
-a.[BusinessEntityID], a.[NationalIDNumber], b.photoName, b.photo, a.[LoginID], a.[OrganizationNode], a.[JobTitle], a.[BirthDate], a.[MaritalStatus], a.[Gender], a.[HireDate], a.[SalariedFlag], a.[VacationHours], a.[SickLeaveHours], a.[CurrentFlag], a.[rowguid], a.[ModifiedDate]
+a.[BusinessEntityID], a.[NationalIDNumber], 
+b.photoName, b.photo, 
+a.[LoginID], a.[OrganizationNode], a.[JobTitle], a.[BirthDate], a.[MaritalStatus], a.[Gender], a.[HireDate], a.[SalariedFlag], a.[VacationHours], a.[SickLeaveHours], a.[CurrentFlag], a.[rowguid], a.[ModifiedDate]
 from [AdventureWorks2019].[HumanResources].[Employee] a inner join @openrowset b
 on a.NationalIDNumber = b.NationalIDNumber
 GO
