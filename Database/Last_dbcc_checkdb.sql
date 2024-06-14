@@ -1,7 +1,7 @@
 use master
 go
 declare 
-@sql		nvarchar(max), 
+@sql		  nvarchar(max), 
 @db_name	nvarchar(500)
 
 if object_id('tempdb..database_details') is not null
@@ -11,10 +11,10 @@ end
 
 create table tempdb..database_details (
 compatibility_level	int, 
-database_id			int, 
-database_name		varchar(500), 
-last_dbcc_checkdb	datetime, 
-Last_Log_Backup		datetime)
+database_id			    int, 
+database_name		    varchar(500), 
+last_dbcc_checkdb	  datetime, 
+Last_Log_Backup		  datetime)
 
 declare SQL_CUR	 cursor fast_forward
 for
@@ -30,9 +30,9 @@ begin
 set @sql = 'use ['+@db_name+']
 declare @checkdb table (
 ParentObject	varchar(1000), 
-Object			varchar(1000), 
-Field			varchar(1000), 
-VALUE			varchar(1000))
+Object			  varchar(1000), 
+Field			    varchar(1000), 
+VALUE			    varchar(1000))
 
 insert into @checkdb 
 exec(''dbcc page (0,1,9,3) with tableresults'')
@@ -43,9 +43,9 @@ from (
 select 
 VALUE, case Field 
 when ''dbi_LastLogBackupTime'' then ''LastLogBackup''
-when ''dbi_dbname'' then ''database_name''
-when ''dbi_dbid'' then ''database_id''
-when ''dbi_cmptlevel'' then ''compatibility_level''
+when ''dbi_dbname''            then ''database_name''
+when ''dbi_dbid''              then ''database_id''
+when ''dbi_cmptlevel''         then ''compatibility_level''
 when ''dbi_dbccLastKnownGood'' then ''last_dbcc_checkdb''
 end Field
 from @checkdb
