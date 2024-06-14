@@ -10,11 +10,11 @@ drop table tempdb..database_details
 end
 
 create table tempdb..database_details (
-compatibility_level	int, 
-database_id			    int, 
-database_name		    varchar(500), 
-last_dbcc_checkdb	  datetime, 
-Last_Log_Backup		  datetime)
+compatibility_level  int, 
+database_id          int, 
+database_name        varchar(500), 
+last_dbcc_checkdb    datetime, 
+Last_Log_Backup      datetime)
 
 declare SQL_CUR	 cursor fast_forward
 for
