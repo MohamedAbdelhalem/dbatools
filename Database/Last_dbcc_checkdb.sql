@@ -29,10 +29,10 @@ while @@FETCH_STATUS = 0
 begin
 set @sql = 'use ['+@db_name+']
 declare @checkdb table (
-ParentObject	varchar(1000), 
-Object			  varchar(1000), 
-Field			    varchar(1000), 
-VALUE			    varchar(1000))
+ParentObject  varchar(1000), 
+Object        varchar(1000), 
+Field         varchar(1000), 
+VALUE         varchar(1000))
 
 insert into @checkdb 
 exec(''dbcc page (0,1,9,3) with tableresults'')
