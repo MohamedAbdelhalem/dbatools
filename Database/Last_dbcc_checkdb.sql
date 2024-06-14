@@ -1,8 +1,8 @@
 use master
 go
 declare 
-@sql		  nvarchar(max), 
-@db_name	nvarchar(500)
+@sql        nvarchar(max), 
+@db_name    nvarchar(500)
 
 if object_id('tempdb..database_details') is not null
 begin
