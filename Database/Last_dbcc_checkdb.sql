@@ -1,9 +1,10 @@
 use master
 go
-CREATE Procedure dbo.last_dbcc_checkdb
-(@db_name varchar(max) = 'all')
-as
-begin
+--CREATE Procedure dbo.last_dbcc_checkdb (@db_name varchar(max) = 'all')
+--as
+--begin
+
+declare @db_name varchar(max) = 'all'
 declare @databases table (database_id int)
 
 if @db_name = 'all'
@@ -92,4 +93,4 @@ select *
 from tempdb..database_details
 order by last_dbcc_checkdb desc
 
-end
+--end
