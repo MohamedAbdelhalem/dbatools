@@ -1,8 +1,30 @@
 use master
 go
+CREATE Procedure dbo.last_dbcc_checkdb
+(@db_name varchar(max) = 'all')
+as
+begin
+declare @databases table (database_id int)
+
+if @db_name = 'all'
+begin
+insert into @databases 
+select database_id
+from sys.databases
+where database_id > 4
+end
+else
+begin
+insert into @databases 
+select database_id
+from sys.databases
+where database_id > 4
+and name in (select ltrim(rtrim(value)) from master.dbo.Separator(@db_name,','))
+end
+
 declare 
-@sql        nvarchar(max), 
-@db_name    nvarchar(500)
+@sql       nvarchar(max), 
+@dbname    nvarchar(500)
 
 if object_id('tempdb..database_details') is not null
 begin
@@ -20,14 +42,14 @@ declare SQL_CUR	 cursor fast_forward
 for
 select name 
 from sys.databases
-where database_id > 4
+where database_id in (select database_id from @databases)
 order by name
 
 open SQL_CUR
-fetch next from SQL_CUR into @db_name
+fetch next from SQL_CUR into @dbname
 while @@FETCH_STATUS = 0
 begin
-set @sql = 'use ['+@db_name+']
+set @sql = 'use ['+@dbname+']
 declare @checkdb table (
 ParentObject  varchar(1000), 
 Object        varchar(1000), 
@@ -61,7 +83,7 @@ pivot
 --print(@sql)
 exec(@sql)
 
-fetch next from SQL_CUR into @db_name
+fetch next from SQL_CUR into @dbname
 end
 close SQL_CUR
 deallocate SQL_CUR
@@ -69,3 +91,5 @@ deallocate SQL_CUR
 select * 
 from tempdb..database_details
 order by last_dbcc_checkdb desc
+
+end
