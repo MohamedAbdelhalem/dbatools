@@ -1,7 +1,7 @@
 create table [Sales].[ProtectedData04](
-id								int identity(1,1), 
-description_text	nvarchar(100), 
-value							varbinary(max))
+id                  int identity(1,1), 
+description_text    nvarchar(100), 
+value               varbinary(max))
 
 DROP ASYMMETRIC KEY ASYMMohamed
 go
