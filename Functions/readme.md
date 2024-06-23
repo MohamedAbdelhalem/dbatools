@@ -1,1 +1,1 @@
-If you will use all scripts in all folders you must run these functions before, because almost all scripts are using these functions.
+If you plan to use all scripts in every folder, you need to run these functions first. Most scripts rely on these functions.
