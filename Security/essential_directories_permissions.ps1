@@ -5,7 +5,6 @@ $service = @(Get-Service -name "*SQL*" | where {$_.DisplayName -like "SQL Server
 #This will allow you to gather the physical locations of the system databases and verify that the issue is not 
 #originating from there.
 
-
 #net start $service /f /T3608
 
 $ver = sqlcmd -S . -E -Q "declare @v varchar(30) select @v = cast(value_data as varchar(30)) from sys.dm_server_registry where value_name = 'CurrentVersion'; select @v"
