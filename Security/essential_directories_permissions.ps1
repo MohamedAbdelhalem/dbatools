@@ -1,15 +1,8 @@
 $service = @(Get-Service -name "*SQL*" | where {$_.DisplayName -like "SQL Server (*"} | select name).name
-
-#If you are encountering issues starting up the SQL server service and need to confirm that the permissions 
-#are correctly set, uncomment the line below to open the service in a minimal configuration with a single-user mode. 
-#This will allow you to gather the physical locations of the system databases and verify that the issue is not 
-#originating from there.
-
-#net start $service /f /T3608
-
-$ver = sqlcmd -S . -E -Q "declare @v varchar(30) select @v = cast(value_data as varchar(30)) from sys.dm_server_registry where value_name = 'CurrentVersion'; select @v"
-$logPth = "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL"+$ver[2].ToString().Substring(0,$ver[2].IndexOf("."))+"."+$service+"\CPE"
-$parPth = "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL"+$ver[2].ToString().Substring(0,$ver[2].IndexOf("."))+"."+$service+"\"+$service+"\Parameters"
+$ver = (get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL').$service
+$logPth = "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\"+$ver+"\CPE"
+$parPth = "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\"+$ver+"\"+$service+"\Parameters"
+$ACL = [System.Collections.ArrayList]@()
 
 #These folders are essential directories to prevent the SQL Server instance from starting up.
 
@@ -30,13 +23,26 @@ write-host $service -ForegroundColor Red -BackgroundColor Yellow -NoNewline;
 write-host " is running under service account " -ForegroundColor Green -NoNewline;
 write-host $account -ForegroundColor Red -BackgroundColor Yellow
 write-host "Please check below to see if the correct permissions are missing from these folders." -ForegroundColor Red
+write-host " " 
 
 for ($f = 0; $f -lt $folders.count; $f++)
 {
-    write-host $folders[$f].substring(0, 2) -ForegroundColor Green
+    if ($folders[$f].substring(0, 2) -eq "-e") 
+    {
+        write-host "Error file" -ForegroundColor white -BackgroundColor red
+    }
+    if ($folders[$f].substring(0, 2) -eq "-l") 
+    {
+        write-host "Master DB Transaction log file" -ForegroundColor white -BackgroundColor red
+    }
+    if ($folders[$f].substring(0, 2) -eq "-d") 
+    {
+        write-host "Master DB Data file" -ForegroundColor white -BackgroundColor red
+    }
+    if ($folders[$f].substring(0, 2) -eq "-g") 
+    {
+        write-host "Error Log directory" -ForegroundColor white -BackgroundColor red
+    }
     write-host $folders[$f].substring(2,$folders[$f].ToString().Length - 2) -ForegroundColor Green
-    Get-ACL -Path $folders[$f].substring(2,$folders[$f].ToString().Length - 2) | Format-Table -Wrap
+    Get-ACL -Path $folders[$f].substring(2,$folders[$f].ToString().Length - 2) | ForEach-Object { $_.Access  } | where-object {$_.IdentityReference -eq $account}
 }
-
-#net stop $service
-#net start $service
