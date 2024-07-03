@@ -1,22 +1,22 @@
 declare
-@db_name					varchar(255),
-@sql							varchar(max)
-declare 					@databases table (
-database_name 		varchar(255),
-file_id 					int,
-logical_name 			varchar(255),
-disk_letter 			varchar(3),
-physical_name 		varchar(max),
-file_size_n 			bigint,
-file_size 				varchar(20),
-file_growth_n 		bigint,
-file_growth 			varchar(20),
-file_max_size_n 	bigint,
-file_max_size 		varchar(20),
+@db_name          varchar(255),
+@sql              varchar(max)
+declare           @databases table (
+database_name     varchar(255),
+file_id           int,
+logical_name      varchar(255),
+disk_letter       varchar(3),
+physical_name     varchar(max),
+file_size_n       bigint,
+file_size         varchar(20),
+file_growth_n     bigint,
+file_growth       varchar(20),
+file_max_size_n   bigint,
+file_max_size     varchar(20),
 file_used_space_n bigint,
-file_used_space 	varchar(20),
+file_used_space   varchar(20),
 file_free_space_n bigint,
-file_free_space 	varchar(20)
+file_free_space   varchar(20)
 )
 declare db_cursor cursor fast_forward
 for
