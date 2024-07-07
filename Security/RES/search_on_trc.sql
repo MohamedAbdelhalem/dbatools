@@ -25,6 +25,7 @@ while @@FETCH_STATUS = 0
 begin
 
 set @log = @log_path+@log
+print(@log)
 
 SELECT StartTime, HostName, ApplicationName, LoginName, TextDAta
 FROM sys.fn_trace_gettable(@log,DEFAULT)   
