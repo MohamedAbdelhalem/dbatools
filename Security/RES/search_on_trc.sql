@@ -4,7 +4,9 @@ select @log_path =
 substring(reverse(substring(reverse(value_data), charindex('\',reverse(value_data)), len(value_data))),3,len(value_data))
 from (
 select cast(value_data as varchar(max)) value_data
-from sys.dm_server_registry r cross apply (select left(cast(value_data as varchar(20)),2) [ver] from sys.dm_server_registry where cast(value_name as varchar(max)) = 'CurrentVersion') v
+from sys.dm_server_registry r cross apply (select left(cast(value_data as varchar(20)),2) [ver] 
+from sys.dm_server_registry 
+where cast(value_name as varchar(max)) = 'CurrentVersion') v
 where registry_key = 'HKLM\Software\Microsoft\Microsoft SQL Server\MSSQL'+v.ver+'.MSSQLSERVER\MSSQLServer\Parameters'
 and cast(value_data as varchar(max)) like '-e%'
 )a
