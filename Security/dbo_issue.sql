@@ -1,3 +1,8 @@
+--SELECT d.name AS 'Database', s.name AS 'Owner'
+--FROM sys.databases d
+--LEFT JOIN sys.server_principals s
+--ON d.owner_sid = s.sid; 
+
 declare @table table (databasename varchar(1000), dbo_login varchar(255), sysdb_login varchar(255))
 declare @dbname varchar(1000), @sql varchar(max)
 declare db_cursor cursor fast_forward
@@ -22,4 +27,11 @@ fetch next from db_cursor into @dbname
 end
 close db_cursor 
 deallocate db_cursor 
-select * from @table
+
+select t.*, 
+case when t.dbo_login is null then 'ALTER AUTHORIZATION ON DATABASE::['+t.databasename+'] TO ['+sa.name+'];' else null end change_script
+from @table t cross apply (select name from master.sys.server_principals where principal_id = 1) sa
+inner join sys.databases db
+on t.databasename = db.name
+where db.state_desc = 'Online'
+and db.is_read_only = 0
