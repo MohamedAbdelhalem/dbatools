@@ -26,7 +26,7 @@ close db_cursor
 deallocate db_cursor 
 
 select t.*, 
-case when t.dbo_login is null then 'ALTER AUTHORIZATION ON DATABASE::['+t.databasename+'] TO ['+sa.name+'];' else null end change_script
+case when t.dbo_login is null then 'ALTER AUTHORIZATION ON DATABASE::['+t.databasename+'] TO ['+sa.name+'];' else 'go' end change_script
 from @table t cross apply (select name from master.sys.server_principals where principal_id = 1) sa
 inner join sys.databases db
 on t.databasename = db.name
