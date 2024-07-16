@@ -1,8 +1,5 @@
---SELECT d.name AS 'Database', s.name AS 'Owner'
---FROM sys.databases d
---LEFT JOIN sys.server_principals s
---ON d.owner_sid = s.sid; 
-
+use master
+go
 declare @table table (databasename varchar(1000), dbo_login varchar(255), sysdb_login varchar(255))
 declare @dbname varchar(1000), @sql varchar(max)
 declare db_cursor cursor fast_forward
