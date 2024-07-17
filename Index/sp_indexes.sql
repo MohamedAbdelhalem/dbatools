@@ -164,7 +164,7 @@ and i.column_id = c.column_id
 left outer join sys.computed_columns cc
 on cc.object_id = c.object_id
 and cc.column_id = c.column_id
-where t.object_id = object_id('[Production].[ProductReview]')
+where t.object_id = object_id(@P_table_name)
 and i.index_id = @p_index_id
 and is_included_column = 0
 order by i.key_ordinal
@@ -189,7 +189,7 @@ and i.column_id = c.column_id
 left outer join sys.computed_columns cc
 on cc.object_id = c.object_id
 and cc.column_id = c.column_id
-where t.object_id = object_id('[Production].[ProductReview]')
+where t.object_id = object_id(@P_table_name)
 and i.index_id = @p_index_id
 and is_included_column = 1
 order by i.key_ordinal
