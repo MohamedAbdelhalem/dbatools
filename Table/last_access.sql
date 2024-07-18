@@ -1,3 +1,11 @@
+--If the description, last_user_insert_update_delete, has the same last access as the last_user_seek:
+----Afterward, it was noted that users were deleting or updating records using predicates (WHERE condition).
+
+--If description last_user_insert_update_delete alone 
+--Then:
+----1. 99% of it consisted of insert statements.
+----2. 1% of it was updated or deleted without any predicates (WHERE condition), which is a rare case.
+
 select database_name, table_name, 
 max(convert(datetime,substring(last_access, 1, charindex('_', last_access)-1),120)) last_access,
 substring(last_access, charindex('_', last_access)+1, len(last_access)) description
@@ -26,10 +34,3 @@ on u.object_id = t.object_id)a
 group by database_name, table_name,
 substring(last_access, charindex('_', last_access)+1, len(last_access)) 
 
---If the description, last_user_insert_update_delete, has the same last access as the last_user_seek:
-----Afterward, it was noted that users were deleting or updating records using predicates (WHERE condition).
-
---If description last_user_insert_update_delete alone 
---Then:
-----1. 99% of it consisted of insert statements.
-----2. 1% of it was updated or deleted without any predicates (WHERE condition), which is a rare case.
