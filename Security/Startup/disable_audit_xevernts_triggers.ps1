@@ -100,16 +100,15 @@ elseif ($exist -eq 1)
     {
         $instance = @(hostname)+"\"+$chosenInstanceName
     }
-    $audit = @(sqlcmd -S $instance -E -Q "select name from sys.server_audits where is_state_enabled = 1")
-    $trigger = @(sqlcmd -S $instance -E -Q "select name from sys.server_triggers where is_disabled = 0")
     if ($stop_start -eq "Y")
     {
         Stop-Service -Name $chosenServiceName
         Write-Host "Instance ""$chosenServiceName"" has been stopped." -ForegroundColor Black -BackgroundColor green
-        net Start $chosenServiceName /T3608
+        net Start $chosenServiceName /mSQLCMD /f
         Write-Host "The instance ""$chosenServiceName"", has been initiated with the trace flag 3608." -ForegroundColor Black -BackgroundColor green
     }
-
+    $audit = @(sqlcmd -S $instance -E -Q "select name from sys.server_audits where is_state_enabled = 1")
+    $trigger = @(sqlcmd -S $instance -E -Q "select name from sys.server_triggers where is_disabled = 0")
     for ($loop = 0; $loop -lt $audit.count - 4; $loop++)
     {
         $ObjectTable += [pscustomobject]@{ID = $loop + 1;Name = $audit[$loop + 2].Trim(); Type = "Audit"; Status = "Enabled"}
@@ -125,7 +124,7 @@ elseif ($exist -eq 1)
     {
         Write-Host "In instance ""$chosenInstanceName"", there are no enabled audits or triggers to be disabled." -ForegroundColor Green
     }
-    elseif ($existAduit -gt 0)
+    elseif ($existObject -gt 0)
     {
         $confirm = Read-Host -Prompt "what do you want to disable from the above list? Please type ""Trigger"", ""Audit"", or ""ALL"" or ""Press any key"" to skip and ignore."
         if ($confirm -eq "trigger" -or $confirm -eq "all")
@@ -174,5 +173,4 @@ elseif ($exist -eq 1)
 else
 {
     Write-Host "Something went wrong." -ForegroundColor Red
-
 }
