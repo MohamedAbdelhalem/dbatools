@@ -17,10 +17,8 @@ pauseSec = $azuresql.autoPauseDelay[$i];
 CBStorageR = $azuresql.currentBackupStorageRedundancy[$i];
 CSON = $azuresql.currentServiceObjectiveName[$i];
 zoneRedundant = $azuresql.zoneRedundant[$i];
-type = $azuresql.type[$i];
-manualCutover = $azuresql.manualCutover[$i];
-requestedBackupStorageRedundancy = $azuresql.requestedBackupStorageRedundancy[$i];
-requestedServiceObjectiveName = $azuresql.requestedServiceObjectiveName[$i];
+RBakStrogRed = $azuresql.requestedBackupStorageRedundancy[$i];
+RSON = $azuresql.requestedServiceObjectiveName[$i];
 readScale = $azuresql.readScale[$i];
 managedBy = $azuresql.managedBy[$i]}
 }
