@@ -10,3 +10,4 @@ publicAccess = $sql.publicNetworkAccess;
 resourceGroup = $sql.resourceGroup;
 state = $sql.state}
 $table | Format-Table
+
