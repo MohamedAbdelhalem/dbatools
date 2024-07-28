@@ -186,7 +186,7 @@ declare @sql varchar(max) = '
 
 '
 select row_number() over(order by product_version desc, product_name) id, product_name, product_code, product_version,
-'msiexec /x "'+ltrim(rtrim(product_code))+'"'
+'msiexec /x "'+replace(replace(convert(varbinary(max),cast(product_code as nvarchar(1000))),0x0900,N''),0x0D00,N'')+'"'
 from (
 select gbulk id, 
 ltrim(rtrim(substring([1], charindex('>',[1])+1,len([1])))) product_name, 
