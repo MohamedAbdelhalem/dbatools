@@ -14,7 +14,7 @@ open the script product.sql into any SQL Server instance and copy the result of 
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/past_msiinv_result_into_get_product_code_select_version.png)
 
-Open **regedit** and go **\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server** 
+Open **regedit** and go to **\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server** 
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_01.png)
 
@@ -22,7 +22,7 @@ and *right click* find, then past the product_code then click *Find Next*
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_02.png)
 
-from down path you will see the instance the belongs to this code
+from down path, you will see the instance that belongs to this code.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_03.png)
 
@@ -30,11 +30,11 @@ Then find in the SQL Script **get_product_codes.sql** to locat you on the produc
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_04.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+Execute the script again after you add the instance name, and you will see the product name has been updated.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_05.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+After adding and updating all products, all changes have been reflected. Now you can choose the instance(s) that you want to remove.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_final01.png)
 
