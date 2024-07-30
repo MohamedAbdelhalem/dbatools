@@ -22,7 +22,7 @@ and *right click* find, then past the product_code then click *Find Next*
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_02.png)
 
-from down path, you will see the instance that belongs to this code.
+From the down path, you will see the instance that belongs to this code.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_03.png)
 
@@ -30,27 +30,41 @@ Then find in the SQL Script **get_product_codes.sql** to locat you on the produc
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_04.png)
 
-Open PowerShell as Administrator and copy the column msiexec_delete_service** that belongs to a specific instance.
+Open **PowerShell as Administrator** and copy the column **msiexec_delete_service** that belongs to a specific instance.
 powershell
 ```
 msiexec /x "{DB570D37-60D8-4D12-A7AB-11482EA5FE8A}"
 ```
+and then *click* Yes on **Windows Installer**
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_05.png)
 
-After adding and updating all products, all changes have been reflected. Now you can choose the instance(s) that you want to remove.
+and here is the exact instance product(s), and you may see one code for **SQL Server** (*Instance Name*) plus the **CEIP** or one code for each one.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_final01.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+
+
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_final02.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+Now, go to the services and you will indicate that it has been stopped (SQL Server Engine and the Agent).
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiexec_01.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+then to remove the removed services from **services.msc**, open **CMD as Administrator** and then execute these script but replace the right values, as the below example:
+
+powershell
+```
+powershell
+get-service -name "*sql*" | where {$_.status -eq "stopped"} select @{name="name"; expression={"sc.exe delete "+$_.name}}
+
+exit
+
+sc.exe delete SQLAgent$MSSQL2016_03
+
+sc.exe delete MSSQL$MSSQL2016_03
+```
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiexec_02.png)
 
