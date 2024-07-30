@@ -30,7 +30,10 @@ Then find in the SQL Script **get_product_codes.sql** to locat you on the produc
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_04.png)
 
-Execute the script again after you add the instance name, and you will see the product name has been updated.
+Open PowerShell as Administrator and copy the column msiexec_delete_service** that belongs to a specific instance.
+powershell
+```
+msiexec /x "{}"
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_05.png)
 
