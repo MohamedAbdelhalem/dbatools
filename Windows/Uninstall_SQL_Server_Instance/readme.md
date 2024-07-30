@@ -6,27 +6,27 @@ You can use **msiinv.exe** app to gather all product codes of the above uninstal
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/download_msiinv.png)
 
-Here are all products information printed out to an external file named **sql.txt**
+Here are all products information printed out to an external file named **sql_products.txt**
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiinv_sql_products.png)
 
-open the script product.sql into any SQL Server instance and copy the result of the file **sql.txt** into the **@sql** variable.
+open the script product.sql into any SQL Server instance and copy the result of the file **sql_products.txt** into the **@sql** variable.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/past_msiinv_result_into_get_product_code_select_version.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+Open **regedit** and go **\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server** 
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_01.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+and *right click* find, then past the product_code then click *Find Next*
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_02.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+from down path you will see the instance the belongs to this code
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_03.png)
 
-If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
+Then find in the SQL Script **get_product_codes.sql** to locat you on the product code, then update the name and add **- instance name**
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_04.png)
 
