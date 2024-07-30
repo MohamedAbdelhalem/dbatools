@@ -33,7 +33,8 @@ Then find in the SQL Script **get_product_codes.sql** to locat you on the produc
 Open PowerShell as Administrator and copy the column msiexec_delete_service** that belongs to a specific instance.
 powershell
 ```
-msiexec /x "{}"
+msiexec /x "{DB570D37-60D8-4D12-A7AB-11482EA5FE8A}"
+```
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_05.png)
 
