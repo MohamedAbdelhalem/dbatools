@@ -2,8 +2,16 @@
 #Connect-AzureRmAccount
 
 #Run script (F5)
+if (Test-Path variable:resourceGroupList) {rv resourceGroupList}
+if (Test-Path variable:azureSql) {rv azureSql}
+
 $resourceGroupList = Get-AzureRmResourceGroup
-$server = Get-AzureRmSqlServer
-$azureSql = Get-AzureRmSqlDatabase -ResourceGroupName $resourceGroupList.ResourceGroupName -ServerName $server.ServerName
-$azureSql | select DatabaseName, Location, Edition,@{N='MaxSize';E={[string]($_.MaxSizeBytes/1GB) + " GB"}}, Status,
-currentServiceObjectiveName,zoneRedundant,readScale,managedBy  | format-table
+for ($rg = 0; $rg -lt $resourceGroupList.Count-1; $rg++)
+{
+    $server = Get-AzureRmSqlServer
+    $azureSql += Get-AzureRmSqlDatabase -ResourceGroupName $resourceGroupList.ResourceGroupName[$rg] -ServerName $server.ServerName
+    $azureSql | select ResourceGroupName, ServerName, DatabaseName, 
+    Location, Edition,@{N='MaxSize';E={[string]($_.MaxSizeBytes/1GB) + " GB"}}, 
+    Status, currentServiceObjectiveName, zoneRedundant, readScale | format-table
+}
+
