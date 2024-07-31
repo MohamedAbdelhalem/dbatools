@@ -1,5 +1,4 @@
 If you have an instance that you want to decommission it/them but you face an issue and you are not able to proceed.
-[a link](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/get_product_codes.sql)
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/Manual_Remove_instance.png)
 
@@ -11,7 +10,7 @@ Here are all products information printed out to an external file named **sql_pr
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiinv_sql_products.png)
 
-open the script product.sql into any SQL Server instance and copy the result of the file **sql_products.txt** into the **@sql** variable.
+open the script [get_product_codes.sql](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/get_product_codes.sql) into any SQL Server instance and copy the result of the file **sql_products.txt** into the **@sql** variable.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/past_msiinv_result_into_get_product_code_select_version.png)
 
@@ -27,7 +26,7 @@ From the down path, you will see the instance that belongs to this code.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_03.png)
 
-Then find in the SQL Script **get_product_codes.sql** to locat you on the product code, then update the name and add **- instance name**
+Then find in the SQL Script [get_product_codes.sql](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/get_product_codes.sql) to locate you on the product code, then update the name and add **- instance name**
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_04.png)
 
@@ -39,7 +38,7 @@ After adding and updating all products, all changes have been reflected. Now you
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_final01.png)
 
-I've updated the sql script to add another column and to just copy the column result of column **msiexec_delete_service** in PowerShell to remove the specific product(s). 
+I've updated the SQL script to add another column and to just copy the column result of column **msiexec_delete_service** in PowerShell to remove the specific product(s). 
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_final02.png)
 
@@ -52,18 +51,18 @@ and then *click* Yes on **Windows Installer**
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiexec_01.png)
 
-and here is the exact instance product(s), and you may see one code for **SQL Server** (*Instance Name*) plus the **CEIP** or one code for each one.
+Here is the exact instance product(s), and you may see one code for **SQL Server** (*Instance Name*) plus the **CEIP** or one code for each one.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiexec_02.png)
 
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiexec_03.png)
 
-Now, go to the services and you will indicate that it has been stopped (SQL Server Engine and the Agent).
+Now, you can go to the services and you will indicate that it has been stopped (SQL Server Engine and the Agent).
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/droped_service_indecator.png)
 
-then to remove the removed services from **services.msc**, open **cmd as Administrator** and then execute these script but replace the right values, as the below example:
+Then, to remove the removed services from **services.msc**, open **cmd as Administrator** and then execute these scripts but replace the right values, as in the below example:
 
 ```cmd
 powershell.exe
@@ -79,7 +78,7 @@ sc.exe delete MSSQL$MSSQL2016_03
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/delete_service_sc.png)
 
-and finally the services have been removed.
+Finally, the services have been removed.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/delete_service_sc_final.png)
 
