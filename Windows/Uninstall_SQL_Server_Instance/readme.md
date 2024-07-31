@@ -43,8 +43,8 @@ I've updated the sql script to add another column and to just copy the column re
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/find_product_code_final02.png)
 
 Open **PowerShell as Administrator** and copy the column **msiexec_delete_service** that belongs to a specific instance.
-powershell
-```
+
+```powershell
 msiexec /x "{DB570D37-60D8-4D12-A7AB-11482EA5FE8A}"
 ```
 and then *click* Yes on **Windows Installer**
@@ -64,8 +64,7 @@ Now, go to the services and you will indicate that it has been stopped (SQL Serv
 
 then to remove the removed services from **services.msc**, open **CMD as Administrator** and then execute these script but replace the right values, as the below example:
 
-CMD
-```
+```powershell
 powershell.exe
 
 get-service -name "*sql*" | where {$_.status -eq "stopped"} select @{name="name"; expression={"sc.exe delete "+$_.name}}
