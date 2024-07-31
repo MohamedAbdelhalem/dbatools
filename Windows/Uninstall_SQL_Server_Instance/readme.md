@@ -10,7 +10,7 @@ Here are all products information printed out to an external file named **sql_pr
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiinv_sql_products.png)
 
-open the script [get_product_codes.sql](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/get_product_codes.sql) into any SQL Server instance and copy the result of the file **sql_products.txt** into the **@sql** variable and change **@select_verion = 2016** variable with your demand SQL version.
+Open the script [get_product_codes.sql](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/get_product_codes.sql) into any SQL Server instance and copy the result of the file **sql_products.txt** into the **@sql** variable and change **@select_verion = 2016** variable with your demand SQL version.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/past_msiinv_result_into_get_product_code_select_version.png)
 
