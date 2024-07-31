@@ -2,7 +2,7 @@ If you have an instance that you want to decommission it/them but you face an is
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/Manual_Remove_instance.png)
 
-You can use **msiinv.exe** app to gather all product codes of the above uninstall Programs.
+You can use [msiinv.exe](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/msiinv.exe) app to gather all product codes of the above uninstall Programs.
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/download_msiinv.png)
 
