@@ -24,13 +24,13 @@ inner join sys.tables t
 on t.object_id = s.object_id)a
 pivot
 (max(name) for stats_column_id in ([1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15], [16], [17]))piv)b
---cross apply [sys].[dm_db_stats_properties_internal](object_id,stats_id)
-where table_name in ('FBNK_SMB_H_FT_DETAILS','')
+cross apply [sys].[dm_db_stats_properties_internal](object_id,stats_id)
+--where table_name in ('FBNK_SMB_H_FT_DETAILS','')
 --and stats_name = 'IX_TRANS_PARTIES_1'
---order by cast(replace(rows,',','') as float) desc--, frequently_use desc, pct, not_often_frequently_use, single_frequently_use, not_in_use
+order by cast(replace(rows,',','') as float) desc--, frequently_use desc, pct, not_often_frequently_use, single_frequently_use, not_in_use
 
-DBCC SHOW_STATISTICS (ACCT_STMT)
-DBCC SHOW_STATISTICS ('ACCT_STMT', STMT_CYCLE_ACCT_STMT_FK) WITH HISTOGRAM;
+--DBCC SHOW_STATISTICS (ACCT_STMT)
+--DBCC SHOW_STATISTICS ('ACCT_STMT', STMT_CYCLE_ACCT_STMT_FK) WITH HISTOGRAM;
 
 --update statistics [dbo].[ACCT_STMT]
 
