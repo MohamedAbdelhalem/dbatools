@@ -62,7 +62,7 @@ Now, go to the services and you will indicate that it has been stopped (SQL Serv
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/droped_service_indecator.png)
 
-then to remove the removed services from **services.msc**, open **CMD as Administrator** and then execute these script but replace the right values, as the below example:
+then to remove the removed services from **services.msc**, open **cmd as Administrator** and then execute these script but replace the right values, as the below example:
 
 ```cmd
 powershell.exe
