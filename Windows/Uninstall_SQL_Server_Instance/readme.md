@@ -64,7 +64,7 @@ Now, go to the services and you will indicate that it has been stopped (SQL Serv
 
 then to remove the removed services from **services.msc**, open **CMD as Administrator** and then execute these script but replace the right values, as the below example:
 
-```powershell
+```cmd
 powershell.exe
 
 get-service -name "*sql*" | where {$_.status -eq "stopped"} select @{name="name"; expression={"sc.exe delete "+$_.name}}
