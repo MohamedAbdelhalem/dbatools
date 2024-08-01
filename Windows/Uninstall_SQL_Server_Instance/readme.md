@@ -6,7 +6,14 @@ You can use [msiinv.exe](https://github.com/MohamedAbdelhalem/dbatools/blob/main
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/download_msiinv.png)
 
+Execute the below PowerShell scrip to export all products related to SQL Server
+
+```powershell
+.\msiinv -s | select-string "SQL Server" -context 1,1 > sql_products.txt
+```
+
 Here are all products information printed out to an external file named **sql_products.txt**
+
 
 ![alt text](https://github.com/MohamedAbdelhalem/dbatools/blob/main/Windows/Uninstall_SQL_Server_Instance/gallery/msiinv_sql_products.png)
 
