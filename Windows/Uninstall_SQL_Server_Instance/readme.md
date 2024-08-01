@@ -74,7 +74,7 @@ Then, to remove the removed services from **services.msc**, open **cmd as Admini
 ```cmd
 powershell.exe
 
-get-service -name "*sql*" | where {$_.status -eq "stopped"} select @{name="name"; expression={"sc.exe delete "+$_.name}}
+get-service -name "*sql*" | where {$_.status -eq "stopped"} | select @{name="name"; expression={"sc.exe delete "+$_.name}}
 
 exit
 
