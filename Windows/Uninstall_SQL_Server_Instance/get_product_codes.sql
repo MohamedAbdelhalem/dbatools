@@ -5,7 +5,6 @@
 --.\msiinv.exe -s | select-string "SQL Server" -context 1,1 > c:\temp\sql.txt
 
 declare @sql varchar(max) = '
-
   
 > SQL Server 2017 Integration Services Scale Out Management Portal
   	Product code:	{6BD8D100-B16C-409E-B0EA-BF508D7874EC}
@@ -47,7 +46,7 @@ Cache\KB5003279\ServicePack\1033_ENU_LP\x64\setup\x64\
 > SQL Server 2016 Database Engine Shared
   	Product code:	{81CABA93-27C0-4BD9-9B5E-227C76B59F46}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - MSSQLSERVER
   	Product code:	{0C457EC3-E998-4041-B856-908D5A2C1708}
   
 > Microsoft SQL Server 2017 T-SQL Language Service 
@@ -101,7 +100,7 @@ Cache\KB5003279\ServicePack\1033_ENU_LP\x64\setup\x64\
 > SQL Server Management Studio
   	Product code:	{1B8CFC46-1F08-4DA7-9FEA-E1F523FBD67F}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - EXCHINST
   	Product code:	{0CF485A6-6486-4E5A-B1B8-A32EF067DB05}
   
 > Microsoft SQL Server 2016 Setup (English)
@@ -114,16 +113,16 @@ Cache\KB5029186\GDR\1033_ENU_LP\x64\setup\sqlsupport_msi\
 > Microsoft SQL Server Data-Tier Application Framework (x86)
   	Product code:	{F45421F6-76C3-47EE-8823-7D064A77E1F0}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - SCOMDBINST
   	Product code:	{863E9807-97F0-417A-9957-DE4372A13404}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - SCOMDWINST
   	Product code:	{DB570D37-60D8-4D12-A7AB-11482EA5FE8A}
   
 > SQL Server 2016 DMF
   	Product code:	{2FFF0757-4360-42F5-8814-16BB5CF0145F}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - SCOMDWINST
   	Product code:	{2CE39A67-8A43-4C5C-B9F9-E587CACF80D4}
   
 > SQL Server Management Studio for Analysis Services
@@ -183,16 +182,16 @@ Cache\KB5003279\ServicePack\1033_ENU_LP\x64\setup\
 > SQL Server 2016 Shared Management Objects Extensions
   	Product code:	{B6E1A5EB-1C58-4A04-B76B-E5FE1BE22CA1}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - MSSQLSERVER
   	Product code:	{51574D2C-DE28-4441-BDC2-967F0FFC0918}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - SCOMAUDINST
   	Product code:	{6FA9813C-79F8-4DA3-89DE-9619470EB173}
   
 > SQL Server 2016 Client Tools
   	Product code:	{A070F2AC-A75B-448C-BECB-B794EB7E0E0D}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - EXCHINST
   	Product code:	{050B443D-9AEB-4847-B92A-E7DD886DCFE1}
   
 > SQL Server 2017 Common Files
@@ -207,13 +206,13 @@ Cache\KB5003279\ServicePack\1033_ENU_LP\x64\setup\
 > SQL Server 2016 Documentation Components
   	Product code:	{2DF3556D-8F7D-4E7B-B412-1273ABF94624}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - SCOMAUDINST
   	Product code:	{3ABB656D-84FE-4EA8-9549-5BA43A73DB95}
   
 > SQL Server 2016 Documentation Components
   	Product code:	{060F438D-A367-4B23-9487-7431025E0F87}
   
-> SQL Server 2016 Database Engine Services
+> SQL Server 2016 Database Engine Services - SCOMDBINST
   	Product code:	{9CB25DAD-B089-4861-8443-4D43B1C320CA}
   
 > Microsoft SQL Server 2016 RsFx Driver
@@ -294,7 +293,9 @@ order by product_name
 end
 else
 begin
+
 select 2
+
 select row_number() over(order by product_version desc, product_name) id, 
 product_name, 
 replace(replace(replace(replace(convert(varbinary(max),cast(product_code as nvarchar(1000))),0x0900,N''),0x0D00,N''),'}',''),'{','') product_code, product_version,
@@ -317,8 +318,9 @@ select row_number() over(partition by gbulk order by id)row_id, gbulk, value
 from (
 select top 100 percent master.dbo.gBulk(row_number() over(order by id),2) gbulk, id, value 
 from master.dbo.separator(@sql, char(10))
-where value like '%>%'
-or value like '%Product%'
+where (value like '%>%'
+or value like '%Product%')
+and value not like '%installed%'
 order by id)a)b
 pivot (
 max(value) for row_id in ([1],[2]))p)c
