@@ -1,26 +1,26 @@
 declare @server_location table (server_id int identity(1,1), ag_name varchar(255), server_name varchar(255), role_desc varchar(100), location_desc varchar(100)) 
 declare @DCLocation table (role_desc varchar(100), location_desc varchar(100))
 declare 
-@load_balncing      	  bit = 1,
-@balance_sync_type    	varchar(100) = 'Report',
-@allowConn        		  varchar(100) = 'Yes', --'AppIntent' = 'READ_ONLY', 'Yes' = 'ALL'
-@port          			    varchar(10),
-@sql          			    varchar(max),
-@loop          			    int = 0,
-@dc_role          		  varchar(100),
-@replicas        		    int,
-@ag_name        		    varchar(255),
-@replica_server      	  varchar(255),
+@load_balncing    bit = 1,
+@balance_sync_type varchar(100) = 'Report',
+@allowConn        varchar(100) = 'Yes', --'AppIntent' = 'READ_ONLY', 'Yes' = 'ALL'
+@port             varchar(10),
+@sql              varchar(max),
+@loop             int = 0,
+@dc_role          varchar(100),
+@replicas         int,
+@ag_name          varchar(255),
+@replica_server   varchar(255),
 @read_only_routing_list varchar(max),
-@1						          varchar(255), 
-@2						          varchar(255), 
-@3						          varchar(255), 
-@4						          varchar(255), 
-@5						          varchar(255), 
-@6						          varchar(255), 
-@7						          varchar(255), 
-@8						          varchar(255), 
-@9						          varchar(255)
+@1                varchar(255), 
+@2                varchar(255), 
+@3                varchar(255), 
+@4                varchar(255), 
+@5                varchar(255), 
+@6                varchar(255), 
+@7                varchar(255), 
+@8                varchar(255), 
+@9                varchar(255)
 
 --write down here the location for each server
 --PDC means Primary data center
@@ -49,8 +49,26 @@ declare ag_cursor cursor fast_forward
 for
 select 
 ag_name, [1],[2],[3],[4],[5],[6],[7],[8],[9]
-from @ag_replicas
-
+from (
+select top 100 percent
+row_number() over(partition by ag_name order by ag_name, is_local desc, synchronization_state_desc, replica_server_name) id,
+ag_name, replica_server_name 
+--role_desc, synchronization_state_desc, is_local, 
+from (
+select ag.name ag_name, rcs.replica_server_name, synchronization_state_desc, dbrs.is_local, role_desc, connected_state_desc, rs.synchronization_health_desc 
+from sys.dm_hadr_database_replica_states dbrs inner join sys.availability_groups ag
+on dbrs.group_id = ag.group_id
+inner join sys.dm_hadr_availability_replica_states  rs
+on dbrs.replica_id = rs.replica_id
+inner join sys.dm_hadr_availability_replica_cluster_states rcs
+on rcs.replica_id = rs.replica_id
+group by ag.name, synchronization_state_desc, dbrs.is_local, role_desc, connected_state_desc, rs.synchronization_health_desc, rcs.replica_server_name)a
+where connected_state_desc = 'CONNECTED'
+and synchronization_health_desc = 'HEALTHY'
+order by ag_name, is_local desc, synchronization_state_desc)b
+pivot
+(max(replica_server_name) for id in ([1],[2],[3],[4],[5],[6],[7],[8],[9]))p
+ 
 select @port = ls.port 
 from sys.dm_tcp_listener_states ls inner join sys.availability_group_listener_ip_addresses ipa
 on ls.ip_address = ipa.ip_address
