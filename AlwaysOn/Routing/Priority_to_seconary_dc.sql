@@ -28,12 +28,12 @@ declare
 --PDC means Secondary data center
 
 insert into @server_location values 
- ('T24_R21_Prod','D1T24DBPRV1','PRIMARY','PDC')
-,('T24_R21_Prod','D1T24DBPRV2','SECONDARY','PDC')
-,('T24_R21_Prod','D1T24DBPRV3','SECONDARY','PDC')
-,('T24_R21_Prod','D2T24DBPRV1','SECONDARY','SDC')
-,('T24_R21_Prod','D2T24DBPRV2','SECONDARY','SDC')
-,('T24_R21_Prod','D2T24DBPRV3','SECONDARY','SDC')
+ ('AG1','D1ERPDBPRV1','PRIMARY','PDC')
+,('AG1','D1ERPDBPRV2','SECONDARY','PDC')
+,('AG1','D1ERPDBPRV3','SECONDARY','PDC')
+,('AG1','D2ERPDBPRV1','SECONDARY','SDC')
+,('AG1','D2ERPDBPRV2','SECONDARY','SDC')
+,('AG1','D2ERPDBPRV3','SECONDARY','SDC')
 
 insert into @DCLocation
 select role_desc, location_desc
