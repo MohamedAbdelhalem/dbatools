@@ -1,13 +1,14 @@
 --parameters
 declare 
 @dml_operation	varchar(100) = 'insert',
-@bulk			int = 3000,
-@using_CI		bit = 0,
---if you will not use a clustered index key column and you don't have another option then using a regular column
---then try to use Non-clustered index column BUT THIS COLUMN BE UNIQUE 
+@bulk			int = 1000,
+@using_CI		bit = 1,
+--When a clustered index key column is not utilized and no alternative is available, using a standard column is the subsequent option.
+--then use Non-clustered index column BUT THIS COLUMN BE UNIQUE 
 --e.g. 
 --[INT] with Identity
 --[DATETIME] with default Getdate() NOT [DATE], DO NOT USE [DATE] data type 
+@where_condition varchar(max) = 'Where SalesOrderID between 46659 and 64600',
 @column_name	varchar(255) = 'OrderDate', 
 @column_type	varchar(255) = 'datetime',
 --Expected values for DML Operations
@@ -97,7 +98,8 @@ from (
 select 
 master.dbo.gbulk(row_number() over(order by '+@column_name+'),'+cast(@bulk as varchar(50))+') gbulk_id, 
 '+@column_name+' dataValues 
-from '+@source_table+')a
+from '+@source_table+'
+'+case when @where_condition = 'default' then '' else @where_condition end+')a
 group by gbulk_id
 order by gbulk_id'
 
