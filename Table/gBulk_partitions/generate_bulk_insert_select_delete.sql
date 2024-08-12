@@ -3,19 +3,20 @@ declare
 @dml_operation	varchar(100) = 'insert',
 @bulk			int = 1000,
 @using_CI		bit = 1,
---When a clustered index key column is not utilized and no alternative is available, using a standard column is the subsequent option.
+--When a clustered index key column is not utilized and no alternative is available, use a standard column is the subsequent option.
 --then use Non-clustered index column BUT THIS COLUMN BE UNIQUE 
 --e.g. 
 --[INT] with Identity
 --[DATETIME] with default Getdate() NOT [DATE], DO NOT USE [DATE] data type 
 @where_condition varchar(max) = 'Where SalesOrderID between 46659 and 64600',
+--place in @where_condition parameter the filter you want or type 'default'
 @column_name	varchar(255) = 'OrderDate', 
 @column_type	varchar(255) = 'datetime',
 --Expected values for DML Operations
 --Delete
 --Select COUNT(*)
 --Select COUNT
-@source_db		varchar(355) = db_name(db_id()),
+@source_db	varchar(355) = db_name(db_id()),
 @source_table	varchar(355) = '[Sales].[SalesOrderHeader]',
 @destinationDB	varchar(355) = 'AdventureWorks2019',
 @destinationTB	varchar(355) = '[Sales].[SalesOrderHeader]'
