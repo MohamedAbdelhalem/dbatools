@@ -8,16 +8,20 @@ go
 CREATE --alter 
 Procedure [dbo].[sp_dump_table]
 (
-@table varchar(350), 
-@new_name varchar(350) = 'default', 
-@migrated_to varchar(300) = 'MS SQL Server', --or PostgreSQL
-@columns varchar(3000) = 'all',
+@table					varchar(350), 
+@new_name				varchar(350) = 'default', 
+@migrated_to			varchar(300) = 'MS SQL Server',--Oracle, --'MS SQL Server', --or PostgreSQL
+@predication_using_CI	bit = 1,
+@predicated_column_name	varchar(255) = 'default', 
+@predicated_column_type	varchar(255) = 'default',
+@columns				varchar(3000) = 'all',
 @where_records_condition varchar(300) = 'default',
-@with_computed int = 0, 
-@header bit = 1, 
-@bulk int = 1000, 
-@patch int = 0,
-@allow_date_null int = 0)
+@with_computed			int = 0, 
+@header					bit = 0, 
+@bulk					int = 1000, 
+@patch					int = 1,
+@allow_date_null		int = 0
+)
 as
 begin
 declare @object_id int
@@ -28,6 +32,8 @@ where object_id = object_id(@table)
 
 declare @result Table (Output_Text nvarchar(max), Row_no int identity(1,1) primary key)
 declare
+@ci_or_pk_or_nci_column_name varchar(255),
+@ci_or_pk_or_nci_column_type varchar(100),
 @table_name varchar(250),
 @column_name varchar(250),
 @vcolumn_name varchar(250),
@@ -49,6 +55,30 @@ declare
 
 set nocount on 
 declare @tab cursor
+
+if @predication_using_CI = 1 and @predicated_column_name = 'default' and @predicated_column_type = 'default'
+begin
+	select top 1
+	@ci_or_pk_or_nci_column_name = c.name, 
+	@ci_or_pk_or_nci_column_type = t.name
+	from sys.columns c inner join sys.types t
+	on c.user_type_id = t.user_type_id
+	inner join sys.indexes i 
+	on c.object_id = i.object_id 
+	inner join sys.index_columns ic 
+	on i.object_id = ic.object_id 
+	and i.index_id = ic.index_id 
+	and c.column_id = ic.column_id 
+	where c.object_id = object_id(@table)
+	and i.index_id = 1
+	order by c.is_identity desc
+end
+else
+if @predication_using_CI = 0 and @predicated_column_name != 'default' and @predicated_column_type != 'default'
+begin
+	set @ci_or_pk_or_nci_column_name = @predicated_column_name 
+	set @ci_or_pk_or_nci_column_type = @predicated_column_type
+end
 
 set @V$declare = ''
 set @V$select = ''
@@ -318,7 +348,6 @@ begin
 	(max(column_name) for ordinal_position in ([1],[2],[3],[4],[5],[6],[7],[8]))pvt
 end
 
-
 if @object_id is not null
 begin
 
@@ -395,7 +424,6 @@ begin
 				case 
 				when data_type = 'char'				then '+isnull('+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
 				when data_type = 'nchar'			then '+isnull(''N''+'+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
-				--when data_type = 'varchar'			then '+isnull('+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
 				when data_type = 'varchar'			then '+isnull('+''''''''''+'+replace(@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+','''''''','''''''''''')+'''''''',''NULL'')+'+''
 				when data_type = 'nvarchar'			then '+isnull(''N''+'+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
 				when data_type = 'text'				then '+isnull('+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
@@ -411,8 +439,6 @@ begin
 				when data_type = 'bigint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'smallint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'tinyint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
---				when data_type = 'datetime'			then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121),''NULL'')+'+''''+''''+''''+''''
---				when data_type = 'datetime'			then '''case when ''+'+''''+''''+''''+''''+'+convert(varchar(50),isnull(@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',''''),121)+'+''''+''''+''''+''''+ ' + '' = ''''1900-01-01 00:00:00.000'''' then NULL else ''+ '+''''+''''+''''+''''+'+convert(varchar(50),isnull(@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',''''),121)+'+''''+''''+''''+''''+'+'' end'''
 				when data_type = 'datetime'	and @allow_date_null = 0 then '''case when ''+'+''''+''''+''''+''''+'+convert(varchar(50),isnull(@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',''''),121)+'+''''+''''+''''+''''+ ' + '' = ''''1900-01-01 00:00:00.000'''' then ''''1900-01-01 00:00:00.000'''' else ''+ '+''''+''''+''''+''''+'+convert(varchar(50),isnull(@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',''''),121)+'+''''+''''+''''+''''+'+'' end'''
 				when data_type = 'datetime'	and @allow_date_null = 1 then '''case when ''+'+''''+''''+''''+''''+'+convert(varchar(50),isnull(@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',''''),121)+'+''''+''''+''''+''''+ ' + '' = ''''1900-01-01 00:00:00.000'''' then NULL else ''+ '+''''+''''+''''+''''+'+convert(varchar(50),isnull(@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',''''),121)+'+''''+''''+''''+''''+'+'' end'''
 				when data_type = 'datetime2'		then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121),''NULL'')+'+''''+''''+''''+''''
@@ -473,13 +499,11 @@ begin
 				when data_type = 'smallint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'tinyint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'datetime'			then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121),''NULL'')+'+''''+''''+''''+''''
---				when data_type = 'datetime'			then 'case when +'+''''+''''+''''+''''+'+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121)+'+''''+''''+''''+''''+ '= ''1900-01-01 00:00:00'' then NULL else '+''''+''''+''''+''''+'+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121)+'+''''+''''+''''+''''+' end'
 				when data_type = 'datetime2'		then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121),''NULL'')+'+''''+''''+''''+''''
 				when data_type = 'date'				then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121),''NULL'')+'+''''+''''+''''+''''
 				when data_type = 'smalldate'		then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121),''NULL'')+'+''''+''''+''''+''''
 				when data_type = 'smalldatetime'	then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121),''NULL'')+'+''''+''''+''''+''''
 				end DATA_TYPE
---					+ 'case when '+''''+convert(varchar(50),isnull(@backup_time,''),121)+'''' + ' = ''1900-01-01 00:00:00.000'' then NULL else '+ ''''+convert(varchar(50),isnull(@backup_time,''),121)+''''+' end'+','+ +isnull(''''+replace(@template_id,'''','''''')+'''',NULL)++');'
 
 		from INFORMATION_SCHEMA.columns c
 		where object_id('['+c.TABLE_SCHEMA+'].['+TABLE_NAME+']') = @object_id
@@ -521,7 +545,7 @@ begin
 				when data_type = 'nvarchar'			then '+isnull('+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
 				when data_type = 'text'				then '+isnull('+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
 				when data_type = 'ntext'			then '+isnull('+''''''''''+'+@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+'+'''''''',''NULL'')+'+''
-				when data_type = 'bit'				then '+isnull(convert(varchar(50), case @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+' when 1 then ''true'' else ''false'' end, 2),''NULL'')'
+				when data_type = 'bit'				then '+isnull(convert(varchar(50), case @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+' when 1 then 1 else 0 end, 2),''NULL'')'
 				when data_type = 'numeric'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'decimal'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'money'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
@@ -532,27 +556,23 @@ begin
 				when data_type = 'bigint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'smallint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
 				when data_type = 'tinyint'			then '+isnull(convert(varchar(50), @'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+', 2),''NULL'')'
-				when data_type = 'datetime'			then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120),''NULL'')+'+''''+''''+''''+''''
---				when data_type = 'datetime'			then 'case when +'+''''+''''+''''+''''+'+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121)+'+''''+''''+''''+''''+ '= ''1900-01-01 00:00:00'' then NULL else '+''''+''''+''''+''''+'+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',121)+'+''''+''''+''''+''''+' end'
-				when data_type = 'datetime2'		then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120),''NULL'')+'+''''+''''+''''+''''
-				when data_type = 'date'				then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120),''NULL'')+'+''''+''''+''''+''''
-				when data_type = 'smalldate'		then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120),''NULL'')+'+''''+''''+''''+''''
-				when data_type = 'smalldatetime'	then ''''+''''+''''+''''+'+isnull(convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120),''NULL'')+'+''''+''''+''''+''''
+				when data_type = 'datetime'			then 'isnull('+''''+'to_date('''+'+''''''''+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120)+''''''''+'+''','''+'+''''''''+'+'''YYYY-MM-DD HH24:MI:SS'''+'+''''''''+'+''')'''+','+'''NULL'')'
+				when data_type = 'datetime2'		then 'isnull('+''''+'to_date('''+'+''''''''+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120)+''''''''+'+''','''+'+''''''''+'+'''YYYY-MM-DD HH24:MI:SS'''+'+''''''''+'+''')'''+','+'''NULL'')'
+				when data_type = 'date'				then 'isnull('+''''+'to_date('''+'+''''''''+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120)+''''''''+'+''','''+'+''''''''+'+'''YYYY-MM-DD HH24:MI:SS'''+'+''''''''+'+''')'''+','+'''NULL'')'
+				when data_type = 'smalldate'		then 'isnull('+''''+'to_date('''+'+''''''''+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120)+''''''''+'+''','''+'+''''''''+'+'''YYYY-MM-DD HH24:MI:SS'''+'+''''''''+'+''')'''+','+'''NULL'')'
+				when data_type = 'smalldatetime'	then 'isnull('+''''+'to_date('''+'+''''''''+convert(varchar(50),@'+lower(case when charindex(' ',column_name) > 0 then replace(column_name,' ','') else column_name end)+',120)+''''''''+'+''','''+'+''''''''+'+'''YYYY-MM-DD HH24:MI:SS'''+'+''''''''+'+''')'''+','+'''NULL'')'
 				end DATA_TYPE
---					+ 'case when '+''''+convert(varchar(50),isnull(@backup_time,''),121)+'''' + ' = ''1900-01-01 00:00:00.000'' then NULL else '+ ''''+convert(varchar(50),isnull(@backup_time,''),121)+''''+' end'+','+ +isnull(''''+replace(@template_id,'''','''''')+'''',NULL)++');'
 
 		from INFORMATION_SCHEMA.columns c
 		where object_id('['+c.TABLE_SCHEMA+'].['+TABLE_NAME+']') = @object_id
 		and column_name in (select column_name from @columns_table)
 		order by ordinal_position
+
 	end
 
 	declare @col cursor
 	set @col = cursor local
 	for
-	select column_name, v_column_name, data_type, inserted_data_type 
-	from @insert_syntax
-
 	select column_name, v_column_name, data_type, inserted_data_type 
 	from @insert_syntax
 
@@ -594,7 +614,11 @@ begin
 	for
 	select '+@V$select+'
 	from '+case @migrated_to when 'MS SQL Server' then @table else replace(replace(@table,']',''),'[','') end+'
-	'+case when isnull(@where_records_condition,'default') = 'default' then '' else @where_records_condition end+' 
+	where ['+@ci_or_pk_or_nci_column_name+'] in (select ['+@ci_or_pk_or_nci_column_name+'] 
+												   from (select master.dbo.gbulk(row_number() over(order by ['+@ci_or_pk_or_nci_column_name+']),'+cast(@bulk as varchar(100))+') gid, ['+@ci_or_pk_or_nci_column_name+'] 
+														   from '+case @migrated_to when 'MS SQL Server' then @table else replace(replace(@table,']',''),'[','') end+'
+														   '+case when isnull(@where_records_condition,'default') = 'default' then '' else @where_records_condition end+')a 
+												  where gid = '+cast(@patch as varchar(100))+')
 	open CURSOR_COLUMN
 	fetch next from CURSOR_COLUMN into '+@V$variables_cursor+'
 	while @@fetch_status = 0
@@ -624,55 +648,40 @@ begin
 	end
 	close CURSOR_COLUMN
 	deallocate CURSOR_COLUMN'
-	--print(@sql)
-		Insert Into @Result values ('SET IMPLICIT_TRANSACTIONS ON')
-		if(select sum(cast(is_identity as int)) from sys.columns where object_id = object_id(@table)) = 1
+--	print(@sql)
+
+----#####################################################
+
+		if(select sum(cast(is_identity as int)) from sys.columns where object_id = object_id(@table)) = 1 and @migrated_to = 'MS SQL Server'
 		begin
+			Insert Into @Result values ('SET IMPLICIT_TRANSACTIONS ON')
 			insert into @result values ('SET IDENTITY_INSERT '+@new_name+' ON')
 		end
 		Insert Into @Result
 		exec(@sql)
-		if(select sum(cast(is_identity as int)) from sys.columns where object_id = object_id(@table)) = 1
+		if(select sum(cast(is_identity as int)) from sys.columns where object_id = object_id(@table)) = 1 and @migrated_to = 'MS SQL Server'
 		begin
 			insert into @result values ('SET IDENTITY_INSERT '+@new_name+' OFF')
 		end
 		Insert Into @Result values ('COMMIT;')
 end
 
---insert into Test_Script_SS_BAB_Dev.dbo.output_insert
 if @header = 1
 begin
 Select s.value [--]
 from @Result r cross apply master.dbo.Separator(Output_Text, char(9)) s
---where Row_no between ((@patch * @bulk) + 1) and ((@patch + 1) * @bulk)
 order by Row_no
 end
 else
 begin
 Select Output_Text [--]
 from @Result 
---where Row_no between ((@patch * @bulk) + 1) and ((@patch + 1) * @bulk)
 order by Row_no
 end
-
---insert into Test_Script_SS_BAB_Dev.dbo.output_insert values ('go')
-
 end
 else
 begin
 print('This table does not exist, please re-enter the correct name with the schema name, like, dbo.table_name')
 end
 set nocount off
-
 end
-go
-
-
---select from_id, to_id, from_unique_column, to_unique_column 
---from (
---select row_number() over(order by from_id) id, from_id, to_id, from_unique_column, to_unique_column 
---from master.dbo.[FBNK_AC_LOCKED_EVENTS_ARC_FEB2019_summary5]
---where from_id != to_id)a
---order by id 
-
-
