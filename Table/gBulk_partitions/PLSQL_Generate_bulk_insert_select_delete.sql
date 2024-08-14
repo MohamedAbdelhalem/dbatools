@@ -13,8 +13,14 @@ CREATE TABLE DML_DATA_COLLECTION
    );
 /
 
+--parameters
 declare 
 dml_operation	varchar2(100) := 'delete';
+--Expected values for DML Operations
+--Delete
+--Select COUNT(*)
+--Select COUNT
+--Insert
 bulk			number := 1000;
 using_CI		number := 1;
 --When a clustered index key column is not utilized and no alternative is available, use a standard column is the subsequent option.
@@ -30,10 +36,11 @@ source_db	    varchar2(355);
 source_table	varchar2(355) := 'SalesOrderHeader';
 destinationDB	varchar2(355) := 'AdventureWorks2019';
 destinationTB	varchar2(355) := 'SalesOrderHeader';
+
+--variables
 sqlscript		varchar2(8000);
 all_columns	    varchar2(8000);
 v_column        varchar2(255) := '';
-
 col_cursor SYS_REFCURSOR;
 cur_select varchar2(999) := 'select column_name from user_tab_columns where table_name = upper(';
 begin
