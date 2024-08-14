@@ -26,6 +26,7 @@ COMMIT;
                                                         UPDATE T1
                                                         SET COL10 = '2000-01-01 01:10:20'
                                                         WHERE COL2 = 10;
+<code style="color : green">text</code>
 ```
 **In session 2 after you execute the update statement it will show you the below error message**
 
