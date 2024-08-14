@@ -1,6 +1,4 @@
-```html
-<p><span style="color:blue">some *blue* text</span>.</p>
-```
+<span style="color:blue">some *blue* text</span>
 Some tradeoffs for using SNAPSHOT ISOLATION LEVEL
 1- update after select when session 1 did not commit yet
 
