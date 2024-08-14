@@ -1,8 +1,8 @@
 Some treadoffs for using SNAPSHOT ISOLATION LEVEL
 1- update after select when session 1 did not commit yet
 
-Session 1                                                                                    Session 2
 ```SQL
+--Session 1                                                                              Session 2
 SET TRANSACTION ISOLATION LEVEL SNAPSHOT
 BEGIN TRANSACTION
 UPDATE T1
