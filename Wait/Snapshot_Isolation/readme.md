@@ -2,25 +2,31 @@ Some tradeoffs for using SNAPSHOT ISOLATION LEVEL
 1- update after select when session 1 did not commit yet
 
 ```SQL
---Session 1                                                          Session 2
+--Session 1                                             Session 2
+-------------------------------------------------------------------------------------------------------------------------------------------
 SET TRANSACTION ISOLATION LEVEL SNAPSHOT
 BEGIN TRANSACTION
 UPDATE T1
 SET COL1 = 5000
 WHERE COL2 = 10;
 -------------------------------------------------------------------------------------------------------------------------------------------
-                                                                     SET TRANSACTION ISOLATION LEVEL SNAPSHOT
-                                                                     BEGIN TRANSACTION
-                                                                     SELECT COUNT(*)
-                                                                     FROM T1;
+                                                        SET TRANSACTION ISOLATION LEVEL SNAPSHOT
+                                                        BEGIN TRANSACTION
+                                                        SELECT COUNT(*)
+                                                        FROM T1;
 -------------------------------------------------------------------------------------------------------------------------------------------
 COMMIT;
 -------------------------------------------------------------------------------------------------------------------------------------------
-                                                                     SELECT COL3, COL4, COL5, COL6, COL7
-                                                                     FROM T1
-                                                                     WHERE COL2 = 10;
+                                                        SELECT COL3, COL4, COL5, COL6, COL7
+                                                        FROM T1
+                                                        WHERE COL2 = 10;
 -------------------------------------------------------------------------------------------------------------------------------------------
-                                                                     UPDATE T1
-                                                                     SET COL10 = '2000-01-01 01:10:20'
-                                                                     WHERE COL2 = 10;
-                                                                     MSG ERROR
+                                                        UPDATE T1
+                                                        SET COL10 = '2000-01-01 01:10:20'
+                                                        WHERE COL2 = 10;
+```
+                                                        Msg 3960, Level 16, State 5, Line 5
+                                                        Snapshot isolation transaction aborted due to update conflict.
+                                                        You cannot use snapshot isolation to access table 'dbo.T1' directly or indirectly in database 'MYDB' to update, delete, or insert the                                                          row that has been modified or deleted by another transaction. Retry the transaction or change the isolation level for the             
+                                                        update/delete statement.
+
