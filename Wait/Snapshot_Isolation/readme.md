@@ -1,5 +1,6 @@
 <p>Some tradeoffs for using SNAPSHOT ISOLATION LEVEL</p>
 <p>1- update after select when session 1 did not commit yet</p>
+
 ```SQL
 --Session 1                                             Session 2
 --------------------------------------------------------------------------------------------------------
