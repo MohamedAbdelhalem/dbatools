@@ -1,4 +1,4 @@
-<p>Some tradeoffs for using SNAPSHOT ISOLATION LEVEL</p>
+<p>Some tradeoffs for using <b>Snapshot Isolation Level</b></p>
 <p>1- update after select when session 1 did not commit yet</p>
 
 ```SQL
