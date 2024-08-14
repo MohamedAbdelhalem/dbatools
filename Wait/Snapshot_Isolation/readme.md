@@ -25,11 +25,8 @@ COMMIT;
                                                         SET COL10 = '2000-01-01 01:10:20'
                                                         WHERE COL2 = 10;
 ```
-**In session 2 after you execute the update statement it will shows you the below error message**
+**In session 2 after you execute the update statement it will show you the below error message**
 
 <span style="color: green">Msg 3960, Level 16, State 5, Line 5</span>
-Snapshot isolation transaction aborted due to update conflict.
-You cannot use snapshot isolation to access table 'dbo.T1' directly or indirectly in database 'MYDB' to update, delete, or insert the
-row that has been modified or deleted by another transaction. Retry the transaction or change the isolation level for the             
-update/delete statement. </font>
+
 
