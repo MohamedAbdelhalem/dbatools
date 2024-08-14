@@ -54,7 +54,7 @@ SELECT * FROM T1;
 SELECT * FROM T1;
 --LCK_M_SCH_S                     
 ```
-**In session 1 after you execute the SELECT statement it will be blocked LCK_M_SCH_S:**
+**In session 1 after you execute the SELECT statement it will be blocked LCK_M_SCH_S if session 2 using Read Committed Snapshot Isolation RCSI:**
 
 ```SQL
 --Session 1                                             Session 2
