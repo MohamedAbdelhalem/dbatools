@@ -9,17 +9,21 @@ BEGIN TRANSACTION
 UPDATE T1
 SET COL1 = 5000
 WHERE COL2 = 10;
+--Commands completed successfully.
 --------------------------------------------------------------------------------------------------------
                                                         SET TRANSACTION ISOLATION LEVEL SNAPSHOT
                                                         BEGIN TRANSACTION
                                                         SELECT COUNT(*)
                                                         FROM T1;
+                                                        --Commands completed successfully.
 --------------------------------------------------------------------------------------------------------
 COMMIT;
+--Commands completed successfully.
 --------------------------------------------------------------------------------------------------------
                                                         SELECT COL3, COL4, COL5, COL6, COL7
                                                         FROM T1
                                                         WHERE COL2 = 10;
+                                                        --Commands completed successfully.      
 --------------------------------------------------------------------------------------------------------
                                                         UPDATE T1
                                                         SET COL10 = '2000-01-01 01:10:20'
@@ -42,10 +46,10 @@ COMMIT;
 SET TRANSACTION ISOLATION LEVEL SNAPSHOT
 BEGIN TRANSACTION
 SELECT * FROM T1;
-Commands completed successfully.
+--Commands completed successfully.
 --------------------------------------------------------------------------------------------------------
                                                         ALTER INDEX ALL ON T1 REBUILD WITH (ONLINE = ON);
-                                                        Commands completed successfully.
+                                                        --Commands completed successfully.
 --------------------------------------------------------------------------------------------------------
 SELECT * FROM T1;
 --LCK_M_SCH_S                     
@@ -58,11 +62,11 @@ SELECT * FROM T1;
 SET TRANSACTION ISOLATION LEVEL SNAPSHOT
 BEGIN TRANSACTION
 SELECT * FROM T1;
-Commands completed successfully.
+--Commands completed successfully.
 --------------------------------------------------------------------------------------------------------
                                                         SET TRANSACTION ISOLATION LEVEL SNAPSHOT
                                                         ALTER INDEX ALL ON T1 REBUILD WITH (ONLINE = ON);
-                                                        Commands completed successfully.
+                                                        --Commands completed successfully.
 --------------------------------------------------------------------------------------------------------
 SELECT * FROM T1;
 --Error                   
