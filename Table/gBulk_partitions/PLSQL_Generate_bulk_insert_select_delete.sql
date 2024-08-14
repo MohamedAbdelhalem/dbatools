@@ -21,14 +21,14 @@ dml_operation	varchar2(100) := 'delete';
 --Select COUNT(*)
 --Select COUNT
 --Insert
-bulk			number := 1000;
-using_CI		number := 1;
---When a clustered index key column is not utilized and no alternative is available, use a standard column is the subsequent option.
---then use Non-clustered index column BUT THIS COLUMN BE UNIQUE 
+bulk			number := 1000; -- the actual number or rows per patch.
+using_CI		number := 1; --this parameter means it will automatically use the cluster index column.
+--When a clustered index key column is not utilized and no alternative is available, use a standard column as the subsequent option.
+--then use a Non-clustered index column BUT THIS COLUMN MUST BE UNIQUE 
 --e.g. 
 --[NUMBER] with Identity
 --[DATE] with default sysdate  
-enable_search   number := 0;
+enable_search   number := 0; --place here "1" to apply the where_condition parameter below.
 where_condition varchar2(999) := 'Where SalesOrderID between 46659 and 64600';
 column_name	    varchar2(255) := 'OrderDate'; 
 column_type	    varchar2(255) := 'DATE';
