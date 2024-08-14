@@ -27,9 +27,9 @@ COMMIT;
 ```
 **In session 2 after you execute the update statement it will shows you the below error message**
 
-![#f03c15] Msg 3960, Level 16, State 5, Line 5
+<font color="green"> Msg 3960, Level 16, State 5, Line 5
 Snapshot isolation transaction aborted due to update conflict.
 You cannot use snapshot isolation to access table 'dbo.T1' directly or indirectly in database 'MYDB' to update, delete, or insert the
 row that has been modified or deleted by another transaction. Retry the transaction or change the isolation level for the             
-update/delete statement. `#f03c15
+update/delete statement. </font>
 
