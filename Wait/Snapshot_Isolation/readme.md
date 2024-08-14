@@ -28,5 +28,5 @@ COMMIT;
 **In session 2 after you execute the update statement it will show you the below error message**
 
 <span style="color: green">Msg 3960, Level 16, State 5, Line 5</span>
-
+#f03c15 mmoo
 
