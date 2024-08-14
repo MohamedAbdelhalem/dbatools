@@ -1,6 +1,8 @@
+<span style="color:blue">some *blue* text</span>.
 Some tradeoffs for using SNAPSHOT ISOLATION LEVEL
 1- update after select when session 1 did not commit yet
 
+<span style="color:blue">some *blue* text</span>.
 ```SQL
 --Session 1                                             Session 2
 --------------------------------------------------------------------------------------------------------
@@ -27,6 +29,6 @@ COMMIT;
 ```
 **In session 2 after you execute the update statement it will show you the below error message**
 
-<span style="color: green">Msg 3960, Level 16, State 5, Line 5</span>
-#f03c15 mmoo
+<span style="color:blue">some *blue* text</span>.
+
 
