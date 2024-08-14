@@ -21,8 +21,8 @@ dml_operation	varchar2(100) := 'delete';
 --Select COUNT(*)
 --Select COUNT
 --Insert
-bulk			number := 1000; -- the actual number or rows per patch.
-using_CI		number := 1; --this parameter means it will automatically use the cluster index column.
+bulk		number := 1000; -- the actual number or rows per patch.
+using_CI	number := 1; --this parameter means it will automatically use the cluster index column.
 --When a clustered index key column is not utilized and no alternative is available, use a standard column as the subsequent option.
 --then use a Non-clustered index column BUT THIS COLUMN MUST BE UNIQUE 
 --e.g. 
@@ -30,19 +30,19 @@ using_CI		number := 1; --this parameter means it will automatically use the clus
 --[DATE] with default sysdate  
 enable_search   number := 0; --place here "1" to apply the where_condition parameter below.
 where_condition varchar2(999) := 'Where SalesOrderID between 46659 and 64600';
-column_name	    varchar2(255) := 'OrderDate'; 
-column_type	    varchar2(255) := 'DATE';
-source_db	    varchar2(355);
+column_name	varchar2(255) := 'OrderDate'; 
+column_type	varchar2(255) := 'DATE';
+source_db	varchar2(355);
 source_table	varchar2(355) := 'SalesOrderHeader';
 destinationDB	varchar2(355) := 'AdventureWorks2019';
 destinationTB	varchar2(355) := 'SalesOrderHeader';
 
 --variables
-sqlscript		varchar2(8000);
-all_columns	    varchar2(8000);
+sqlscript	varchar2(8000);
+all_columns	varchar2(8000);
 v_column        varchar2(255) := '';
-col_cursor SYS_REFCURSOR;
-cur_select varchar2(999) := 'select column_name from user_tab_columns where table_name = upper(';
+col_cursor 	SYS_REFCURSOR;
+cur_select 	varchar2(999) := 'select column_name from user_tab_columns where table_name = upper(';
 begin
 
 select user into source_db from dual;
