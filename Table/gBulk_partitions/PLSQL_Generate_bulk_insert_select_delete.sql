@@ -1,3 +1,18 @@
+--Create this table first to save the patches result fro any table
+CREATE TABLE DML_DATA_COLLECTION 
+   (	
+	GID NUMBER, 
+	SchemaName VARCHAR2(400), 
+	TableName VARCHAR2(400), 
+	ColumnName VARCHAR2(400), 
+	FROM_VALUE VARCHAR2(400), 
+	TO_VALUE VARCHAR2(400), 
+	TABLE_TOTAL_ROWS NUMBER, 
+	ROWS_PER_PATCH NUMBER, 
+	DML_SCRIPT VARCHAR2(4000)
+   );
+/
+
 declare 
 dml_operation	varchar2(100) := 'delete';
 bulk			number := 1000;
@@ -61,7 +76,8 @@ then
     end if;
 end if;
 
-sqlscript := 'INSERT INTO DML_DATA_COLLECTION SELECT GID, 
+sqlscript := 'INSERT INTO DML_DATA_COLLECTION 
+SELECT GID, 
 '||''''||source_db||''''||','||''''||source_table||''''||','||''''||column_name||''''||',
 '||case 
 when column_type in ('DATE') then 'TO_CHAR(MIN(dataValues),''YYYY-MM-DD HH24:MI:SS'')' 
