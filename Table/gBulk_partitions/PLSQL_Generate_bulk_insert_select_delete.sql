@@ -17,6 +17,11 @@ declare
 dml_operation	varchar2(100) := 'delete';
 bulk			number := 1000;
 using_CI		number := 1;
+--When a clustered index key column is not utilized and no alternative is available, use a standard column is the subsequent option.
+--then use Non-clustered index column BUT THIS COLUMN BE UNIQUE 
+--e.g. 
+--[NUMBER] with Identity
+--[DATE] with default sysdate  
 enable_search   number := 0;
 where_condition varchar2(999) := 'Where SalesOrderID between 46659 and 64600';
 column_name	    varchar2(255) := 'OrderDate'; 
