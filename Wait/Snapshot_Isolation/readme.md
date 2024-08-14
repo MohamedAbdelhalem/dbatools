@@ -30,10 +30,10 @@ COMMIT;
 ```
 **In session 2 after you execute the update statement it will show you the below error message**
 
-<code style="color : red">Msg 3960, Level 16, State 5, Line 5</code>
-<code style="color :red">Snapshot isolation transaction aborted due to update conflict.</code>
-<code style="color : red">You cannot use snapshot isolation to access table 'dbo.T1' directly or indirectly in database 'MYDB' to update, delete, or insert the</code>
-<code style="color : red">row that has been modified or deleted by another transaction. Retry the transaction or change the isolation level for the</code>
-<code style="color : red">update/delete statement.</code>
+<p><code style="color : red">Msg 3960, Level 16, State 5, Line 5</code></p>
+<p><code style="color :red">Snapshot isolation transaction aborted due to update conflict.</code></p>
+<p><code style="color : red">You cannot use snapshot isolation to access table 'dbo.T1' directly or indirectly in database 'MYDB' to update, delete, or insert the</code></p>
+<p><code style="color : red">row that has been modified or deleted by another transaction. Retry the transaction or change the isolation level for the</code></p>
+<p><code style="color : red">update/delete statement.</code></p>
 
 
