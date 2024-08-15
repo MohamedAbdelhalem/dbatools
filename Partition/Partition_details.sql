@@ -3,7 +3,7 @@ go
 select *, 
 case when Partition_Value_To not in ('>') then cast((cast(Partition_Value_To as bigint) - cast(Partition_Value_From as bigint)) as varchar(200)) end Partition_Range
 from (
-select al.table_name, partition_rows, partition_size,
+select pf.name Partition_Function,ps.name Partition_Scheme, al.table_name, partition_rows, partition_size,
 master.dbo.numbersize(sum(total_pages) over(partition by al.table_name) *8.0,'k') table_size,
 isnull((prv.boundary_id + boundary_value_on_right),al.partition_number) partition_number, prv.value Partition_Key_Value, 
 LAG(prv.value,1,1) OVER(ORDER BY table_name, partition_number) Partition_Value_From,
@@ -35,3 +35,20 @@ and (prv.boundary_id + boundary_value_on_right) = al.partition_number
 --and prv.value = datepart(DY,'2024-01-01')
 )x
 order by table_name, partition_number
+
+--select t.name, p.* 
+--from sys.partitions p inner join sys.tables t
+--on p.object_id = t.object_id
+--inner join sys.indexes i
+--on  p.object_id = i.object_id
+--and p.index_id = i.index_id
+--where p.index_id = 1
+--and t.object_id = object_id('[Sales].[SalesOrderHeader]')
+
+--select * from sys.partition_range_values
+
+--select count(*) from sales.SalesOrderHeader where SalesOrderID <= 44659
+--select count(*) from sales.SalesOrderHeader where SalesOrderID between 72659 + 1 and 73659
+--select count(*) from sales.SalesOrderHeader where SalesOrderID > 73659
+
+--ALTER PARTITION FUNCTION myRangePF1 () SPLIT RANGE (500);  
