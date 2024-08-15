@@ -1,8 +1,8 @@
---about range right or left it has a simple difference between these two options
---if we choose right partition 1 will be empty or has the previous values
---if we choose left partition 1 will have values start of that
+--About the range, there is a simple difference between choosing right or left.
+--if we choose right, partition 1 will be empty or have the previous values
+--if we choose left, partition 1 will have values starting with that
 
---let say multi examples
+--let's say multi examples
 
 --1. int partition key
 --RIGHT
@@ -21,7 +21,7 @@ RANGE RIGHT FOR VALUES (
 --partition 4 will have values = 2002
 --and so on
 
---so in this case if you desire to truncate Year 2020 
+--so in this case if you desire to truncate the Year 2020 
 --you will use partition number 22
 
 TRUNCATE TABLE [dbo].[PARTITION_TABLE] WITH (PARTITIONS (22));
@@ -43,7 +43,7 @@ RANGE LEFT FOR VALUES (
 --partition 5 will have values = 2004
 --and so on
 
---so in this case if you desire to truncate Year 2020 
+--so in this case if you desire to truncate the Year 2020 
 --you will use partition number 21
 
 TRUNCATE TABLE [dbo].[PARTITION_TABLE] WITH (PARTITIONS (21));
