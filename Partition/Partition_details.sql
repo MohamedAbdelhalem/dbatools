@@ -1,8 +1,13 @@
-use [AdventureWorks2019]
+--use [AdventureWorks2019]
 go
+select *, 
+case when PARTITION_KEY_TO not in ('>') then cast((cast(PARTITION_KEY_TO as bigint) - cast(PARTITION_KEY_FROM as bigint)) as varchar(200)) end Partition_Range
+from (
 select al.table_name, partition_rows, partition_size,
 master.dbo.numbersize(sum(total_pages) over(partition by al.table_name) *8.0,'k') table_size,
-(prv.boundary_id + boundary_value_on_right) partition_number, prv.value PARTITION_KEY_Value
+isnull((prv.boundary_id + boundary_value_on_right),al.partition_number) partition_number, prv.value PARTITION_KEY_Value, 
+LAG(prv.value,1,1) OVER(ORDER BY table_name, partition_number) PARTITION_KEY_FROM,
+case when prv.value is null then '>' else prv.value end PARTITION_KEY_TO
 from (
 select i.data_space_id, p.object_id, p.index_id,
 '['+schema_name(schema_id)+'].['+t.name+']' table_name,partition_number,
@@ -22,9 +27,11 @@ inner join sys.partition_schemes ps
 on al.data_space_id = ps.data_space_id
 inner join sys.partition_functions pf
 on ps.function_id = pf.function_id
-inner join sys.partition_range_values prv
+left outer join sys.partition_range_values prv
 on prv.function_id = pf.function_id
+--and (prv.boundary_id + boundary_value_on_right) = al.partition_number
 and (prv.boundary_id + boundary_value_on_right) = al.partition_number
---where table_name = '[dbo].[PARTITION_TABLE]'
+where table_name = '[Sales].[SalesOrderHeader]'
 --and prv.value = datepart(DY,'2024-01-01')
+)x
 order by table_name, partition_number
