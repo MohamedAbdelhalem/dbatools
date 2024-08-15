@@ -3,7 +3,7 @@ go
 select *, 
 case when Partition_Value_To not in ('>') then cast((cast(Partition_Value_To as bigint) - cast(Partition_Value_From as bigint)) as varchar(200)) end Partition_Range
 from (
-select pf.name Partition_Function,ps.name Partition_Scheme, al.table_name, partition_rows, partition_size,
+select '['+pf.name+']' Partition_Function, '['+ps.name+']' Partition_Scheme, al.table_name, partition_rows, partition_size,
 master.dbo.numbersize(sum(total_pages) over(partition by al.table_name) *8.0,'k') table_size,
 isnull((prv.boundary_id + boundary_value_on_right),al.partition_number) partition_number, prv.value Partition_Key_Value, 
 LAG(prv.value,1,1) OVER(ORDER BY table_name, partition_number) Partition_Value_From,
@@ -51,4 +51,4 @@ order by table_name, partition_number
 --select count(*) from sales.SalesOrderHeader where SalesOrderID between 72659 + 1 and 73659
 --select count(*) from sales.SalesOrderHeader where SalesOrderID > 73659
 
---ALTER PARTITION FUNCTION myRangePF1 () SPLIT RANGE (500);  
+--ALTER PARTITION FUNCTION [PARTITION_F_SALES_ORDER_ID_LEFT] () SPLIT RANGE (500);  
