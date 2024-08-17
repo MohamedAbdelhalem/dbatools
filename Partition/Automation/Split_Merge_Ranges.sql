@@ -1,32 +1,32 @@
 --parameters
 declare 
-@table_name			varchar(255)  = '[Sales].[SalesOrderHeader]',
-@position			char(1)		  = 'm', --accepted values "R" for Right or "L" for Left or "M" for Manual, and this parameter will be ignored when @alter = 'MERGE'
-@alter				char(5)       = 'split', --accepted values "SPLIT" or "MERGE"
-@manual_split		int			  = 0, 
-@from_partition		int			  = 152,
-@to_partition		int			  = 0,
-@bulk				decimal(12,0) = 1000,
+@table_name		varchar(255)  = '[Sales].[SalesOrderHeader]',
+@position		char(1)       = 'm', --accepted values "R" for Right or "L" for Left or "M" for Manual, and this parameter will be ignored when @alter = 'MERGE'
+@alter			char(5)       = 'split', --accepted values "SPLIT" or "MERGE"
+@manual_split		int           = 0, --not yet activated
+@from_partition		int           = 152,
+@to_partition		int           = 0,
+@bulk			decimal(12,0) = 1000,
 @partition_column	varchar(255)  = 'SalesOrderID',
-@useLastFileGroup	int			  = 1,
+@useLastFileGroup	int           = 1,
 @manualFileGroup	varchar(500)  = 'DL006',
-@action				int			  = 3
+@action			int           = 3
 
 --variables
 declare
-@partition_function varchar(255),
+@partition_function 	varchar(255),
 @partition_scheme	varchar(255),
 @partition_rows		varchar(255),
 @partition_from		varchar(255),
 @Partition_Key		varchar(255),
-@sql				nvarchar(max),
+@sql			nvarchar(max),
 @biggest_value		bigint,
 @smallest_value		bigint,
-@loop				int = 1,
-@psname				varchar(500),
-@fgname				varchar(500),
-@pscount			int,
-@executesql			varchar(2000)
+@loop			int = 1,
+@psname			varchar(500),
+@fgname			varchar(500),
+@pscount		int,
+@executesql		varchar(2000)
 
 if @alter in ('SPLIT','MERGE')
 begin
