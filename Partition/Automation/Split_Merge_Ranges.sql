@@ -1,32 +1,32 @@
 --parameters
 declare 
-@table_name		varchar(255)  = '[Sales].[SalesOrderHeader]',
-@position		char(1)       = 'm', --accepted values "R" for Right or "L" for Left or "M" for Manual, and this parameter will be ignored when @alter = 'MERGE'
-@alter			char(5)       = 'split', --accepted values "SPLIT" or "MERGE"
-@manual_split		int           = 0, --not yet activated
-@from_partition		int           = 152,
-@to_partition		int           = 0,
-@bulk			decimal(12,0) = 1000,
-@partition_column	varchar(255)  = 'SalesOrderID',
-@useLastFileGroup	int           = 1,
-@manualFileGroup	varchar(500)  = 'DL006',
-@action			int           = 3
+@table_name				varchar(255)  = '[Sales].[SalesOrderHeader]',
+@position				char(1)       = 'l', --accepted values "R" for Right or "L" for Left or "M" for Manual, and this parameter will be ignored when @alter = 'MERGE'
+@alter					char(5)       = 'merge', --accepted values "SPLIT" or "MERGE"
+@manual_split			int           = 0, --not yet activated
+@from_partition			int           = 44,
+@to_partition			int           = 45,
+@bulk					decimal(12,0) = 1000000,
+@partition_column		varchar(255)  = 'SalesOrderID',
+@useLastFileGroup		int           = 1,
+@manualFileGroup		varchar(500)  = 'SalesFG',
+@action					int           = 1
 
 --variables
 declare
 @partition_function 	varchar(255),
-@partition_scheme	varchar(255),
-@partition_rows		varchar(255),
-@partition_from		varchar(255),
-@Partition_Key		varchar(255),
-@sql			nvarchar(max),
-@biggest_value		bigint,
-@smallest_value		bigint,
-@loop			int = 1,
-@psname			varchar(500),
-@fgname			varchar(500),
-@pscount		int,
-@executesql		varchar(2000)
+@partition_scheme		varchar(255),
+@partition_rows			varchar(255),
+@partition_from			varchar(255),
+@Partition_Key			varchar(255),
+@sql					nvarchar(max),
+@biggest_value			bigint,
+@smallest_value			bigint,
+@loop					int = 1,
+@psname					varchar(500),
+@fgname					varchar(500),
+@pscount				int,
+@executesql				varchar(2000)
 
 if @alter in ('SPLIT','MERGE')
 begin
@@ -38,8 +38,8 @@ begin
 	@Partition_Key		= Partition_Key_Value
 	from (
 	select 
-	'['+cast(pf.name as varchar(500))+']' Partition_Function, 
-	'['+cast(ps.name as varchar(500))+']' Partition_Scheme, al.table_name, partition_rows, partition_size,
+	cast(pf.name as varchar(500)) Partition_Function, 
+	cast(ps.name as varchar(500)) Partition_Scheme, al.table_name, partition_rows, partition_size,
 	master.dbo.numbersize(sum(total_pages) over(partition by al.table_name) *8.0,'k') table_size,
 	isnull((prv.boundary_id + boundary_value_on_right),al.partition_number) partition_number, 
 	cast(prv.value as varchar(255)) Partition_Key_Value, 
@@ -76,6 +76,8 @@ begin
 	(@position in ('M') and partition_number = @from_partition)
 	order by table_name, partition_number
 
+
+
 	if @position = 'R' and @alter = 'SPLIT'
 	begin
 		set @sql = N'Select Top 1 @output = max('+@partition_column+') FROM '+@table_name+' Where '+@partition_column+' > '+cast(@partition_from as varchar(50))
@@ -86,7 +88,7 @@ begin
 	select @pscount = count(*)
 	from sys.partition_schemes ps inner join sys.partition_functions pf
 	on ps.function_id = pf.function_id
-	where pf.name = replace(replace(@partition_function,']',''),'[','')
+	where pf.name = replace(replace(@partition_function,']',''),'[','')	
 
 	if @position = 'R' and @alter = 'SPLIT'
 	begin
@@ -94,7 +96,7 @@ begin
 		begin
 			set @loop = 1
 			while @loop < @pscount + 1
-			begin
+			begin	
 				select 
 				@psname = psname, 
 				@fgname = fgname
@@ -111,9 +113,9 @@ begin
 				on ps.data_space_id = d.partition_scheme_id
 				inner join sys.partition_functions pf
 				on ps.function_id = pf.function_id
+				where pf.name = @partition_function
 				group by ps.name, fg.name, pf.name)a
-				where pfname = replace(replace(@partition_function,']',''),'[','')
-				and id = @loop
+				where id = @loop
 
 				if @action = 1
 				begin
@@ -134,10 +136,9 @@ begin
 					print(@executesql)
 					print('GO')
 				end
+				set @loop += 1
 			end
-			set @loop += 1
-		end
-		select @partition_from = @partition_from + @bulk 
+		select @partition_from = @partition_from + @bulk
 		if @action = 1
 		begin
 			print('ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');')  
@@ -157,6 +158,7 @@ begin
 			print(@executesql)  
 			print('GO')
 		end
+	end
 	end
 	else
 	if @position = 'M' and @alter = 'SPLIT' and @from_partition > 0 and @to_partition = 0 and @from_partition != 1 and 
@@ -181,9 +183,9 @@ begin
 			on ps.data_space_id = d.partition_scheme_id
 			inner join sys.partition_functions pf
 			on ps.function_id = pf.function_id
+			where pf.name = @partition_function
 			group by ps.name, fg.name, pf.name)a
-			where pfname = replace(replace(@partition_function,']',''),'[','')
-			and id = @loop
+			where id = @loop
 
 			if @action = 1
 			begin
@@ -251,9 +253,9 @@ begin
 				on ps.data_space_id = d.partition_scheme_id
 				inner join sys.partition_functions pf
 				on ps.function_id = pf.function_id
+				where pf.name = @partition_function
 				group by ps.name, fg.name, pf.name)a
-				where pfname = replace(replace(@partition_function,']',''),'[','')
-				and id = @loop
+				where id = @loop
 
 				if @action = 1
 				begin
