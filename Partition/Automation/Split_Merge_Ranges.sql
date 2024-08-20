@@ -1,3 +1,16 @@
+--What are the code functions for version 3?
+
+--SPLIT with parameter @postition = R means splitting the last partition into multi-partitions
+--SPLIT with parameter @postition = L means splitting the first partition into multi-partitions
+--SPLIT with parameter @postition = M means no automatic figures (just 1 partition),
+----you have to add values for these parameters:
+----@from_partition > 0 (add partition number that you want to split)
+----@to_partition = 0 
+----@bulk > 0
+--MERGE PARTITIONS, add the range of partitions for parameters
+----@from_partition > 0 (add partition number starts)
+----@to_partition > 0 (add partition number ends)
+
 --parameters
 declare 
 @table_name			varchar(255)  = '[Sales].[SalesOrderHeader]',
