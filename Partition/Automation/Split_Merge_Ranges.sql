@@ -14,7 +14,7 @@ declare
 
 --variables
 declare
-@partition_function 	varchar(255),
+@partition_function 		varchar(255),
 @partition_scheme		varchar(255),
 @partition_rows			varchar(255),
 @partition_from			varchar(255),
@@ -32,7 +32,7 @@ if @alter in ('SPLIT','MERGE')
 begin
 	set nocount on
 	select 
-	@partition_function = partition_function,
+	@partition_function 	= partition_function,
 	@partition_scheme	= partition_scheme,
 	@partition_from		= Partition_Value_From,
 	@Partition_Key		= Partition_Key_Value
@@ -75,8 +75,6 @@ begin
 	or
 	(@position in ('M') and partition_number = @from_partition)
 	order by table_name, partition_number
-
-
 
 	if @position = 'R' and @alter = 'SPLIT'
 	begin
