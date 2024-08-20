@@ -1,3 +1,4 @@
+--grant
 select ep.endpoint_id, ep.name, ep.state_desc, sp.class_desc, sp.grantee_principal_id, spr.name, 
 sp.permission_name, sp.state_desc, ep.protocol_desc,
 sp.state_desc+' '+[permission_name]+' ON '+class_desc+'::['+ep.name+'] TO [' collate Latin1_General_CI_AS+spr.name+']' permission_script
