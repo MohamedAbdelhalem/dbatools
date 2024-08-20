@@ -1,16 +1,16 @@
 --parameters
 declare 
-@table_name				varchar(255)  = '[Sales].[SalesOrderHeader]',
-@position				char(1)       = 'l', --accepted values "R" for Right or "L" for Left or "M" for Manual, and this parameter will be ignored when @alter = 'MERGE'
-@alter					char(5)       = 'merge', --accepted values "SPLIT" or "MERGE"
+@table_name			varchar(255)  = '[Sales].[SalesOrderHeader]',
+@position			char(1)       = 'l', --accepted values "R" for Right or "L" for Left or "M" for Manual, and this parameter will be ignored when @alter = 'MERGE'
+@alter				char(5)       = 'merge', --accepted values "SPLIT" or "MERGE"
 @manual_split			int           = 0, --not yet activated
 @from_partition			int           = 44,
 @to_partition			int           = 45,
-@bulk					decimal(12,0) = 1000000,
+@bulk				decimal(12,0) = 1000000,
 @partition_column		varchar(255)  = 'SalesOrderID',
 @useLastFileGroup		int           = 1,
 @manualFileGroup		varchar(500)  = 'SalesFG',
-@action					int           = 1
+@action				int           = 1
 
 --variables
 declare
@@ -19,14 +19,14 @@ declare
 @partition_rows			varchar(255),
 @partition_from			varchar(255),
 @Partition_Key			varchar(255),
-@sql					nvarchar(max),
+@sql				nvarchar(max),
 @biggest_value			bigint,
 @smallest_value			bigint,
-@loop					int = 1,
-@psname					varchar(500),
-@fgname					varchar(500),
-@pscount				int,
-@executesql				varchar(2000)
+@loop				int = 1,
+@psname				varchar(500),
+@fgname				varchar(500),
+@pscount			int,
+@executesql			varchar(2000)
 
 if @alter in ('SPLIT','MERGE')
 begin
@@ -141,19 +141,19 @@ begin
 		select @partition_from = @partition_from + @bulk
 		if @action = 1
 		begin
-			print('ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');')  
+			print('ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');')  
 			print('GO')
 		end
 		else
 		if @action = 2
 		begin
-			set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
+			set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
 			exec(@executesql)  
 		end
 		else
 		if @action = 3
 		begin
-			set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
+			set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
 			exec(@executesql)  
 			print(@executesql)  
 			print('GO')
@@ -211,19 +211,19 @@ begin
 		select @partition_from = @Partition_Key - @bulk 
 		if @action = 1
 		begin
-			print('ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');')  
+			print('ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');')  
 			print('GO')
 		end
 		else
 		if @action = 2
 		begin
-			set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
+			set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
 			exec(@executesql)
 		end
 		else
 		if @action = 3
 		begin
-			set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
+			set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@partition_from as varchar(200))+');'
 			exec(@executesql)
 			print(@executesql)
 			print('GO')
@@ -281,19 +281,19 @@ begin
 
 			if @action = 1
 			begin
-				print('ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@Partition_Key as varchar(200))+');')  
+				print('ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@Partition_Key as varchar(200))+');')  
 				print('GO')
 			end
 			else
 			if @action = 2
 			begin
-				set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@Partition_Key as varchar(200))+');'
+				set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@Partition_Key as varchar(200))+');'
 				exec(@executesql)
 			end
 			else
 			if @action = 3
 			begin
-				set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() SPLIT RANGE ('+cast(@Partition_Key as varchar(200))+');'
+				set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() SPLIT RANGE ('+cast(@Partition_Key as varchar(200))+');'
 				exec(@executesql)
 				print(@executesql)
 				print('GO')
@@ -344,19 +344,19 @@ begin
 			begin
 				if @action = 1
 				begin
-					print('ALTER PARTITION FUNCTION '+@partition_function+'() MERGE RANGE ('+cast(@Partition_Key as varchar(200))+');')  
+					print('ALTER PARTITION FUNCTION ['+@partition_function+']() MERGE RANGE ('+cast(@Partition_Key as varchar(200))+');')  
 					print('GO')
 				end
 				else
 				if @action = 2
 				begin
-					set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() MERGE RANGE ('+cast(@Partition_Key as varchar(200))+');'
+					set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() MERGE RANGE ('+cast(@Partition_Key as varchar(200))+');'
 					exec(@executesql)
 				end
 				else
 				if @action = 3
 				begin
-					set @executesql = 'ALTER PARTITION FUNCTION '+@partition_function+'() MERGE RANGE ('+cast(@Partition_Key as varchar(200))+');'
+					set @executesql = 'ALTER PARTITION FUNCTION ['+@partition_function+']() MERGE RANGE ('+cast(@Partition_Key as varchar(200))+');'
 					exec(@executesql)
 					print(@executesql)
 					print('GO')
