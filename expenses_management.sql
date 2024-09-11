@@ -3,14 +3,11 @@ declare
 @start	float = 3500,
 @amount float,
 @number float = -1
-
 set @amount = @start
 
 while @number < 0
 begin
-
 delete @fin 
-
 insert into @fin (date_time, due, amount) 
 values
 ('2024-10-01', 0,@amount),
