@@ -3,11 +3,14 @@ declare
 @start	float = 3500,
 @amount float,
 @number float = -1
+
 set @amount = @start
 
 while @number < 0
 begin
+
 delete @fin 
+
 insert into @fin (date_time, due, amount) 
 values
 ('2024-10-01', 0,@amount),
@@ -45,11 +48,19 @@ from @fin f)a
 set @amount = @amount + 1
 end
 
-select date_time, due, amount, amount_due, @amount - 1 monthly_saving_amount, 
-master.dbo.format(min(amount_due) over(),-1) smallest_amount, 
-master.dbo.format(max(amount_due) over(),-1) biggest_amount
+select 
+convert(date,date_time,120) due_date, 
+master.dbo.format(due,-1) due_amount, 
+master.dbo.format(amount,-1) monthly_saving_amount, 
+master.dbo.format(amount_due,-1) incremental_monthly_payment,
+case 
+when amount_due = min(amount_due) over() then 'Smallest Amount is '+master.dbo.format(min(amount_due) over(),-1) 
+when amount_due = max(amount_due) over() then 'Biggest Amount is '+master.dbo.format(max(amount_due) over(),-1) 
+else '' end [statistics]
 from (
 select date_time, due, amount, 
 isnull((select SUM(amount) from @fin where id - 1 < f.id), amount) inc_amount,
 isnull((select SUM(amount - due) from @fin where id - 1 < f.id), amount) amount_due
 from @fin f)a
+order by due_date
+
