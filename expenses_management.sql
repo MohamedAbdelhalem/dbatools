@@ -39,7 +39,8 @@ values
 ('2026-09-01', 19500,N'ايجار قسظ أول',@amount),
 ('2026-10-01', 0,N'',@amount)
 
-select top 1 @number = min(amount_due) over() from (
+select @number = min(amount_due) 
+from (
 select date_time, due, amount, 
 isnull((select SUM(amount) from @fin where id - 1 < f.id), amount) inc_amount,
 isnull((select SUM(amount - due) from @fin where id - 1 < f.id), amount) amount_due
