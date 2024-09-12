@@ -1,14 +1,15 @@
 --use [AdventureWorks2019]
 go
 select 
-Partition_Function, Partition_Scheme, table_name, partition_size, table_size, partition_number, partition_rows, Partition_Key_Value, 
+Partition_Function, Partition_Scheme, table_name, partition_size, table_size, partition_number, partition_rows,  
 case when Partition_Value_From = 1 then case when boundary_value_on_right = 1 then '<' else '<=' end else 
 case 
 when (select name from sys.types tp where tp.user_type_id = x.user_type_id) in ('tinyint','smallint','int','bigint','decimal','numeric','float') then cast(Partition_Value_From as varchar(100)) 
 when (select name from sys.types tp where tp.user_type_id = x.user_type_id) in ('datetime2','smalldate','datetime','date') then convert(varchar(20),Partition_Value_From,120) 
 end end Partition_Value_From,
 Partition_Value_To	Partition_Range, 
-case when Partition_Value_To not in ('>=') then cast((cast(Partition_Value_To as bigint) - cast(Partition_Value_From as bigint)) as varchar(200)) end Partition_Range
+case when Partition_Value_To not in ('>=') then cast((cast(Partition_Value_To as bigint) - cast(Partition_Value_From as bigint)) as varchar(200)) end Partition_Range,
+Partition_Key_Value
 from (
 select '['+pf.name+']' Partition_Function, '['+ps.name+']' Partition_Scheme, al.table_name, partition_size,pp.user_type_id,boundary_value_on_right,
 master.dbo.numbersize(sum(total_pages) over(partition by al.table_name) *8.0,'k') table_size,
