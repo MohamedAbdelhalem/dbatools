@@ -8,7 +8,7 @@ declare
 @source_database_name	varchar(500) = 'AdventureWorks2016',
 @source_schema_table	varchar(500) = '[Sales].[SalesOrderHeader]',
 @keep_days				int = '31',
-@action					varchar(100) = 'insert into', --accepted values (select *, select count(*), delete, Insert Into)
+@action					varchar(100) = 'Insert Into', --accepted values (select *, select count(*), delete, Insert Into)
 @bulk					int = 1000, -- between 1000 and 3000 depend on sys.dm_tran_locks
 @exec					int = 1 --1=print, 2=execute
  
@@ -88,7 +88,7 @@ for
 select gid, min(['+@ci_or_pk_column_name+']), max(['+@ci_or_pk_column_name+'])
 from (
 select master.dbo.gbulk(row_number() over(order by ['+@ci_or_pk_column_name+']), '+cast(@bulk as varchar(100))+') gid, ['+@ci_or_pk_column_name+']
-from '+@table_name+' WITH (NOLOCK)
+from '+case when ltrim(rtrim(@action)) = 'insert into' then @source_database_name+'.'+@source_schema_table else @table_name end+' WITH (NOLOCK)
 where ['+@date_column_name+'] < '+''''+convert(varchar(10),dateadd(day,-@keep_days,getdate()),120)+''''+')a
 group by gid
 order by gid
