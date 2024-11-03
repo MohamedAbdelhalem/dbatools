@@ -1,21 +1,21 @@
 --use [AdventureWorks2019]
 go
 select 
-Partition_Function, Partition_Scheme, table_name, partition_size, table_size, partition_number, partition_rows,  
+Partition_Function, Partition_Scheme, table_name, partition_size, table_size, partition_number, fg.name filegroup_name, fg.is_read_only, Partition_Key_Value, partition_rows,  
 case when Partition_Value_From = 1 then case when boundary_value_on_right = 1 then '<' else '<=' end else 
 case 
 when (select name from sys.types tp where tp.user_type_id = x.user_type_id) in ('tinyint','smallint','int','bigint','decimal','numeric','float') then cast(Partition_Value_From as varchar(100)) 
 when (select name from sys.types tp where tp.user_type_id = x.user_type_id) in ('datetime2','smalldate','datetime','date') then convert(varchar(20),Partition_Value_From,120) 
 end end Partition_Value_From,
 Partition_Value_To	Partition_Range, 
-case when Partition_Value_To not in ('>=') then cast((cast(Partition_Value_To as bigint) - cast(Partition_Value_From as bigint)) as varchar(200)) end Partition_Range,
-Partition_Key_Value
+case when Partition_Value_To not in ('>=') then cast((cast(Partition_Value_To as bigint) - cast(Partition_Value_From as bigint)) as varchar(200)) end Partition_Range 
 from (
 select '['+pf.name+']' Partition_Function, '['+ps.name+']' Partition_Scheme, al.table_name, partition_size,pp.user_type_id,boundary_value_on_right,
 master.dbo.numbersize(sum(total_pages) over(partition by al.table_name) *8.0,'k') table_size,
 isnull((prv.boundary_id + boundary_value_on_right),al.partition_number) partition_number, partition_rows, prv.value Partition_Key_Value, 
 LAG(prv.value,1,1) OVER(ORDER BY table_name, partition_number) Partition_Value_From,
-case when prv.value is null then '>=' else prv.value end Partition_Value_To
+case when prv.value is null then '>=' else prv.value end Partition_Value_To,
+al.data_space_id aloc_data_space_id , ps.data_space_id ps_data_space_id 
 from (
 select i.data_space_id, p.object_id, p.index_id,
 '['+schema_name(schema_id)+'].['+t.name+']' table_name,partition_number,
@@ -41,7 +41,14 @@ left outer join sys.partition_range_values prv
 on prv.function_id = pf.function_id
 --and (prv.boundary_id + boundary_value_on_right) = al.partition_number
 and (prv.boundary_id + boundary_value_on_right) = al.partition_number
-where table_name = '[Sales].[SalesOrderDetail]'
+where table_name = '[dbo].[FactProductInventory_data01]'
 --and prv.value = datepart(DY,'2024-01-01')
-)x
+)x inner join sys.destination_data_spaces d
+on partition_number = d.destination_id
+inner join sys.filegroups fg
+on fg.data_space_id = d.data_space_id
 order by table_name, partition_number
+
+
+--select $PARTITION.[PARTITION_F_SALES_ORDER_ID_RIGHT](ProductKey) AS Partition, * from [dbo].[FactProductInventory_Data01]
+--where $PARTITION.[PARTITION_F_SALES_ORDER_ID_RIGHT](ProductKey) = 5
