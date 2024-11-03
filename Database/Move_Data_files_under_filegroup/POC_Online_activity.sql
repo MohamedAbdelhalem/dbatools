@@ -86,7 +86,7 @@ ALTER DATABASE [AdventureWorksDW2016] SET RECOVERY FULL
 
 --end database setup
 GO
---Taking a regular full backup in case you want to go before this step
+--Take a regular full backup in case you want to go before this step
 
 BACKUP DATABASE [AdventureWorksDW2016] 
 TO DISK = N'C:\share\AdventureWorksDW2016_all_full_backup.bak' WITH NOFORMAT, INIT,  
@@ -98,11 +98,13 @@ select name, state_desc, physical_name, m.is_read_only
 from sys.master_files m
 where database_id = db_id('AdventureWorksDW2016')
 
---
---step 0 change the file growth to 0 but it is an optional step
+--step 0 Change the file growth to 0 but it is an optional step
+---------------------------------------------------------------
 --ALTER DATABASE AdventureWorksDW2016 MODIFY FILE (NAME='AdventureWorksDW2016_Data_05', FILEGROWTH=0KB)
+	
 --step 1 change the filegroup from read-write to read-only
---but unfortantly you must close all sessions
+--Unfortunately, you must close all sessions
+----------------------------------------------------------
 ALTER DATABASE AdventureWorksDW2016 SET SINGLE_USER WITH ROLLBACK IMMEDIATE; 
 ALTER DATABASE AdventureWorksDW2016 MODIFY FILEGROUP FG05 READONLY; 
 ALTER DATABASE AdventureWorksDW2016 SET MULTI_USER;
@@ -113,17 +115,20 @@ from sys.master_files m
 where database_id = db_id('AdventureWorksDW2016')
 
 --step 2 take backup from the file/s you need to migrate it/them
---in my case i just move file 5 = AdventureWorksDW2016_Data_05
+--in my case, I just moved file 5 = AdventureWorksDW2016_Data_05
+------------------------------------------------------------------
 BACKUP DATABASE [AdventureWorksDW2016] 
 FILE = 'AdventureWorksDW2016_Data_05'
 TO DISK = N'C:\share\AdventureWorksDW2016_only_file_05_backup.bak' with INIT
 ------------------------------------------------------------------------------------
---the end of the praperation
+--the end of the preparation
 
---step 3 - taking the file in an offile state 
+--step 3 Take the file in an offline state 
+------------------------------------------
 ALTER DATABASE AdventureWorksDW2016 MODIFY FILE (NAME='AdventureWorksDW2016_Data_05', OFFLINE);
 
 --step 4 restore the file to another path
+--------------------------------------------
 RESTORE DATABASE [AdventureWorksDW2016] 
 FILE = 'AdventureWorksDW2016_Data_05'
 FROM DISK = N'C:\share\AdventureWorksDW2016_only_file_05_backup.bak'
@@ -136,7 +141,8 @@ select name, state_desc, physical_name, m.is_read_only, growth
 from sys.master_files m
 where database_id = db_id('AdventureWorksDW2016')
 
---step 5 the last step return again the filegroup to READ-Write state
+--step 5 the last step returns the filegroup to the READ-Write state
+-----------------------------------------------------------------------------
 ALTER DATABASE AdventureWorksDW2016 SET SINGLE_USER WITH ROLLBACK IMMEDIATE; 
 ALTER DATABASE AdventureWorksDW2016 MODIFY FILEGROUP FG05 READWRITE; 
 --again it's an optional step
