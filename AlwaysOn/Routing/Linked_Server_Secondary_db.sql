@@ -38,6 +38,14 @@ EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname = N'secondary_db', @locallogin 
 
 select * from [secondary_db].AdventureWorks2019.Sales.SalesOrderHeader
 select * from [secondary_db].master.sys.servers
+SELECT * FROM OPENQUERY([secondary_db], 'SELECT DATABASEPROPERTYEX(''AdventureWorks2019'', ''Updateability'')');
+SELECT * FROM OPENQUERY([primary_db], 'SELECT DATABASEPROPERTYEX(''AdventureWorks2019'', ''Updateability'')');
+SELECT * FROM OPENQUERY([192.168.100.102], 'SELECT DATABASEPROPERTYEX(''AdventureWorks2019'', ''Updateability'')');
+
+--After remove routing you will see this error
+--Msg 979, Level 14, State 1, Line 40
+--The target database ('AdventureWorks2019') is in an availability group and currently does not allow read only connections. For more information about application intent, see SQL Server Books Online.
+
 
 
 
