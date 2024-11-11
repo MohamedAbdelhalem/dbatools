@@ -1,15 +1,18 @@
 use master
 go
 select 
-ar.replica_server_name replica_server,ag.name availability_group_name, count(*) [sync_databases], db.state_desc, cm.member_state_desc member_state,ars.role_desc, cm.number_of_quorum_votes quorum_votes, 
+ar.replica_server_name replica_server,ag.name availability_group_name, count(*) [sync_databases], db.state_desc, 
+cm.member_state_desc member_state,ars.role_desc, cm.number_of_quorum_votes quorum_votes, 
 synchronization_state_desc sync_state_desc, rs.synchronization_health_desc sync_health_desc, database_state_desc, 
-master.dbo.numbersize(isnull(sum(log_send_queue_size),0),'kb') log_send_queue_size, --master.dbo.format(cast(cast(sum(log_send_queue_size) as float) /1024.0 as numeric(10,5)),5)log_send_queue_size_mb,
-master.dbo.numbersize(isnull(sum(redo_queue_size),0),'kb') redo_queue_size_not_yet,
-convert(varchar(20), dateadd(s, (cast(substring(master.dbo.numbersize(isnull(sum(redo_queue_size),0) + isnull(sum(log_send_queue_size),0),'kb'),1,charindex(' ',master.dbo.numbersize(isnull(sum(redo_queue_size),0) + isnull(sum(log_send_queue_size),0),'kb'))-1) as float) * 100.0), '2000-01-01'), 108) [Time to complete (0.01 GB = 2 sec)],
+master.dbo.numbersize(isnull(sum(log_send_queue_size),0),'kb') 'log_send_queue_size (RPO = Data Loss)', 
+--master.dbo.format(cast(cast(sum(log_send_queue_size) as float) /1024.0 as numeric(10,5)),5)log_send_queue_size_mb,
+master.dbo.numbersize(isnull(sum(redo_queue_size),0),'kb') 'redo_queue_size_not_yet (RTO = Long catch up)',
+--convert(varchar(20), dateadd(s, (cast(substring(master.dbo.numbersize(isnull(sum(redo_queue_size),0) + isnull(sum(log_send_queue_size),0),'kb'),1,charindex(' ',master.dbo.numbersize(isnull(sum(redo_queue_size),0) + isnull(sum(log_send_queue_size),0),'kb'))-1) as float) * 100.0), '2000-01-01'), 108) [Time to complete (0.01 GB = 2 sec)],
 master.dbo.numbersize(isnull((isnull(sum(log_send_queue_size),0) + isnull(sum(redo_queue_size),0)),0),'kb') total_waiting_logs,
 master.dbo.duration('s', sum(case when isnull(datediff(s,last_redone_time,getdate()),0) < 0 then 0 else isnull(datediff(s,last_redone_time,getdate()),0) end)) last_redone_time,
-case when sum(isnull(datediff(s,last_sent_time,getdate()),0)) < 60*60*1 then 'No Data Loss' else 'Data Loss' end PRO,
-master.dbo.duration('s', sum(case when isnull(datediff(s,last_sent_time,getdate()),0) < 0 then 0 else isnull(datediff(s,last_sent_time,getdate()),0) end)) [Data_loss_Time RPO], 
+case when sum(isnull(datediff(s,last_sent_time,getdate()),0)) < 60*60*1 then 'No Data Loss' else 'Data Loss' end RPO,
+master.dbo.duration('s', sum(case when isnull(datediff(s,last_sent_time,getdate()),0) <= 0 then 0 else isnull(datediff(s,last_sent_time,getdate()),0) end)) [Data_loss_Time RPO], 
+master.dbo.duration('s', sum(case when isnull(datediff(s,last_sent_time,last_received_time),0) <= 0 then 0 else isnull(datediff(s,last_redone_time,GETDATE()),0) end)) [Long_catch_up RTO], 
 master.dbo.duration('s', sum(isnull(datediff(s,last_sent_time,last_received_time),0))) [Network latency]
 from sys.dm_hadr_database_replica_states rs inner join sys.databases db 
 on rs.database_id = db.database_id
