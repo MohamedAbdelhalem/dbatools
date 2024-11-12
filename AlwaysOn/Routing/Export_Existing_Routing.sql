@@ -1,5 +1,6 @@
 select replica_id, replica_server_name, ag.name ag_name,[READ_ONLY_ROUTING_LIST],
-'ALTER AVAILABILITY GROUP ['+ag.name+'] MODIFY REPLICA ON N'+''''+replica_server_name+''''+' WITH (PRIMARY_ROLE (READ_ONLY_ROUTING_LIST='+[READ_ONLY_ROUTING_LIST]+'));'
+'ALTER AVAILABILITY GROUP ['+ag.name+'] MODIFY REPLICA ON N'+''''+replica_server_name+''''+' WITH (PRIMARY_ROLE (READ_ONLY_ROUTING_LIST='+[READ_ONLY_ROUTING_LIST]+'));' [READ_ONLY_ROUTING_EXIST],
+'ALTER AVAILABILITY GROUP ['+ag.name+'] MODIFY REPLICA ON N'+''''+replica_server_name+''''+' WITH (PRIMARY_ROLE (READ_ONLY_ROUTING_LIST=NONE));' [REMOVE_EXIST_READ_ONLY_ROUTING]
 from (
 select replica_id, replica_server_name, group_id, '(' +
 isnull([1],    '') + isnull(','+[2],'') + isnull(','+[3],'') + isnull(','+[4],'') + 
@@ -32,4 +33,3 @@ max([READ_ONLY_ROUTING_LIST]) for routing_priority in ([1],[2],[3],[4],[5],[6],[
 inner join sys.availability_groups ag
 on c.group_id = ag.group_id
 order by replica_id
-
