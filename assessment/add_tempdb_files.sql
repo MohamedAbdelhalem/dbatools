@@ -1,8 +1,8 @@
 declare 
 @required_files int = 8, --minimum files are 8 (default) 
-@location		varchar(1000) = 'default' --accepted inputs are
+@location varchar(1000) = 'default' --accepted inputs are
 --default or '' or null = same current location
---or add new location
+--or add a new location
   
 declare @table table (output_text varchar(max))
 
