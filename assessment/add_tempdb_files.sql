@@ -1,5 +1,5 @@
 declare 
-@required_files int = 12,
+@required_files int = 8, --minimum files are 8 (default) 
 @location		varchar(1000) = 'default'
 
 declare @table table (output_text varchar(max))
