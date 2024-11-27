@@ -1,4 +1,3 @@
-
 declare 
 @service_account	varchar(200),
 @FQDN				varchar(100),
@@ -30,15 +29,11 @@ exec xp_regread
 @value_name = 'Domain',
 @value = @FQDN output
 
-select 'setspn -s MSSQLSvc/'+name+'.'+@FQDN+' '+@service_account
+select 'setspn -S MSSQLSvc/'+case when charindex('\',name) > 0 then substring(name, 1, charindex('\',name)-1) else name end+'.'+@FQDN+ case when charindex('\',name) > 0 then ':'+substring(name, charindex('\',name)+1, len(name)) else '' end+' '+upper(@service_account)
 from sys.servers
 where server_id = 0
 union
-select 'setspn -s MSSQLSvc/'+name+'.'+@FQDN+':'+@port+' '+@service_account
+select 'setspn -S MSSQLSvc/'+case when charindex('\',name) > 0 then substring(name, 1, charindex('\',name)-1) else name end+'.'+@FQDN+':'+@port+' '+upper(@service_account)
 from sys.servers
 where server_id = 0
-union
-select 'setspn -s MSSQLSvc/'+name+'.'+@FQDN+':'+substring(name, charindex('\',name)+1, len(name))+' '+@service_account
-from sys.servers
-where server_id = 0
-and charindex('\',name) > 0
+
