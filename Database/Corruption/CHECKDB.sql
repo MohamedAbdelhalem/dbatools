@@ -23,7 +23,7 @@ go
 
 exec sp_readerrorlog 0, 1, 'checkdb'
 
---if you have to fix the data page with option Repair_allow_data_loss this means that the repair will drop a row or rows, page or pages, or the entire table
+--if you have to fix the data page with the option Repair_allow_data_loss this means that the repair will drop a row or rows, page or pages, or the entire table
 --so the primary fix here is to restore the last backups
 --means the data on disk is corrupted, may it because:
 --1- may one of the servers had a logical consistency-bases I/O error, which indicated that a data page could not be decrypted due to a missing DEK(Database Encryption Key).
@@ -32,8 +32,11 @@ exec sp_readerrorlog 0, 1, 'checkdb'
 --   For instance, if a page is supposed to contain a specific value but instead contains all zeros, this would be a clear sign of corruption.
 --4- may be because of hardware failures, such as faulty disks or memory. for example, if a disk controller malfunctions, it might write incorrect data to the disk, 
 --   This type of corruption is often detected during routine consistency checks.
---5- may be because inadequate transaction logging can cause torn pages, where only part of a page is written to disk. 
+--5- may be because inadequate transaction logging can cause torn pages, where only part of a page is written on disk. 
 --   This can happen if the system crashes or loses power during a write operation
 --
+
 -- Microsoft recommends restoring from a good backup first because when you restore the full backup (assuming the full backup is clean or free of corruption) and then apply all transaction logs up to the tail log backup, 
 -- you ensure that all transactions are redone. This process guarantees clean pages and helps mitigate any corruption.
+
+-- Maintaining a large retention of backup files can help mitigate corruption issues. Additionally, performing a weekly DBCC CHECKDB can ensure that the restoration process is brief and that you have a clean, full backup.
