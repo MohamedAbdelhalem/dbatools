@@ -11,5 +11,3 @@ Using a `uniqueidentifier` column with `NEWID()` as the first column in a cluste
 ### Summary
 - **Good for High Inserts**: The solution is effective for systems with high insert operations due to reduced contention and better scalability.
 - **Not Ideal for High Selects**: The increased fragmentation and larger index size can negatively impact read performance, making it less suitable for systems with high select operations.
-
-Would you like to explore alternative solutions for optimizing both insert and select operations?
