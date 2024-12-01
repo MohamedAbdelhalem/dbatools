@@ -1,4 +1,8 @@
-**Prompt [Try this prompt in Copilot for Microsoft 365](https://www.microsoft365.com/chat/entity1-d870f6cd-4aa5-4d42-9626-ab690c041429/eyJpZCI6IlZYTmxjbFl4ZkdoMGRIQnpPaTh2YzNWaWMzUnlZWFJsTFdsdWRDNXZabVpwWTJVdVkyOXRMM3hQU1VRNk1HTTVZVE01WTJNdFl6azFNeTAwWXpReUxUZ3hZakV0TWpSaE1qZGxNRFpqWmpJNGZHRXlOek16WVRabExURmpOell0TkRreE5TMWlOMkl3TFRRMVkyUmlNV0U0WWpjeE5Yd3lNREkwTFRFeUxUQXhWREV6T2pNd09qUXlMamN6TVRrek1qaGEiLCJzY2VuYXJpbyI6InNoYXJlTGlua1ZpYVJpY2hDb3B5IiwicHJvcGVydGllcyI6eyJwcm9tcHRTb3VyY2UiOiJ1c2VyIiwiY2xpY2tUaW1lc3RhbXAiOiIyMDI0LTEyLTAxVDEzOjMwOjQ0LjkwMloifSwiY2hhdFR5cGUiOiJ3b3JrIiwidmVyc2lvbiI6MS4xfQ)**
+**Microsoft recommends restoring from a good backup first because when you restore the full backup (assuming the full backup is clean or free of corruption) and then apply all transaction logs up to the tail log backup, you ensure that all transactions are redone. This process guarantees clean pages and helps mitigate any corruption.
+Maintaining a large retention of backup files can help mitigate corruption issues. Additionally, performing a weekly DBCC CHECKDB can ensure that the restoration process is brief and that you have a clean, full backup.
+**
+
+
 how to fix the page header when was overwritten with zeros as it due to bad disk cache, so how to use undocumented commands to fix this issue?
 **Response**
 Fixing a page header that has been overwritten with zeros due to a bad disk cache is a complex and risky process. It involves using undocumented commands, which should be used with extreme caution and only in non-production environments. Here’s a step-by-step guide on how to approach this:
