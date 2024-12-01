@@ -1,6 +1,5 @@
 **Microsoft recommends restoring from a good backup first because when you restore the full backup (assuming the full backup is clean or free of corruption) and then apply all transaction logs up to the tail log backup, you ensure that all transactions are redone. This process guarantees clean pages and helps mitigate any corruption.
-Maintaining a large retention of backup files can help mitigate corruption issues. Additionally, performing a weekly DBCC CHECKDB can ensure that the restoration process is brief and that you have a clean, full backup.
-**
+Maintaining a large retention of backup files can help mitigate corruption issues. Additionally, performing a weekly DBCC CHECKDB can ensure that the restoration process is brief and that you have a clean, full backup.**
 
 
 how to fix the page header when was overwritten with zeros as it due to bad disk cache, so how to use undocumented commands to fix this issue?
