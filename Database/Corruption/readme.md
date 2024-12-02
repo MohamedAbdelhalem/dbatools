@@ -44,7 +44,10 @@ When a page header is overwritten with zeros, it means that the metadata for tha
 ### Example Scenario
 Imagine you have a page with ID 224 that has been corrupted. You would first dump the page contents using `DBCC PAGE` to confirm the corruption. Then, calculate the offset where the corruption occurred and use `DBCC WRITEPAGE` to overwrite the corrupted data. Finally, set the database back to multi-user mode.
 
-If you need further assistance or specific examples related to your environment, feel free to ask![1](https://www.mssqltips.com/sqlservertip/5226/undetected-sql-server-data-corruption-with-database-page-verify-option-set-to-none/)[2](https://www.mssqltips.com/sqlservertip/2871/troubleshooting-and-fixing-sql-server-page-level-corruption/)[3](https://www.mssqltips.com/sqlservertip/5645/sql-server-database-corruption-and-impact-of-running-checkdb-repair-with-allow-data-loss/)
+(https://https://www.mssqltips.com/sqlservertip/5645/sql-server-database-corruption-and-impact-of-running-checkdb-repair-with-allow-data-loss/)[running-checkdb-repair-with-allow-data-loss]
+
+
+(https://www.mssqltips.com/sqlservertip/5226/undetected-sql-server-data-corruption-with-database-page-verify-option-set-to-none/)[2](https://www.mssqltips.com/sqlservertip/2871/troubleshooting-and-fixing-sql-server-page-level-corruption/)[3](https://www.mssqltips.com/sqlservertip/5645/sql-server-database-corruption-and-impact-of-running-checkdb-repair-with-allow-data-loss/)
 
 [1](https://www.mssqltips.com/sqlservertip/5226/undetected-sql-server-data-corruption-with-database-page-verify-option-set-to-none/): [Undetected SQL Server Data Corruption with Database Page Verify option set to NONE](https://www.mssqltips.com/sqlservertip/5226/undetected-sql-server-data-corruption-with-database-page-verify-option-set-to-none/)
 [2](https://www.mssqltips.com/sqlservertip/2871/troubleshooting-and-fixing-sql-server-page-level-corruption/): [Troubleshooting and Fixing SQL Server Page Level Corruption](https://www.mssqltips.com/sqlservertip/2871/troubleshooting-and-fixing-sql-server-page-level-corruption/)
