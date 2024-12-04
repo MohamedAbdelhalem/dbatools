@@ -11,7 +11,7 @@ GO
 CREATE Procedure [dbo].[sync_logins_between_replicas]
 (
 --parameters
-@show varchar(50) = 'sync', --accepted values "all" to show all the local logins, "sync" to create the logins that are not exits on the secondary replica
+@show varchar(50) = 'sync', --Accepted values "all" to show all the local logins, "sync" to create the logins that are not exit on the secondary replica
 @replica_name varchar(300) = '<replica name>'
 )
 as
