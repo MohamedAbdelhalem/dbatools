@@ -1,5 +1,7 @@
 use [master]
 GO
+--Create linked server and the below view and procedure in each replica. 
+GO
 Create View dbo.sys_logins(
 principal_id int, sid varbinary(max), loginname varchar(200),is_disabled int,language varchar(200),denylogin int,hasaccess int,
 sysadmin varchar(50),securityadmin varchar(50),serveradmin varchar(50),setupadmin varchar(50),processadmin varchar(50),diskadmin varchar(50),dbcreator varchar(50),bulkadmin varchar(50))
@@ -10,7 +12,7 @@ CREATE Procedure [dbo].[sync_logins_between_replicas]
 (
 --parameters
 @show varchar(50) = 'sync',
-@replica_name varchar(300) = 'IAUSQLCLS02'
+@replica_name varchar(300) = '<replica name>'
 )
 as
 begin
@@ -154,5 +156,5 @@ where script is not null
 order by loginname, script desc
 end
 set nocount off
-----Exec ('Create Login [DBA_Temp] With Password = 0x0200B5868C4C2387D6EDEBF8BEE40E4C5A9C890C35B9CF025088511C04F41EB0B19B2D19B2651EFC65059DC3736DBB1D66A5E03CEA43A923B05382CCBE18FC12BBEB3D44EEE6 Hashed, SID = 0xC86970323776CF4F90EECCA4D88C5B48, Default_Database = [master], Check_Policy = OFF, Check_Expiration = OFF;') AT [IAUSQLCLS02]
+----Exec ('Create Login [DBA_Temp] With Password = 0xCF654654654654607777708BEE40E4C5A9C890C35B9CF025088511C04F51EFC65059D5382CCBE18FC12BBEB3D44EEE6 Hashed, SID = 0xCF654587886970323776CF4F90EECCA4D88C5B48, Default_Database = [master], Check_Policy = OFF, Check_Expiration = OFF;') AT [<linked server replica name>]
 end
