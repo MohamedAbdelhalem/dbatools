@@ -1,7 +1,14 @@
---parameters
- 
+use [master]
+GO
+Create View dbo.sys_logins(
+principal_id int, sid varbinary(max), loginname varchar(200),is_disabled int,language varchar(200),denylogin int,hasaccess int,
+sysadmin varchar(50),securityadmin varchar(50),serveradmin varchar(50),setupadmin varchar(50),processadmin varchar(50),diskadmin varchar(50),dbcreator varchar(50),bulkadmin varchar(50))
+
+GO
+
 CREATE Procedure [dbo].[sync_logins_between_replicas]
 (
+--parameters
 @show varchar(50) = 'sync',
 @replica_name varchar(300) = 'IAUSQLCLS02'
 )
