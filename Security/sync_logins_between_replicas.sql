@@ -2,12 +2,28 @@ use [master]
 GO
 --Create linked server and the below view and procedure in each replica. 
 GO
-Create View dbo.sys_logins(
-principal_id int, sid varbinary(max), loginname varchar(200),is_disabled int,language varchar(200),denylogin int,hasaccess int,
-sysadmin varchar(50),securityadmin varchar(50),serveradmin varchar(50),setupadmin varchar(50),processadmin varchar(50),diskadmin varchar(50),dbcreator varchar(50),bulkadmin varchar(50))
+Create View dbo.sys_logins
+as
+select sp.principal_id, l.sid, loginname, is_disabled, language, denylogin, hasaccess, 
+case sysadmin        when 1 then 'sysadmin'			else null end sysadmin, 
+case securityadmin   when 1 then 'securityadmin'	else null end securityadmin, 
+case serveradmin     when 1 then 'serveradmin'		else null end serveradmin, 
+case setupadmin      when 1 then 'setupadmin'		else null end setupadmin, 
+case processadmin    when 1 then 'processadmin'		else null end processadmin, 
+case diskadmin       when 1 then 'diskadmin'		else null end diskadmin, 
+case dbcreator       when 1 then 'dbcreator'		else null end dbcreator, 
+case bulkadmin       when 1 then 'bulkadmin'		else null end bulkadmin 
+from sys.syslogins l inner join sys.server_principals sp
+on l.name = sp.name
+where l.name not like '#%'
+and l.name not like 'NT SERVICE\%'
+and l.name not like 'NT AUTHORITY\%'
+and sp.type in ('u','g','s')
+
 
 GO
-
+exec [dbo].[sync_logins_between_replicas] @show='sync',@replica_name='SQLSERVERVM02'
+GO
 CREATE Procedure [dbo].[sync_logins_between_replicas]
 (
 --parameters
