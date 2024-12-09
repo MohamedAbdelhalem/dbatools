@@ -22,9 +22,11 @@ and sp.type in ('u','g','s')
 
 
 GO
-exec [dbo].[sync_logins_between_replicas] @show='sync',@replica_name='SQLSERVERVM02'
+--exec [dbo].[sync_logins_between_replicas] @show='sync',@replica_name='SQLSERVERVM02'
 GO
-ALTER Procedure [dbo].[sync_logins_between_replicas]
+CREATE
+--ALTER 
+Procedure [dbo].[sync_logins_between_replicas]
 (
 --parameters
 @show varchar(50) = 'sync', --Accepted values "all" to show all the local logins, "sync" to create the logins that are not exit on the secondary replica
