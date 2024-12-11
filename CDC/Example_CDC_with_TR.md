@@ -49,6 +49,21 @@ Integrate the captured changes into your ETL process:
 - Transform the data as needed.
 - Load the data into the destination (data warehouse).
 
+When using Change Data Capture (CDC) with transactional replication in SQL Server, the ETL process using SSIS or another ETL tool typically reads from the **Subscriber**.
+
+Here’s why:
+- The **Publisher** is your primary, source database where the original transactions occur. It’s critical to minimize the load and impact on the Publisher to ensure optimal performance and availability.
+- The **Subscriber** receives the replicated changes and maintains an up-to-date copy of the data. This makes it an ideal source for your ETL processes because it allows you to offload the data extraction and transformation workload from the primary database.
+
+By reading from the Subscriber, you can ensure that your ETL processes don’t interfere with the performance of the primary database and that you can still capture all the necessary changes tracked by CDC.
+
+### ETL Process with Subscriber
+1. **Extract**: Use your ETL tool to read changes from the CDC tables on the Subscriber database.
+2. **Transform**: Process the change data as needed for your data warehouse.
+3. **Load**: Load the transformed data into the data warehouse.
+
+This approach ensures that your ETL operations are efficient and have minimal impact on your primary operational systems.
+
 ### Important Considerations:
 - **Latency**: There might be some latency between when changes are made and when they appear in the destination database.
 - **Permissions**: Ensure that the required permissions are set for CDC and replication.
