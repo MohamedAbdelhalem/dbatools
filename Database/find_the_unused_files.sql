@@ -36,7 +36,7 @@ select
 ltrim(rtrim(substring(output_text, charindex('m ',output_text)+1, len(output_text)))) output_text,
 ltrim(rtrim(substring(output_text, 1, charindex('m ',output_text)-2))) last_modify_date
 from @table
-where output_text like '%M %'
+where output_text like '%M  %'
 and output_text not like '%<DIR>%')a)b
 
 delete @table 
