@@ -9,3 +9,9 @@ The "**Replace a process-level token**" security policy in SQL Server allows a s
 If this role is missing for a service account, the affected services may fail to start or perform specific tasks that require this privilege. This can lead to issues with automated tasks, scheduled jobs, and other operations that depend on the ability to replace process-level tokens.
 
 To ensure smooth operation, you can manually add the service account to the "Replace a process-level token" policy using the Local Security Policy tool (secpol.msc) on Windows.
+
+The "**Bypass traverse checking**" security policy in SQL Server allows a service account to navigate an object path in the NTFS file system or in the registry without being checked for the Traverse Folder special access permission. This means that the account can traverse folders to access permitted files or subfolders, but it does not allow the account to list the contents of a folder.
+
+If this role is missing for a service account, the affected services may encounter issues when trying to access certain files or directories. This can lead to problems with automated tasks, scheduled jobs, and other operations that require access to specific paths.
+
+To ensure smooth operation, you can manually add the service account to the "Bypass traverse checking" policy using the Local Security Policy tool (secpol.msc) on Windows.
