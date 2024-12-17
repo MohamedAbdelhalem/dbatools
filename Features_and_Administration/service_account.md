@@ -15,3 +15,10 @@ The "**Bypass traverse checking**" security policy in SQL Server allows a servic
 If this role is missing for a service account, the affected services may encounter issues when trying to access certain files or directories. This can lead to problems with automated tasks, scheduled jobs, and other operations that require access to specific paths.
 
 To ensure smooth operation, you can manually add the service account to the "Bypass traverse checking" policy using the Local Security Policy tool (secpol.msc) on Windows.
+
+
+The "**Adjust memory quotas for a process**" security policy in SQL Server allows a service account to change the maximum amount of memory that is available to a process. This is important for system tuning and ensuring that SQL Server can dynamically manage its memory usage based on the workload.
+
+If this role is missing for a service account, SQL Server may encounter issues with memory management, leading to performance problems or even failure to start. This can affect the overall performance and stability of the SQL Server instance.
+
+To ensure smooth operation, you can manually add the service account to the "Adjust memory quotas for a process" policy using the Local Security Policy tool (secpol.msc) on Windows.
