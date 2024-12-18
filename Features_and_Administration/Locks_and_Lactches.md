@@ -16,19 +16,19 @@ Let's break down the scenario with the three sessions (SPIDs) and see how latche
 ### Latches and Locks in Action
 
 #### SPID 77 (Reading Page 1000)
-- **Latch**: Since page 1000 is not in memory, SQL Server will need to load it from disk. It will acquire a **PAGEIOLATCH_SH** (shared I/O latch) to read the page into the buffer pool¹(https://learn.microsoft.com/en-us/sql/relational-databases/diagnose-resolve-latch-contention?view=sql-server-ver16).
+- **Latch**: Since page 1000 is not in memory, SQL Server will need to load it from disk. It will acquire a **PAGEIOLATCH_SH** (shared I/O latch) to read the page into the buffer pool.
 - **Lock**: Once the page is in memory, SPID 77 will acquire a **shared lock (S)** on page 1000 to read the data, ensuring no other transaction can modify it while it's being read.
 
 #### SPID 78 (Reading Pages 1000 and 1001)
 - **Latch**:
-  - For page 1000 (not in memory), SQL Server will acquire a **PAGEIOLATCH_SH** to load it into the buffer pool¹(https://learn.microsoft.com/en-us/sql/relational-databases/diagnose-resolve-latch-contention?view=sql-server-ver16).
-  - For page 1001 (already in memory), SQL Server will acquire a **PAGELATCH_SH** (shared latch) to ensure the page is not modified while being read²(https://www.sqlshack.com/all-about-latches-in-sql-server/).
+  - For page 1000 (not in memory), SQL Server will acquire a **PAGEIOLATCH_SH** to load it into the buffer pool.
+  - For page 1001 (already in memory), SQL Server will acquire a **PAGELATCH_SH** (shared latch) to ensure the page is not modified while being read.
 - **Lock**: SPID 78 will acquire **shared locks (S)** on both pages 1000 and 1001 to read the data.
 
 #### SPID 79 (Inserting into Page 1001 and Updating Page 1002)
 - **Latch**:
-  - For page 1001 (in memory), SQL Server will acquire a **PAGELATCH_EX** (exclusive latch) to modify the page²(https://www.sqlshack.com/all-about-latches-in-sql-server/).
-  - For page 1002 (not in memory), SQL Server will acquire a **PAGEIOLATCH_EX** to load it into the buffer pool and then a **PAGELATCH_EX** to modify it¹(https://learn.microsoft.com/en-us/sql/relational-databases/diagnose-resolve-latch-contention?view=sql-server-ver16).
+  - For page 1001 (in memory), SQL Server will acquire a **PAGELATCH_EX** (exclusive latch) to modify the page.
+  - For page 1002 (not in memory), SQL Server will acquire a **PAGEIOLATCH_EX** to load it into the buffer pool and then a **PAGELATCH_EX** to modify it.
 - **Lock**:
   - For the insert operation on page 1001, SPID 79 will acquire an **exclusive lock (X)** to ensure no other transaction can read or modify the data during the insert.
   - For the update operation on page 1002, SPID 79 will acquire an **exclusive lock (X)** to ensure the data is not read or modified by other transactions during the update.
@@ -45,9 +45,3 @@ Let's break down the scenario with the three sessions (SPIDs) and see how latche
 
 By using both latches and locks, SQL Server ensures that data is read and written safely and consistently, even when multiple sessions are accessing the same pages.
 
-¹(https://learn.microsoft.com/en-us/sql/relational-databases/diagnose-resolve-latch-contention?view=sql-server-ver16): [Diagnose and resolve latch contention](https://learn.microsoft.com/en-us/sql/relational-databases/diagnose-resolve-latch-contention?view=sql-server-ver16)
-²(https://www.sqlshack.com/all-about-latches-in-sql-server/): [All about Latches in SQL Server](https://www.sqlshack.com/all-about-latches-in-sql-server/)
-
-Source: Conversation with Copilot, 12/18/2024
-(1) Whitepaper: Diagnose & resolve latch contention - SQL Server. https://learn.microsoft.com/en-us/sql/relational-databases/diagnose-resolve-latch-contention?view=sql-server-ver16.
-(2) All about Latches in SQL Server - SQL Shack. https://www.sqlshack.com/all-about-latches-in-sql-server/.
