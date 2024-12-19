@@ -1,4 +1,4 @@
-**Does bucket_count need me to monitor if the number was exceeded and how to maintain it?**
+### Does bucket_count need me to monitor if the number was exceeded and how to maintain it?
 
 Yes, monitoring the `BUCKET_COUNT` for hash indexes on memory-optimized tables is important to ensure optimal performance. Here’s what you need to know:
 
@@ -12,7 +12,7 @@ Yes, monitoring the `BUCKET_COUNT` for hash indexes on memory-optimized tables i
 
 
 
-**When the hash index is used for distinct values and every memory-optimized table requires at least one index (with no clustered index), the hash index will act as the clustered index, similar to a traditional disk-based table. When creating the table initially and specifying the Bucket_Count, it should be 1-2 times the number of distinct values. Therefore, I need to estimate the total values in the table as a row count, as I am designing this hash index as a clustered unique index. For example, if I have a table called customers and customer_id is a unique column, this will be my hash index column. In this case, I need to estimate the total number of customers and monitor the bucket_count to ensure it does not exceed the row number. If the values are unique and the bucket_count exceeds the row number, I must drop the index and create it again with a higher bucket_count. Please evaluate my understanding.**
+### When the hash index is used for distinct values and every memory-optimized table requires at least one index (with no clustered index), the hash index will act as the clustered index, similar to a traditional disk-based table. When creating the table initially and specifying the Bucket_Count, it should be 1-2 times the number of distinct values. Therefore, I need to estimate the total values in the table as a row count, as I am designing this hash index as a clustered unique index. For example, if I have a table called customers and customer_id is a unique column, this will be my hash index column. In this case, I need to estimate the total number of customers and monitor the bucket_count to ensure it does not exceed the row number. If the values are unique and the bucket_count exceeds the row number, I must drop the index and create it again with a higher bucket_count. Please evaluate my understanding.
 
 
 Let's clarify a few points to ensure everything is clear:
@@ -32,7 +32,7 @@ Let's clarify a few points to ensure everything is clear:
 In summary, your approach is correct: you need to estimate the number of unique values when creating the hash index and monitor the `BUCKET_COUNT` to ensure it remains appropriate as your data grows. If necessary, you will need to recreate the index with a higher `BUCKET_COUNT`.
 
 
-**How to know that I have hash collisions in my index?**
+### How to know that I have hash collisions in my index?
 
 To determine if you have hash collisions in your memory-optimized hash index, you can use the `sys.dm_db_xtp_hash_index_stats` dynamic management view (DMV). This DMV provides detailed statistics about the performance and health of your hash indexes. Here’s how you can use it:
 
@@ -67,7 +67,7 @@ To determine if you have hash collisions in your memory-optimized hash index, yo
 By regularly monitoring these statistics, you can ensure that your hash indexes remain efficient and adjust them as needed to handle growing data volumes.
 
 
-**Clarify the internal meaning of `chain_length`**
+### Clarify the internal meaning of `chain_length`
 
 In the context of memory-optimized hash indexes, the **chain length** refers to the number of entries (or rows) that are linked together in a single bucket due to hash collisions. Here’s a more detailed explanation:
 
@@ -102,7 +102,7 @@ ON
 By monitoring these statistics, you can ensure that your hash indexes remain efficient and make adjustments as needed.
 
 
-**As a rule of thumb, if I see two rows in a single bucket, that will be a bucket collision. With an estimated 10,000,000 rows, this means that with 9,999,999 rows, I will not have any bucket collision. Is this correct, or is there another way?**
+### As a rule of thumb, if I see two rows in a single bucket, that will be a bucket collision. With an estimated 10,000,000 rows, this means that with 9,999,999 rows, I will not have any bucket collision. Is this correct, or is there another way?
 
 You're on the right track, but let's clarify a bit more about hash collisions and bucket distribution:
 
@@ -118,7 +118,7 @@ You're on the right track, but let's clarify a bit more about hash collisions an
 
 In summary, while setting the `BUCKET_COUNT` to match or exceed the number of rows helps reduce collisions, some collisions are still possible. Monitoring and adjusting based on actual data distribution is key to maintaining optimal performance.
 
-**What is the collision percentage at which I must drop and recreate the hash index?**
+### What is the collision percentage at which I must drop and recreate the hash index?
 
 There isn't a strict rule for the exact collision percentage that necessitates dropping and recreating a hash index, but there are some guidelines you can follow to maintain optimal performance:
 
@@ -151,7 +151,7 @@ ON
 By regularly monitoring these statistics, you can make informed decisions about when to adjust your hash indexes.
 
 
-**Does dropping and recreating the hash index mean dropping the entire table and creating it again? What is the estimated time for a table with a 128 GB size? Also, will it impact table access during the maintenance window? Lastly, is there any online operation available for hash indexes?**
+### Does dropping and recreating the hash index mean dropping the entire table and creating it again? What is the estimated time for a table with a 128 GB size? Also, will it impact table access during the maintenance window? Lastly, is there any online operation available for hash indexes?
 
 Dropping and recreating a hash index does not mean you have to drop the entire table. However, it does impact the table's availability and performance during the operation. Here’s a detailed explanation:
 
