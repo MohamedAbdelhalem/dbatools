@@ -18,12 +18,12 @@ END;
 GO
 ```
 
-In this example, the stored procedure `usp_2` is created without the `NATIVE_COMPILATION` and `SCHEMABINDING` options. It will be interpreted and can still access the memory-optimized table `T2`[1](https://learn.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/creating-a-memory-optimized-table-and-a-natively-compiled-stored-procedure?view=sql-server-ver16)[2](https://www.sqlservercentral.com/articles/natively-compiled-stored-procedures-what-they-are-all-about).
+In this example, the stored procedure `usp_2` is created without the `NATIVE_COMPILATION` and `SCHEMABINDING` options. It will be interpreted and can still access the memory-optimized table `T2`
 
 
 ### You can create a procedure that contains memory-optimized tables with both `SCHEMABINDING` and `NATIVE_COMPILATION` options in SQL Server. 
 
-When you create a natively compiled stored procedure, you must use the `NATIVE_COMPILATION` option to indicate that the procedure is natively compiled. Additionally, the `SCHEMABINDING` option is required for natively compiled stored procedures. This means that the tables referenced by the procedure cannot be dropped unless the procedure itself is dropped first. The tables referenced in the procedure must include their schema name, and wildcards (*) are not allowed in queries[1](https://learn.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/creating-natively-compiled-stored-procedures?view=sql-server-ver16)[2](https://learn.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/native-compilation-of-tables-and-stored-procedures?view=sql-server-ver16).
+When you create a natively compiled stored procedure, you must use the `NATIVE_COMPILATION` option to indicate that the procedure is natively compiled. Additionally, the `SCHEMABINDING` option is required for natively compiled stored procedures. This means that the tables referenced by the procedure cannot be dropped unless the procedure itself is dropped first. The tables referenced in the procedure must include their schema name, and wildcards (*) are not allowed in queries.
 
 Here is an example of how you can create a natively compiled stored procedure with `SCHEMABINDING`:
 
@@ -47,6 +47,6 @@ END;
 GO
 ```
 
-In this example, the `NATIVE_COMPILATION` option indicates that the stored procedure is natively compiled, and the `SCHEMABINDING` option ensures that the procedure is bound to the schema of the objects it references[1](https://learn.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/creating-natively-compiled-stored-procedures?view=sql-server-ver16)[2](https://learn.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/native-compilation-of-tables-and-stored-procedures?view=sql-server-ver16).
+In this example, the `NATIVE_COMPILATION` option indicates that the stored procedure is natively compiled, and the `SCHEMABINDING` option ensures that the procedure is bound to the schema of the objects it references.
 
 
