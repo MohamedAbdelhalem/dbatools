@@ -1,4 +1,4 @@
-Is it a good idea to create a new hash index and then drop the old one with high collision, instead of dropping and recreating the hash index?
+### Is it a good idea to create a new hash index and then drop the old one with high hash collision, instead of dropping and recreating the hash index?
 
 Creating a new hash index and then dropping the old one can be a good strategy to minimize downtime and maintain table access. Here’s how this approach can help:
 
