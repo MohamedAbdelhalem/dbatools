@@ -18,6 +18,6 @@ To troubleshoot and mitigate these issues, consider the following steps:
 
 - **Monitor Index Statistics**: Regularly check the performance statistics of your indexes using DMVs like `sys.dm_db_xtp_index_stats` and `sys.dm_db_xtp_hash_index_stats`.
 
-- **Optimize Index Design**: Ensure that your indexes are designed to match your query patterns. Consider adding covering indexes or adjusting existing indexes to better support your workload²(https://techcommunity.microsoft.com/blog/sqlserver/in-memory-oltp-indexes---part-2-performance-troubleshooting-guide-/385725).
+- **Optimize Index Design**: Ensure that your indexes are designed to match your query patterns. Consider adding covering indexes or adjusting existing indexes to better support your workload.
 
 - **Manage Memory**: Monitor memory usage and ensure that your system has enough memory to support your memory-optimized tables and indexes.
