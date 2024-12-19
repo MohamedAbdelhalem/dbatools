@@ -1,4 +1,4 @@
-Bad performance on a memory-optimized non-clustered index can occur under several conditions. Here are some common scenarios and their causes:
+### Bad performance on a memory-optimized non-clustered index can occur under several conditions. Here are some common scenarios and their causes:
 
 1. **Inefficient Query Patterns**: If your queries are not well-suited to the index structure, performance can suffer. For example, non-clustered indexes are optimized for forward ordered scans. Queries that require backward scans or complex joins might not perform well.
 
