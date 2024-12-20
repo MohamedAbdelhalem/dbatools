@@ -27,7 +27,7 @@ c. If the SQL Server service does not start, assign permission to the local serv
 d. To Test the connection using the Encrypt Connection option:
 
 1. Open SSMS -> Options -> Connection Properties -> Encrypt connection (Enable the Checkbox)
-2. In server name type SQLN2.corpnet.contoso.com
+2. In server name type `SQLProdN1`
 3. Connect to the SQL Server instance
 
 - View sys.dm_exec_connections to review connection information and confirm connections are encrypted.
