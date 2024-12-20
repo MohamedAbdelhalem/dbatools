@@ -12,3 +12,10 @@
 Imagine a high-traffic data warehouse where multiple ETL processes are inserting data into a table with a clustered columnstore index. To handle these concurrent inserts efficiently, SQL Server might create multiple deltastores. As the tuple mover compresses and closes these deltastores, new ones can be created to handle ongoing inserts.
 
 This design ensures that the system remains performant and can handle high volumes of data efficiently.
+
+
+### so how many deltastores can have 1 clustered index columnstore?
+
+A clustered columnstore index can have multiple deltastores. Each deltastore corresponds to a rowgroup in the **OPEN** state, where new rows are temporarily stored in a rowstore format before being compressed into the columnstore format.
+
+There isn't a strict limit on the number of deltastores a clustered columnstore index can have, but having too many deltastores can impact performance. The tuple mover process periodically compresses these deltastores into columnstore rowgroups to optimize storage and query performance.
