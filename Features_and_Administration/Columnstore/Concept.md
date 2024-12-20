@@ -1,6 +1,4 @@
 ## Let's say I have a table with 50 columns and a clustered index column store containing 5000 rowgroups. If a select statement requires only 100 rowgroups and 10 columns, the engine will select these 100 rowgroups, extract the 10 segments for each rowgroup, decompress these segments, and convert them from columnar to regular rowstore. It will then perform the necessary relations and aggregations before presenting the results to the user. 
-## Could you please evaluate my understanding?
-
 
 that's quite accurate! Here's a detailed breakdown to confirm and clarify:
 
