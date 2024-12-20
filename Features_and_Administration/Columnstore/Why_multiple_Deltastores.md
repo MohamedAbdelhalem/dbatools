@@ -1,4 +1,4 @@
-## A clustered columnstore index can have multiple deltastores for several reasons:
+# A clustered columnstore index can have multiple deltastores for several reasons:
 
 1. **Concurrent Inserts**: When multiple insert operations occur simultaneously, SQL Server can create multiple deltastores to handle these concurrent operations efficiently. This helps avoid contention and ensures that inserts can proceed without waiting for a single deltastore to be processed.
 
