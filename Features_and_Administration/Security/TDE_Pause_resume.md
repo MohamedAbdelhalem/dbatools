@@ -127,5 +127,5 @@ SET ENCRYPTION RESUME;
 GO
 ```
 
-This approach helps manage the performance impact of TDE encryption on your SQL Server instance¹(https://www.mssqltips.com/sqlservertip/7381/sql-server-tde-initial-scan-suspend-resume/)²(https://learn.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-ver16).
+This approach helps manage the performance impact of TDE encryption on your SQL Server instance.
 
