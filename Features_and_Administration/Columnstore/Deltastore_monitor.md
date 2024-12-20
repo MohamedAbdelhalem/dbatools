@@ -1,5 +1,4 @@
-so how to know the number of deltastores in my columnstore clustered index
-
+## How can I determine the number of deltastores in my columnstore clustered index?
 
 To find out the number of deltastores in your clustered columnstore index, you can query the system catalog views in SQL Server. Specifically, you can use the `sys.column_store_row_groups` view, which provides information about the rowgroups, including deltastores.
 
@@ -13,11 +12,9 @@ SELECT
 FROM 
     sys.column_store_row_groups
 WHERE 
-    state_desc = 'OPEN' -- This indicates deltastores
+    state_description = 'OPEN' -- This indicates deltastores
 GROUP BY 
     object_id, partition_number;
 ```
 
 This query will return the table name, partition number, and the count of deltastores for each partition. The `state_desc = 'OPEN'` condition filters the results to include only the deltastores.
-
-Would you like more details on interpreting these results or any other aspect of managing columnstore indexes?
