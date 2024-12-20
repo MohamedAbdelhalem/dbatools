@@ -1,6 +1,6 @@
 # Does "open" in the state_description column of sys.column_store_row_groups mean it is not compressed?
 
-You are correct. In the `sys.column_store_row_groups` view, the `state_description` column indicates the state of each rowgroup. When the `state_description` is **OPEN**, it means that the rowgroup is still in a rowstore format and is accepting new records. It has not yet been compressed into the columnstore format¹(https://learn.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-column-store-row-groups-transact-sql?view=sql-server-ver16).
+You are correct. In the `sys.column_store_row_groups` view, the `state_description` column indicates the state of each rowgroup. When the `state_description` is **OPEN**, it means that the rowgroup is still in a rowstore format and is accepting new records. It has not yet been compressed into the columnstore format.
 
 Here are the possible states for a rowgroup:
 
