@@ -18,9 +18,9 @@ b. To install and configure a certificate for the SQL Server instance.
 6. Restart the SQL Server service.
 
 c. If the SQL Server service does not start, assign permission to the local service account.
-1. In the search bar type, "certlm.msc", and then select Manage computer certificates
+1. In the search bar type, `certlm.msc`, and then select Manage computer certificates
 2. Select Personal and then Certificates. 
-3. Right-click the "SQLCertificate" certificate, select All Tasks, and then Manage Private Keys.
+3. Right-click the `SQLCertificate` certificate, select All Tasks, and then Manage Private Keys.
 4. Add `corpnet\SQLN2_SVC` in the security box with Full Control.
 5. Click OK and return to the Configuration Manager to restart the SQL Server service.
 
