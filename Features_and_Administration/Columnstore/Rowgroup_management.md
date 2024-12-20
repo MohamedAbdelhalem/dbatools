@@ -1,4 +1,4 @@
-Logically, in the case of a columnstore index, when I reach 1,048,576 rows, the tuple mover will compress and close the rowgroup. However, what happens when the rows in the rowgroup are below 1,048,576? Are they compressed or not, and are the columns split into segments or not?
+## Logically, in the case of a columnstore index, when I reach 1,048,576 rows, the tuple mover will compress and close the rowgroup. However, what happens when the rows in the rowgroup are below 1,048,576? Are they compressed or not, and are the columns split into segments or not?
 
 When a rowgroup in a columnstore index has fewer than 1,048,576 rows, it can still be compressed, but the behavior depends on the specific circumstances:
 
