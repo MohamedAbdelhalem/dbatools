@@ -2,7 +2,7 @@
 
 You're almost correct, but let's clarify the details:
 
-1. **Deltastore**: 
+1. **Deltastore (multi Delta groups)**: 
    - **OPEN**: This state indicates that the rowgroup is in the deltastore and is still in rowstore format. It is accepting new records and has not yet been compressed.
 
 2. **Rowgroup**:
