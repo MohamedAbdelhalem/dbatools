@@ -98,4 +98,4 @@ SELECT t.[commit_time] AS [CommitTime]
  SELECT * FROM Account.BalanceHistory
 
 ```
-This command enables the ledger feature for the `SalesLedger` table, ensuring all changes are securely logged and verifiable.
+
