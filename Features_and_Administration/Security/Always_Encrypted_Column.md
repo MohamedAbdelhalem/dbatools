@@ -39,7 +39,7 @@ CREATE TABLE dbo.Patients
 
 13. fill the table with this sample by executing this code
 14. connect to SQL Server by opening then SSMS and put in the **Additional Connection Parameter** `Column Encryption Setting=Enabled`
-15. or connect to SQL Server by **sqlcmd -S . -E `-g` -d AdventureWorks2019**
+15. or connect to SQL Server by **SQLCMD -S . -E `-g` -d AdventureWorks2019**
 
 ```SQL
 USE Adventureworks2022
