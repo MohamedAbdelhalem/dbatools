@@ -33,8 +33,10 @@ d. To Test the connection using the Encrypt Connection option:
 - View sys.dm_exec_connections to review connection information and confirm connections are encrypted.
 ```SQL
 
-SELECT session_id, net_transport, encrypt_option, client_net_address FROM sys.dm_exec_connections
-
+SELECT session_id, net_transport, encrypt_option, client_net_address
+FROM sys.dm_exec_connections
+WHERE session_id = @@spid
+ 
 --The encrypt_option column will contain the value TRUE indicating that the connections are encrypted.
 ````
 
