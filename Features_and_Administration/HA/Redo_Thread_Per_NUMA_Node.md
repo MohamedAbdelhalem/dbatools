@@ -7,4 +7,4 @@ https://techcommunity.microsoft.com/blog/sqlserver/sql-server-20162017-availabil
 
 In SQL Server, during the Redo phase on the secondary replica, the redo model can utilize multiple parallel redo worker threads per database. These threads are allocated one per NUMA node. The threads are assigned based on **`Physical NUMA nodes`** rather than Soft-NUMA nodes.
 
-Soft-NUMA is a logical partitioning of CPUs within a `physical NUMA` node to improve scalability and performance, but the redo threads are aligned with the `physical NUMA` configuration to ensure optimal performance and resource utilization.
+Soft-NUMA is a logical partitioning of CPUs within a **`Physical NUMA nodes`** to improve scalability and performance, but the redo threads are aligned with the **`Physical NUMA nodes`** configuration to ensure optimal performance and resource utilization.
